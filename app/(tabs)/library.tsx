@@ -71,7 +71,7 @@ export default function Library() {
           : lib.completed.map((r) => {
               const n = novenaById(r.novenaId);
               return n && (
-                <CompletedNovenaCard key={r.id} novena={n} prayedRange={formatRange(r.startedOn, r.endedOn ?? r.startedOn)}
+                <CompletedNovenaCard key={r.id} novena={n} prayedRange={formatRange(r.startedOn, r.completedOn ?? r.startedOn)}
                   onOpen={() => router.push(`/novena/${n.id}`)}
                   onPrayAgain={() => { setMenuRun(r.id); setAlert({ kind: 'prayAgain' }); }} />
               );

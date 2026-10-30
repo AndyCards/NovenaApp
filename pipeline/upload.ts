@@ -14,8 +14,12 @@ const walk = (d: string): string[] => readdirSync(d).flatMap((f) => (statSync(jo
 
 // version.json goes last, so the app never sees a new version before its files exist.
 const files = walk('out').sort((a) => (a.endsWith('version.json') ? 1 : -1));
-for (const f of files) {
-  const key = relative('out', f);
-  await s3.send(new PutObjectCommand({ Bucket: R2_BUCKET, Key: key, Body: readFileSync(f), ContentType: types[key.split('.').pop()!] }));
-  console.log('uploaded', key);
+async function main() {
+  for (const f of files) {
+    const key = relative('out', f);
+    await s3.send(new PutObjectCommand({ Bucket: R2_BUCKET, Key: key, Body: readFileSync(f), ContentType: types[key.split('.').pop()!] }));
+    console.log('uploaded', key);
+  }
 }
+
+main();

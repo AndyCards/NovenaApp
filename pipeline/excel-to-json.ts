@@ -30,11 +30,17 @@ const novenas = rows('Novenas').map((n, order) => ({
   })),
 }));
 const saints = rows('Saints').map((s) => ({ id: s.id, name: s.name, avatar: s.avatar || undefined, feastDate: s.feastDate, patronOf: list(s.patronOf) }));
-const categories = rows('Categories').map((c) => ({ id: c.id, name: c.name }));
-const suggestions = rows('Suggestions').map((s) => s.text).filter(Boolean);
+const categories = rows('Categories').map((c, order) => ({ id: c.id, name: c.name, order }));
+const collections = rows('Collections').map((c, order) => ({ id: c.id, title: c.title, subtitle: c.subtitle, novenaIds: list(c.novenaIds), order }));
+const suggestions = rows('Suggestions').map((s) => ({ term: s.term, related: list(s.related) })).filter((s) => s.term);
 
 const version = Number(process.env.CONTENT_VERSION ?? Date.now());
-const catalog = parseCatalog({ version, novenas, saints, categories, suggestions });
+const parsed = parseCatalog({ version, minAppVersion: process.env.MIN_APP_VERSION ?? '1.0.0', novenas, saints, categories, collections, suggestions });
+if (!parsed.ok) {
+  console.error('Catalog is NOT valid:', parsed.error);
+  process.exit(1);
+}
+const catalog = parsed.catalog;
 mkdirSync('out', { recursive: true });
 writeFileSync('out/catalog.json', JSON.stringify(catalog));
 writeFileSync('out/version.json', JSON.stringify({ version }));
