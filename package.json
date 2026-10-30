@@ -9,8 +9,10 @@
     "android": "expo run:android",
     "test": "jest",
     "typecheck": "tsc --noEmit",
-    "content:build": "ts-node pipeline/excel-to-json.ts",
-    "content:validate": "ts-node pipeline/validate.ts"
+    "content:build": "tsx pipeline/excel-to-json.ts",
+    "content:validate": "tsx pipeline/validate.ts",
+    "content:images": "tsx pipeline/images.ts",
+    "content:upload": "tsx pipeline/upload.ts"
   },
   "dependencies": {
     "expo": "~52.0.0",
@@ -36,7 +38,8 @@
     "drizzle-orm": "^0.36.0",
     "zod": "^3.23.8",
     "zustand": "^5.0.1",
-    "date-fns": "^4.1.0"
+    "date-fns": "^4.1.0",
+    "@react-navigation/bottom-tabs": "^7.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
@@ -46,6 +49,9 @@
     "jest-expo": "~52.0.0",
     "drizzle-kit": "^0.28.0",
     "ts-node": "^10.9.2",
-    "xlsx": "^0.18.5"
+    "xlsx": "^0.18.5",
+    "sharp": "^0.33.5",
+    "@aws-sdk/client-s3": "^3.600.0",
+    "tsx": "^4.19.0"
   }
 }

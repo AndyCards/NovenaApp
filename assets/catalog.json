@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "minAppVersion": "0.1.0",
+  "novenas": [
+    {
+      "id": "st-anthony",
+      "title": "St. Anthony Novena",
+      "saintId": "anthony",
+      "tagline": "For lost articles",
+      "about": "[Placeholder] A nine-day prayer asking St. Anthony for help.",
+      "minutesPerDay": 5,
+      "tags": ["Lost Articles"],
+      "categoryIds": ["difficult-situations"],
+      "keywords": ["lost", "finding"],
+      "image": { "thumb": "stanthony-thumb.webp", "full": "stanthony-full.webp", "focus": "top-center" },
+      "hasAudio": false,
+      "featured": true,
+      "order": 1,
+      "days": [
+        { "day": 1, "title": "Day 1 · Placeholder", "blocks": [ { "type": "opening", "text": "[Placeholder opening]" }, { "type": "prayer", "text": "[Placeholder prayer text for Day 1. Real prayer text comes from your sheet.]" }, { "type": "intention" }, { "type": "silence", "seconds": 10 }, { "type": "closing", "text": "Amen." } ] },
+        { "day": 2, "title": "Day 2 · Placeholder", "blocks": [ { "type": "prayer", "text": "[Placeholder prayer text for Day 2]" } ] },
+        { "day": 3, "title": "Day 3 · Placeholder", "blocks": [ { "type": "prayer", "text": "[Placeholder prayer text for Day 3]" } ] },
+        { "day": 4, "title": "Day 4 · Placeholder", "blocks": [ { "type": "prayer", "text": "[Placeholder prayer text for Day 4]" } ] },
+        { "day": 5, "title": "Day 5 · Placeholder", "blocks": [ { "type": "prayer", "text": "[Placeholder prayer text for Day 5]" } ] },
+        { "day": 6, "title": "Day 6 · Placeholder", "blocks": [ { "type": "prayer", "text": "[Placeholder prayer text for Day 6]" } ] },
+        { "day": 7, "title": "Day 7 · Placeholder", "blocks": [ { "type": "prayer", "text": "[Placeholder prayer text for Day 7]" } ] },
+        { "day": 8, "title": "Day 8 · Placeholder", "blocks": [ { "type": "prayer", "text": "[Placeholder prayer text for Day 8]" } ] },
+        { "day": 9, "title": "Day 9 · Placeholder", "blocks": [ { "type": "prayer", "text": "[Placeholder prayer text for Day 9]" } ] }
+      ]
+    }
+  ],
+  "saints": [
+    { "id": "anthony", "name": "St Anthony", "feastDate": "06-13", "patronOf": ["lost articles"] }
+  ],
+  "categories": [
+    { "id": "difficult-situations", "name": "Difficult situations", "order": 1 }
+  ],
+  "collections": [
+    { "id": "popular", "title": "Popular among Catholics", "subtitle": "Timeless, beloved devotions prayed worldwide", "novenaIds": ["st-anthony"], "order": 1 }
+  ],
+  "suggestions": [
+    { "term": "lost", "related": ["lost items", "finding things"] }
+  ]
+}
