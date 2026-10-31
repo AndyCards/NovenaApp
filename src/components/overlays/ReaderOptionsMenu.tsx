@@ -83,7 +83,7 @@ export function ReaderOptionsMenu(p: Props) {
     transform: reduced ? [] : [{ translateX: (1 - progress.value) * 40 }, { translateY: (1 - progress.value) * -60 }, { scale: 0.9 + 0.1 * progress.value }],
   }));
   return (
-    <Modal visible={mounted} transparent animationType="none" onRequestClose={p.onClose} statusBarTranslucent>
+    <Modal visible={mounted} transparent animationType="fade" onRequestClose={p.onClose} statusBarTranslucent>
       <Animated.View pointerEvents="none" style={[StyleSheet.absoluteFill, { backgroundColor: colors.overlay.scrim }, scrimStyle]} />
       <Pressable accessibilityLabel={strings.common.close} onPress={p.onClose} style={{ flex: 1 }}>
         <Animated.View style={[{ position: 'absolute', top: insets.top + 48, right: screenMargin + 14, width: 250 }, menuStyle]}>

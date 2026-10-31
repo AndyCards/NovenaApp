@@ -1,30 +1,20 @@
-// Lets a pop-up animate OUT before it is removed. `mounted` stays true until the leaving animation has finished.
-// `progress` goes 0 -> 1 as the pop-up arrives and 1 -> 0 as it leaves.
-import { useEffect, useState } from 'react';
-import { useReducedMotion, useSharedValue, withTiming } from 'react-native-reanimated';
-import { scheduleOnRN } from 'react-native-worklets';
+// Drives a pop-up's arrival: `progress` goes 0 -> 1 as it appears (the card rises and settles).
+// Leaving is handled by the phone's own fade on the Modal, which closes instantly in the system's eyes. That matters:
+// a pop-up that lingers for a moment after a tap can freeze the screen if the tap also navigates somewhere.
+import { useEffect } from 'react';
+import { useReducedMotion, useSharedValue, withDelay, withTiming } from 'react-native-reanimated';
 import { duration, ease, settle } from './tokens';
 
 export function usePresence(visible: boolean) {
   const reduced = useReducedMotion();
-  const [mounted, setMounted] = useState(visible);
   const progress = useSharedValue(0);
   useEffect(() => {
     if (visible) {
-      setMounted(true);
       progress.value = reduced ? withTiming(1, { duration: duration.fade, easing: ease.out }) : withTiming(1, settle);
     } else {
-      progress.value = withTiming(0, { duration: reduced ? duration.quick : duration.sheetOut, easing: ease.in }, (finished) => {
-        if (finished) scheduleOnRN(setMounted, false);
-      });
+      // Stay fully shown while the system fades the pop-up away, then reset quietly for next time.
+      progress.value = withDelay(500, withTiming(0, { duration: 0 }));
     }
   }, [visible]); // eslint-disable-line react-hooks/exhaustive-deps
-  // Safety net: if the leaving animation is ever interrupted and never reports back, still remove the pop-up,
-  // so an invisible layer can never be left on screen blocking taps.
-  useEffect(() => {
-    if (visible) return;
-    const t = setTimeout(() => setMounted(false), duration.sheetOut + 150);
-    return () => clearTimeout(t);
-  }, [visible]);
-  return { mounted, progress, reduced };
+  return { mounted: visible, progress, reduced };
 }

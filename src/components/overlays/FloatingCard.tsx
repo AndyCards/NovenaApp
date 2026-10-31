@@ -27,7 +27,7 @@ export function FloatingCard({ visible, onClose, title, subtitle, icon, children
     transform: reduced ? [] : [{ translateY: (1 - progress.value) * 56 }, { scale: 0.97 + 0.03 * progress.value }],
   }));
   return (
-    <Modal visible={mounted} transparent animationType="none" onRequestClose={onClose} statusBarTranslucent>
+    <Modal visible={mounted} transparent animationType="fade" onRequestClose={onClose} statusBarTranslucent>
       <Animated.View pointerEvents="none" style={[StyleSheet.absoluteFill, { backgroundColor: colors.overlay.scrim }, scrimStyle]} />
       <Pressable accessibilityLabel={strings.common.close} onPress={onClose} style={{ flex: 1, justifyContent: 'flex-end', paddingHorizontal: screenMargin, paddingBottom: Math.max(insets.bottom, 10) + 4 }}>
         <Animated.View style={[{ alignItems: 'center', gap: 20 }, cardStyle]}>

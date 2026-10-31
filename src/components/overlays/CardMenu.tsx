@@ -29,7 +29,7 @@ export function CardMenu({ visible, anchorBottom, paused, onClose, onPause, onRe
     transform: reduced ? [] : [{ translateY: (1 - progress.value) * -8 }, { scale: 0.96 + 0.04 * progress.value }],
   }));
   return (
-    <Modal visible={mounted} transparent animationType="none" onRequestClose={onClose} statusBarTranslucent>
+    <Modal visible={mounted} transparent animationType="fade" onRequestClose={onClose} statusBarTranslucent>
       {/* Tap anywhere outside the menu to close it. */}
       <Pressable accessibilityLabel={strings.common.close} onPress={onClose} style={{ flex: 1 }}>
         {/* Raised look: a clear border plus a wide, soft shadow so the card floats above the page behind it. */}
