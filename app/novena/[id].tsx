@@ -1,13 +1,15 @@
-// Novena page: description, nine days, start / continue.
+// Novena page, Figma Page 34 "Novena page · Pray Day 4" (1227:62829).
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { ScrollView, Text, View } from 'react-native';
+import { useState } from 'react';
+import { Pressable, ScrollView, Text, useWindowDimensions, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ActionBar } from '@/components/actions/ActionBar';
+import { IconButton } from '@/components/actions/IconButton';
+import { Icon } from '@/components/Icon';
 import { NovenaImage } from '@/components/content/NovenaImage';
 import { NovenaMetaRow } from '@/components/content/NovenaMetaRow';
-import { NavBar } from '@/components/navigation/NavBar';
 import { NovenaDayRow } from '@/components/reader/NovenaDayRow';
-import { colors, screenMargin } from '@/constants/theme';
+import { colors, radius, screenMargin } from '@/constants/theme';
 import { type } from '@/constants/typography';
 import { strings } from '@/copy/strings';
 import { useCatalog } from '@/hooks/useCatalog';
@@ -16,49 +18,61 @@ import { useLibrary } from '@/hooks/useLibrary';
 export default function NovenaPage() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
-  const { novenaById, saintById } = useCatalog();
+  const { width } = useWindowDimensions();
+  const { novenaById } = useCatalog();
   const lib = useLibrary();
+  const [daysOpen, setDaysOpen] = useState(true);
   const novena = novenaById(id);
   if (!novena) return null;
   const run = lib.runs.find((r) => r.novenaId === id && (r.status === 'active' || r.status === 'paused'));
-  const saint = saintById(novena.saintId);
 
-  const primary = async () => {
+  // No run yet: "Start Novena". Missed days: "Continue with Day N". Otherwise: "Pray Day N".
+  const label = !run ? strings.novena.start : run.missed.length > 0 ? strings.novena.continueDay(run.continueDay) : strings.novena.prayDay(run.continueDay);
+  const openDay = async (day: number) => {
     const runId = run?.id ?? (await lib.start(novena.id));
-    router.push(`/reader/${runId}/${run?.continueDay ?? 1}`);
+    router.push(`/reader/${runId}/${day}`);
   };
+  const saved = lib.isSaved(novena.id);
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.surface.page }}>
-      <NavBar title={novena.title} onBack={() => router.back()} />
-      <ScrollView contentContainerStyle={{ paddingBottom: 140 }}>
-        <NovenaImage image={novena.image} size="full" label={novena.title} style={{ width: '100%', height: 300 }} />
-        <View style={{ padding: screenMargin, gap: 8 }}>
-          <Text style={[type.headingH2, { color: colors.text.primary }]}>{novena.title}</Text>
-          {saint ? <Text style={[type.bodyMedium, { color: colors.text.tertiary }]}>{saint.name}</Text> : null}
-          <NovenaMetaRow minutes={novena.minutesPerDay} tags={novena.tags} />
-          <Text style={[type.bodyLarge, { color: colors.text.body }]}>{novena.about}</Text>
+    <SafeAreaView edges={['top']} style={{ flex: 1, backgroundColor: colors.surface.page }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: screenMargin, paddingVertical: 6 }}>
+        <IconButton icon="back" label="Back" size="large" onPress={() => router.back()} />
+        <IconButton icon="share" label="Share" size="large" onPress={() => router.push(`/share/${novena.id}`)} />
+      </View>
+      <ScrollView contentContainerStyle={{ paddingBottom: 60 }}>
+        <View style={{ paddingHorizontal: screenMargin }}>
+          <NovenaImage image={novena.image} size="full" label={novena.title} style={{ width: width - screenMargin * 2, height: 403, borderRadius: radius.s }} />
         </View>
-        <Text style={[type.titleSection, { color: colors.text.primary, paddingHorizontal: screenMargin }]}>{strings.novena.days}</Text>
-        {novena.days.map((d) => (
-          <NovenaDayRow
-            key={d.day}
-            day={d.day}
-            title={d.title}
-            meta={strings.novena.minutes(novena.minutesPerDay)}
-            state={run ? lib.stateOf(run, d.day) : 'upcoming'}
-            onPress={async () => {
-              const runId = run?.id ?? (await lib.start(novena.id));
-              router.push(`/reader/${runId}/${d.day}`);
-            }}
-          />
-        ))}
+        <View style={{ paddingHorizontal: screenMargin + 2, paddingVertical: 6, marginTop: 6, gap: 20 }}>
+          <View style={{ gap: 6 }}>
+            <Text accessibilityRole="header" style={[type.headingH2, { color: colors.text.body, textTransform: 'capitalize' }]}>{novena.title}</Text>
+            <NovenaMetaRow minutes={novena.minutesPerDay} tags={novena.tags} />
+          </View>
+          <ActionBar primaryLabel={label} onPrimary={() => openDay(run?.continueDay ?? 1)} saved={saved}
+            onToggleSave={() => (saved ? lib.unsave(novena.id) : lib.save(novena.id))} />
+          <Text style={[type.bodyMedium, { color: colors.text.body }]}>{novena.about}</Text>
+        </View>
+        <Pressable accessibilityRole="button" accessibilityState={{ expanded: daysOpen }} onPress={() => setDaysOpen((o) => !o)}
+          style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: screenMargin, paddingVertical: 6, marginTop: 14 }}>
+          <Text style={[type.titleMedium, { color: colors.text.secondary }]}>{strings.novena.days}</Text>
+          <Icon name={daysOpen ? 'chevronDown' : 'chevronRight'} size={22} color={colors.text.secondary} />
+        </Pressable>
+        {daysOpen ? (
+          <View style={{ padding: screenMargin, gap: 8 }}>
+            {novena.days.map((d) => (
+              <NovenaDayRow
+                key={d.day}
+                day={d.day}
+                title={d.title}
+                meta={d.day === 1 ? `${strings.novena.startHere} · ${strings.novena.minutes(novena.minutesPerDay)}` : strings.novena.minutes(novena.minutesPerDay)}
+                state={run ? lib.stateOf(run, d.day) : 'upcoming'}
+                onPress={() => openDay(d.day)}
+              />
+            ))}
+          </View>
+        ) : null}
       </ScrollView>
-      <ActionBar
-        primaryLabel={run ? strings.novena.continueDay(run.continueDay) : strings.novena.start}
-        onPrimary={primary}
-        actions={[{ icon: 'bookmark', label: 'Save', onPress: () => (lib.isSaved(novena.id) ? lib.unsave(novena.id) : lib.save(novena.id)) }]}
-      />
     </SafeAreaView>
   );
 }

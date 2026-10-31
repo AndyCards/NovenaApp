@@ -1,17 +1,18 @@
+// Figma "Day Marker": 32 circle with praying hands. Solid when prayed, dashed otherwise.
 import { View } from 'react-native';
-import { colors, stroke } from '@/constants/theme';
+import { colors } from '@/constants/theme';
 import type { DayState } from '@/utils/dayRules';
 import { Icon } from '../Icon';
 
-export function DayMarker({ state }: { state: DayState }) {
-  const filled = state === 'prayed';
+export function DayMarker({ state, size = 32 }: { state: DayState; size?: number }) {
+  const prayed = state === 'prayed';
+  const border = state === 'today' ? colors.text.secondary : state === 'missed' ? colors.border.strong : colors.border.default;
+  const hands = prayed ? colors.text.onAction : state === 'upcoming' ? colors.border.default : state === 'missed' ? colors.text.tertiary : colors.text.secondary;
   return (
-    <View accessibilityLabel={state} style={{ width: 24, height: 24, borderRadius: 12, alignItems: 'center', justifyContent: 'center',
-      backgroundColor: filled ? colors.action.selected : 'transparent',
-      borderWidth: filled ? 0 : state === 'today' ? 2 : stroke.default,
-      borderColor: state === 'today' ? colors.border.focus : state === 'missed' ? colors.border.strong : colors.border.default,
-      borderStyle: state === 'missed' ? 'dashed' : 'solid' }}>
-      {filled ? <Icon name="check" size={14} color={colors.text.onAction} /> : null}
+    <View accessibilityLabel={state} style={{ width: size, height: size, borderRadius: size / 2, alignItems: 'center', justifyContent: 'center',
+      backgroundColor: prayed ? colors.action.primary : 'transparent',
+      borderWidth: prayed ? 0 : 1, borderStyle: 'dashed', borderColor: border }}>
+      <Icon name="handsPraying" size={Math.round(size * 0.56)} color={hands} weight={prayed ? 'fill' : 'light'} />
     </View>
   );
 }

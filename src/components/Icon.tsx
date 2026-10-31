@@ -1,6 +1,6 @@
 // Icons: the Phosphor set, "Light" weight, as used in the Figma file's Icons page.
 import {
-  Bell, BookmarkSimple, ClockCounterClockwise, Bookmarks, Books, Briefcase, CalendarDots, CaretLeft, CaretRight, Check, Cross, DotsThree,
+  Bell, BookmarkSimple, CaretDown, Clock, ClockCounterClockwise, Bookmarks, Books, Briefcase, CalendarDots, CaretLeft, CaretRight, Check, Cross, DotsThree,
   DownloadSimple, Export, HandHeart, HandsPraying, Headphones, Heart, Heartbeat, MagnifyingGlass, MaskSad, Pause, Play,
   UsersThree, X,
 } from 'phosphor-react-native';
@@ -11,6 +11,7 @@ const icons = {
   share: Export, search: MagnifyingGlass, check: Check, play: Play, pause: Pause, download: DownloadSimple,
   bookmark: BookmarkSimple, bookmarks: Bookmarks, books: Books, book: Books, bell: Bell, calendar: CalendarDots,
   heart: Heart, history: ClockCounterClockwise, handsPraying: HandsPraying, headphones: Headphones,
+  clock: Clock, chevronDown: CaretDown,
   cross: Cross, handHeart: HandHeart, usersThree: UsersThree, briefcase: Briefcase, heartbeat: Heartbeat, maskSad: MaskSad,
 } as const;
 export type IconName = keyof typeof icons;

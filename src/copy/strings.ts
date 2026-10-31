@@ -34,7 +34,7 @@ export const strings = {
     offline: 'Search needs internet. Showing your saved novenas.',
   },
   novena: {
-    start: 'Start novena',
+    start: 'Start Novena',
     prayDay: (n: number) => `Pray Day ${n}`,
     continueDay: (n: number) => `Continue with Day ${n}`,
     prayedDay: (n: number) => `Prayed Day ${n}`,
