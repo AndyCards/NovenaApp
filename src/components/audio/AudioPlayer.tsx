@@ -93,7 +93,9 @@ export function AudioPlayer({ state, title, image, positionSec, durationSec, lay
         {image ? <NovenaImage image={image} label="" style={{ width: 44, height: 44, borderRadius: radius.s }} /> : null}
         <View style={{ flex: 1, gap: 2 }}>
           <Text numberOfLines={1} style={[type.labelSmall, { color: colors.text.body }]}>{title}</Text>
-          <Animated.Text key={state} entering={reduced ? undefined : FadeIn.duration(duration.fade)} numberOfLines={1} style={[type.bodySmall, { color: colors.text.secondary }, statusStyle]}>{label(state, left)}</Animated.Text>
+          <Animated.View key={state} entering={reduced ? undefined : FadeIn.duration(duration.fade)}>
+            <Animated.Text numberOfLines={1} style={[type.bodySmall, { color: colors.text.secondary }, statusStyle]}>{label(state, left)}</Animated.Text>
+          </Animated.View>
         </View>
         {canClose ? <RoundButton icon="close" label="Close player" onPress={onClose} /> : null}
         <RoundButton icon={playing ? 'pause' : 'play'} label={playing ? 'Pause' : 'Play'} onPress={disabled ? () => {} : playing ? onPause : onPlay} />
