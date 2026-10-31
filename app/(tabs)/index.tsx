@@ -14,6 +14,7 @@ import { IntentionTile } from '@/components/content/IntentionTile';
 import { NovenaCard } from '@/components/content/NovenaCard';
 import { NovenaRow } from '@/components/content/NovenaRow';
 import { SectionHeader } from '@/components/content/SectionHeader';
+import { useRunMenu } from '@/components/overlays/useRunMenu';
 import { HomeAppBar } from '@/components/navigation/HomeAppBar';
 import { colors, screenMargin } from '@/constants/theme';
 import { Reveal } from '@/motion/Reveal';
@@ -31,7 +32,10 @@ export default function Home() {
   const router = useRouter();
   const { width } = useWindowDimensions();
   const { catalog, novenaById } = useCatalog();
-  const { runs, start, resume, loaded } = useRuns();
+  const runsApi = useRuns();
+  const { runs, start, resume, loaded } = runsApi;
+  const { openMenu, menus } = useRunMenu(runsApi);
+  const [scrolled, setScrolled] = useState(false); // true once the page has scrolled, so the top bar can lift
   const [continuePage, setContinuePage] = useState(1);
   const [featuredPage, setFeaturedPage] = useState(1);
 
@@ -113,8 +117,8 @@ export default function Home() {
   return (
     <SafeAreaView edges={['top']} style={{ flex: 1, backgroundColor: colors.surface.default }}>
       {/* Top bar: the pocketNovena name, then Calendar and Search buttons. */}
-      <HomeAppBar onCalendar={() => router.push('/calendar')} onSearch={() => router.push('/search')} />
-      <ScrollView contentContainerStyle={{ paddingTop: 12, paddingBottom: 140, gap: 32 }}>
+      <HomeAppBar raised={scrolled} onCalendar={() => router.push('/calendar')} onSearch={() => router.push('/search')} />
+      <ScrollView scrollEventThrottle={16} onScroll={(e) => { const s = e.nativeEvent.contentOffset.y > 2; if (s !== scrolled) setScrolled(s); }} contentContainerStyle={{ paddingTop: 12, paddingBottom: 140, gap: 32 }}>
         {/* Someone already praying sees: Continue cards, featured novenas, intentions, feast days, then the other sections. */}
         {/* Someone new sees: featured novenas, "How a novena works", feast days, then the other sections. */}
         {!loaded ? null : returning ? (
@@ -125,10 +129,10 @@ export default function Home() {
               <View style={{ gap: 6 }}>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false} snapToInterval={continueWidth + 10} decelerationRate="fast"
                   onMomentumScrollEnd={(e) => setContinuePage(pageFrom(e, continueWidth + 10))}
-                  contentContainerStyle={{ paddingHorizontal: screenMargin, paddingVertical: 2, gap: 10 }}>
+                  contentContainerStyle={{ paddingHorizontal: screenMargin, paddingVertical: 6, gap: 10 }} style={{ marginVertical: -4 }}>
                   {active.map(({ run, novena }) => (
                     <ContinueCard key={run.id} novena={novena!} day={run.continueDay} missed={run.missed.length} width={continueWidth}
-                      onOpen={() => open(novena!)} onContinue={() => router.push(`/reader/${run.id}/${run.continueDay}`)} />
+                      onOpen={() => open(novena!)} onMenu={(y) => openMenu(run.id, y)} onContinue={() => router.push(`/reader/${run.id}/${run.continueDay}`)} />
                   ))}
                 </ScrollView>
                 {active.length > 1 ? <CarouselIndicator count={active.length} active={continuePage} /> : null}
@@ -179,6 +183,7 @@ export default function Home() {
           </>
         )}
       </ScrollView>
+      {menus}
     </SafeAreaView>
   );
 }
