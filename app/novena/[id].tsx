@@ -8,6 +8,7 @@ import { IconButton } from '@/components/actions/IconButton';
 import { Icon } from '@/components/Icon';
 import { NovenaImage } from '@/components/content/NovenaImage';
 import { NovenaMetaRow } from '@/components/content/NovenaMetaRow';
+import { Toast } from '@/components/overlays/Toast';
 import { NovenaDayRow } from '@/components/reader/NovenaDayRow';
 import { colors, radius, screenMargin } from '@/constants/theme';
 import { type } from '@/constants/typography';
@@ -22,6 +23,7 @@ export default function NovenaPage() {
   const { novenaById } = useCatalog();
   const lib = useLibrary();
   const [daysOpen, setDaysOpen] = useState(true);
+  const [hint, setHint] = useState<string | null>(null); // small message at the bottom, e.g. "Tap Start Novena to begin"
   const busy = useRef(false); // stops a double tap from starting the novena twice
   const novena = novenaById(id);
   if (!novena) return null;
@@ -30,9 +32,11 @@ export default function NovenaPage() {
 
   // No run yet: "Start Novena". Missed days: "Continue with Day N". Otherwise: "Pray Day N".
   const label = !run ? strings.novena.start : run.missed.length > 0 ? strings.novena.continueDay(run.continueDay) : strings.novena.prayDay(run.continueDay);
-  // Opening any day starts the novena first if it hasn't been started yet.
-  const openDay = async (day: number) => {
+  // Only the big "Start Novena" button starts a novena. Tapping a day in the list before that just shows a hint,
+  // so a novena is never started (and "Continue praying" never appears on Home) unless the person chose to begin.
+  const openDay = async (day: number, startIfNeeded = false) => {
     if (busy.current || !lib.loaded) return; // wait until we know whether it's already started
+    if (!run && !startIfNeeded) { setHint(strings.novena.startFirst); return; }
     busy.current = true;
     try {
       if (run?.status === 'paused') await lib.resume(run.id); // opening a paused novena picks it up again
@@ -62,7 +66,7 @@ export default function NovenaPage() {
             <NovenaMetaRow minutes={novena.minutesPerDay} tags={novena.tags} />
           </View>
           {/* Save (bookmark) and the main dark pray button. */}
-          <ActionBar primaryLabel={label} onPrimary={() => openDay(run?.continueDay ?? 1)} saved={saved}
+          <ActionBar primaryLabel={label} onPrimary={() => openDay(run?.continueDay ?? 1, true)} saved={saved}
             onToggleSave={() => (saved ? lib.unsave(novena.id) : lib.save(novena.id))} />
           <Text style={[type.bodyMedium, { color: colors.text.body }]}>{novena.about}</Text>
         </View>
@@ -88,6 +92,7 @@ export default function NovenaPage() {
           </View>
         ) : null}
       </ScrollView>
+      <Toast message={hint} onDismiss={() => setHint(null)} />
     </SafeAreaView>
   );
 }

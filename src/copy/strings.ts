@@ -40,6 +40,7 @@ export const strings = {
     prayedDay: (n: number) => `Prayed Day ${n}`,
     days: 'Novena Days',
     startHere: 'Start here',
+    startFirst: 'Tap Start Novena to begin your first day.',
     minutes: (n: number) => `${n} min`,
     minutesPerDay: (n: number) => `${n} mins a day`,
   },
