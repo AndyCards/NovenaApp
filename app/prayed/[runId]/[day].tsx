@@ -14,12 +14,19 @@ import { useCatalog } from '@/hooks/useCatalog';
 import { useLibrary } from '@/hooks/useLibrary';
 import { addDaysTo, formatShortDate, formatTime12 } from '@/utils/dateUtils';
 import { Reveal } from '@/motion/Reveal';
+import Animated, { useAnimatedStyle, useSharedValue, withDelay, withTiming } from 'react-native-reanimated';
+import { duration, ease } from '@/motion/tokens';
 
 function DayDot({ prayed, today, date }: { prayed: boolean; today: boolean; date: string }) {
   const size = 50;
+  // Just-prayed day: the dark fill and praying hands arrive quietly (fade and a gentle settle), as the page appears.
+  const arrive = useSharedValue(today && prayed ? 0 : 1);
+  useEffect(() => { if (today && prayed) arrive.value = withDelay(350, withTiming(1, { duration: duration.sheetIn, easing: ease.sheet })); }, [today, prayed, arrive]);
+  const fill = useAnimatedStyle(() => ({ opacity: arrive.value, transform: [{ scale: 0.88 + 0.12 * arrive.value }] }));
   const dot = (
     <View style={{ width: size, height: size, borderRadius: size / 2, alignItems: 'center', justifyContent: 'center',
-      backgroundColor: prayed ? colors.action.primary : 'transparent', borderWidth: prayed ? 0 : 1, borderStyle: 'dashed', borderColor: colors.border.default }}>
+      backgroundColor: 'transparent', borderWidth: prayed ? 0 : 1, borderStyle: 'dashed', borderColor: colors.border.default }}>
+      {prayed ? <Animated.View style={[{ position: 'absolute', width: size, height: size, borderRadius: size / 2, backgroundColor: colors.action.primary }, fill]} /> : null}
       <Icon name="handsPraying" size={26} color={prayed ? colors.text.onAction : colors.border.default} />
     </View>
   );

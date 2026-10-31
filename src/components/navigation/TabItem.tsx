@@ -8,6 +8,7 @@ import { type } from '@/constants/typography';
 import { PressableScale } from '@/motion/PressableScale';
 import { duration, ease, pressScale } from '@/motion/tokens';
 import { Icon, type IconName } from '../Icon';
+import { haptics } from '@/motion/haptics';
 
 type Props = { label: string; icon: IconName; active: boolean; onPress: () => void };
 
@@ -18,7 +19,7 @@ export function TabItem({ label, icon, active, onPress }: Props) {
   const filled = useAnimatedStyle(() => ({ opacity: p.value }));
   const outlined = useAnimatedStyle(() => ({ opacity: 1 - p.value }));
   return (
-    <PressableScale scaleTo={pressScale.icon + 0.03} accessibilityRole="tab" accessibilityState={{ selected: active }} accessibilityLabel={label} onPress={onPress}
+    <PressableScale scaleTo={pressScale.icon + 0.03} accessibilityRole="tab" accessibilityState={{ selected: active }} accessibilityLabel={label} onPress={() => { if (!active) haptics.tap(); onPress(); }}
       style={{ flex: 1, alignItems: 'center', gap: 2, paddingHorizontal: 8, paddingVertical: 4 }}>
       <View style={{ height: 40, paddingHorizontal: 16, justifyContent: 'center', borderRadius: radius.m }}>
         <Animated.View pointerEvents="none" style={[{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, borderRadius: radius.m, backgroundColor: colors.surface.subtle }, pill]} />

@@ -2,10 +2,11 @@
 // Motion: the white selected pill slides from one segment to the next.
 import { useEffect, useRef, useState } from 'react';
 import { View } from 'react-native';
-import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
+import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { colors, radius, stroke } from '@/constants/theme';
-import { spring } from '@/motion/tokens';
+import { settle } from '@/motion/tokens';
 import { Segment } from './Segment';
+import { haptics } from '@/motion/haptics';
 
 type Item<T extends string> = { key: T; label: string; count?: number };
 
@@ -23,7 +24,7 @@ export function SegmentedControl<T extends string>({ items, value, onChange }: {
   useEffect(() => {
     if (segWidth <= 0) return;
     if (first.current) { x.value = target; first.current = false; }
-    else x.value = withSpring(target, spring.settle);
+    else x.value = withTiming(target, settle);
   }, [target, segWidth, x]);
   const pill = useAnimatedStyle(() => ({ transform: [{ translateX: x.value }] }));
   return (
@@ -33,7 +34,7 @@ export function SegmentedControl<T extends string>({ items, value, onChange }: {
         <Animated.View pointerEvents="none" style={[{ position: 'absolute', left: PAD, top: PAD, width: segWidth, height: 38, borderRadius: radius.m, backgroundColor: colors.surface.default,
           borderWidth: stroke.hairline, borderColor: colors.border.default, shadowColor: '#000', shadowOpacity: 0.05, shadowRadius: 3, shadowOffset: { width: 0, height: 2 }, elevation: 1 }, pill]} />
       ) : null}
-      {items.map((i) => <Segment key={i.key} label={i.label} count={i.count} selected={i.key === value} onPress={() => onChange(i.key)} />)}
+      {items.map((i) => <Segment key={i.key} label={i.label} count={i.count} selected={i.key === value} onPress={() => { if (i.key !== value) haptics.tap(); onChange(i.key); }} />)}
     </View>
   );
 }

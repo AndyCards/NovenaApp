@@ -3,8 +3,8 @@
 // With Reduce Motion on, it skips the shrinking and only dims slightly.
 import { useState } from 'react';
 import { Pressable, type GestureResponderEvent, type PressableProps, type StyleProp, type ViewStyle } from 'react-native';
-import Animated, { useAnimatedStyle, useReducedMotion, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
-import { duration, ease, pressScale, spring } from './tokens';
+import Animated, { useAnimatedStyle, useReducedMotion, useSharedValue, withTiming } from 'react-native-reanimated';
+import { duration, ease, pressScale, release } from './tokens';
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
@@ -30,7 +30,7 @@ export function PressableScale({ style, scaleTo = pressScale.button, dimTo = 1, 
     onPressIn?.(e);
   };
   const handleOut = (e: GestureResponderEvent) => {
-    down.value = withSpring(0, spring.release);
+    down.value = withTiming(0, release);
     if (typeof style === 'function') setPressed(false);
     onPressOut?.(e);
   };

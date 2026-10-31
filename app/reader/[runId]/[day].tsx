@@ -26,6 +26,7 @@ import { useLibrary } from '@/hooks/useLibrary';
 import { markPrayed } from '@/hooks/useMarkPrayed';
 import { downloadNovenaAudio, removeDownload } from '@/utils/downloads';
 import type { DownloadStatus } from '@/utils/downloadStatus';
+import { haptics } from '@/motion/haptics';
 
 function NavButton({ icon, label, onPress }: { icon: 'back' | 'more'; label: string; onPress: () => void }) {
   return (
@@ -94,6 +95,7 @@ export default function Reader() {
   const finish = async () => {
     if (!run) return;
     await markPrayed(run.id, dayNo, run.startedOn, run.prayedDays);
+    haptics.success(); // one calm double-tap: the day is done
     router.replace(`/prayed/${run.id}/${dayNo}`);
   };
   // No intention written yet? Open the box to write one. Otherwise show it.
@@ -107,7 +109,7 @@ export default function Reader() {
         <NavButton icon="more" label={strings.common.more} onPress={() => setPopup('menu')} />
       </View>
 
-      <Reveal slide={false} style={{ flex: 1 }}>
+      <Reveal key={dayNo} slide={false} style={{ flex: 1 }}>
         <ScrollView contentContainerStyle={{ paddingTop: 6, paddingHorizontal: 22, gap: 24, paddingBottom: 72 }}>
           {/* "Day 1 of 9" with the cross, then the prayer itself, then the mark-as-prayed button. */}
           <ChapterTitle title={strings.reader.dayOf(dayNo, novena.days.length)} />

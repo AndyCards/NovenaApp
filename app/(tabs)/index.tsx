@@ -24,6 +24,7 @@ import { useCatalog } from '@/hooks/useCatalog';
 import { useRuns } from '@/hooks/useNovenaRun';
 import { todayString } from '@/utils/dateUtils';
 import { upcomingFeasts } from '@/utils/feasts';
+import { haptics } from '@/motion/haptics';
 
 // Works out which card of a sideways carousel is showing, so the little dots can follow along.
 const pageFrom = (e: NativeSyntheticEvent<NativeScrollEvent>, step: number) => Math.round(e.nativeEvent.contentOffset.x / step) + 1;
@@ -56,6 +57,7 @@ export default function Home() {
   const startNovena = async (n: Novena) => {
     if (busy.current || !loaded) return;
     busy.current = true;
+    haptics.confirm();
     try {
       // Already praying it (or paused)? Pick it up again instead of starting a second copy.
       const existing = runs.find((r) => r.novenaId === n.id && (r.status === 'active' || r.status === 'paused'));

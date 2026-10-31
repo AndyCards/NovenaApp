@@ -33,7 +33,7 @@ Buttons, cards, rows and pop-ups, each matching a component on the Figma Compone
 - `calendar/` calendar days and month cards
 
 ## src/motion/ — how things move
-The app's animation rules live here so every screen moves the same way. `timing.ts` and `tokens.ts` hold the speeds and soft curves (calm, no bounce). `PressableScale` makes buttons and cards dip slightly under a finger. `Reveal` fades and slides page content in, one piece after another. `usePresence` lets pop-ups animate out before they disappear. Everything runs on the phone's UI thread (react-native-reanimated) and switches itself off when iPhone's Reduce Motion setting is on.
+The app's animation rules live here so every screen moves the same way. `timing.ts` and `tokens.ts` hold the speeds and soft curves (calm, no bounce). `PressableScale` makes buttons and cards dip slightly under a finger. `Reveal` fades and slides page content in, one piece after another. `usePresence` lets pop-ups animate out before they disappear. `haptics.ts` adds three gentle touch cues. The full rules are in `docs/MOTION.md`. Everything runs on the phone's UI thread (react-native-reanimated) and switches itself off when iPhone's Reduce Motion setting is on.
 
 ## src/hooks/ — the "brains" behind screens
 Small helpers that load data and do actions, so screens stay simple (e.g. `useLibrary`, `useAudio`, `useReminders`).
