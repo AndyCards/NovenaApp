@@ -6,15 +6,15 @@ import Animated, { FadeOut, LinearTransition, ReduceMotion, useReducedMotion, wi
 import { duration, ease, revealDistance, staggerDelay } from './tokens';
 
 // The "entering" recipe for the Nth item. Runs on the UI thread.
-export function revealIn(index: number, withSlide = true) {
+export function revealIn(index: number, withSlide = true, fromX = 0) {
   const delay = staggerDelay(index);
   return () => {
     'worklet';
     return {
-      initialValues: { opacity: 0, transform: [{ translateY: withSlide ? revealDistance : 0 }] },
+      initialValues: { opacity: 0, transform: [{ translateY: withSlide ? revealDistance : 0 }, { translateX: fromX }] },
       animations: {
         opacity: withDelay(delay, withTiming(1, { duration: duration.reveal, easing: ease.out })),
-        transform: [{ translateY: withDelay(delay, withTiming(0, { duration: duration.reveal, easing: ease.push })) }],
+        transform: [{ translateY: withDelay(delay, withTiming(0, { duration: duration.reveal, easing: ease.push })) }, { translateX: withDelay(delay, withTiming(0, { duration: duration.reveal, easing: ease.push })) }],
       },
     };
   };
@@ -24,12 +24,12 @@ export function revealIn(index: number, withSlide = true) {
 const listMove = LinearTransition.duration(duration.sheetIn).easing(ease.sheet).reduceMotion(ReduceMotion.System);
 const listLeave = FadeOut.duration(duration.fade).reduceMotion(ReduceMotion.System);
 
-type Props = { index?: number; slide?: boolean; list?: boolean; children: ReactNode; style?: StyleProp<ViewStyle> };
+type Props = { index?: number; slide?: boolean; fromX?: number; list?: boolean; children: ReactNode; style?: StyleProp<ViewStyle> };
 
-export function Reveal({ index = 0, slide = true, list = false, children, style }: Props) {
+export function Reveal({ index = 0, slide = true, fromX = 0, list = false, children, style }: Props) {
   const reduced = useReducedMotion();
   return (
-    <Animated.View entering={reduced ? undefined : revealIn(index, slide)} layout={list && !reduced ? listMove : undefined} exiting={list && !reduced ? listLeave : undefined} style={style}>
+    <Animated.View entering={reduced ? undefined : revealIn(index, slide, fromX)} layout={list && !reduced ? listMove : undefined} exiting={list && !reduced ? listLeave : undefined} style={style}>
       {children}
     </Animated.View>
   );

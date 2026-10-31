@@ -2,7 +2,7 @@
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
-import { ScrollView, Text, View } from 'react-native';
+import { RefreshControl, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button } from '@/components/actions/Button';
 import { ActiveNovenaCard } from '@/components/content/ActiveNovenaCard';
@@ -69,7 +69,7 @@ export default function Library() {
           ]}
         />
       </View>
-      <ScrollView contentContainerStyle={{ paddingHorizontal: screenMargin, paddingBottom: 140, gap: 12 }}>
+      <ScrollView refreshControl={<RefreshControl refreshing={false} onRefresh={() => lib.refresh()} tintColor={colors.text.muted} />} contentContainerStyle={{ paddingHorizontal: screenMargin, paddingBottom: 140, gap: 12 }}>
         {/* Active tab: one card per novena being prayed. Empty? A friendly message and a button to find one. */}
         {tab === 'active' && (lib.active.length === 0
           ? <Empty icon="bookOpen" title={L.emptyActiveTitle} body={L.emptyActiveBody} cta={L.emptyActiveCta} onPress={() => router.push('/')} />

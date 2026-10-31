@@ -17,11 +17,11 @@ import { Reveal } from '@/motion/Reveal';
 import Animated, { useAnimatedStyle, useSharedValue, withDelay, withTiming } from 'react-native-reanimated';
 import { duration, ease } from '@/motion/tokens';
 
-function DayDot({ prayed, today, date }: { prayed: boolean; today: boolean; date: string }) {
+function DayDot({ prayed, today, date, wave = -1 }: { prayed: boolean; today: boolean; date: string; wave?: number }) {
   const size = 50;
   // Just-prayed day: the dark fill and praying hands arrive quietly (fade and a gentle settle), as the page appears.
-  const arrive = useSharedValue(today && prayed ? 0 : 1);
-  useEffect(() => { if (today && prayed) arrive.value = withDelay(350, withTiming(1, { duration: duration.sheetIn, easing: ease.sheet })); }, [today, prayed, arrive]);
+  const arrive = useSharedValue((today && prayed) || wave >= 0 ? 0 : 1);
+  useEffect(() => { if ((today && prayed) || (wave >= 0 && prayed)) arrive.value = withDelay(350 + Math.max(0, wave) * 140, withTiming(1, { duration: duration.sheetIn, easing: ease.sheet })); }, [today, prayed, wave, arrive]);
   const fill = useAnimatedStyle(() => ({ opacity: arrive.value, transform: [{ scale: 0.88 + 0.12 * arrive.value }] }));
   const dot = (
     <View style={{ width: size, height: size, borderRadius: size / 2, alignItems: 'center', justifyContent: 'center',
@@ -67,7 +67,7 @@ export default function DayPrayed() {
       <View style={{ flex: 1, alignItems: 'center', paddingTop: 70, paddingHorizontal: 24, gap: 28 }}>
         <View style={{ flexDirection: 'row', gap: 6 }}>
           {strip.map((d, i) => (
-            <Reveal key={d} index={i}><DayDot prayed={run.prayedDays.includes(d)} today={d === dayNo} date={formatShortDate(addDaysTo(run.startedOn, d - 1))} /></Reveal>
+            <Reveal key={d} index={i}><DayDot wave={dayNo >= total ? i : -1} prayed={run.prayedDays.includes(d)} today={d === dayNo} date={formatShortDate(addDaysTo(run.startedOn, d - 1))} /></Reveal>
           ))}
         </View>
         <Reveal index={strip.length} style={{ alignItems: 'center', gap: 6 }}>

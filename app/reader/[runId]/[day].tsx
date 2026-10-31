@@ -2,7 +2,7 @@
 // Source Serif 4 is used only on Reader screens. Audio never starts by itself.
 import { LinearGradient } from 'expo-linear-gradient';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button } from '@/components/actions/Button';
@@ -50,6 +50,7 @@ export default function Reader() {
   const novena = preview ? novenaById(runId!.slice('preview~'.length)) : run ? novenaById(run.novenaId) : undefined;
   const dayNo = Number(day);
   const [intentionText, setIntentionText] = useState(''); // what is saved
+  const lastDay = useRef(dayNo); // the day shown before this one, to know which way to slide
   const [draft, setDraft] = useState(''); // what is being typed, saved only on "Save intention"
   // Which pop-up is open right now: the … menu, the intention (view or edit), or "Continue another time?".
   const [popup, setPopup] = useState<'none' | 'menu' | 'intention-view' | 'intention-edit' | 'pause'>('none');
@@ -90,6 +91,9 @@ export default function Reader() {
   // A day that isn't due yet can be read, but not marked as prayed.
   const notYet = !!run && lib.stateOf(run, dayNo) === 'upcoming';
   const close = () => setPopup('none');
+  // Going to a later day, the prayer slides in gently from the right; to an earlier day, from the left.
+  const slideFrom = lastDay.current === dayNo ? 0 : dayNo > lastDay.current ? 28 : -28;
+  lastDay.current = dayNo;
 
   // "Mark Day N as prayed": save it, refresh, then show the "Day N marked as prayed" screen.
   const finish = async () => {
@@ -109,7 +113,7 @@ export default function Reader() {
         <NavButton icon="more" label={strings.common.more} onPress={() => setPopup('menu')} />
       </View>
 
-      <Reveal key={dayNo} slide={false} style={{ flex: 1 }}>
+      <Reveal key={dayNo} slide={false} fromX={slideFrom} style={{ flex: 1 }}>
         <ScrollView contentContainerStyle={{ paddingTop: 6, paddingHorizontal: 22, gap: 24, paddingBottom: 72 }}>
           {/* "Day 1 of 9" with the cross, then the prayer itself, then the mark-as-prayed button. */}
           <ChapterTitle title={strings.reader.dayOf(dayNo, novena.days.length)} />
