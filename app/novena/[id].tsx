@@ -7,7 +7,6 @@ import { ActionBar } from '@/components/actions/ActionBar';
 import { IconButton } from '@/components/actions/IconButton';
 import { NovenaImage } from '@/components/content/NovenaImage';
 import { NovenaMetaRow } from '@/components/content/NovenaMetaRow';
-import { Toast } from '@/components/overlays/Toast';
 import { NovenaDayRow } from '@/components/reader/NovenaDayRow';
 import { colors, radius, screenMargin } from '@/constants/theme';
 import { type } from '@/constants/typography';
@@ -24,7 +23,6 @@ export default function NovenaPage() {
   const { novenaById } = useCatalog();
   const lib = useLibrary();
   const [daysOpen, setDaysOpen] = useState(true);
-  const [hint, setHint] = useState<string | null>(null); // small message at the bottom, e.g. "Tap Start Novena to begin"
   const busy = useRef(false); // stops a double tap from starting the novena twice
   const novena = novenaById(id);
   if (!novena) return null;
@@ -37,7 +35,8 @@ export default function NovenaPage() {
   // so a novena is never started (and "Continue praying" never appears on Home) unless the person chose to begin.
   const openDay = async (day: number, startIfNeeded = false) => {
     if (busy.current || !lib.loaded) return; // wait until we know whether it's already started
-    if (!run && !startIfNeeded) { setHint(strings.novena.startFirst); return; }
+    // Not started yet: open the day as a read-only preview (no marking as prayed, no streak, nothing saved).
+    if (!run && !startIfNeeded) { router.push(`/reader/preview~${novena.id}/${day}`); return; }
     busy.current = true;
     try {
       if (run?.status === 'paused') await lib.resume(run.id); // opening a paused novena picks it up again
@@ -93,7 +92,6 @@ export default function NovenaPage() {
           </Reveal>
         ) : null}
       </ScrollView>
-      <Toast message={hint} onDismiss={() => setHint(null)} />
     </SafeAreaView>
   );
 }

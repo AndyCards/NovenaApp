@@ -42,8 +42,11 @@ export default function Reader() {
   const { catalog, novenaById } = useCatalog();
   const lib = useLibrary();
   const audio = useAudio();
-  const run = lib.runs.find((r) => r.id === runId);
-  const novena = run ? novenaById(run.novenaId) : undefined;
+  // "preview~<novenaId>" means the person is reading a day of a novena they have NOT started: read-only,
+  // nothing is saved, nothing can be marked as prayed, and no streak is counted.
+  const preview = !!runId?.startsWith('preview~');
+  const run = preview ? undefined : lib.runs.find((r) => r.id === runId);
+  const novena = preview ? novenaById(runId!.slice('preview~'.length)) : run ? novenaById(run.novenaId) : undefined;
   const dayNo = Number(day);
   const [intentionText, setIntentionText] = useState(''); // what is saved
   const [draft, setDraft] = useState(''); // what is being typed, saved only on "Save intention"
@@ -53,7 +56,7 @@ export default function Reader() {
 
   // Load the person's saved intention, and whether this novena's audio is already downloaded.
   useEffect(() => {
-    if (!runId) return;
+    if (!runId || preview) return;
     (async () => {
       let text = await getIntention(runId);
       // Testing aid: save a sample intention once per novena run, so the intention pop-up has something to show.
@@ -79,16 +82,17 @@ export default function Reader() {
     if (st.state !== 'hidden') audio.close();
     if (PLACEHOLDER_AUDIO) audio.open(novena.id, novena.title, dayNo);
   }, [novena?.id, dayNo]); // eslint-disable-line react-hooks/exhaustive-deps
-  if (!run || !novena) return null;
+  if (!novena || (!run && !preview)) return null;
   const content = novena.days.find((d) => d.day === dayNo);
   if (!content) return null;
-  const alreadyPrayed = run.prayedDays.includes(dayNo);
+  const alreadyPrayed = !!run?.prayedDays.includes(dayNo);
   // A day that isn't due yet can be read, but not marked as prayed.
-  const notYet = lib.stateOf(run, dayNo) === 'upcoming';
+  const notYet = !!run && lib.stateOf(run, dayNo) === 'upcoming';
   const close = () => setPopup('none');
 
   // "Mark Day N as prayed": save it, refresh, then show the "Day N marked as prayed" screen.
   const finish = async () => {
+    if (!run) return;
     await markPrayed(run.id, dayNo, run.startedOn, run.prayedDays);
     router.replace(`/prayed/${run.id}/${dayNo}`);
   };
@@ -99,7 +103,7 @@ export default function Reader() {
     <SafeAreaView edges={['top', 'bottom']} style={{ flex: 1, backgroundColor: colors.surface.default }}>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: screenMargin + 2, paddingVertical: 6 }}>
         {/* Back asks "Continue another time?" if today's day isn't marked as prayed yet. … opens the menu. */}
-        <NavButton icon="back" label={strings.common.back} onPress={() => (alreadyPrayed ? router.back() : setPopup('pause'))} />
+        <NavButton icon="back" label={strings.common.back} onPress={() => (alreadyPrayed || preview ? router.back() : setPopup('pause'))} />
         <NavButton icon="more" label={strings.common.more} onPress={() => setPopup('menu')} />
       </View>
 
@@ -108,7 +112,10 @@ export default function Reader() {
           {/* "Day 1 of 9" with the cross, then the prayer itself, then the mark-as-prayed button. */}
           <ChapterTitle title={strings.reader.dayOf(dayNo, novena.days.length)} />
           <PrayerPassage blocks={content.blocks} onViewIntention={openIntention} />
-          <Button label={alreadyPrayed ? strings.novena.prayedDay(dayNo) : strings.reader.markPrayed(dayNo)} icon="handsPraying" disabled={alreadyPrayed || notYet} onPress={finish} />
+          {/* Preview: instead of "Mark as prayed", offer to start the novena (then this same day opens for real). */}
+          {preview ? (
+            <Button label={strings.novena.start} icon="handsPraying" onPress={async () => { const id = await lib.start(novena.id); router.replace(`/reader/${id}/${dayNo}`); }} />
+          ) : <Button label={alreadyPrayed ? strings.novena.prayedDay(dayNo) : strings.reader.markPrayed(dayNo)} icon="handsPraying" disabled={alreadyPrayed || notYet} onPress={finish} />}
         </ScrollView>
         {/* Soft white fades at the top and bottom edges so text gently disappears as you scroll. */}
         <LinearGradient pointerEvents="none" colors={['#FFFFFF', 'rgba(255,255,255,0)']} style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 12 }} />
@@ -142,6 +149,7 @@ export default function Reader() {
         onRemoveDownload={async () => { await removeDownload(novena.id); setDownload({ kind: 'none' }); }}
         onShare={() => { close(); router.push(`/share/${novena.id}`); }}
         onViewIntention={openIntention}
+        hideIntention={preview}
       />
       <PopupCard type="pause" visible={popup === 'pause'} onClose={close} onLeave={() => { close(); router.back(); }} />
       <PopupCard type="intention-view" visible={popup === 'intention-view'} onClose={close} novenaTitle={`${novena.title} Novena`} value={intentionText} onEdit={() => { setDraft(intentionText); setPopup('intention-edit'); }} />
@@ -154,6 +162,7 @@ export default function Reader() {
         onChange={setDraft}
         // The intention stays on this phone. It is never uploaded or shared.
         onSave={async () => {
+          if (!run) return;
           const text = draft.trim();
           await setIntention(run.id, text);
           setIntentionText(text);

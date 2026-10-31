@@ -30,6 +30,7 @@ type Props = {
   onRemoveDownload: () => void;
   onShare: () => void;
   onViewIntention: () => void;
+  hideIntention?: boolean; // preview mode: no run yet, so there is no intention to show
 };
 
 const shadow = { shadowColor: '#000', shadowOpacity: 0.08, shadowRadius: 12, shadowOffset: { width: 0, height: 4 }, elevation: 6 } as const;
@@ -72,7 +73,7 @@ export function ReaderOptionsMenu(p: Props) {
     { label: p.download.kind === 'done' ? r.offlineReady : r.download, detail: p.hasAudio ? downloadDetail : r.audioSoon, icon: 'download', disabled: !p.hasAudio,
       onPress: p.download.kind === 'done' ? p.onRemoveDownload : p.download.kind === 'downloading' ? () => {} : p.onDownload },
     { label: r.share, icon: 'share', onPress: p.onShare },
-    { label: r.viewIntentionRow, icon: 'handsPraying', onPress: p.onViewIntention },
+    ...(p.hideIntention ? [] : [{ label: r.viewIntentionRow, icon: 'handsPraying' as IconName, onPress: p.onViewIntention }]),
   ];
   // Motion: the menu grows out of the "…" button (top right) while the backdrop fades in.
   const { mounted, progress, reduced } = usePresence(p.visible);
