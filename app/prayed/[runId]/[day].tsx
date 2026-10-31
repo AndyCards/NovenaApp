@@ -13,6 +13,7 @@ import { getReminderSettings } from '@/data/queries';
 import { useCatalog } from '@/hooks/useCatalog';
 import { useLibrary } from '@/hooks/useLibrary';
 import { addDaysTo, formatShortDate, formatTime12 } from '@/utils/dateUtils';
+import { Reveal } from '@/motion/Reveal';
 
 function DayDot({ prayed, today, date }: { prayed: boolean; today: boolean; date: string }) {
   const size = 50;
@@ -58,14 +59,14 @@ export default function DayPrayed() {
       </View>
       <View style={{ flex: 1, alignItems: 'center', paddingTop: 70, paddingHorizontal: 24, gap: 28 }}>
         <View style={{ flexDirection: 'row', gap: 6 }}>
-          {strip.map((d) => (
-            <DayDot key={d} prayed={run.prayedDays.includes(d)} today={d === dayNo} date={formatShortDate(addDaysTo(run.startedOn, d - 1))} />
+          {strip.map((d, i) => (
+            <Reveal key={d} index={i}><DayDot prayed={run.prayedDays.includes(d)} today={d === dayNo} date={formatShortDate(addDaysTo(run.startedOn, d - 1))} /></Reveal>
           ))}
         </View>
-        <View style={{ alignItems: 'center', gap: 6 }}>
+        <Reveal index={strip.length} style={{ alignItems: 'center', gap: 6 }}>
           <Text accessibilityRole="header" style={[type.titleCard, { color: colors.text.primary, textAlign: 'center' }]}>{strings.dayPrayed.title(dayNo)}</Text>
           <Text style={[type.bodyLarge, { color: colors.text.secondary, textAlign: 'center' }]}>{strings.dayPrayed.body}</Text>
-        </View>
+        </Reveal>
       </View>
       <View style={{ paddingHorizontal: screenMargin, paddingBottom: 8, gap: 10 }}>
         {/* The reminder note (not shown after the last day), then the Share button. */}

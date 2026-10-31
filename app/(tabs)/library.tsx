@@ -12,6 +12,7 @@ import { AlertCard, type AlertKind } from '@/components/overlays/AlertCard';
 import { CardMenu } from '@/components/overlays/CardMenu';
 import { Toast } from '@/components/overlays/Toast';
 import { colors, radius, screenMargin, stroke } from '@/constants/theme';
+import { Reveal } from '@/motion/Reveal';
 import { type } from '@/constants/typography';
 import { strings } from '@/copy/strings';
 import { useCatalog } from '@/hooks/useCatalog';
@@ -24,11 +25,11 @@ const L = strings.library;
 
 function Empty({ title, body, cta, onPress }: { title: string; body: string; cta: string; onPress: () => void }) {
   return (
-    <View style={{ alignItems: 'center', padding: 32, gap: 12 }}>
+    <Reveal style={{ alignItems: 'center', padding: 32, gap: 12 }}>
       <Text style={[type.titleCard, { color: colors.text.primary, textAlign: 'center' }]}>{title}</Text>
       <Text style={[type.bodyLarge, { color: colors.text.secondary, textAlign: 'center' }]}>{body}</Text>
       <Button label={cta} onPress={onPress} />
-    </View>
+    </Reveal>
   );
 }
 
@@ -63,33 +64,37 @@ export default function Library() {
         {/* Active tab: one card per novena being prayed. Empty? A friendly message and a button to find one. */}
         {tab === 'active' && (lib.active.length === 0
           ? <Empty title={L.emptyActiveTitle} body={L.emptyActiveBody} cta={L.emptyActiveCta} onPress={() => router.push('/')} />
-          : lib.active.map((r) => {
+          : lib.active.map((r, i) => {
               const n = novenaById(r.novenaId);
               return n && (
-                <ActiveNovenaCard key={r.id} novena={n} paused={r.status === 'paused'}
+                <Reveal key={r.id} index={i} list>
+                <ActiveNovenaCard novena={n} paused={r.status === 'paused'}
                   day={prayedToday(r) ? dueDay(r.startedOn, todayString()) : r.continueDay}
                   prayedToday={prayedToday(r)}
                   onOpen={() => router.push(`/novena/${n.id}`)}
                   onPray={() => (prayedToday(r) ? router.push(`/novena/${n.id}`) : router.push(`/reader/${r.id}/${r.continueDay}`))}
                   onMenu={() => setMenuRun(r.id)} />
+                </Reveal>
               );
             }))}
         {/* Completed tab: finished novenas with their dates and "Pray it again". */}
         {tab === 'completed' && (lib.completed.length === 0
           ? <Empty title={L.emptyCompletedTitle} body={L.emptyCompletedBody} cta={L.emptyCompletedCta} onPress={() => setTab('active')} />
-          : lib.completed.map((r) => {
+          : lib.completed.map((r, i) => {
               const n = novenaById(r.novenaId);
               return n && (
-                <CompletedNovenaCard key={r.id} novena={n} prayedRange={formatRange(r.startedOn, r.completedOn ?? r.startedOn)}
+                <Reveal key={r.id} index={i} list>
+                <CompletedNovenaCard novena={n} prayedRange={formatRange(r.startedOn, r.completedOn ?? r.startedOn)}
                   onOpen={() => router.push(`/novena/${n.id}`)}
                   onPrayAgain={() => { setMenuRun(r.id); setAlert({ kind: 'prayAgain' }); }} />
+                </Reveal>
               );
             }))}
         {/* Saved tab: novenas saved for later, in one card. Tap the bookmark to unsave (with Undo). */}
         {tab === 'saved' && (lib.saved.length === 0
           ? <Empty title={L.emptySavedTitle} body={L.emptySavedBody} cta={L.emptySavedCta} onPress={() => router.push('/')} />
           : (
-            <View style={{ borderRadius: radius.m, borderWidth: stroke.hairline, borderColor: colors.border.default, overflow: 'hidden' }}>
+            <Reveal style={{ borderRadius: radius.m, borderWidth: stroke.hairline, borderColor: colors.border.default, overflow: 'hidden' }}>
               {lib.saved.map((id, i) => {
                 const n = novenaById(id);
                 return n && (
@@ -100,7 +105,7 @@ export default function Library() {
                   </View>
                 );
               })}
-            </View>
+            </Reveal>
           ))}
       </ScrollView>
 

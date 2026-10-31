@@ -15,6 +15,7 @@ import { strings } from '@/copy/strings';
 import { useReminders } from '@/hooks/useReminders';
 import { formatTime12 } from '@/utils/dateUtils';
 import { inQuietHours } from '@/utils/reminderPlanner';
+import { Reveal } from '@/motion/Reveal';
 
 const R = strings.reminders;
 const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -51,7 +52,7 @@ export default function Reminders() {
       </View>
       <ScrollView contentContainerStyle={{ paddingTop: 8, paddingBottom: 140, gap: 24 }}>
         {!permission && <View style={{ paddingHorizontal: screenMargin }}><ReminderNote text="Reminders are off. Turn on notifications in Settings to get a gentle nudge." /></View>}
-        <View style={{ gap: 10 }}>
+        <Reveal index={0} style={{ gap: 10 }}>
           {/* First card: the daily reminder switch, the time (tap to change), and which weekdays. */}
           <Header title={R.title} />
           <Card>
@@ -73,8 +74,8 @@ export default function Reminders() {
               </View>
             </View>
           </Card>
-        </View>
-        <View style={{ gap: 10 }}>
+        </Reveal>
+        <Reveal index={1} style={{ gap: 10 }}>
           {/* Second card: a note after a missed day, feast-day suggestions, and quiet hours. */}
           <Header title={R.extras} />
           <Card>
@@ -88,7 +89,7 @@ export default function Reminders() {
               control={<Switch label={R.quietHours} value={quietOn}
                 onValueChange={(on) => update(on ? { quietStart: QUIET.start, quietEnd: QUIET.end } : { quietStart: '00:00', quietEnd: '00:00' })} />} />
           </Card>
-        </View>
+        </Reveal>
       </ScrollView>
       {picking ? <ReminderSheet visible time={settings.time} onClose={() => setPicking(false)} onSave={(time) => { update({ time, enabled: true }); setPicking(false); }} /> : null}
     </SafeAreaView>

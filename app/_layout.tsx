@@ -16,7 +16,11 @@ export default function RootLayout() {
     <CatalogProvider>
       <ReminderSync />
       <StatusBar style="dark" />
-      <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.surface.page } }} />
+      {/* Screens slide in from the right and can be swiped back (the native iOS push). The "day prayed" screen fades in instead,
+          because it replaces the Reader rather than stacking on top of it. iOS handles Reduce Motion for these itself. */}
+      <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.surface.page } }}>
+        <Stack.Screen name="prayed/[runId]/[day]" options={{ animation: 'fade', animationDuration: 250 }} />
+      </Stack>
     </CatalogProvider>
   );
 }

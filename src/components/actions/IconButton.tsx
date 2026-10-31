@@ -1,8 +1,9 @@
 // A round button that shows just an icon (for example Back, Share or More).
 // It always has a spoken label so screen readers can say what it does.
-import { Pressable } from 'react-native';
 import { colors, minTouchTarget, stroke } from '@/constants/theme';
 import { Icon, type IconName } from '../Icon';
+import { PressableScale } from '@/motion/PressableScale';
+import { pressScale } from '@/motion/tokens';
 
 type Props = { icon: IconName; label: string; onPress: () => void; size?: 'default' | 'large' | 'bordered' };
 const dims = { default: 36, large: 44, bordered: 44 } as const;
@@ -10,7 +11,8 @@ const dims = { default: 36, large: 44, bordered: 44 } as const;
 export function IconButton({ icon, label, onPress, size = 'default' }: Props) {
   const d = dims[size];
   return (
-    <Pressable
+    <PressableScale
+      scaleTo={pressScale.icon}
       accessibilityRole="button"
       accessibilityLabel={label}
       hitSlop={Math.max(0, (minTouchTarget - d) / 2)}
@@ -22,6 +24,6 @@ export function IconButton({ icon, label, onPress, size = 'default' }: Props) {
       })}
     >
       <Icon name={icon} />
-    </Pressable>
+    </PressableScale>
   );
 }

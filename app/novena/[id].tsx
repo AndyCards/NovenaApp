@@ -5,7 +5,6 @@ import { Pressable, ScrollView, Text, useWindowDimensions, View } from 'react-na
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ActionBar } from '@/components/actions/ActionBar';
 import { IconButton } from '@/components/actions/IconButton';
-import { Icon } from '@/components/Icon';
 import { NovenaImage } from '@/components/content/NovenaImage';
 import { NovenaMetaRow } from '@/components/content/NovenaMetaRow';
 import { Toast } from '@/components/overlays/Toast';
@@ -15,6 +14,8 @@ import { type } from '@/constants/typography';
 import { strings } from '@/copy/strings';
 import { useCatalog } from '@/hooks/useCatalog';
 import { useLibrary } from '@/hooks/useLibrary';
+import { Reveal } from '@/motion/Reveal';
+import { RotatingChevron } from '@/motion/RotatingChevron';
 
 export default function NovenaPage() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -56,11 +57,11 @@ export default function NovenaPage() {
         <IconButton icon="share" label="Share" size="large" onPress={() => router.push(`/share/${novena.id}`)} />
       </View>
       <ScrollView contentContainerStyle={{ paddingBottom: 60 }}>
-        <View style={{ paddingHorizontal: screenMargin }}>
+        <Reveal slide={false} style={{ paddingHorizontal: screenMargin }}>
           {/* The big saint picture (cropped from the top so heads are never cut off). */}
           <NovenaImage image={novena.image} size="full" label={novena.title} style={{ width: width - screenMargin * 2, height: 403, borderRadius: radius.s }} />
-        </View>
-        <View style={{ paddingHorizontal: screenMargin + 2, paddingVertical: 6, marginTop: 6, gap: 20 }}>
+        </Reveal>
+        <Reveal index={1} style={{ paddingHorizontal: screenMargin + 2, paddingVertical: 6, marginTop: 6, gap: 20 }}>
           <View style={{ gap: 6 }}>
             <Text accessibilityRole="header" style={[type.headingH2, { color: colors.text.body, textTransform: 'capitalize' }]}>{novena.title}</Text>
             <NovenaMetaRow minutes={novena.minutesPerDay} tags={novena.tags} />
@@ -69,15 +70,15 @@ export default function NovenaPage() {
           <ActionBar primaryLabel={label} onPrimary={() => openDay(run?.continueDay ?? 1, true)} saved={saved}
             onToggleSave={() => (saved ? lib.unsave(novena.id) : lib.save(novena.id))} />
           <Text style={[type.bodyMedium, { color: colors.text.body }]}>{novena.about}</Text>
-        </View>
+        </Reveal>
         {/* "Novena Days" heading. Tap it to fold or unfold the list of nine days. */}
         <Pressable accessibilityRole="button" accessibilityState={{ expanded: daysOpen }} onPress={() => setDaysOpen((o) => !o)}
           style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: screenMargin, paddingVertical: 6, marginTop: 14 }}>
           <Text style={[type.titleMedium, { color: colors.text.secondary }]}>{strings.novena.days}</Text>
-          <Icon name={daysOpen ? 'chevronDown' : 'chevronRight'} size={22} color={colors.text.secondary} />
+          <RotatingChevron open={daysOpen} size={22} color={colors.text.secondary} />
         </Pressable>
         {daysOpen ? (
-          <View style={{ padding: screenMargin, gap: 8 }}>
+          <Reveal index={0} style={{ padding: screenMargin, gap: 8 }}>
             {/* One card per day, with a marker showing prayed, today, missed or still to come. */}
             {novena.days.map((d) => (
               <NovenaDayRow
@@ -89,7 +90,7 @@ export default function NovenaPage() {
                 onPress={() => openDay(d.day)}
               />
             ))}
-          </View>
+          </Reveal>
         ) : null}
       </ScrollView>
       <Toast message={hint} onDismiss={() => setHint(null)} />

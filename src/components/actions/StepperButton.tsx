@@ -1,13 +1,15 @@
 // The little round arrow buttons that move to the previous or next day ("‹ Day 1 of 9 ›").
-import { Pressable } from 'react-native';
 import { colors } from '@/constants/theme';
 import { Icon } from '../Icon';
+import { PressableScale } from '@/motion/PressableScale';
+import { pressScale } from '@/motion/tokens';
 
 type Props = { direction: 'previous' | 'next'; onPress: () => void; disabled?: boolean };
 
 export function StepperButton({ direction, onPress, disabled }: Props) {
   return (
-    <Pressable
+    <PressableScale
+      scaleTo={pressScale.icon}
       accessibilityRole="button"
       accessibilityLabel={direction === 'previous' ? 'Previous day' : 'Next day'}
       accessibilityState={{ disabled }}
@@ -20,6 +22,6 @@ export function StepperButton({ direction, onPress, disabled }: Props) {
       })}
     >
       <Icon name={direction === 'previous' ? 'chevronLeft' : 'chevronRight'} size={14} />
-    </Pressable>
+    </PressableScale>
   );
 }

@@ -1,10 +1,11 @@
 // Figma "Button": 50 high pill. Primary = dark top-to-bottom gradient, optional icon after the label.
 // Secondary = light grey fill with a hairline border.
 import { LinearGradient } from 'expo-linear-gradient';
-import { Pressable, Text, View, type ViewStyle } from 'react-native';
+import { Text, View, type ViewStyle } from 'react-native';
 import { colors, radius, stroke } from '@/constants/theme';
 import { type } from '@/constants/typography';
 import { Icon, type IconName } from '../Icon';
+import { PressableScale } from '@/motion/PressableScale';
 
 type Props = {
   label: string;
@@ -30,13 +31,13 @@ export function Button({ label, onPress, variant = 'primary', size = 'default', 
   );
   const shape: ViewStyle = { height: h, borderRadius: radius.full, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, paddingHorizontal: size === 'default' ? 24 : 16 };
   return (
-    <Pressable accessibilityRole="button" accessibilityLabel={label} accessibilityState={{ disabled }} disabled={disabled} onPress={onPress}
-      style={({ pressed }) => [{ opacity: pressed ? 0.85 : 1 }, style]}>
+    <PressableScale dimTo={0.92} accessibilityRole="button" accessibilityLabel={label} accessibilityState={{ disabled }} disabled={disabled} onPress={onPress}
+      style={style}>
       {primary ? (
         <LinearGradient colors={colors.gradient.button} style={[shape, { borderWidth: stroke.hairline, borderColor: colors.border.subtle }]}>{inner}</LinearGradient>
       ) : (
         <View style={[shape, { backgroundColor: disabled ? colors.action.disabled : colors.action.secondary, borderWidth: stroke.hairline, borderColor: colors.border.default }]}>{inner}</View>
       )}
-    </Pressable>
+    </PressableScale>
   );
 }

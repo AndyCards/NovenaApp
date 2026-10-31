@@ -16,6 +16,7 @@ import { NovenaRow } from '@/components/content/NovenaRow';
 import { SectionHeader } from '@/components/content/SectionHeader';
 import { HomeAppBar } from '@/components/navigation/HomeAppBar';
 import { colors, screenMargin } from '@/constants/theme';
+import { Reveal } from '@/motion/Reveal';
 import { strings } from '@/copy/strings';
 import type { Collection, Novena } from '@/content/types';
 import { useCatalog } from '@/hooks/useCatalog';
@@ -66,8 +67,8 @@ export default function Home() {
   const featuredWidth = width - 2 * screenMargin;
 
   // Draws one section. "list" sections show tall rows going down; other sections show cards you swipe sideways.
-  const renderCollection = (c: Collection, layout = c.layout ?? 'cards') => (
-    <View key={c.id} style={{ gap: 10 }}>
+  const renderCollection = (c: Collection, index: number, layout = c.layout ?? 'cards') => (
+    <Reveal key={c.id} index={index} style={{ gap: 10 }}>
       <SectionHeader title={c.title} subtitle={c.subtitle} />
       {layout === 'list' ? (
         <View style={{ gap: 12 }}>{novenasOf(c).map((n) => <NovenaRow key={n.id} novena={n} onPress={() => open(n)} />)}</View>
@@ -76,12 +77,12 @@ export default function Home() {
           {novenasOf(c).map((n) => <NovenaCard key={n.id} novena={n} onPress={() => open(n)} />)}
         </ScrollView>
       )}
-    </View>
+    </Reveal>
   );
 
   // The "Feast days ahead" row: the next four saints' feast days.
-  const feastSection = feasts.length > 0 && (
-    <View style={{ gap: 10 }}>
+  const feastSection = (index: number) => feasts.length > 0 && (
+    <Reveal index={index} style={{ gap: 10 }}>
       <SectionHeader title="Feast days ahead" subtitle={strings.home.feastSubtitle} onSeeAll={() => router.push('/calendar')} />
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: screenMargin }}>
         {feasts.map((f) => (
@@ -89,7 +90,7 @@ export default function Home() {
             onPress={() => (f.novena ? open(f.novena) : router.push('/calendar'))} />
         ))}
       </View>
-    </View>
+    </Reveal>
   );
 
   return (
@@ -99,9 +100,9 @@ export default function Home() {
       <ScrollView contentContainerStyle={{ paddingTop: 12, paddingBottom: 140, gap: 32 }}>
         {/* Someone already praying sees: Continue cards, featured novenas, intentions, feast days, then the other sections. */}
         {/* Someone new sees: featured novenas, "How a novena works", feast days, then the other sections. */}
-        {returning ? (
+        {!loaded ? null : returning ? (
           <>
-            <View style={{ gap: 10 }}>
+            <Reveal index={0} style={{ gap: 10 }}>
               {/* "Continue praying": one card per novena in progress, swipe sideways. */}
               <SectionHeader title={strings.home.continueTitle} subtitle={strings.home.continueSubtitle} />
               <View style={{ gap: 6 }}>
@@ -115,9 +116,9 @@ export default function Home() {
                 </ScrollView>
                 {active.length > 1 ? <CarouselIndicator count={active.length} active={continuePage} /> : null}
               </View>
-            </View>
+            </Reveal>
             {featured ? (
-              <View style={{ gap: 10 }}>
+              <Reveal index={1} style={{ gap: 10 }}>
                 {/* The big featured cards with the "Start Novena" button. */}
                 <SectionHeader title={featured.title} subtitle={featured.subtitle} />
                 <View style={{ gap: 6, paddingBottom: 6 }}>
@@ -130,9 +131,9 @@ export default function Home() {
                   </ScrollView>
                   <CarouselIndicator count={novenasOf(featured).length} active={featuredPage} tone="strong" />
                 </View>
-              </View>
+              </Reveal>
             ) : null}
-            <View style={{ gap: 10 }}>
+            <Reveal index={2} style={{ gap: 10 }}>
               {/* "What are you praying for?": two tiles per row. Tapping one shows the novenas for that need. */}
               <SectionHeader title={strings.home.intentionsTitle} />
               <View style={{ paddingHorizontal: screenMargin, gap: 10 }}>
@@ -144,19 +145,19 @@ export default function Home() {
                   </View>
                 ))}
               </View>
-            </View>
-            {feastSection}
-            {others.map((c) => renderCollection(c))}
+            </Reveal>
+            {feastSection(3)}
+            {others.map((c, i) => renderCollection(c, 4 + i))}
           </>
         ) : (
           <>
-            {featured ? renderCollection(featured, 'cards') : null}
-            <View style={{ gap: 10 }}>
+            {featured ? renderCollection(featured, 0, 'cards') : null}
+            <Reveal index={1} style={{ gap: 10 }}>
               <SectionHeader title={strings.home.howItWorksTitle} subtitle={strings.home.howItWorksSubtitle} />
               <View style={{ paddingHorizontal: screenMargin }}><HowItWorksCard /></View>
-            </View>
-            {feastSection}
-            {others.map((c) => renderCollection(c))}
+            </Reveal>
+            {feastSection(2)}
+            {others.map((c, i) => renderCollection(c, 3 + i))}
           </>
         )}
       </ScrollView>

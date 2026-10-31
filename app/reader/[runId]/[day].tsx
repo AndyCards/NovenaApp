@@ -3,7 +3,7 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { Pressable, ScrollView, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button } from '@/components/actions/Button';
 import { AudioDock } from '@/components/audio/AudioDock';
@@ -17,6 +17,9 @@ import { strings } from '@/copy/strings';
 import { getDownload, getIntention, setIntention } from '@/data/queries';
 import { useAudio } from '@/hooks/useAudio';
 import { PLACEHOLDER_AUDIO } from '@/constants/config';
+import { PressableScale } from '@/motion/PressableScale';
+import { Reveal } from '@/motion/Reveal';
+import { pressScale } from '@/motion/tokens';
 import { usePlayerStore } from '@/state/playerStore';
 import { useCatalog } from '@/hooks/useCatalog';
 import { useLibrary } from '@/hooks/useLibrary';
@@ -26,10 +29,10 @@ import type { DownloadStatus } from '@/utils/downloadStatus';
 
 function NavButton({ icon, label, onPress }: { icon: 'back' | 'more'; label: string; onPress: () => void }) {
   return (
-    <Pressable accessibilityRole="button" accessibilityLabel={label} onPress={onPress}
+    <PressableScale scaleTo={pressScale.icon} accessibilityRole="button" accessibilityLabel={label} onPress={onPress}
       style={({ pressed }) => ({ width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: pressed ? colors.surface.subtle : 'transparent' })}>
       <Icon name={icon} size={22} />
-    </Pressable>
+    </PressableScale>
   );
 }
 
@@ -88,7 +91,7 @@ export default function Reader() {
         <NavButton icon="more" label={strings.common.more} onPress={() => setPopup('menu')} />
       </View>
 
-      <View style={{ flex: 1 }}>
+      <Reveal slide={false} style={{ flex: 1 }}>
         <ScrollView contentContainerStyle={{ paddingTop: 6, paddingHorizontal: 22, gap: 24, paddingBottom: 72 }}>
           {/* "Day 1 of 9" with the cross, then the prayer itself, then the mark-as-prayed button. */}
           <ChapterTitle title={strings.reader.dayOf(dayNo, novena.days.length)} />
@@ -98,7 +101,7 @@ export default function Reader() {
         {/* Soft white fades at the top and bottom edges so text gently disappears as you scroll. */}
         <LinearGradient pointerEvents="none" colors={['#FFFFFF', 'rgba(255,255,255,0)']} style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 12 }} />
         <LinearGradient pointerEvents="none" colors={['rgba(255,255,255,0)', '#FFFFFF']} style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 46 }} />
-      </View>
+      </Reveal>
       {/* The audio player appears here only after the person chooses Listen. It never plays by itself. */}
       <AudioDock inline />
 

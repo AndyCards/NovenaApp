@@ -1,12 +1,14 @@
 // Figma "Reader · Options menu": a floating card under the More button (top right).
 // Day stepper, Prayer mode (Listen / Read only), then Save, Download, Share, View intention.
 import { Fragment } from 'react';
-import { Modal, Pressable, Text, View } from 'react-native';
+import { Modal, Pressable, StyleSheet, Text, View } from 'react-native';
+import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors, screenMargin, stroke } from '@/constants/theme';
 import { type } from '@/constants/typography';
 import { strings } from '@/copy/strings';
 import type { DownloadStatus } from '@/utils/downloadStatus';
+import { usePresence } from '@/motion/usePresence';
 import { Icon, type IconName } from '../Icon';
 import { StepperButton } from '../actions/StepperButton';
 
@@ -72,10 +74,19 @@ export function ReaderOptionsMenu(p: Props) {
     { label: r.share, icon: 'share', onPress: p.onShare },
     { label: r.viewIntentionRow, icon: 'handsPraying', onPress: p.onViewIntention },
   ];
+  // Motion: the menu grows out of the "…" button (top right) while the backdrop fades in.
+  const { mounted, progress, reduced } = usePresence(p.visible);
+  const scrimStyle = useAnimatedStyle(() => ({ opacity: Math.min(1, progress.value) }));
+  const menuStyle = useAnimatedStyle(() => ({
+    opacity: Math.min(1, progress.value * 1.8),
+    transform: reduced ? [] : [{ translateX: (1 - progress.value) * 40 }, { translateY: (1 - progress.value) * -60 }, { scale: 0.9 + 0.1 * progress.value }],
+  }));
   return (
-    <Modal visible={p.visible} transparent animationType="fade" onRequestClose={p.onClose} statusBarTranslucent>
-      <Pressable accessibilityLabel={strings.common.close} onPress={p.onClose} style={{ flex: 1, backgroundColor: colors.overlay.scrim }}>
-        <Pressable accessible={false} style={{ position: 'absolute', top: insets.top + 48, right: screenMargin + 14, width: 250, borderRadius: 25, overflow: 'hidden', backgroundColor: colors.surface.default, ...shadow }}>
+    <Modal visible={mounted} transparent animationType="none" onRequestClose={p.onClose} statusBarTranslucent>
+      <Animated.View pointerEvents="none" style={[StyleSheet.absoluteFill, { backgroundColor: colors.overlay.scrim }, scrimStyle]} />
+      <Pressable accessibilityLabel={strings.common.close} onPress={p.onClose} style={{ flex: 1 }}>
+        <Animated.View style={[{ position: 'absolute', top: insets.top + 48, right: screenMargin + 14, width: 250 }, menuStyle]}>
+        <Pressable accessible={false} style={{ borderRadius: 25, overflow: 'hidden', backgroundColor: colors.surface.default, ...shadow }}>
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 12, paddingVertical: 10 }}>
             <StepperButton direction="previous" disabled={p.day <= 1} onPress={() => p.onChangeDay(p.day - 1)} />
             <Text accessibilityRole="adjustable" style={[type.labelSmall, { color: colors.text.primary }]}>{r.dayOf(p.day, p.total)}</Text>
@@ -98,6 +109,7 @@ export function ReaderOptionsMenu(p: Props) {
             </Fragment>
           ))}
         </Pressable>
+        </Animated.View>
       </Pressable>
     </Modal>
   );

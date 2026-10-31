@@ -15,6 +15,7 @@ import { type } from '@/constants/typography';
 import { strings } from '@/copy/strings';
 import { useCatalog } from '@/hooks/useCatalog';
 import { feastsInMonth } from '@/utils/feasts';
+import { Reveal } from '@/motion/Reveal';
 
 const WEEKDAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
@@ -62,12 +63,15 @@ export default function CalendarScreen() {
       </View>
 
       {view === 'year' ? (
+        <Reveal slide={false} style={{ flex: 1 }}>
         <ScrollView contentContainerStyle={{ paddingTop: 8, paddingBottom: 60 }}>
           <YearCalendarGrid year={year} today={now} onSelectMonth={(m) => { setMonth0(m); setView('month'); }} />
         </ScrollView>
+        </Reveal>
       ) : (
         <ScrollView contentContainerStyle={{ paddingTop: 8, paddingBottom: 60, gap: 24 }}>
-          <View style={{ marginHorizontal: screenMargin, borderRadius: radius.m, borderWidth: stroke.hairline, borderColor: colors.border.default, paddingHorizontal: 10, paddingTop: 14, paddingBottom: 6 }}>
+          {/* The month card fades in again each time you move to another month. */}
+          <Reveal key={format(first, 'yyyy-MM')} slide={false} style={{ marginHorizontal: screenMargin, borderRadius: radius.m, borderWidth: stroke.hairline, borderColor: colors.border.default, paddingHorizontal: 10, paddingTop: 14, paddingBottom: 6 }}>
             <View style={{ flexDirection: 'row', alignItems: 'center', paddingLeft: 4, marginBottom: 6 }}>
               <Text style={[type.headingH2, { flex: 1, color: colors.text.primary }]}>{format(first, 'MMMM yyyy')}</Text>
               <RoundButton icon="chevronLeft" label="Previous month" onPress={() => shiftMonth(-1)} />
@@ -89,10 +93,10 @@ export default function CalendarScreen() {
                 })}
               </View>
             ))}
-          </View>
+          </Reveal>
 
           {feasts.length > 0 ? (
-            <View style={{ gap: 10 }}>
+            <Reveal key={`feasts-${format(first, 'yyyy-MM')}`} index={1} slide={false} style={{ gap: 10 }}>
               <Text accessibilityRole="header" style={[type.titleMedium, { color: colors.text.secondary, paddingHorizontal: screenMargin }]}>{strings.calendar.feastsThisMonth}</Text>
               <View style={{ marginHorizontal: screenMargin, borderRadius: radius.m, borderWidth: stroke.hairline, borderColor: colors.border.default, overflow: 'hidden' }}>
                 {feasts.map((f, i) => (
@@ -102,7 +106,7 @@ export default function CalendarScreen() {
                   </View>
                 ))}
               </View>
-            </View>
+            </Reveal>
           ) : null}
         </ScrollView>
       )}

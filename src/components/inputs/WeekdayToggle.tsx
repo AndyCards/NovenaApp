@@ -1,16 +1,28 @@
 // Figma "Weekday Toggle": 44 high circle. On = solid grey, Off = soft gradient.
+// Motion: the grey fill fades in over the soft gradient, and the circle dips slightly under a finger.
 import { LinearGradient } from 'expo-linear-gradient';
-import { Pressable, Text } from 'react-native';
+import { useEffect } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import Animated, { interpolateColor, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { colors } from '@/constants/theme';
 import { type } from '@/constants/typography';
+import { PressableScale } from '@/motion/PressableScale';
+import { duration, ease, pressScale } from '@/motion/tokens';
+
+const AnimatedText = Animated.createAnimatedComponent(Text);
 
 export function WeekdayToggle({ label, on, onPress }: { label: string; on: boolean; onPress: () => void }) {
-  const text = <Text style={[type.labelSmall, { color: on ? colors.surface.raised : colors.text.body }]}>{label.slice(0, 1)}</Text>;
-  const shape = { flex: 1, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', borderWidth: 0.5, borderColor: colors.border.subtle } as const;
+  const p = useSharedValue(on ? 1 : 0);
+  useEffect(() => { p.value = withTiming(on ? 1 : 0, { duration: duration.quick, easing: ease.out }); }, [on, p]);
+  const fill = useAnimatedStyle(() => ({ opacity: p.value }));
+  const text = useAnimatedStyle(() => ({ color: interpolateColor(p.value, [0, 1], [colors.text.body, colors.surface.raised]) }));
   return (
-    <Pressable accessibilityRole="switch" accessibilityState={{ checked: on }} accessibilityLabel={label} onPress={onPress} style={{ flex: 1 }}>
-      {on ? <LinearGradient colors={[colors.action.selected, colors.action.selected]} style={shape}>{text}</LinearGradient>
-        : <LinearGradient colors={['#EFEFEF', '#FBFBFB']} style={shape}>{text}</LinearGradient>}
-    </Pressable>
+    <PressableScale scaleTo={pressScale.icon} accessibilityRole="switch" accessibilityState={{ checked: on }} accessibilityLabel={label} onPress={onPress} style={{ flex: 1 }}>
+      <View style={{ height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', borderWidth: 0.5, borderColor: colors.border.subtle, overflow: 'hidden' }}>
+        <LinearGradient colors={['#EFEFEF', '#FBFBFB']} style={StyleSheet.absoluteFill} />
+        <Animated.View style={[StyleSheet.absoluteFill, { backgroundColor: colors.action.selected }, fill]} />
+        <AnimatedText style={[type.labelSmall, text]}>{label.slice(0, 1)}</AnimatedText>
+      </View>
+    </PressableScale>
   );
 }

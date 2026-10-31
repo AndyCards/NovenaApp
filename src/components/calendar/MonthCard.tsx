@@ -1,8 +1,10 @@
 // A small month for the year view (Figma "Month Card"): white card, month name, M–S letters, days.
 import { format } from 'date-fns';
-import { Pressable, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { colors, stroke } from '@/constants/theme';
 import { type } from '@/constants/typography';
+import { PressableScale } from '@/motion/PressableScale';
+import { pressScale } from '@/motion/tokens';
 import { YearDay } from './YearDay';
 
 type Props = { year: number; month0: number; current?: boolean; todayDay?: number; onPress: () => void };
@@ -15,7 +17,7 @@ export function MonthCard({ year, month0, current, todayDay, onPress }: Props) {
   while (cells.length % 7) cells.push(null);
   const rows = Array.from({ length: cells.length / 7 }, (_, r) => cells.slice(r * 7, r * 7 + 7));
   return (
-    <Pressable accessibilityRole="button" accessibilityLabel={format(first, 'MMMM yyyy')} onPress={onPress}
+    <PressableScale scaleTo={pressScale.card} accessibilityRole="button" accessibilityLabel={format(first, 'MMMM yyyy')} onPress={onPress}
       style={{ flex: 1, padding: 8, paddingBottom: 12, borderRadius: 12, borderWidth: stroke.hairline, borderColor: colors.border.subtle, backgroundColor: colors.surface.default,
         shadowColor: '#000', shadowOpacity: 0.05, shadowRadius: 3, shadowOffset: { width: 0, height: 1 }, elevation: 1 }}>
       <Text style={[type.calendarMonth, { color: colors.text.primary, marginBottom: 4 }]}>{format(first, 'MMM')}</Text>
@@ -27,6 +29,6 @@ export function MonthCard({ year, month0, current, todayDay, onPress }: Props) {
           {row.map((d, j) => <YearDay key={j} day={d} state={d !== null && current && todayDay === d ? 'today' : 'default'} />)}
         </View>
       ))}
-    </Pressable>
+    </PressableScale>
   );
 }
