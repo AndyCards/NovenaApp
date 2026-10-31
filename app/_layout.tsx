@@ -5,6 +5,7 @@ import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { colors } from '@/constants/theme';
 import { ReminderSync } from '@/components/ReminderSync';
+import { MotionSelfTest } from '@/motion/MotionSelfTest';
 import { CatalogProvider } from '@/hooks/useCatalog';
 
 export default function RootLayout() {
@@ -15,6 +16,7 @@ export default function RootLayout() {
   return (
     <CatalogProvider>
       <ReminderSync />
+      <MotionSelfTest />
       <StatusBar style="dark" />
       {/* Screens slide in from the right and can be swiped back (the native iOS push). The "day prayed" screen fades in instead,
           because it replaces the Reader rather than stacking on top of it. iOS handles Reduce Motion for these itself. */}
