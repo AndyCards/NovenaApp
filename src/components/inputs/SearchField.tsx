@@ -19,7 +19,7 @@ export function SearchField({ value, onChangeText, onSubmit, autoFocus, placehol
         placeholder={placeholder}
         placeholderTextColor={colors.text.muted}
         returnKeyType="search"
-        style={[type.bodyLarge, { flex: 1, color: colors.text.primary }]}
+        style={[type.bodyLarge, { flex: 1, height: 45, paddingVertical: 0, lineHeight: 20, textAlignVertical: 'center', color: colors.text.primary }]}
       />
       {value ? (
         <Pressable accessibilityRole="button" accessibilityLabel="Clear search" onPress={() => onChangeText('')} hitSlop={8}
