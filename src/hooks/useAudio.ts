@@ -1,7 +1,7 @@
 // Audio playback. Audio NEVER starts by itself: the player opens paused and the person taps play.
 // There is one player for the whole app, so the Reader and the player card control the same audio.
 import { createAudioPlayer, setAudioModeAsync, type AudioPlayer } from 'expo-audio';
-import { audioUrl } from '@/constants/config';
+import { audioUrl, PLACEHOLDER_AUDIO } from '@/constants/config';
 import { usePlayerStore } from '@/state/playerStore';
 import { isDownloaded, localAudioPath } from '@/utils/downloads';
 
@@ -24,7 +24,9 @@ export function useAudio() {
         await setAudioModeAsync({ playsInSilentMode: true });
         audioModeSet = true;
       }
-      const source = (await isDownloaded(novenaId, day)) ? localAudioPath(novenaId, day) : audioUrl(novenaId, day);
+      // While real recordings don't exist, play the bundled placeholder tone (works offline, no network needed).
+      const source = PLACEHOLDER_AUDIO ? require('../../assets/audio/placeholder-prayer.mp3')
+        : (await isDownloaded(novenaId, day)) ? localAudioPath(novenaId, day) : audioUrl(novenaId, day);
       if (request !== openRequest) return; // a newer open (or close) happened while we waited
       player = createAudioPlayer(source);
       player.addListener('playbackStatusUpdate', (s) => {

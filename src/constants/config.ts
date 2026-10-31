@@ -7,6 +7,10 @@ export const CONTENT_BASE_URL =
 export const CATALOG_URL = `${CONTENT_BASE_URL}/catalog.json`;
 export const VERSION_URL = `${CONTENT_BASE_URL}/version.json`;
 
+// TEMPORARY: while real recordings don't exist yet, every day plays one short placeholder tone (assets/audio/placeholder-prayer.mp3,
+// made for this app, so no licence worries) and the audio bar shows on the Reader. Set to false when real audio is ready.
+export const PLACEHOLDER_AUDIO = true;
+
 export const audioUrl = (novenaId: string, day: number) =>
   `${CONTENT_BASE_URL}/audio/${novenaId}/day-${day}.m4a`;
 

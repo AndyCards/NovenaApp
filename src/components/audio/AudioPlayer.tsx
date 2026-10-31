@@ -30,7 +30,7 @@ const label = (state: Props['state'], left: string) =>
   : state === 'offline' ? "Offline · can't stream. Download to listen"
   : "Can't play right now. Read instead";
 
-const mmss = (s: number) => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, '0')}`;
+const mmss = (s: number) => { const t = Math.max(0, Math.floor(s)); return `${Math.floor(t / 60)}:${String(t % 60).padStart(2, '0')}`; };
 
 function RoundButton({ icon, label: a11y, onPress }: { icon: 'play' | 'pause' | 'close'; label: string; onPress: () => void }) {
   return (
@@ -44,8 +44,11 @@ function RoundButton({ icon, label: a11y, onPress }: { icon: 'play' | 'pause' | 
 
 export function AudioPlayer({ state, title, image, positionSec, durationSec, layout = 'full', onPlay, onPause, onSeek, onClose }: Props) {
   const [trackWidth, setTrackWidth] = useState(0);
+  const [scrub, setScrub] = useState<number | null>(null); // 0 to 1 while a finger is dragging the bar, otherwise null
   const left = mmss(Math.max(0, durationSec - positionSec));
   const progress = durationSec > 0 ? Math.min(1, positionSec / durationSec) : 0;
+  const shown = scrub ?? progress; // while dragging, the bar follows the finger
+  const fraction = (x: number) => (trackWidth > 0 ? Math.min(1, Math.max(0, x / trackWidth)) : 0);
   const playing = state === 'playing';
   const disabled = state === 'offline' || state === 'error' || state === 'loading';
   const canClose = state === 'paused' || state === 'finished' || state === 'error';
@@ -62,16 +65,30 @@ export function AudioPlayer({ state, title, image, positionSec, durationSec, lay
         <RoundButton icon={playing ? 'pause' : 'play'} label={playing ? 'Pause' : 'Play'} onPress={disabled ? () => {} : playing ? onPause : onPlay} />
       </View>
       {layout === 'full' ? (
-        <Pressable accessibilityRole="adjustable" accessibilityLabel="Audio position" onLayout={(e) => setTrackWidth(e.nativeEvent.layout.width)}
-          onPress={(e) => durationSec > 0 && trackWidth > 0 && onSeek((e.nativeEvent.locationX / trackWidth) * durationSec)}
-          style={{ height: 16, justifyContent: 'center', marginRight: 4 }}>
-          {/* The bar and knob ignore touches, so the tap position is measured across the whole bar. */}
-          <View pointerEvents="none" style={{ height: 4, borderRadius: 2, backgroundColor: colors.progress.track }}>
-            <View style={{ width: `${progress * 100}%`, height: 4, borderRadius: 2, backgroundColor: colors.progress.fill }} />
+        <View style={{ gap: 2 }}>
+          {/* The progress bar. Tap anywhere on it to jump there, or drag the knob to move forward and back. */}
+          <View accessibilityRole="adjustable" accessibilityLabel="Audio position"
+            accessibilityValue={{ min: 0, max: Math.round(durationSec), now: Math.round(positionSec) }}
+            onLayout={(e) => setTrackWidth(e.nativeEvent.layout.width)}
+            onStartShouldSetResponder={() => !disabled && durationSec > 0}
+            onResponderGrant={(e) => setScrub(fraction(e.nativeEvent.locationX))}
+            onResponderMove={(e) => setScrub(fraction(e.nativeEvent.locationX))}
+            onResponderRelease={(e) => { const f = fraction(e.nativeEvent.locationX); setScrub(null); onSeek(f * durationSec); }}
+            onResponderTerminate={() => setScrub(null)}
+            style={{ height: 24, justifyContent: 'center', marginRight: 4 }}>
+            {/* The bar and knob ignore touches, so the finger position is measured across the whole bar. */}
+            <View pointerEvents="none" style={{ height: 4, borderRadius: 2, backgroundColor: colors.progress.track }}>
+              <View style={{ width: `${shown * 100}%`, height: 4, borderRadius: 2, backgroundColor: colors.progress.fill }} />
+            </View>
+            <View pointerEvents="none" style={{ position: 'absolute', left: Math.max(0, shown * trackWidth - 8), width: 16, height: 16, borderRadius: 8, backgroundColor: colors.surface.default, borderWidth: 0.6, borderColor: colors.border.strong,
+              shadowColor: '#000', shadowOpacity: 0.1, shadowRadius: 2, shadowOffset: { width: 0, height: 1 } }} />
           </View>
-          <View pointerEvents="none" style={{ position: 'absolute', left: Math.max(0, progress * trackWidth - 8), width: 16, height: 16, borderRadius: 8, backgroundColor: colors.surface.default, borderWidth: 0.6, borderColor: colors.border.strong,
-            shadowColor: '#000', shadowOpacity: 0.1, shadowRadius: 2, shadowOffset: { width: 0, height: 1 } }} />
-        </Pressable>
+          {/* Time passed on the left, total length on the right. */}
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginRight: 4 }}>
+            <Text style={[type.bodySmall, { color: colors.text.tertiary }]}>{mmss(shown * durationSec)}</Text>
+            <Text style={[type.bodySmall, { color: colors.text.tertiary }]}>{mmss(durationSec)}</Text>
+          </View>
+        </View>
       ) : null}
     </View>
   );

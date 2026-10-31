@@ -18,7 +18,8 @@ type Props = {
   saved: boolean;
   download: DownloadStatus;
   sizeMb?: number;
-  hasAudio: boolean;
+  hasAudio: boolean; // real recordings exist (needed for Download)
+  canListen: boolean; // something can be played (a real recording or the placeholder tone)
   onClose: () => void;
   onChangeDay: (day: number) => void;
   onMode: (m: 'listen' | 'read') => void;
@@ -85,8 +86,8 @@ export function ReaderOptionsMenu(p: Props) {
             <View style={{ paddingHorizontal: 10, paddingTop: 10, paddingBottom: 6, gap: 8 }}>
               <Text style={[type.bodySmall, { color: colors.text.tertiary, paddingHorizontal: 4 }]}>{r.prayerMode}</Text>
               <View accessibilityRole="radiogroup" style={{ flexDirection: 'row', padding: 4, borderRadius: 25, backgroundColor: colors.surface.subtle }}>
-                <Segment label={r.listen} icon="headphones" active={p.hasAudio && p.mode === 'listen'} disabled={!p.hasAudio} onPress={() => p.onMode('listen')} />
-                <Segment label={r.readOnly} icon="speakerSlash" active={!p.hasAudio || p.mode === 'read'} onPress={() => p.onMode('read')} />
+                <Segment label={r.listen} icon="headphones" active={p.canListen && p.mode === 'listen'} disabled={!p.canListen} onPress={() => p.onMode('listen')} />
+                <Segment label={r.readOnly} icon="speakerSlash" active={!p.canListen || p.mode === 'read'} onPress={() => p.onMode('read')} />
               </View>
             </View>
           )}

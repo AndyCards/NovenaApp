@@ -16,6 +16,7 @@ import { colors, screenMargin } from '@/constants/theme';
 import { strings } from '@/copy/strings';
 import { getDownload, getIntention, setIntention } from '@/data/queries';
 import { useAudio } from '@/hooks/useAudio';
+import { PLACEHOLDER_AUDIO } from '@/constants/config';
 import { usePlayerStore } from '@/state/playerStore';
 import { useCatalog } from '@/hooks/useCatalog';
 import { useLibrary } from '@/hooks/useLibrary';
@@ -54,11 +55,15 @@ export default function Reader() {
   }, [novena?.id]);
   // Leaving the Reader stops the audio, so it never keeps playing with no way to pause it.
   useEffect(() => () => { if (usePlayerStore.getState().state !== 'hidden') audio.close(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
-  // Moving to another day closes the previous day's audio.
+  // Moving to another day closes the previous day's audio. While placeholder audio is on, the player bar then
+  // appears for the new day, paused (it never starts by itself).
   useEffect(() => {
+    if (!novena) return;
     const st = usePlayerStore.getState();
-    if (st.state !== 'hidden' && st.day !== dayNo) audio.close();
-  }, [dayNo]); // eslint-disable-line react-hooks/exhaustive-deps
+    if (st.state !== 'hidden' && st.novenaId === novena.id && st.day === dayNo) return; // already showing this day
+    if (st.state !== 'hidden') audio.close();
+    if (PLACEHOLDER_AUDIO) audio.open(novena.id, novena.title, dayNo);
+  }, [novena?.id, dayNo]); // eslint-disable-line react-hooks/exhaustive-deps
   if (!run || !novena) return null;
   const content = novena.days.find((d) => d.day === dayNo);
   if (!content) return null;
@@ -107,6 +112,7 @@ export default function Reader() {
         download={download}
         sizeMb={novena.audioSizeMb}
         hasAudio={novena.hasAudio}
+        canListen={novena.hasAudio || PLACEHOLDER_AUDIO}
         onClose={close}
         onChangeDay={(d) => router.setParams({ day: String(d) })}
         onMode={(m) => { if (m === 'listen') audio.open(novena.id, novena.title, dayNo); else audio.close(); close(); }}
