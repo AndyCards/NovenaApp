@@ -45,9 +45,9 @@ function Segment({ label, icon, active, onPress }: { label: string; icon: IconNa
 function Row({ label, detail, icon, onPress }: { label: string; detail?: string; icon: IconName; onPress: () => void }) {
   return (
     <Pressable accessibilityRole="menuitem" accessibilityLabel={detail ? `${label}. ${detail}` : label} onPress={onPress}
-      style={({ pressed }) => ({ flexDirection: 'row', alignItems: 'center', gap: 12, paddingHorizontal: 14, paddingVertical: 13, backgroundColor: pressed ? colors.surface.subtle : 'transparent' })}>
+      style={({ pressed }) => ({ flexDirection: 'row', alignItems: 'center', gap: 12, minHeight: 48, paddingHorizontal: 16, paddingVertical: 12, backgroundColor: pressed ? colors.surface.subtle : 'transparent' })}>
       <View style={{ flex: 1, gap: 2 }}>
-        <Text style={[type.bodyMedium, { color: colors.text.primary }]}>{label}</Text>
+        <Text style={[type.labelSmall, { color: colors.text.primary }]}>{label}</Text>
         {detail ? <Text style={[type.bodySmall, { color: colors.text.tertiary }]}>{detail}</Text> : null}
       </View>
       <Icon name={icon} size={20} color={colors.text.secondary} />
@@ -72,7 +72,7 @@ export function ReaderOptionsMenu(p: Props) {
   return (
     <Modal visible={p.visible} transparent animationType="fade" onRequestClose={p.onClose} statusBarTranslucent>
       <Pressable accessibilityLabel={strings.common.close} onPress={p.onClose} style={{ flex: 1, backgroundColor: colors.overlay.scrim }}>
-        <Pressable accessible={false} style={{ position: 'absolute', top: insets.top + 48, right: screenMargin + 14, width: 248, borderRadius: 22, overflow: 'hidden', backgroundColor: colors.surface.default, ...shadow }}>
+        <Pressable accessible={false} style={{ position: 'absolute', top: insets.top + 48, right: screenMargin + 14, width: 250, borderRadius: 25, overflow: 'hidden', backgroundColor: colors.surface.default, ...shadow }}>
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 12, paddingVertical: 10 }}>
             <StepperButton direction="previous" disabled={p.day <= 1} onPress={() => p.onChangeDay(p.day - 1)} />
             <Text accessibilityRole="adjustable" style={[type.labelSmall, { color: colors.text.primary }]}>{r.dayOf(p.day, p.total)}</Text>
@@ -82,7 +82,7 @@ export function ReaderOptionsMenu(p: Props) {
           {p.hasAudio ? (
             <View style={{ paddingHorizontal: 10, paddingTop: 10, paddingBottom: 6, gap: 8 }}>
               <Text style={[type.bodySmall, { color: colors.text.tertiary, paddingHorizontal: 4 }]}>{r.prayerMode}</Text>
-              <View accessibilityRole="radiogroup" style={{ flexDirection: 'row', padding: 3, borderRadius: 22, backgroundColor: colors.surface.subtle }}>
+              <View accessibilityRole="radiogroup" style={{ flexDirection: 'row', padding: 4, borderRadius: 25, backgroundColor: colors.surface.subtle }}>
                 <Segment label={r.listen} icon="headphones" active={p.mode === 'listen'} onPress={() => p.onMode('listen')} />
                 <Segment label={r.readOnly} icon="speakerSlash" active={p.mode === 'read'} onPress={() => p.onMode('read')} />
               </View>

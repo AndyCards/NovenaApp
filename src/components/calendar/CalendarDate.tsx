@@ -11,9 +11,9 @@ export function CalendarDate({ day, today, saintName, saintAvatar, onPress }: Pr
   if (day === null) return <View style={{ flex: 1 }} />;
   return (
     <Pressable accessibilityRole="button" disabled={!onPress} accessibilityLabel={`${day}${saintName ? `, ${saintName} feast day` : ''}${today ? ', today' : ''}`} onPress={onPress}
-      style={{ flex: 1, minHeight: 66, alignItems: 'center', paddingTop: 6, gap: 4 }}>
-      <View style={{ width: 30, height: 30, borderRadius: 15, alignItems: 'center', justifyContent: 'center', backgroundColor: today ? colors.action.primary : 'transparent' }}>
-        <Text style={[type.calendarDay, { fontSize: 15, color: today ? colors.text.onAction : colors.text.secondary }]}>{day}</Text>
+      style={{ flex: 1, minHeight: 64, alignItems: 'center', paddingTop: 6, gap: 4 }}>
+      <View style={{ width: 32, height: 32, borderRadius: 16, alignItems: 'center', justifyContent: 'center', backgroundColor: today ? colors.action.primary : 'transparent' }}>
+        <Text style={[type.bodyMedium, { color: today ? colors.text.onAction : colors.text.secondary }]}>{day}</Text>
       </View>
       {saintName ? <SaintAvatar name={saintName} file={saintAvatar} size="tiny" /> : null}
     </Pressable>

@@ -69,12 +69,12 @@ export default function CalendarScreen() {
         <ScrollView contentContainerStyle={{ paddingTop: 8, paddingBottom: 60, gap: 24 }}>
           <View style={{ marginHorizontal: screenMargin, borderRadius: radius.m, borderWidth: stroke.hairline, borderColor: colors.border.default, paddingHorizontal: 10, paddingTop: 14, paddingBottom: 6 }}>
             <View style={{ flexDirection: 'row', alignItems: 'center', paddingLeft: 4, marginBottom: 6 }}>
-              <Text style={[type.titleCard, { flex: 1, fontSize: 20, color: colors.text.primary }]}>{format(first, 'MMMM yyyy')}</Text>
+              <Text style={[type.headingH2, { flex: 1, color: colors.text.primary }]}>{format(first, 'MMMM yyyy')}</Text>
               <RoundButton icon="chevronLeft" label="Previous month" onPress={() => shiftMonth(-1)} />
               <RoundButton icon="chevronRight" label="Next month" onPress={() => shiftMonth(1)} />
             </View>
             <View style={{ flexDirection: 'row', paddingBottom: 6 }}>
-              {WEEKDAYS.map((d) => <Text key={d} style={[type.bodyMedium, { flex: 1, textAlign: 'center', color: colors.text.secondary }]}>{d}</Text>)}
+              {WEEKDAYS.map((d) => <Text key={d} style={[type.calendarWeekday, { flex: 1, textAlign: 'center', color: colors.text.secondary }]}>{d}</Text>)}
             </View>
             {weeks.map((week, i) => (
               <View key={i} style={{ flexDirection: 'row', borderTopWidth: stroke.hairline, borderColor: colors.border.subtle }}>

@@ -17,13 +17,13 @@ export function FeastDateRow({ saintName, avatar, feastDate, startDate, onPress 
   return (
     <Pressable accessibilityRole="button" accessibilityLabel={`${strings.calendar.feastDay(saintName)}, ${formatMonthDay(feastDate)}`} onPress={onPress}
       style={({ pressed }) => ({ flexDirection: 'row', alignItems: 'center', gap: 12, paddingHorizontal: 14, paddingVertical: 10, backgroundColor: pressed ? colors.surface.subtle : 'transparent' })}>
-      <View style={{ width: 32, alignItems: 'center' }}>
+      <View style={{ width: 34, alignItems: 'center' }}>
         <Text style={[type.labelXSmall, { color: colors.text.tertiary, textTransform: 'uppercase' }]}>{format(d, 'MMM')}</Text>
-        <Text style={[type.titleCard, { color: colors.text.primary }]}>{format(d, 'd')}</Text>
+        <Text style={[type.labelLarge, { color: colors.text.primary }]}>{format(d, 'd')}</Text>
       </View>
       <SaintAvatar name={saintName} file={avatar} size="row" />
       <View style={{ flex: 1, gap: 2 }}>
-        <Text numberOfLines={1} style={[type.labelMedium, { color: colors.text.primary }]}>{strings.calendar.feastDay(saintName)}</Text>
+        <Text numberOfLines={1} style={[type.bodyMedium, { color: colors.text.primary }]}>{strings.calendar.feastDay(saintName)}</Text>
         <Text style={[type.bodySmall, { color: colors.text.tertiary }]}>{strings.calendar.novenaStarts(formatMonthDay(startDate))}</Text>
       </View>
       <Icon name="chevronRight" size={18} color={colors.icon.secondary} />

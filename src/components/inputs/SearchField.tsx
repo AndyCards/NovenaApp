@@ -9,7 +9,7 @@ type Props = { value: string; onChangeText: (t: string) => void; onSubmit?: (t: 
 
 export function SearchField({ value, onChangeText, onSubmit, autoFocus, placeholder = strings.home.searchPlaceholder }: Props) {
   return (
-    <View style={{ flex: 1, height: 44, flexDirection: 'row', alignItems: 'center', gap: 8, paddingLeft: 14, paddingRight: 10, borderRadius: radius.full, backgroundColor: colors.surface.default, borderWidth: stroke.hairline, borderColor: colors.border.default }}>
+    <View style={{ flex: 1, height: 45, flexDirection: 'row', alignItems: 'center', gap: 8, paddingLeft: 14, paddingRight: 10, borderRadius: radius.full, backgroundColor: colors.surface.default, borderWidth: stroke.hairline, borderColor: colors.border.default }}>
       <TextInput
         accessibilityLabel="Search"
         value={value}
@@ -19,7 +19,7 @@ export function SearchField({ value, onChangeText, onSubmit, autoFocus, placehol
         placeholder={placeholder}
         placeholderTextColor={colors.text.muted}
         returnKeyType="search"
-        style={[type.bodyMedium, { flex: 1, color: colors.text.primary }]}
+        style={[type.bodyLarge, { flex: 1, color: colors.text.primary }]}
       />
       {value ? (
         <Pressable accessibilityRole="button" accessibilityLabel="Clear search" onPress={() => onChangeText('')} hitSlop={8}

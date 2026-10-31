@@ -15,7 +15,7 @@ type Props = {
   disabled?: boolean;
   style?: ViewStyle;
 };
-const heights = { default: 50, medium: 44, small: 36 } as const;
+const heights = { default: 50, medium: 44, small: 34 } as const;
 
 export function Button({ label, onPress, variant = 'primary', size = 'default', icon, disabled, style }: Props) {
   const primary = variant === 'primary' && !disabled;

@@ -10,7 +10,7 @@ export function SuggestionRow({ label, match = '', onPress }: { label: string; m
     <Pressable accessibilityRole="button" accessibilityLabel={label} onPress={onPress}
       style={({ pressed }) => ({ height: 46, flexDirection: 'row', alignItems: 'center', gap: 12, paddingHorizontal: 10, backgroundColor: pressed ? colors.surface.subtle : 'transparent' })}>
       <Icon name="search" size={20} />
-      <Text style={[type.bodyMedium, { color: colors.text.body }]}>
+      <Text style={[type.bodyLarge, { color: colors.text.body }]}>
         {i < 0 ? label : (
           <>
             {label.slice(0, i)}

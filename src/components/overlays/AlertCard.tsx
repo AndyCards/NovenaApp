@@ -29,7 +29,7 @@ export function AlertCard({ alert, onClose, onPrimary, onSecondary }: Props) {
   })();
   return (
     <FloatingCard visible onClose={onClose} title={content.title}>
-      <Text style={[type.bodyMedium, { color: colors.text.secondary, textAlign: 'center', marginTop: -12, paddingHorizontal: 12 }]}>{content.body}</Text>
+      <Text style={[type.bodyLarge, { color: colors.text.secondary, textAlign: 'center', marginTop: -12, paddingHorizontal: 12 }]}>{content.body}</Text>
       <View style={{ gap: 10, marginTop: 20 }}>
         <Button label={content.secondary} variant="secondary" onPress={onSecondary ?? onClose} />
         <Button label={content.primary} icon="handsPraying" onPress={onPrimary} />

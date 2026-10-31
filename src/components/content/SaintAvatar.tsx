@@ -5,7 +5,7 @@ import { colors } from '@/constants/theme';
 import { type } from '@/constants/typography';
 import { imageSource } from '@/content/localImages';
 
-const sizes = { tiny: 28, row: 36, small: 32, medium: 48, large: 72 } as const;
+const sizes = { tiny: 30, row: 40, small: 32, medium: 48, large: 72 } as const;
 
 export function SaintAvatar({ name, file, size = 'medium' }: { name: string; file?: string; size?: keyof typeof sizes }) {
   const d = sizes[size];

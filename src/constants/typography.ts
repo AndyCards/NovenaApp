@@ -42,6 +42,7 @@ export const type = {
   labelXSmall: style(fonts.regular, 10, 13),
   calendarDay: style(fonts.medium, 16, 21),
   calendarMonth: style(fonts.semibold, 13, 21),
+  calendarWeekday: style(fonts.regular, 13, 21), // weekday names above the month grid (Mon, Tue ...)
   calendarYearDay: style(fonts.medium, 10, 13),
   calendarYearWeekday: style(fonts.bold, 10, 13),
   sharePrayer: style(fonts.regular, 15, 20),

@@ -17,7 +17,7 @@ export function PopupCard(p: Props) {
   if (p.type === 'pause') {
     return (
       <FloatingCard visible={p.visible} onClose={p.onClose} title={r.pauseTitle}>
-        <Text style={[type.bodyMedium, { color: colors.text.secondary, textAlign: 'center', marginTop: -12, paddingHorizontal: 12 }]}>{r.pauseBody}</Text>
+        <Text style={[type.bodyLarge, { color: colors.text.secondary, textAlign: 'center', marginTop: -12, paddingHorizontal: 12 }]}>{r.pauseBody}</Text>
         <View style={{ gap: 10, marginTop: 20 }}>
           <Button label={r.pauseLeave} variant="secondary" onPress={p.onLeave} />
           <Button label={r.pauseStay} icon="handsPraying" onPress={p.onClose} />
