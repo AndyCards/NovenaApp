@@ -1,9 +1,11 @@
 // The "..." menu on a Library card (Figma "Library · Active card menu"): a small white card that pops up
 // right under the "..." button, with the action on the left and its icon on the right.
-import { Modal, Pressable, Text, View } from 'react-native';
-import { colors, elevation, radius, screenMargin, stroke } from '@/constants/theme';
+import { Modal, Pressable, Text } from 'react-native';
+import Animated, { useAnimatedStyle } from 'react-native-reanimated';
+import { colors, radius, screenMargin, stroke } from '@/constants/theme';
 import { type } from '@/constants/typography';
 import { strings } from '@/copy/strings';
+import { usePresence } from '@/motion/usePresence';
 import { Icon, type IconName } from '../Icon';
 
 type Props = { visible: boolean; anchorBottom: number; paused?: boolean; onClose: () => void; onPause: () => void; onResume: () => void; onRestart: () => void; onRemove: () => void };
@@ -20,16 +22,26 @@ function Row({ label, icon, onPress, last }: { label: string; icon: IconName; on
 }
 
 export function CardMenu({ visible, anchorBottom, paused, onClose, onPause, onResume, onRestart, onRemove }: Props) {
+  // Motion: the menu fades and eases down into place under the "…" button; on close it fades away quickly.
+  const { mounted, progress, reduced } = usePresence(visible);
+  const menuStyle = useAnimatedStyle(() => ({
+    opacity: Math.min(1, progress.value * 1.8),
+    transform: reduced ? [] : [{ translateY: (1 - progress.value) * -8 }, { scale: 0.96 + 0.04 * progress.value }],
+  }));
   return (
-    <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose} statusBarTranslucent>
+    <Modal visible={mounted} transparent animationType="none" onRequestClose={onClose} statusBarTranslucent>
       {/* Tap anywhere outside the menu to close it. */}
       <Pressable accessibilityLabel={strings.common.close} onPress={onClose} style={{ flex: 1 }}>
-        <View style={[{ position: 'absolute', top: anchorBottom + 4, right: screenMargin + 10, width: 250, overflow: 'hidden', borderRadius: radius.m,
-          backgroundColor: colors.surface.default, borderWidth: stroke.hairline, borderColor: colors.border.subtle }, elevation.card, { shadowOpacity: 0.12, shadowRadius: 12 }]}>
+        {/* Raised look: a clear border plus a wide, soft shadow so the card floats above the page behind it. */}
+        <Animated.View style={[{ position: 'absolute', top: anchorBottom + 4, right: screenMargin + 10, width: 250, borderRadius: radius.m,
+          backgroundColor: colors.surface.default, borderWidth: stroke.hairline, borderColor: colors.border.default,
+          shadowColor: '#000', shadowOpacity: 0.18, shadowRadius: 18, shadowOffset: { width: 0, height: 8 }, elevation: 10 }, menuStyle]}>
+          <Animated.View style={{ overflow: "hidden", borderRadius: radius.m }}>
           <Row label={paused ? 'Resume novena' : strings.library.menuPause} icon={paused ? 'play' : 'pause'} onPress={paused ? onResume : onPause} />
           <Row label={strings.library.menuRestart} icon="restart" onPress={onRestart} />
           <Row label={strings.library.menuRemove} icon="trash" onPress={onRemove} last />
-        </View>
+          </Animated.View>
+        </Animated.View>
       </Pressable>
     </Modal>
   );
