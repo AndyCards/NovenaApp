@@ -17,7 +17,8 @@ export async function loadCatalog(): Promise<Catalog> {
     const info = await FileSystem.getInfoAsync(STORED);
     if (info.exists) {
       const parsed = parseCatalog(JSON.parse(await FileSystem.readAsStringAsync(STORED)));
-      if (parsed.ok) return (current = parsed.catalog);
+      // A newer app version can ship a newer bundled catalog than the stored copy.
+      if (parsed.ok && parsed.catalog.version >= bundled.version) return (current = parsed.catalog);
     }
   } catch {}
   const parsed = parseCatalog(bundled);

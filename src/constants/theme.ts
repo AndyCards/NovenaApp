@@ -38,6 +38,11 @@ export const colors = {
   icon: { default: '#3F3F3F', secondary: '#6F6F6F' },
   progress: { track: '#D9D9D9', fill: '#5F5F5F' },
   overlay: { scrim: 'rgba(0,0,0,0.25)' },
+  gradient: {
+    button: ['#575757', '#474747'], // dark CTA, top to bottom
+    iconCircle: ['#F1F1F1', '#FAFAFA'],
+    imageScrim: ['rgba(0,0,0,0)', 'rgba(0,0,0,0.1)', 'rgba(0,0,0,0.45)', 'rgba(0,0,0,0.72)', 'rgba(0,0,0,0.82)'],
+  },
   glass: {
     nowPlayingFill: 'rgba(242,241,234,0.72)',
     nowPlayingBorder: 'rgba(255,255,255,0.9)',
@@ -67,12 +72,13 @@ export const elevation = {
     shadowOffset: { width: 0, height: 1 },
     elevation: 1,
   },
+  // Figma Elevation/Card: 0 0 4 #0000000D + 0 1 1 #0000000A
   card: {
     shadowColor: '#000000',
-    shadowOpacity: 0.08,
-    shadowRadius: 12,
-    shadowOffset: { width: 0, height: 4 },
-    elevation: 3,
+    shadowOpacity: 0.06,
+    shadowRadius: 3,
+    shadowOffset: { width: 0, height: 1 },
+    elevation: 1,
   },
 } as const;
 

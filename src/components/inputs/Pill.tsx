@@ -1,14 +1,12 @@
+// Figma "Pill": small grey tag with a hairline border.
 import { Text, View } from 'react-native';
-import { colors, radius, space } from '@/constants/theme';
+import { colors, radius, stroke } from '@/constants/theme';
 import { type } from '@/constants/typography';
 
-const sizes = { small: { h: 22, t: type.labelXSmall }, medium: { h: 28, t: type.labelCaption }, large: { h: 36, t: type.labelChip } } as const;
-
-export function Pill({ label, size = 'medium' }: { label: string; size?: keyof typeof sizes }) {
-  const s = sizes[size];
+export function Pill({ label }: { label: string; size?: 'small' | 'medium' | 'large' }) {
   return (
-    <View style={{ height: s.h, justifyContent: 'center', paddingHorizontal: space[10], borderRadius: radius.full, backgroundColor: colors.surface.subtle, alignSelf: 'flex-start' }}>
-      <Text style={[s.t, { color: colors.text.secondary }]}>{label}</Text>
+    <View style={{ paddingHorizontal: 10, paddingVertical: 6, borderRadius: radius.full, borderWidth: stroke.hairline, borderColor: colors.border.strong, backgroundColor: colors.surface.subtle, alignSelf: 'flex-start' }}>
+      <Text style={[type.bodySmall, { color: colors.text.secondary }]}>{label}</Text>
     </View>
   );
 }

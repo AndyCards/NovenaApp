@@ -48,6 +48,7 @@ export interface Saint {
 export interface Category {
   id: string;
   name: string;
+  icon?: string; // e.g. "cross", see src/components/Icon.tsx
   order: number;
 }
 
@@ -55,6 +56,7 @@ export interface Collection {
   id: string;
   title: string;
   subtitle: string;
+  layout?: 'featured' | 'list' | 'cards'; // how Home shows this section (default: cards)
   novenaIds: string[];
   order: number;
 }

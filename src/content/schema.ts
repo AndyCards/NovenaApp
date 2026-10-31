@@ -53,12 +53,13 @@ export const catalogSchema = z.object({
       patronOf: z.array(z.string()),
     }),
   ),
-  categories: z.array(z.object({ id: z.string(), name: z.string(), order: z.number() })),
+  categories: z.array(z.object({ id: z.string(), name: z.string(), icon: z.string().optional(), order: z.number() })),
   collections: z.array(
     z.object({
       id: z.string(),
       title: z.string(),
       subtitle: z.string(),
+      layout: z.enum(['featured', 'list', 'cards']).optional(),
       novenaIds: z.array(z.string()),
       order: z.number(),
     }),

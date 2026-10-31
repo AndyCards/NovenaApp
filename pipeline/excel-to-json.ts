@@ -30,8 +30,8 @@ const novenas = rows('Novenas').map((n, order) => ({
   })),
 }));
 const saints = rows('Saints').map((s) => ({ id: s.id, name: s.name, avatar: s.avatar || undefined, feastDate: s.feastDate, patronOf: list(s.patronOf) }));
-const categories = rows('Categories').map((c, order) => ({ id: c.id, name: c.name, order }));
-const collections = rows('Collections').map((c, order) => ({ id: c.id, title: c.title, subtitle: c.subtitle, novenaIds: list(c.novenaIds), order }));
+const categories = rows('Categories').map((c, order) => ({ id: c.id, name: c.name, icon: c.icon || undefined, order }));
+const collections = rows('Collections').map((c, order) => ({ id: c.id, title: c.title, subtitle: c.subtitle, layout: (c.layout || undefined) as 'featured' | 'list' | 'cards' | undefined, novenaIds: list(c.novenaIds), order }));
 const suggestions = rows('Suggestions').map((s) => ({ term: s.term, related: list(s.related) })).filter((s) => s.term);
 
 const version = Number(process.env.CONTENT_VERSION ?? Date.now());

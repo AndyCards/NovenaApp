@@ -2,11 +2,13 @@ import { Image } from 'expo-image';
 import { Text, View } from 'react-native';
 import { colors } from '@/constants/theme';
 import { type } from '@/constants/typography';
-import { imageUrl } from '@/constants/config';
+import { imageSource } from '@/content/localImages';
 
-export function SaintAvatar({ name, file, size = 'medium' }: { name: string; file?: string; size?: 'small' | 'medium' }) {
-  const d = size === 'small' ? 32 : 48;
-  if (file) return <Image accessibilityLabel={name} source={{ uri: imageUrl(file) }} contentPosition="top center" style={{ width: d, height: d, borderRadius: d / 2 }} />;
+const sizes = { small: 32, medium: 48, large: 72 } as const;
+
+export function SaintAvatar({ name, file, size = 'medium' }: { name: string; file?: string; size?: keyof typeof sizes }) {
+  const d = sizes[size];
+  if (file) return <Image accessibilityLabel={name} source={imageSource(file)} contentFit="cover" contentPosition="top center" style={{ width: d, height: d, borderRadius: d / 2, backgroundColor: colors.surface.subtle }} />;
   return (
     <View accessibilityLabel={name} style={{ width: d, height: d, borderRadius: d / 2, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.surface.subtle }}>
       <Text style={[type.labelCaption, { color: colors.text.secondary }]}>{name.replace(/^St\.? /, '').slice(0, 1)}</Text>
