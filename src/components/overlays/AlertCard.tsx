@@ -3,6 +3,7 @@ import { Text, View } from 'react-native';
 import { colors } from '@/constants/theme';
 import { type } from '@/constants/typography';
 import { strings } from '@/copy/strings';
+import type { IconName } from '../Icon';
 import { Button } from '../actions/Button';
 import { FloatingCard } from './FloatingCard';
 
@@ -18,17 +19,17 @@ type Props = { alert: AlertKind | null; onClose: () => void; onPrimary: () => vo
 export function AlertCard({ alert, onClose, onPrimary, onSecondary }: Props) {
   if (!alert) return null;
   const a = strings.alerts;
-  const content = (() => {
+  const content: { title: string; body: string; primary: string; secondary: string; icon: IconName } = (() => {
     switch (alert.kind) {
-      case 'missed': return { title: a.missedTitle(alert.days), body: a.missedBody, primary: a.missedContinue(alert.continueDay), secondary: a.missedPray };
-      case 'complete': return { title: a.completeTitle, body: a.completeBody(alert.novenaTitle), primary: a.prayAgain, secondary: a.completeShare };
-      case 'prayAgain': return { title: a.prayAgainTitle, body: a.prayAgainBody, primary: a.startAgain, secondary: a.notNow };
-      case 'remove': return { title: a.removeTitle, body: a.removeBody, primary: a.keepPraying, secondary: a.stopNovena };
-      case 'prayAnother': return { title: alert.title, body: alert.body, primary: alert.confirmLabel, secondary: a.notNow };
+      case 'missed': return { title: a.missedTitle(alert.days), body: a.missedBody, primary: a.missedContinue(alert.continueDay), secondary: a.missedPray, icon: 'calendarDate' };
+      case 'complete': return { title: a.completeTitle, body: a.completeBody(alert.novenaTitle), primary: a.prayAgain, secondary: a.completeShare, icon: 'confetti' };
+      case 'prayAgain': return { title: a.prayAgainTitle, body: a.prayAgainBody, primary: a.startAgain, secondary: a.notNow, icon: 'restart' };
+      case 'remove': return { title: a.removeTitle, body: a.removeBody, primary: a.keepPraying, secondary: a.stopNovena, icon: 'trash' };
+      case 'prayAnother': return { title: alert.title, body: alert.body, primary: alert.confirmLabel, secondary: a.notNow, icon: 'bookOpen' };
     }
   })();
   return (
-    <FloatingCard visible onClose={onClose} title={content.title}>
+    <FloatingCard visible onClose={onClose} title={content.title} icon={content.icon}>
       <Text style={[type.bodyLarge, { color: colors.text.secondary, textAlign: 'center', marginTop: -12, paddingHorizontal: 12 }]}>{content.body}</Text>
       <View style={{ gap: 10, marginTop: 20 }}>
         <Button label={content.secondary} variant="secondary" onPress={onSecondary ?? onClose} />

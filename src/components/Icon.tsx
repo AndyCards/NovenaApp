@@ -2,7 +2,7 @@
 import {
   Bell, BookmarkSimple, Calendar, Moon, Sun, CaretDown, Clock, ClockCounterClockwise, Bookmarks, Books, Briefcase, CalendarDots, CaretLeft, CaretRight, Check, Cross, DotsThree,
   DownloadSimple, Export, HandHeart, HandsPraying, Headphones, Heart, Heartbeat, MagnifyingGlass, MaskSad, Pause, Play, SpeakerSimpleSlash,
-  UsersThree, X, ArrowCounterClockwise, Trash, BookOpenText, CheckCircle,
+  UsersThree, X, Confetti, ArrowCounterClockwise, Trash, BookOpenText, CheckCircle,
 } from 'phosphor-react-native';
 import { colors } from '@/constants/theme';
 
@@ -13,7 +13,7 @@ const icons = {
   heart: Heart, history: ClockCounterClockwise, handsPraying: HandsPraying, headphones: Headphones,
   clock: Clock, sun: Sun, moon: Moon, calendarDate: Calendar, speakerSlash: SpeakerSimpleSlash, chevronDown: CaretDown,
   cross: Cross, handHeart: HandHeart, usersThree: UsersThree, briefcase: Briefcase, heartbeat: Heartbeat, maskSad: MaskSad,
-  restart: ArrowCounterClockwise, trash: Trash, bookOpen: BookOpenText, checkCircle: CheckCircle,
+  restart: ArrowCounterClockwise, trash: Trash, bookOpen: BookOpenText, checkCircle: CheckCircle, confetti: Confetti,
 } as const;
 export type IconName = keyof typeof icons;
 

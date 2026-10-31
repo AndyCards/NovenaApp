@@ -1,6 +1,7 @@
 // Figma "Popup Card": a round X above a floating white card (radius 24), inset 10 from the edges.
 // Title and subtitle are centred. Never a bottom sheet.
 import type { ReactNode } from 'react';
+import { LinearGradient } from 'expo-linear-gradient';
 import { Modal, Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -10,13 +11,13 @@ import { strings } from '@/copy/strings';
 import { PressableScale } from '@/motion/PressableScale';
 import { pressScale } from '@/motion/tokens';
 import { usePresence } from '@/motion/usePresence';
-import { Icon } from '../Icon';
+import { Icon, type IconName } from '../Icon';
 
-type Props = { visible: boolean; onClose: () => void; title?: string; subtitle?: string; children: ReactNode };
+type Props = { visible: boolean; onClose: () => void; title?: string; subtitle?: string; icon?: IconName; children: ReactNode };
 
 const softShadow = { shadowColor: '#000', shadowOpacity: 0.05, shadowRadius: 2, shadowOffset: { width: 0, height: 2 }, elevation: 2 } as const;
 
-export function FloatingCard({ visible, onClose, title, subtitle, children }: Props) {
+export function FloatingCard({ visible, onClose, title, subtitle, icon, children }: Props) {
   const insets = useSafeAreaInsets();
   // Motion: the dark backdrop fades in while the card rises and settles softly; on close it slips away faster.
   const { mounted, progress, reduced } = usePresence(visible);
@@ -36,7 +37,13 @@ export function FloatingCard({ visible, onClose, title, subtitle, children }: Pr
           </PressableScale>
           <Pressable accessible={false} style={{ alignSelf: 'stretch', padding: 16, gap: 20, borderRadius: 24, backgroundColor: colors.surface.default, borderWidth: stroke.hairline, borderColor: colors.border.subtle, ...softShadow }}>
             {title ? (
-              <View style={{ gap: 4 }}>
+              <View style={{ gap: 4, alignItems: 'stretch' }}>
+                {/* Figma "Halo": a 72 round grey circle with a 36 outlined icon, 10 above the title. */}
+                {icon ? (
+                  <LinearGradient colors={colors.gradient.iconCircle} style={{ alignSelf: 'center', width: 72, height: 72, borderRadius: 36, marginBottom: 6, alignItems: 'center', justifyContent: 'center', borderWidth: stroke.hairline, borderColor: colors.border.subtle }}>
+                    <Icon name={icon} size={36} />
+                  </LinearGradient>
+                ) : null}
                 <Text accessibilityRole="header" style={[type.titleDialog, { color: colors.text.secondary, textAlign: 'center' }]}>{title}</Text>
                 {subtitle ? <Text style={[type.bodyLarge, { color: colors.text.secondary, textAlign: 'center' }]}>{subtitle}</Text> : null}
               </View>
