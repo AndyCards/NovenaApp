@@ -14,7 +14,7 @@ import { pressScale } from '@/motion/tokens';
 type Props = { novena: Novena; day: number; prayedToday?: boolean; paused?: boolean; onOpen: () => void; onPray: () => void; onMenu: (anchorBottom: number) => void };
 
 export function ActiveNovenaCard({ novena, day, prayedToday, paused, onOpen, onPray, onMenu }: Props) {
-  const dots = useRef<View>(null); // lets us find where the "..." button is, so the menu can pop up right under it
+  const dots = useRef<{ measureInWindow: (cb: (x: number, y: number, w: number, h: number) => void) => void } | null>(null); // lets us find where the "..." button is, so the menu can pop up right under it
   const nextDay = prayedToday ? Math.min(day + 1, novena.days.length) : day;
   const done = prayedToday;
   return (
@@ -25,7 +25,7 @@ export function ActiveNovenaCard({ novena, day, prayedToday, paused, onOpen, onP
         <View style={{ gap: 2 }}>
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
             <Text style={[type.labelEyebrowCaps, { color: colors.icon.secondary, letterSpacing: 1.2 }]}>{paused ? 'Paused' : strings.library.dayOf(day)}</Text>
-            <View ref={dots} collapsable={false}>
+            <View ref={(r) => { dots.current = r; }} collapsable={false}>
               <PressableScale scaleTo={pressScale.icon} accessibilityRole="button" accessibilityLabel="More options" hitSlop={12}
                 onPress={() => dots.current?.measureInWindow((_x, y, _w, h) => onMenu(y + h))}>
                 <Icon name="more" size={22} />
