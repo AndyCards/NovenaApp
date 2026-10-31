@@ -24,3 +24,13 @@ export const REMINDER_WINDOW_DAYS = 14;
 
 export const NOVENA_LENGTH = 9;
 export const RECENT_SEARCH_LIMIT = 10;
+
+// TEMPORARY, for testing: the first time you open a novena's Reader, a sample intention is saved for it (you can still edit or clear it).
+// Set to false once testing is done.
+export const DUMMY_INTENTIONS = true;
+export const DUMMY_INTENTION_TEXTS = [
+  'Calm before my exams, and the patience to wait on God\u2019s answer.',
+  'Healing and strength for my mother, and peace for our whole family.',
+  'Guidance in my work, and the courage to make a hard decision well.',
+  'Gratitude for what I have, and trust for what is still unknown.',
+];

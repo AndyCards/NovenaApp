@@ -14,9 +14,9 @@ import { ChapterTitle } from '@/components/reader/ChapterTitle';
 import { PrayerPassage } from '@/components/reader/PrayerPassage';
 import { colors, screenMargin } from '@/constants/theme';
 import { strings } from '@/copy/strings';
-import { getDownload, getIntention, setIntention } from '@/data/queries';
+import { getDownload, getIntention, getMeta, setIntention, setMeta } from '@/data/queries';
 import { useAudio } from '@/hooks/useAudio';
-import { PLACEHOLDER_AUDIO } from '@/constants/config';
+import { DUMMY_INTENTIONS, DUMMY_INTENTION_TEXTS, PLACEHOLDER_AUDIO } from '@/constants/config';
 import { PressableScale } from '@/motion/PressableScale';
 import { Reveal } from '@/motion/Reveal';
 import { pressScale } from '@/motion/tokens';
@@ -52,7 +52,19 @@ export default function Reader() {
   const [download, setDownload] = useState<DownloadStatus>({ kind: 'none' });
 
   // Load the person's saved intention, and whether this novena's audio is already downloaded.
-  useEffect(() => { if (runId) getIntention(runId).then(setIntentionText); }, [runId]);
+  useEffect(() => {
+    if (!runId) return;
+    (async () => {
+      let text = await getIntention(runId);
+      // Testing aid: save a sample intention once per novena run, so the intention pop-up has something to show.
+      if (DUMMY_INTENTIONS && !text && !(await getMeta(`dummy-intention-${runId}`))) {
+        text = DUMMY_INTENTION_TEXTS[Math.abs([...runId].reduce((h, c) => h + c.charCodeAt(0), 0)) % DUMMY_INTENTION_TEXTS.length];
+        await setIntention(runId, text);
+        await setMeta(`dummy-intention-${runId}`, '1');
+      }
+      setIntentionText(text);
+    })();
+  }, [runId]);
   useEffect(() => {
     if (novena) getDownload(novena.id).then((d) => setDownload(d?.status === 'complete' ? { kind: 'done' } : { kind: 'none' }));
   }, [novena?.id]);

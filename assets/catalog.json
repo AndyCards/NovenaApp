@@ -1,5 +1,5 @@
 {
- "version": 2,
+ "version": 3,
  "minAppVersion": "0.1.0",
  "novenas": [
   {
@@ -29,15 +29,19 @@
    "days": [
     {
      "day": 1,
-     "title": "Day 1",
+     "title": "Trust",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 1. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 1 of this novena, we turn our hearts to trust, and we ask St Anthony to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 1."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of trust today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Anthony, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -48,21 +52,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of trust. Through the intercession of St Anthony, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 2,
-     "title": "Day 2",
+     "title": "Gratitude",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 2. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 2 of this novena, we turn our hearts to gratitude, and we ask St Anthony to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 2."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of gratitude today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Anthony, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -73,21 +81,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of gratitude. Through the intercession of St Anthony, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 3,
-     "title": "Day 3",
+     "title": "Courage",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 3. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 3 of this novena, we turn our hearts to courage, and we ask St Anthony to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 3."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of courage today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Anthony, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -98,21 +110,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of courage. Through the intercession of St Anthony, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 4,
-     "title": "Day 4",
+     "title": "Forgiveness",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 4. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 4 of this novena, we turn our hearts to forgiveness, and we ask St Anthony to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 4."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of forgiveness today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Anthony, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -123,21 +139,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of forgiveness. Through the intercession of St Anthony, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 5,
-     "title": "Day 5",
+     "title": "Patience",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 5. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 5 of this novena, we turn our hearts to patience, and we ask St Anthony to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 5."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of patience today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Anthony, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -148,21 +168,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of patience. Through the intercession of St Anthony, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 6,
-     "title": "Day 6",
+     "title": "Hope",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 6. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 6 of this novena, we turn our hearts to hope, and we ask St Anthony to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 6."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of hope today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Anthony, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -173,21 +197,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of hope. Through the intercession of St Anthony, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 7,
-     "title": "Day 7",
+     "title": "Humility",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 7. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 7 of this novena, we turn our hearts to humility, and we ask St Anthony to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 7."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of humility today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Anthony, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -198,21 +226,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of humility. Through the intercession of St Anthony, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 8,
-     "title": "Day 8",
+     "title": "Peace",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 8. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 8 of this novena, we turn our hearts to peace, and we ask St Anthony to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 8."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of peace today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Anthony, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -223,21 +255,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of peace. Through the intercession of St Anthony, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 9,
-     "title": "Day 9",
+     "title": "Surrender",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 9. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 9 of this novena, we turn our hearts to surrender, and we ask St Anthony to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 9."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of surrender today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Anthony, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -248,7 +284,7 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of surrender. Through the intercession of St Anthony, bless us and those we love, today and always. Amen."
       }
      ]
     }
@@ -284,15 +320,19 @@
    "days": [
     {
      "day": 1,
-     "title": "Day 1",
+     "title": "Trust",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 1. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 1 of this novena, we turn our hearts to trust, and we ask St Joseph to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 1."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of trust today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Joseph, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -303,21 +343,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of trust. Through the intercession of St Joseph, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 2,
-     "title": "Day 2",
+     "title": "Gratitude",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 2. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 2 of this novena, we turn our hearts to gratitude, and we ask St Joseph to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 2."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of gratitude today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Joseph, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -328,21 +372,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of gratitude. Through the intercession of St Joseph, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 3,
-     "title": "Day 3",
+     "title": "Courage",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 3. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 3 of this novena, we turn our hearts to courage, and we ask St Joseph to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 3."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of courage today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Joseph, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -353,21 +401,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of courage. Through the intercession of St Joseph, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 4,
-     "title": "Day 4",
+     "title": "Forgiveness",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 4. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 4 of this novena, we turn our hearts to forgiveness, and we ask St Joseph to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 4."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of forgiveness today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Joseph, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -378,21 +430,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of forgiveness. Through the intercession of St Joseph, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 5,
-     "title": "Day 5",
+     "title": "Patience",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 5. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 5 of this novena, we turn our hearts to patience, and we ask St Joseph to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 5."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of patience today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Joseph, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -403,21 +459,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of patience. Through the intercession of St Joseph, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 6,
-     "title": "Day 6",
+     "title": "Hope",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 6. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 6 of this novena, we turn our hearts to hope, and we ask St Joseph to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 6."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of hope today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Joseph, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -428,21 +488,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of hope. Through the intercession of St Joseph, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 7,
-     "title": "Day 7",
+     "title": "Humility",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 7. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 7 of this novena, we turn our hearts to humility, and we ask St Joseph to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 7."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of humility today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Joseph, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -453,21 +517,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of humility. Through the intercession of St Joseph, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 8,
-     "title": "Day 8",
+     "title": "Peace",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 8. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 8 of this novena, we turn our hearts to peace, and we ask St Joseph to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 8."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of peace today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Joseph, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -478,21 +546,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of peace. Through the intercession of St Joseph, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 9,
-     "title": "Day 9",
+     "title": "Surrender",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 9. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 9 of this novena, we turn our hearts to surrender, and we ask St Joseph to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 9."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of surrender today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Joseph, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -503,7 +575,7 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of surrender. Through the intercession of St Joseph, bless us and those we love, today and always. Amen."
       }
      ]
     }
@@ -536,15 +608,19 @@
    "days": [
     {
      "day": 1,
-     "title": "Day 1",
+     "title": "Trust",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 1. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 1 of this novena, we turn our hearts to trust, and we ask St Teresa of Lisieux to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 1."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of trust today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Teresa of Lisieux, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -555,21 +631,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of trust. Through the intercession of St Teresa of Lisieux, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 2,
-     "title": "Day 2",
+     "title": "Gratitude",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 2. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 2 of this novena, we turn our hearts to gratitude, and we ask St Teresa of Lisieux to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 2."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of gratitude today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Teresa of Lisieux, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -580,21 +660,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of gratitude. Through the intercession of St Teresa of Lisieux, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 3,
-     "title": "Day 3",
+     "title": "Courage",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 3. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 3 of this novena, we turn our hearts to courage, and we ask St Teresa of Lisieux to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 3."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of courage today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Teresa of Lisieux, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -605,21 +689,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of courage. Through the intercession of St Teresa of Lisieux, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 4,
-     "title": "Day 4",
+     "title": "Forgiveness",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 4. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 4 of this novena, we turn our hearts to forgiveness, and we ask St Teresa of Lisieux to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 4."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of forgiveness today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Teresa of Lisieux, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -630,21 +718,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of forgiveness. Through the intercession of St Teresa of Lisieux, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 5,
-     "title": "Day 5",
+     "title": "Patience",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 5. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 5 of this novena, we turn our hearts to patience, and we ask St Teresa of Lisieux to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 5."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of patience today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Teresa of Lisieux, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -655,21 +747,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of patience. Through the intercession of St Teresa of Lisieux, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 6,
-     "title": "Day 6",
+     "title": "Hope",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 6. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 6 of this novena, we turn our hearts to hope, and we ask St Teresa of Lisieux to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 6."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of hope today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Teresa of Lisieux, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -680,21 +776,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of hope. Through the intercession of St Teresa of Lisieux, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 7,
-     "title": "Day 7",
+     "title": "Humility",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 7. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 7 of this novena, we turn our hearts to humility, and we ask St Teresa of Lisieux to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 7."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of humility today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Teresa of Lisieux, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -705,21 +805,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of humility. Through the intercession of St Teresa of Lisieux, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 8,
-     "title": "Day 8",
+     "title": "Peace",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 8. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 8 of this novena, we turn our hearts to peace, and we ask St Teresa of Lisieux to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 8."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of peace today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Teresa of Lisieux, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -730,21 +834,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of peace. Through the intercession of St Teresa of Lisieux, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 9,
-     "title": "Day 9",
+     "title": "Surrender",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 9. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 9 of this novena, we turn our hearts to surrender, and we ask St Teresa of Lisieux to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 9."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of surrender today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Teresa of Lisieux, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -755,7 +863,7 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of surrender. Through the intercession of St Teresa of Lisieux, bless us and those we love, today and always. Amen."
       }
      ]
     }
@@ -787,15 +895,19 @@
    "days": [
     {
      "day": 1,
-     "title": "Day 1",
+     "title": "Trust",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 1. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 1 of this novena, we turn our hearts to trust, and we ask Divine Mercy to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 1."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of trust today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Divine Mercy, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -806,21 +918,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of trust. Through the intercession of Divine Mercy, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 2,
-     "title": "Day 2",
+     "title": "Gratitude",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 2. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 2 of this novena, we turn our hearts to gratitude, and we ask Divine Mercy to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 2."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of gratitude today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Divine Mercy, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -831,21 +947,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of gratitude. Through the intercession of Divine Mercy, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 3,
-     "title": "Day 3",
+     "title": "Courage",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 3. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 3 of this novena, we turn our hearts to courage, and we ask Divine Mercy to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 3."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of courage today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Divine Mercy, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -856,21 +976,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of courage. Through the intercession of Divine Mercy, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 4,
-     "title": "Day 4",
+     "title": "Forgiveness",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 4. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 4 of this novena, we turn our hearts to forgiveness, and we ask Divine Mercy to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 4."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of forgiveness today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Divine Mercy, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -881,21 +1005,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of forgiveness. Through the intercession of Divine Mercy, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 5,
-     "title": "Day 5",
+     "title": "Patience",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 5. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 5 of this novena, we turn our hearts to patience, and we ask Divine Mercy to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 5."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of patience today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Divine Mercy, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -906,21 +1034,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of patience. Through the intercession of Divine Mercy, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 6,
-     "title": "Day 6",
+     "title": "Hope",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 6. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 6 of this novena, we turn our hearts to hope, and we ask Divine Mercy to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 6."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of hope today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Divine Mercy, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -931,21 +1063,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of hope. Through the intercession of Divine Mercy, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 7,
-     "title": "Day 7",
+     "title": "Humility",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 7. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 7 of this novena, we turn our hearts to humility, and we ask Divine Mercy to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 7."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of humility today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Divine Mercy, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -956,21 +1092,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of humility. Through the intercession of Divine Mercy, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 8,
-     "title": "Day 8",
+     "title": "Peace",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 8. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 8 of this novena, we turn our hearts to peace, and we ask Divine Mercy to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 8."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of peace today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Divine Mercy, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -981,21 +1121,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of peace. Through the intercession of Divine Mercy, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 9,
-     "title": "Day 9",
+     "title": "Surrender",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 9. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 9 of this novena, we turn our hearts to surrender, and we ask Divine Mercy to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 9."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of surrender today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Divine Mercy, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1006,7 +1150,7 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of surrender. Through the intercession of Divine Mercy, bless us and those we love, today and always. Amen."
       }
      ]
     }
@@ -1042,15 +1186,19 @@
    "days": [
     {
      "day": 1,
-     "title": "Day 1",
+     "title": "Trust",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 1. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 1 of this novena, we turn our hearts to trust, and we ask St Monica to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 1."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of trust today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Monica, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1061,21 +1209,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of trust. Through the intercession of St Monica, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 2,
-     "title": "Day 2",
+     "title": "Gratitude",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 2. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 2 of this novena, we turn our hearts to gratitude, and we ask St Monica to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 2."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of gratitude today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Monica, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1086,21 +1238,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of gratitude. Through the intercession of St Monica, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 3,
-     "title": "Day 3",
+     "title": "Courage",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 3. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 3 of this novena, we turn our hearts to courage, and we ask St Monica to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 3."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of courage today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Monica, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1111,21 +1267,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of courage. Through the intercession of St Monica, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 4,
-     "title": "Day 4",
+     "title": "Forgiveness",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 4. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 4 of this novena, we turn our hearts to forgiveness, and we ask St Monica to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 4."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of forgiveness today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Monica, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1136,21 +1296,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of forgiveness. Through the intercession of St Monica, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 5,
-     "title": "Day 5",
+     "title": "Patience",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 5. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 5 of this novena, we turn our hearts to patience, and we ask St Monica to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 5."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of patience today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Monica, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1161,21 +1325,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of patience. Through the intercession of St Monica, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 6,
-     "title": "Day 6",
+     "title": "Hope",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 6. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 6 of this novena, we turn our hearts to hope, and we ask St Monica to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 6."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of hope today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Monica, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1186,21 +1354,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of hope. Through the intercession of St Monica, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 7,
-     "title": "Day 7",
+     "title": "Humility",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 7. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 7 of this novena, we turn our hearts to humility, and we ask St Monica to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 7."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of humility today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Monica, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1211,21 +1383,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of humility. Through the intercession of St Monica, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 8,
-     "title": "Day 8",
+     "title": "Peace",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 8. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 8 of this novena, we turn our hearts to peace, and we ask St Monica to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 8."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of peace today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Monica, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1236,21 +1412,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of peace. Through the intercession of St Monica, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 9,
-     "title": "Day 9",
+     "title": "Surrender",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 9. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 9 of this novena, we turn our hearts to surrender, and we ask St Monica to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 9."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of surrender today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Monica, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1261,7 +1441,7 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of surrender. Through the intercession of St Monica, bless us and those we love, today and always. Amen."
       }
      ]
     }
@@ -1296,15 +1476,19 @@
    "days": [
     {
      "day": 1,
-     "title": "Day 1",
+     "title": "Trust",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 1. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 1 of this novena, we turn our hearts to trust, and we ask St Dymphna to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 1."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of trust today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Dymphna, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1315,21 +1499,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of trust. Through the intercession of St Dymphna, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 2,
-     "title": "Day 2",
+     "title": "Gratitude",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 2. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 2 of this novena, we turn our hearts to gratitude, and we ask St Dymphna to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 2."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of gratitude today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Dymphna, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1340,21 +1528,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of gratitude. Through the intercession of St Dymphna, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 3,
-     "title": "Day 3",
+     "title": "Courage",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 3. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 3 of this novena, we turn our hearts to courage, and we ask St Dymphna to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 3."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of courage today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Dymphna, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1365,21 +1557,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of courage. Through the intercession of St Dymphna, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 4,
-     "title": "Day 4",
+     "title": "Forgiveness",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 4. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 4 of this novena, we turn our hearts to forgiveness, and we ask St Dymphna to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 4."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of forgiveness today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Dymphna, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1390,21 +1586,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of forgiveness. Through the intercession of St Dymphna, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 5,
-     "title": "Day 5",
+     "title": "Patience",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 5. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 5 of this novena, we turn our hearts to patience, and we ask St Dymphna to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 5."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of patience today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Dymphna, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1415,21 +1615,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of patience. Through the intercession of St Dymphna, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 6,
-     "title": "Day 6",
+     "title": "Hope",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 6. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 6 of this novena, we turn our hearts to hope, and we ask St Dymphna to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 6."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of hope today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Dymphna, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1440,21 +1644,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of hope. Through the intercession of St Dymphna, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 7,
-     "title": "Day 7",
+     "title": "Humility",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 7. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 7 of this novena, we turn our hearts to humility, and we ask St Dymphna to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 7."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of humility today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Dymphna, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1465,21 +1673,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of humility. Through the intercession of St Dymphna, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 8,
-     "title": "Day 8",
+     "title": "Peace",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 8. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 8 of this novena, we turn our hearts to peace, and we ask St Dymphna to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 8."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of peace today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Dymphna, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1490,21 +1702,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of peace. Through the intercession of St Dymphna, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 9,
-     "title": "Day 9",
+     "title": "Surrender",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 9. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 9 of this novena, we turn our hearts to surrender, and we ask St Dymphna to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 9."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of surrender today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Dymphna, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1515,7 +1731,7 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of surrender. Through the intercession of St Dymphna, bless us and those we love, today and always. Amen."
       }
      ]
     }
@@ -1550,15 +1766,19 @@
    "days": [
     {
      "day": 1,
-     "title": "Day 1",
+     "title": "Trust",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 1. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 1 of this novena, we turn our hearts to trust, and we ask St Joan of Arc to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 1."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of trust today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Joan of Arc, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1569,21 +1789,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of trust. Through the intercession of St Joan of Arc, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 2,
-     "title": "Day 2",
+     "title": "Gratitude",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 2. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 2 of this novena, we turn our hearts to gratitude, and we ask St Joan of Arc to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 2."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of gratitude today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Joan of Arc, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1594,21 +1818,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of gratitude. Through the intercession of St Joan of Arc, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 3,
-     "title": "Day 3",
+     "title": "Courage",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 3. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 3 of this novena, we turn our hearts to courage, and we ask St Joan of Arc to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 3."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of courage today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Joan of Arc, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1619,21 +1847,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of courage. Through the intercession of St Joan of Arc, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 4,
-     "title": "Day 4",
+     "title": "Forgiveness",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 4. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 4 of this novena, we turn our hearts to forgiveness, and we ask St Joan of Arc to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 4."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of forgiveness today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Joan of Arc, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1644,21 +1876,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of forgiveness. Through the intercession of St Joan of Arc, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 5,
-     "title": "Day 5",
+     "title": "Patience",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 5. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 5 of this novena, we turn our hearts to patience, and we ask St Joan of Arc to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 5."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of patience today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Joan of Arc, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1669,21 +1905,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of patience. Through the intercession of St Joan of Arc, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 6,
-     "title": "Day 6",
+     "title": "Hope",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 6. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 6 of this novena, we turn our hearts to hope, and we ask St Joan of Arc to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 6."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of hope today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Joan of Arc, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1694,21 +1934,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of hope. Through the intercession of St Joan of Arc, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 7,
-     "title": "Day 7",
+     "title": "Humility",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 7. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 7 of this novena, we turn our hearts to humility, and we ask St Joan of Arc to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 7."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of humility today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Joan of Arc, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1719,21 +1963,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of humility. Through the intercession of St Joan of Arc, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 8,
-     "title": "Day 8",
+     "title": "Peace",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 8. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 8 of this novena, we turn our hearts to peace, and we ask St Joan of Arc to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 8."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of peace today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Joan of Arc, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1744,21 +1992,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of peace. Through the intercession of St Joan of Arc, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 9,
-     "title": "Day 9",
+     "title": "Surrender",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 9. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 9 of this novena, we turn our hearts to surrender, and we ask St Joan of Arc to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 9."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of surrender today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Joan of Arc, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1769,7 +2021,7 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of surrender. Through the intercession of St Joan of Arc, bless us and those we love, today and always. Amen."
       }
      ]
     }
@@ -1802,15 +2054,19 @@
    "days": [
     {
      "day": 1,
-     "title": "Day 1",
+     "title": "Trust",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 1. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 1 of this novena, we turn our hearts to trust, and we ask St Cajetan to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 1."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of trust today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Cajetan, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1821,21 +2077,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of trust. Through the intercession of St Cajetan, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 2,
-     "title": "Day 2",
+     "title": "Gratitude",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 2. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 2 of this novena, we turn our hearts to gratitude, and we ask St Cajetan to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 2."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of gratitude today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Cajetan, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1846,21 +2106,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of gratitude. Through the intercession of St Cajetan, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 3,
-     "title": "Day 3",
+     "title": "Courage",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 3. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 3 of this novena, we turn our hearts to courage, and we ask St Cajetan to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 3."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of courage today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Cajetan, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1871,21 +2135,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of courage. Through the intercession of St Cajetan, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 4,
-     "title": "Day 4",
+     "title": "Forgiveness",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 4. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 4 of this novena, we turn our hearts to forgiveness, and we ask St Cajetan to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 4."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of forgiveness today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Cajetan, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1896,21 +2164,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of forgiveness. Through the intercession of St Cajetan, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 5,
-     "title": "Day 5",
+     "title": "Patience",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 5. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 5 of this novena, we turn our hearts to patience, and we ask St Cajetan to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 5."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of patience today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Cajetan, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1921,21 +2193,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of patience. Through the intercession of St Cajetan, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 6,
-     "title": "Day 6",
+     "title": "Hope",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 6. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 6 of this novena, we turn our hearts to hope, and we ask St Cajetan to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 6."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of hope today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Cajetan, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1946,21 +2222,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of hope. Through the intercession of St Cajetan, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 7,
-     "title": "Day 7",
+     "title": "Humility",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 7. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 7 of this novena, we turn our hearts to humility, and we ask St Cajetan to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 7."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of humility today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Cajetan, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1971,21 +2251,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of humility. Through the intercession of St Cajetan, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 8,
-     "title": "Day 8",
+     "title": "Peace",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 8. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 8 of this novena, we turn our hearts to peace, and we ask St Cajetan to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 8."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of peace today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Cajetan, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -1996,21 +2280,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of peace. Through the intercession of St Cajetan, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 9,
-     "title": "Day 9",
+     "title": "Surrender",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 9. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 9 of this novena, we turn our hearts to surrender, and we ask St Cajetan to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 9."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of surrender today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Cajetan, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2021,7 +2309,7 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of surrender. Through the intercession of St Cajetan, bless us and those we love, today and always. Amen."
       }
      ]
     }
@@ -2054,15 +2342,19 @@
    "days": [
     {
      "day": 1,
-     "title": "Day 1",
+     "title": "Trust",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 1. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 1 of this novena, we turn our hearts to trust, and we ask St Jude to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 1."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of trust today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Jude, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2073,21 +2365,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of trust. Through the intercession of St Jude, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 2,
-     "title": "Day 2",
+     "title": "Gratitude",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 2. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 2 of this novena, we turn our hearts to gratitude, and we ask St Jude to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 2."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of gratitude today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Jude, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2098,21 +2394,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of gratitude. Through the intercession of St Jude, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 3,
-     "title": "Day 3",
+     "title": "Courage",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 3. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 3 of this novena, we turn our hearts to courage, and we ask St Jude to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 3."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of courage today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Jude, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2123,21 +2423,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of courage. Through the intercession of St Jude, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 4,
-     "title": "Day 4",
+     "title": "Forgiveness",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 4. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 4 of this novena, we turn our hearts to forgiveness, and we ask St Jude to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 4."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of forgiveness today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Jude, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2148,21 +2452,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of forgiveness. Through the intercession of St Jude, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 5,
-     "title": "Day 5",
+     "title": "Patience",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 5. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 5 of this novena, we turn our hearts to patience, and we ask St Jude to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 5."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of patience today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Jude, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2173,21 +2481,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of patience. Through the intercession of St Jude, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 6,
-     "title": "Day 6",
+     "title": "Hope",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 6. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 6 of this novena, we turn our hearts to hope, and we ask St Jude to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 6."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of hope today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Jude, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2198,21 +2510,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of hope. Through the intercession of St Jude, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 7,
-     "title": "Day 7",
+     "title": "Humility",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 7. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 7 of this novena, we turn our hearts to humility, and we ask St Jude to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 7."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of humility today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Jude, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2223,21 +2539,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of humility. Through the intercession of St Jude, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 8,
-     "title": "Day 8",
+     "title": "Peace",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 8. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 8 of this novena, we turn our hearts to peace, and we ask St Jude to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 8."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of peace today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Jude, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2248,21 +2568,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of peace. Through the intercession of St Jude, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 9,
-     "title": "Day 9",
+     "title": "Surrender",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 9. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 9 of this novena, we turn our hearts to surrender, and we ask St Jude to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 9."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of surrender today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St Jude, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2273,7 +2597,7 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of surrender. Through the intercession of St Jude, bless us and those we love, today and always. Amen."
       }
      ]
     }
@@ -2306,15 +2630,19 @@
    "days": [
     {
      "day": 1,
-     "title": "Day 1",
+     "title": "Trust",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 1. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 1 of this novena, we turn our hearts to trust, and we ask Mary, Undoer of Knots to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 1."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of trust today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Mary, Undoer of Knots, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2325,21 +2653,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of trust. Through the intercession of Mary, Undoer of Knots, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 2,
-     "title": "Day 2",
+     "title": "Gratitude",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 2. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 2 of this novena, we turn our hearts to gratitude, and we ask Mary, Undoer of Knots to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 2."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of gratitude today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Mary, Undoer of Knots, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2350,21 +2682,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of gratitude. Through the intercession of Mary, Undoer of Knots, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 3,
-     "title": "Day 3",
+     "title": "Courage",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 3. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 3 of this novena, we turn our hearts to courage, and we ask Mary, Undoer of Knots to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 3."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of courage today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Mary, Undoer of Knots, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2375,21 +2711,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of courage. Through the intercession of Mary, Undoer of Knots, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 4,
-     "title": "Day 4",
+     "title": "Forgiveness",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 4. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 4 of this novena, we turn our hearts to forgiveness, and we ask Mary, Undoer of Knots to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 4."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of forgiveness today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Mary, Undoer of Knots, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2400,21 +2740,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of forgiveness. Through the intercession of Mary, Undoer of Knots, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 5,
-     "title": "Day 5",
+     "title": "Patience",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 5. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 5 of this novena, we turn our hearts to patience, and we ask Mary, Undoer of Knots to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 5."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of patience today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Mary, Undoer of Knots, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2425,21 +2769,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of patience. Through the intercession of Mary, Undoer of Knots, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 6,
-     "title": "Day 6",
+     "title": "Hope",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 6. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 6 of this novena, we turn our hearts to hope, and we ask Mary, Undoer of Knots to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 6."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of hope today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Mary, Undoer of Knots, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2450,21 +2798,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of hope. Through the intercession of Mary, Undoer of Knots, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 7,
-     "title": "Day 7",
+     "title": "Humility",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 7. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 7 of this novena, we turn our hearts to humility, and we ask Mary, Undoer of Knots to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 7."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of humility today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Mary, Undoer of Knots, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2475,21 +2827,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of humility. Through the intercession of Mary, Undoer of Knots, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 8,
-     "title": "Day 8",
+     "title": "Peace",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 8. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 8 of this novena, we turn our hearts to peace, and we ask Mary, Undoer of Knots to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 8."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of peace today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Mary, Undoer of Knots, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2500,21 +2856,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of peace. Through the intercession of Mary, Undoer of Knots, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 9,
-     "title": "Day 9",
+     "title": "Surrender",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 9. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 9 of this novena, we turn our hearts to surrender, and we ask Mary, Undoer of Knots to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 9."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of surrender today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Mary, Undoer of Knots, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2525,7 +2885,7 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of surrender. Through the intercession of Mary, Undoer of Knots, bless us and those we love, today and always. Amen."
       }
      ]
     }
@@ -2558,15 +2918,19 @@
    "days": [
     {
      "day": 1,
-     "title": "Day 1",
+     "title": "Trust",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 1. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 1 of this novena, we turn our hearts to trust, and we ask Our Lady of Perpetual Succour to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 1."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of trust today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Our Lady of Perpetual Succour, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2577,21 +2941,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of trust. Through the intercession of Our Lady of Perpetual Succour, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 2,
-     "title": "Day 2",
+     "title": "Gratitude",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 2. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 2 of this novena, we turn our hearts to gratitude, and we ask Our Lady of Perpetual Succour to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 2."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of gratitude today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Our Lady of Perpetual Succour, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2602,21 +2970,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of gratitude. Through the intercession of Our Lady of Perpetual Succour, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 3,
-     "title": "Day 3",
+     "title": "Courage",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 3. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 3 of this novena, we turn our hearts to courage, and we ask Our Lady of Perpetual Succour to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 3."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of courage today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Our Lady of Perpetual Succour, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2627,21 +2999,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of courage. Through the intercession of Our Lady of Perpetual Succour, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 4,
-     "title": "Day 4",
+     "title": "Forgiveness",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 4. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 4 of this novena, we turn our hearts to forgiveness, and we ask Our Lady of Perpetual Succour to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 4."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of forgiveness today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Our Lady of Perpetual Succour, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2652,21 +3028,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of forgiveness. Through the intercession of Our Lady of Perpetual Succour, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 5,
-     "title": "Day 5",
+     "title": "Patience",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 5. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 5 of this novena, we turn our hearts to patience, and we ask Our Lady of Perpetual Succour to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 5."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of patience today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Our Lady of Perpetual Succour, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2677,21 +3057,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of patience. Through the intercession of Our Lady of Perpetual Succour, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 6,
-     "title": "Day 6",
+     "title": "Hope",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 6. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 6 of this novena, we turn our hearts to hope, and we ask Our Lady of Perpetual Succour to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 6."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of hope today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Our Lady of Perpetual Succour, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2702,21 +3086,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of hope. Through the intercession of Our Lady of Perpetual Succour, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 7,
-     "title": "Day 7",
+     "title": "Humility",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 7. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 7 of this novena, we turn our hearts to humility, and we ask Our Lady of Perpetual Succour to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 7."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of humility today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Our Lady of Perpetual Succour, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2727,21 +3115,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of humility. Through the intercession of Our Lady of Perpetual Succour, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 8,
-     "title": "Day 8",
+     "title": "Peace",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 8. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 8 of this novena, we turn our hearts to peace, and we ask Our Lady of Perpetual Succour to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 8."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of peace today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Our Lady of Perpetual Succour, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2752,21 +3144,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of peace. Through the intercession of Our Lady of Perpetual Succour, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 9,
-     "title": "Day 9",
+     "title": "Surrender",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 9. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 9 of this novena, we turn our hearts to surrender, and we ask Our Lady of Perpetual Succour to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 9."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of surrender today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Our Lady of Perpetual Succour, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2777,7 +3173,7 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of surrender. Through the intercession of Our Lady of Perpetual Succour, bless us and those we love, today and always. Amen."
       }
      ]
     }
@@ -2810,15 +3206,19 @@
    "days": [
     {
      "day": 1,
-     "title": "Day 1",
+     "title": "Trust",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 1. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 1 of this novena, we turn our hearts to trust, and we ask Our Lady of Mount Carmel to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 1."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of trust today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Our Lady of Mount Carmel, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2829,21 +3229,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of trust. Through the intercession of Our Lady of Mount Carmel, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 2,
-     "title": "Day 2",
+     "title": "Gratitude",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 2. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 2 of this novena, we turn our hearts to gratitude, and we ask Our Lady of Mount Carmel to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 2."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of gratitude today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Our Lady of Mount Carmel, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2854,21 +3258,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of gratitude. Through the intercession of Our Lady of Mount Carmel, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 3,
-     "title": "Day 3",
+     "title": "Courage",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 3. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 3 of this novena, we turn our hearts to courage, and we ask Our Lady of Mount Carmel to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 3."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of courage today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Our Lady of Mount Carmel, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2879,21 +3287,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of courage. Through the intercession of Our Lady of Mount Carmel, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 4,
-     "title": "Day 4",
+     "title": "Forgiveness",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 4. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 4 of this novena, we turn our hearts to forgiveness, and we ask Our Lady of Mount Carmel to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 4."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of forgiveness today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Our Lady of Mount Carmel, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2904,21 +3316,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of forgiveness. Through the intercession of Our Lady of Mount Carmel, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 5,
-     "title": "Day 5",
+     "title": "Patience",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 5. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 5 of this novena, we turn our hearts to patience, and we ask Our Lady of Mount Carmel to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 5."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of patience today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Our Lady of Mount Carmel, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2929,21 +3345,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of patience. Through the intercession of Our Lady of Mount Carmel, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 6,
-     "title": "Day 6",
+     "title": "Hope",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 6. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 6 of this novena, we turn our hearts to hope, and we ask Our Lady of Mount Carmel to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 6."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of hope today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Our Lady of Mount Carmel, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2954,21 +3374,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of hope. Through the intercession of Our Lady of Mount Carmel, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 7,
-     "title": "Day 7",
+     "title": "Humility",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 7. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 7 of this novena, we turn our hearts to humility, and we ask Our Lady of Mount Carmel to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 7."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of humility today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Our Lady of Mount Carmel, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -2979,21 +3403,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of humility. Through the intercession of Our Lady of Mount Carmel, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 8,
-     "title": "Day 8",
+     "title": "Peace",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 8. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 8 of this novena, we turn our hearts to peace, and we ask Our Lady of Mount Carmel to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 8."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of peace today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Our Lady of Mount Carmel, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3004,21 +3432,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of peace. Through the intercession of Our Lady of Mount Carmel, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 9,
-     "title": "Day 9",
+     "title": "Surrender",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 9. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 9 of this novena, we turn our hearts to surrender, and we ask Our Lady of Mount Carmel to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 9."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of surrender today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Our Lady of Mount Carmel, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3029,7 +3461,7 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of surrender. Through the intercession of Our Lady of Mount Carmel, bless us and those we love, today and always. Amen."
       }
      ]
     }
@@ -3061,15 +3493,19 @@
    "days": [
     {
      "day": 1,
-     "title": "Day 1",
+     "title": "Trust",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 1. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 1 of this novena, we turn our hearts to trust, and we ask Sacred Heart of Jesus to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 1."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of trust today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Sacred Heart of Jesus, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3080,21 +3516,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of trust. Through the intercession of Sacred Heart of Jesus, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 2,
-     "title": "Day 2",
+     "title": "Gratitude",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 2. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 2 of this novena, we turn our hearts to gratitude, and we ask Sacred Heart of Jesus to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 2."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of gratitude today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Sacred Heart of Jesus, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3105,21 +3545,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of gratitude. Through the intercession of Sacred Heart of Jesus, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 3,
-     "title": "Day 3",
+     "title": "Courage",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 3. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 3 of this novena, we turn our hearts to courage, and we ask Sacred Heart of Jesus to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 3."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of courage today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Sacred Heart of Jesus, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3130,21 +3574,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of courage. Through the intercession of Sacred Heart of Jesus, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 4,
-     "title": "Day 4",
+     "title": "Forgiveness",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 4. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 4 of this novena, we turn our hearts to forgiveness, and we ask Sacred Heart of Jesus to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 4."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of forgiveness today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Sacred Heart of Jesus, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3155,21 +3603,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of forgiveness. Through the intercession of Sacred Heart of Jesus, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 5,
-     "title": "Day 5",
+     "title": "Patience",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 5. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 5 of this novena, we turn our hearts to patience, and we ask Sacred Heart of Jesus to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 5."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of patience today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Sacred Heart of Jesus, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3180,21 +3632,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of patience. Through the intercession of Sacred Heart of Jesus, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 6,
-     "title": "Day 6",
+     "title": "Hope",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 6. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 6 of this novena, we turn our hearts to hope, and we ask Sacred Heart of Jesus to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 6."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of hope today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Sacred Heart of Jesus, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3205,21 +3661,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of hope. Through the intercession of Sacred Heart of Jesus, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 7,
-     "title": "Day 7",
+     "title": "Humility",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 7. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 7 of this novena, we turn our hearts to humility, and we ask Sacred Heart of Jesus to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 7."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of humility today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Sacred Heart of Jesus, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3230,21 +3690,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of humility. Through the intercession of Sacred Heart of Jesus, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 8,
-     "title": "Day 8",
+     "title": "Peace",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 8. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 8 of this novena, we turn our hearts to peace, and we ask Sacred Heart of Jesus to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 8."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of peace today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Sacred Heart of Jesus, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3255,21 +3719,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of peace. Through the intercession of Sacred Heart of Jesus, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 9,
-     "title": "Day 9",
+     "title": "Surrender",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 9. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 9 of this novena, we turn our hearts to surrender, and we ask Sacred Heart of Jesus to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 9."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of surrender today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Sacred Heart of Jesus, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3280,7 +3748,7 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of surrender. Through the intercession of Sacred Heart of Jesus, bless us and those we love, today and always. Amen."
       }
      ]
     }
@@ -3313,15 +3781,19 @@
    "days": [
     {
      "day": 1,
-     "title": "Day 1",
+     "title": "Trust",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 1. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 1 of this novena, we turn our hearts to trust, and we ask Surrender to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 1."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of trust today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Surrender, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3332,21 +3804,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of trust. Through the intercession of Surrender, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 2,
-     "title": "Day 2",
+     "title": "Gratitude",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 2. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 2 of this novena, we turn our hearts to gratitude, and we ask Surrender to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 2."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of gratitude today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Surrender, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3357,21 +3833,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of gratitude. Through the intercession of Surrender, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 3,
-     "title": "Day 3",
+     "title": "Courage",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 3. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 3 of this novena, we turn our hearts to courage, and we ask Surrender to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 3."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of courage today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Surrender, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3382,21 +3862,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of courage. Through the intercession of Surrender, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 4,
-     "title": "Day 4",
+     "title": "Forgiveness",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 4. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 4 of this novena, we turn our hearts to forgiveness, and we ask Surrender to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 4."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of forgiveness today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Surrender, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3407,21 +3891,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of forgiveness. Through the intercession of Surrender, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 5,
-     "title": "Day 5",
+     "title": "Patience",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 5. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 5 of this novena, we turn our hearts to patience, and we ask Surrender to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 5."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of patience today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Surrender, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3432,21 +3920,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of patience. Through the intercession of Surrender, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 6,
-     "title": "Day 6",
+     "title": "Hope",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 6. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 6 of this novena, we turn our hearts to hope, and we ask Surrender to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 6."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of hope today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Surrender, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3457,21 +3949,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of hope. Through the intercession of Surrender, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 7,
-     "title": "Day 7",
+     "title": "Humility",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 7. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 7 of this novena, we turn our hearts to humility, and we ask Surrender to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 7."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of humility today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Surrender, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3482,21 +3978,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of humility. Through the intercession of Surrender, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 8,
-     "title": "Day 8",
+     "title": "Peace",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 8. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 8 of this novena, we turn our hearts to peace, and we ask Surrender to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 8."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of peace today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Surrender, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3507,21 +4007,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of peace. Through the intercession of Surrender, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 9,
-     "title": "Day 9",
+     "title": "Surrender",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 9. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 9 of this novena, we turn our hearts to surrender, and we ask Surrender to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 9."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of surrender today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Surrender, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3532,7 +4036,7 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of surrender. Through the intercession of Surrender, bless us and those we love, today and always. Amen."
       }
      ]
     }
@@ -3567,15 +4071,19 @@
    "days": [
     {
      "day": 1,
-     "title": "Day 1",
+     "title": "Trust",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 1. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 1 of this novena, we turn our hearts to trust, and we ask St John Bosco to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 1."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of trust today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St John Bosco, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3586,21 +4094,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of trust. Through the intercession of St John Bosco, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 2,
-     "title": "Day 2",
+     "title": "Gratitude",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 2. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 2 of this novena, we turn our hearts to gratitude, and we ask St John Bosco to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 2."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of gratitude today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St John Bosco, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3611,21 +4123,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of gratitude. Through the intercession of St John Bosco, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 3,
-     "title": "Day 3",
+     "title": "Courage",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 3. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 3 of this novena, we turn our hearts to courage, and we ask St John Bosco to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 3."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of courage today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St John Bosco, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3636,21 +4152,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of courage. Through the intercession of St John Bosco, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 4,
-     "title": "Day 4",
+     "title": "Forgiveness",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 4. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 4 of this novena, we turn our hearts to forgiveness, and we ask St John Bosco to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 4."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of forgiveness today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St John Bosco, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3661,21 +4181,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of forgiveness. Through the intercession of St John Bosco, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 5,
-     "title": "Day 5",
+     "title": "Patience",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 5. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 5 of this novena, we turn our hearts to patience, and we ask St John Bosco to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 5."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of patience today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St John Bosco, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3686,21 +4210,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of patience. Through the intercession of St John Bosco, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 6,
-     "title": "Day 6",
+     "title": "Hope",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 6. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 6 of this novena, we turn our hearts to hope, and we ask St John Bosco to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 6."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of hope today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St John Bosco, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3711,21 +4239,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of hope. Through the intercession of St John Bosco, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 7,
-     "title": "Day 7",
+     "title": "Humility",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 7. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 7 of this novena, we turn our hearts to humility, and we ask St John Bosco to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 7."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of humility today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St John Bosco, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3736,21 +4268,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of humility. Through the intercession of St John Bosco, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 8,
-     "title": "Day 8",
+     "title": "Peace",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 8. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 8 of this novena, we turn our hearts to peace, and we ask St John Bosco to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 8."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of peace today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St John Bosco, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3761,21 +4297,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of peace. Through the intercession of St John Bosco, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 9,
-     "title": "Day 9",
+     "title": "Surrender",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 9. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 9 of this novena, we turn our hearts to surrender, and we ask St John Bosco to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 9."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of surrender today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "St John Bosco, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3786,7 +4326,7 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of surrender. Through the intercession of St John Bosco, bless us and those we love, today and always. Amen."
       }
      ]
     }
@@ -3819,15 +4359,19 @@
    "days": [
     {
      "day": 1,
-     "title": "Day 1",
+     "title": "Trust",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 1. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 1 of this novena, we turn our hearts to trust, and we ask Bl. Carlo Acutis to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 1."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of trust today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Bl. Carlo Acutis, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3838,21 +4382,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of trust. Through the intercession of Bl. Carlo Acutis, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 2,
-     "title": "Day 2",
+     "title": "Gratitude",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 2. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 2 of this novena, we turn our hearts to gratitude, and we ask Bl. Carlo Acutis to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 2."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of gratitude today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Bl. Carlo Acutis, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3863,21 +4411,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of gratitude. Through the intercession of Bl. Carlo Acutis, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 3,
-     "title": "Day 3",
+     "title": "Courage",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 3. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 3 of this novena, we turn our hearts to courage, and we ask Bl. Carlo Acutis to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 3."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of courage today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Bl. Carlo Acutis, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3888,21 +4440,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of courage. Through the intercession of Bl. Carlo Acutis, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 4,
-     "title": "Day 4",
+     "title": "Forgiveness",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 4. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 4 of this novena, we turn our hearts to forgiveness, and we ask Bl. Carlo Acutis to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 4."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of forgiveness today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Bl. Carlo Acutis, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3913,21 +4469,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of forgiveness. Through the intercession of Bl. Carlo Acutis, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 5,
-     "title": "Day 5",
+     "title": "Patience",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 5. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 5 of this novena, we turn our hearts to patience, and we ask Bl. Carlo Acutis to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 5."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of patience today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Bl. Carlo Acutis, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3938,21 +4498,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of patience. Through the intercession of Bl. Carlo Acutis, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 6,
-     "title": "Day 6",
+     "title": "Hope",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 6. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 6 of this novena, we turn our hearts to hope, and we ask Bl. Carlo Acutis to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 6."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of hope today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Bl. Carlo Acutis, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3963,21 +4527,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of hope. Through the intercession of Bl. Carlo Acutis, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 7,
-     "title": "Day 7",
+     "title": "Humility",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 7. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 7 of this novena, we turn our hearts to humility, and we ask Bl. Carlo Acutis to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 7."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of humility today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Bl. Carlo Acutis, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -3988,21 +4556,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of humility. Through the intercession of Bl. Carlo Acutis, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 8,
-     "title": "Day 8",
+     "title": "Peace",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 8. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 8 of this novena, we turn our hearts to peace, and we ask Bl. Carlo Acutis to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 8."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of peace today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Bl. Carlo Acutis, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -4013,21 +4585,25 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of peace. Through the intercession of Bl. Carlo Acutis, bless us and those we love, today and always. Amen."
       }
      ]
     },
     {
      "day": 9,
-     "title": "Day 9",
+     "title": "Surrender",
      "blocks": [
       {
        "type": "opening",
-       "text": "[Placeholder] Opening prayer for Day 9. Real prayer text comes from your sheet."
+       "text": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen. Today, on day 9 of this novena, we turn our hearts to surrender, and we ask Bl. Carlo Acutis to pray with us."
       },
       {
        "type": "prayer",
-       "text": "[Placeholder] Prayer text for Day 9."
+       "text": "Lord God, you hear every quiet word we bring to you. Grant us the grace of surrender today. Where we are weary, give us strength; where we are afraid, give us peace; where we are alone, remind us that you are near."
+      },
+      {
+       "type": "prayer",
+       "text": "Bl. Carlo Acutis, you walked the road of faith before us. Stand beside us now as we place our worries in your hands. Teach us to wait without fear, to ask without doubt, and to give thanks before we see the answer."
       },
       {
        "type": "intention"
@@ -4038,7 +4614,7 @@
       },
       {
        "type": "closing",
-       "text": "[Placeholder] Closing prayer."
+       "text": "Lord, hear our prayer on this day of surrender. Through the intercession of Bl. Carlo Acutis, bless us and those we love, today and always. Amen."
       }
      ]
     }
