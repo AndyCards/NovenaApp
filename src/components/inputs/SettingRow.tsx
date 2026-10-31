@@ -1,14 +1,17 @@
+// Figma "Setting Row": optional 22 icon, title (15 SemiBold) + one-line explanation, then a control.
 import type { ReactNode } from 'react';
 import { Text, View } from 'react-native';
-import { colors, space, stroke } from '@/constants/theme';
+import { colors } from '@/constants/theme';
 import { type } from '@/constants/typography';
+import { Icon, type IconName } from '../Icon';
 
-export function SettingRow({ title, body, control }: { title: string; body?: string; control?: ReactNode }) {
+export function SettingRow({ title, body, icon, control }: { title: string; body?: string; icon?: IconName; control?: ReactNode }) {
   return (
-    <View style={{ minHeight: 56, flexDirection: 'row', alignItems: 'center', gap: space[12], paddingVertical: space[12], borderBottomWidth: stroke.hairline, borderColor: colors.border.default }}>
-      <View style={{ flex: 1 }}>
-        <Text style={[type.titleSmall, { color: colors.text.primary }]}>{title}</Text>
-        {body ? <Text style={[type.bodyMedium, { color: colors.text.tertiary }]}>{body}</Text> : null}
+    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12, paddingVertical: 12 }}>
+      {icon ? <Icon name={icon} size={22} /> : null}
+      <View style={{ flex: 1, gap: 2 }}>
+        <Text style={[type.titleSmall, { color: colors.text.secondary, lineHeight: 22 }]}>{title}</Text>
+        {body ? <Text style={[type.bodySmall, { color: colors.text.tertiary }]}>{body}</Text> : null}
       </View>
       {control}
     </View>

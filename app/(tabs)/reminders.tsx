@@ -1,43 +1,89 @@
-// Reminders: daily time, weekdays, extras, quiet hours.
-import { ScrollView, Text, View } from 'react-native';
+// Reminders, Figma Page 34 (1227:58916): daily prayer time card, then Extras.
+import { useRouter } from 'expo-router';
+import { useState, type ReactNode } from 'react';
+import { Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Icon } from '@/components/Icon';
 import { SettingRow } from '@/components/inputs/SettingRow';
 import { Switch } from '@/components/inputs/Switch';
 import { WeekdayToggle } from '@/components/inputs/WeekdayToggle';
 import { ReminderNote } from '@/components/overlays/ReminderNote';
-import { colors, screenMargin } from '@/constants/theme';
+import { ReminderSheet } from '@/components/overlays/ReminderSheet';
+import { colors, radius, screenMargin, stroke } from '@/constants/theme';
 import { type } from '@/constants/typography';
 import { strings } from '@/copy/strings';
 import { useReminders } from '@/hooks/useReminders';
 import { formatTime12 } from '@/utils/dateUtils';
 
 const R = strings.reminders;
-const DAYS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const QUIET = { start: '22:00', end: '07:00' };
+
+const Divider = () => <View style={{ height: stroke.hairline, backgroundColor: colors.border.default }} />;
+const Card = ({ children }: { children: ReactNode }) => (
+  <View style={{ marginHorizontal: screenMargin, paddingHorizontal: 14, paddingVertical: 2, borderRadius: radius.m, borderWidth: stroke.hairline, borderColor: colors.border.default, backgroundColor: colors.surface.default }}>{children}</View>
+);
+const Header = ({ title }: { title: string }) => (
+  <Text accessibilityRole="header" style={[type.titleMedium, { color: colors.text.secondary, paddingHorizontal: screenMargin, paddingVertical: 6 }]}>{title}</Text>
+);
 
 export default function Reminders() {
+  const router = useRouter();
   const { settings, permission, update } = useReminders();
+  const [picking, setPicking] = useState(false);
   if (!settings) return null;
   const toggleDay = (i: number) => update({ weekdays: settings.weekdays ^ (1 << i) });
+  // Quiet hours are "off" when start equals end (an empty window).
+  const quietOn = settings.quietStart !== settings.quietEnd;
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.surface.page }}>
-      <ScrollView contentContainerStyle={{ padding: screenMargin, paddingBottom: 140, gap: 16 }}>
-        <Text accessibilityRole="header" style={[type.headingH2, { color: colors.text.primary }]}>{R.title}</Text>
-        {!permission && <ReminderNote text="Reminders are off. Turn on notifications in Settings to get a gentle nudge." />}
-        <SettingRow title={R.daily} body={R.dailyBody}
-          control={<Switch label={R.daily} value={settings.enabled} onValueChange={(enabled) => update({ enabled })} />} />
-        <SettingRow title={R.time} body={formatTime12(settings.time)} />
-        <Text style={[type.titleSmall, { color: colors.text.primary }]}>{R.repeatOn}</Text>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-          {DAYS.map((d, i) => <WeekdayToggle key={i} label={d} on={!!(settings.weekdays & (1 << i))} onPress={() => toggleDay(i)} />)}
+    <SafeAreaView edges={['top']} style={{ flex: 1, backgroundColor: colors.surface.page }}>
+      <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: screenMargin + 2 }}>
+        <Pressable accessibilityRole="button" accessibilityLabel={strings.common.back} onPress={() => router.navigate('/')} style={{ width: 44, height: 44, alignItems: 'center', justifyContent: 'center' }}>
+          <Icon name="back" size={22} />
+        </Pressable>
+        <Text accessibilityRole="header" style={[type.titleMedium, { flex: 1, textAlign: 'center', color: colors.text.secondary }]}>{R.screenTitle}</Text>
+        <View style={{ width: 44 }} />
+      </View>
+      <ScrollView contentContainerStyle={{ paddingTop: 8, paddingBottom: 140, gap: 24 }}>
+        {!permission && <View style={{ paddingHorizontal: screenMargin }}><ReminderNote text="Reminders are off. Turn on notifications in Settings to get a gentle nudge." /></View>}
+        <View style={{ gap: 10 }}>
+          <Header title={R.title} />
+          <Card>
+            <SettingRow icon="clock" title={R.daily} body={R.dailyBody}
+              control={<Switch label={R.daily} value={settings.enabled} onValueChange={(enabled) => update({ enabled })} />} />
+            <Divider />
+            <Pressable accessibilityRole="button" accessibilityLabel={`${R.time}, ${formatTime12(settings.time)}`} onPress={() => setPicking(true)}
+              style={{ flexDirection: 'row', alignItems: 'center', gap: 12, paddingVertical: 12 }}>
+              <Text style={[type.titleSmall, { flex: 1, color: colors.text.secondary, lineHeight: 22 }]}>{R.time}</Text>
+              <Text style={[type.labelSmall, { color: colors.text.secondary }]}>{formatTime12(settings.time)}</Text>
+              <Icon name="chevronRight" size={18} color={colors.text.secondary} />
+            </Pressable>
+            <Divider />
+            <View style={{ gap: 8, paddingVertical: 12 }}>
+              <Text style={[type.bodySmall, { color: colors.text.tertiary }]}>{R.repeatOn}</Text>
+              <View style={{ flexDirection: 'row', gap: 6 }}>
+                {DAYS.map((d, i) => <WeekdayToggle key={d} label={d} on={!!(settings.weekdays & (1 << i))} onPress={() => toggleDay(i)} />)}
+              </View>
+            </View>
+          </Card>
         </View>
-        <Text style={[type.titleSmall, { color: colors.text.primary }]}>{R.extras}</Text>
-        <SettingRow title={R.missedNote} body={R.missedNoteBody}
-          control={<Switch label={R.missedNote} value={settings.missedDayNote} onValueChange={(missedDayNote) => update({ missedDayNote })} />} />
-        <SettingRow title={R.feastNovenas} body={R.feastNovenasBody}
-          control={<Switch label={R.feastNovenas} value={settings.feastSuggestions} onValueChange={(feastSuggestions) => update({ feastSuggestions })} />} />
-        <SettingRow title={R.quietHours} body={`${formatTime12(settings.quietStart)} – ${formatTime12(settings.quietEnd)}`} />
+        <View style={{ gap: 10 }}>
+          <Header title={R.extras} />
+          <Card>
+            <SettingRow icon="sun" title={R.missedNote} body={R.missedNoteBody}
+              control={<Switch label={R.missedNote} value={settings.missedDayNote} onValueChange={(missedDayNote) => update({ missedDayNote })} />} />
+            <Divider />
+            <SettingRow icon="calendarDate" title={R.feastNovenas} body={R.feastNovenasBody}
+              control={<Switch label={R.feastNovenas} value={settings.feastSuggestions} onValueChange={(feastSuggestions) => update({ feastSuggestions })} />} />
+            <Divider />
+            <SettingRow icon="moon" title={R.quietHours} body={`${formatTime12(QUIET.start)} to ${formatTime12(QUIET.end)}`}
+              control={<Switch label={R.quietHours} value={quietOn}
+                onValueChange={(on) => update(on ? { quietStart: QUIET.start, quietEnd: QUIET.end } : { quietStart: '00:00', quietEnd: '00:00' })} />} />
+          </Card>
+        </View>
       </ScrollView>
+      {picking ? <ReminderSheet visible time={settings.time} onClose={() => setPicking(false)} onSave={(time) => { update({ time, enabled: true }); setPicking(false); }} /> : null}
     </SafeAreaView>
   );
 }
