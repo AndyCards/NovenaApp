@@ -50,6 +50,7 @@ export default function Reader() {
   const novena = preview ? novenaById(runId!.slice('preview~'.length)) : run ? novenaById(run.novenaId) : undefined;
   const dayNo = Number(day);
   const [intentionText, setIntentionText] = useState(''); // what is saved
+  const [editFocus, setEditFocus] = useState(false); // true only when the person tapped to edit, so the keyboard stays away otherwise
   const lastDay = useRef(dayNo); // the day shown before this one, to know which way to slide
   const [draft, setDraft] = useState(''); // what is being typed, saved only on "Save intention"
   // Which pop-up is open right now: the … menu, the intention (view or edit), or "Continue another time?".
@@ -103,7 +104,7 @@ export default function Reader() {
     router.replace(`/prayed/${run.id}/${dayNo}`);
   };
   // No intention written yet? Open the box to write one. Otherwise show it.
-  const openIntention = () => { setDraft(intentionText); setPopup(intentionText.trim() ? 'intention-view' : 'intention-edit'); };
+  const openIntention = () => { setEditFocus(false); setDraft(intentionText); setPopup(intentionText.trim() ? 'intention-view' : 'intention-edit'); };
 
   return (
     <SafeAreaView edges={['top', 'bottom']} style={{ flex: 1, backgroundColor: colors.surface.default }}>
@@ -158,7 +159,7 @@ export default function Reader() {
         hideIntention={preview}
       />
       <PopupCard type="pause" visible={popup === 'pause'} onClose={close} onLeave={() => { close(); router.back(); }} />
-      <PopupCard type="intention-view" visible={popup === 'intention-view'} onClose={close} novenaTitle={`${novena.title} Novena`} value={intentionText} onEdit={() => { setDraft(intentionText); setPopup('intention-edit'); }} />
+      <PopupCard type="intention-view" visible={popup === 'intention-view'} onClose={close} novenaTitle={`${novena.title} Novena`} value={intentionText} onEdit={() => { setEditFocus(true); setDraft(intentionText); setPopup('intention-edit'); }} />
       <PopupCard
         type="intention-edit"
         visible={popup === 'intention-edit'}
@@ -166,6 +167,7 @@ export default function Reader() {
         novenaTitle={`${novena.title} Novena`}
         value={draft}
         onChange={setDraft}
+        focus={editFocus}
         // The intention stays on this phone. It is never uploaded or shared.
         onSave={async () => {
           if (!run) return;

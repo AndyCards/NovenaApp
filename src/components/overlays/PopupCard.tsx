@@ -8,7 +8,7 @@ import { FloatingCard } from './FloatingCard';
 
 type Props =
   | { type: 'pause'; visible: boolean; onClose: () => void; onLeave: () => void }
-  | { type: 'intention-edit'; visible: boolean; onClose: () => void; novenaTitle: string; value: string; onChange: (t: string) => void; onSave: () => void }
+  | { type: 'intention-edit'; visible: boolean; onClose: () => void; novenaTitle: string; value: string; onChange: (t: string) => void; onSave: () => void; focus?: boolean }
   | { type: 'intention-view'; visible: boolean; onClose: () => void; novenaTitle: string; value: string; onEdit: () => void };
 
 const r = strings.reader;
@@ -31,7 +31,7 @@ export function PopupCard(p: Props) {
         <TextInput
           accessibilityLabel={r.intentionTitle}
           multiline
-          autoFocus
+          autoFocus={p.focus} // the keyboard opens only when the person chose to edit, not just by opening the card
           value={p.value}
           onChangeText={p.onChange}
           placeholder={r.intentionPlaceholder}
