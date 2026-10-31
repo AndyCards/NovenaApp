@@ -75,6 +75,7 @@ export async function addRecentSearch(query: string) {
   await db.insert(recentSearch).values({ query, searchedAt: Date.now() }).onConflictDoUpdate({ target: recentSearch.query, set: { searchedAt: Date.now() } });
 }
 export const clearRecentSearches = () => db.delete(recentSearch);
+export const deleteRecentSearch = (query: string) => db.delete(recentSearch).where(eq(recentSearch.query, query));
 
 // ---- small settings (prayer mode, content version) ----
 export const getMeta = async (key: string) => (await db.select().from(appMeta).where(eq(appMeta.key, key)))[0]?.value;

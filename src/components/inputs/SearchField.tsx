@@ -1,16 +1,15 @@
-import { TextInput, View } from 'react-native';
-import { colors, radius, space, stroke } from '@/constants/theme';
+// Figma "Search Field": white pill, hairline border; clear (×) circle and magnifier on the right.
+import { Pressable, TextInput, View } from 'react-native';
+import { colors, radius, stroke } from '@/constants/theme';
 import { type } from '@/constants/typography';
 import { strings } from '@/copy/strings';
-import { ClearButton } from '../actions/ClearButton';
 import { Icon } from '../Icon';
 
 type Props = { value: string; onChangeText: (t: string) => void; onSubmit?: (t: string) => void; autoFocus?: boolean; placeholder?: string };
 
 export function SearchField({ value, onChangeText, onSubmit, autoFocus, placeholder = strings.home.searchPlaceholder }: Props) {
   return (
-    <View style={{ height: 44, flexDirection: 'row', alignItems: 'center', gap: space[8], paddingHorizontal: space[12], borderRadius: radius.full, backgroundColor: colors.surface.raised, borderWidth: stroke.hairline, borderColor: colors.border.default }}>
-      <Icon name="search" color={colors.icon.secondary} />
+    <View style={{ flex: 1, height: 44, flexDirection: 'row', alignItems: 'center', gap: 8, paddingLeft: 14, paddingRight: 10, borderRadius: radius.full, backgroundColor: colors.surface.default, borderWidth: stroke.hairline, borderColor: colors.border.default }}>
       <TextInput
         accessibilityLabel="Search"
         value={value}
@@ -20,9 +19,17 @@ export function SearchField({ value, onChangeText, onSubmit, autoFocus, placehol
         placeholder={placeholder}
         placeholderTextColor={colors.text.muted}
         returnKeyType="search"
-        style={[type.bodyLarge, { flex: 1, color: colors.text.primary }]}
+        style={[type.bodyMedium, { flex: 1, color: colors.text.primary }]}
       />
-      {value ? <ClearButton onPress={() => onChangeText('')} /> : null}
+      {value ? (
+        <Pressable accessibilityRole="button" accessibilityLabel="Clear search" onPress={() => onChangeText('')} hitSlop={8}
+          style={{ width: 22, height: 22, borderRadius: 11, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.surface.subtle }}>
+          <Icon name="clear" size={12} color={colors.text.secondary} />
+        </Pressable>
+      ) : null}
+      <Pressable accessibilityRole="button" accessibilityLabel="Search" onPress={() => onSubmit?.(value)} hitSlop={6}>
+        <Icon name="search" size={22} />
+      </Pressable>
     </View>
   );
 }
