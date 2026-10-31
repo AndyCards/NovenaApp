@@ -19,7 +19,7 @@ type Props = { name: IconName; size?: number; color?: string; weight?: 'light' |
 
 export function Icon({ name, size = 22, color = colors.icon.default, weight = 'light' }: Props) {
   const Glyph = icons[name];
-  return <Glyph size={size} color={color} weight={weight} accessible={false} />;
+  return <Glyph size={size} color={color} weight={weight} />;
 }
 
 export const isIconName = (n: string | undefined): n is IconName => !!n && n in icons;
