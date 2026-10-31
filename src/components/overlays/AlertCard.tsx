@@ -1,5 +1,5 @@
 // Warnings and confirmations: missed days, novena complete, pray another, remove, pray again.
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 import { colors } from '@/constants/theme';
 import { type } from '@/constants/typography';
@@ -22,6 +22,15 @@ export function AlertCard({ alert, onClose, onPrimary, onSecondary }: Props) {
   const kind = alert?.kind;
   // A finished novena gets one calm success cue when the card appears.
   useEffect(() => { if (kind === 'complete') haptics.success(); }, [kind]);
+  // iOS can't show one pop-up while another is still leaving, which could leave the screen stuck. So a card waits
+  // a moment (the menu's exit takes about 200ms) before it appears.
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    setReady(false);
+    if (!kind) return;
+    const t = setTimeout(() => setReady(true), 260);
+    return () => clearTimeout(t);
+  }, [kind]);
   if (!alert) return null;
   const a = strings.alerts;
   const content: { title: string; body: string; primary: string; secondary: string; icon: IconName } = (() => {
@@ -34,7 +43,7 @@ export function AlertCard({ alert, onClose, onPrimary, onSecondary }: Props) {
     }
   })();
   return (
-    <FloatingCard visible onClose={onClose} title={content.title} icon={content.icon}>
+    <FloatingCard visible={ready} onClose={onClose} title={content.title} icon={content.icon}>
       <Text style={[type.bodyLarge, { color: colors.text.secondary, textAlign: 'center', marginTop: -12, paddingHorizontal: 12 }]}>{content.body}</Text>
       <View style={{ gap: 10, marginTop: 20 }}>
         <Button label={content.secondary} variant="secondary" onPress={() => { if (alert.kind === 'remove') haptics.warning(); (onSecondary ?? onClose)(); }} />

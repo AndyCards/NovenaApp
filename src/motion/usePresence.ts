@@ -19,5 +19,12 @@ export function usePresence(visible: boolean) {
       });
     }
   }, [visible]); // eslint-disable-line react-hooks/exhaustive-deps
+  // Safety net: if the leaving animation is ever interrupted and never reports back, still remove the pop-up,
+  // so an invisible layer can never be left on screen blocking taps.
+  useEffect(() => {
+    if (visible) return;
+    const t = setTimeout(() => setMounted(false), duration.sheetOut + 150);
+    return () => clearTimeout(t);
+  }, [visible]);
   return { mounted, progress, reduced };
 }
