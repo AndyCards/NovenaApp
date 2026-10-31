@@ -9,7 +9,8 @@ import { duration, ease } from '@/motion/tokens';
 
 const AnimatedText = Animated.createAnimatedComponent(Text);
 
-export function Segment({ label, count, selected, onPress }: { label: string; count?: number; selected: boolean; onPress: () => void }) {
+export function Segment({ label, count: rawCount, selected, onPress }: { label: string; count?: number; selected: boolean; onPress: () => void }) {
+  const count = rawCount && rawCount > 0 ? rawCount : undefined; // no number bubble when there are none
   const p = useSharedValue(selected ? 1 : 0);
   useEffect(() => { p.value = withTiming(selected ? 1 : 0, { duration: duration.quick, easing: ease.out }); }, [selected, p]);
   const labelColor = useAnimatedStyle(() => ({ color: interpolateColor(p.value, [0, 1], [colors.text.secondary, colors.text.primary]) }));

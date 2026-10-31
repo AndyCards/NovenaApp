@@ -1,12 +1,14 @@
 // Library: Active / Completed / Saved.
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
+import { LinearGradient } from 'expo-linear-gradient';
 import { ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button } from '@/components/actions/Button';
 import { ActiveNovenaCard } from '@/components/content/ActiveNovenaCard';
 import { CompletedNovenaCard } from '@/components/content/CompletedNovenaCard';
 import { SavedRow } from '@/components/content/SavedRow';
+import { Icon, type IconName } from '@/components/Icon';
 import { SegmentedControl } from '@/components/inputs/SegmentedControl';
 import { AlertCard, type AlertKind } from '@/components/overlays/AlertCard';
 import { CardMenu } from '@/components/overlays/CardMenu';
@@ -23,12 +25,18 @@ import { dueDay } from '@/utils/dayRules';
 type Tab = 'active' | 'completed' | 'saved';
 const L = strings.library;
 
-function Empty({ title, body, cta, onPress }: { title: string; body: string; cta: string; onPress: () => void }) {
+// Empty tab (Figma "Library · … empty"): a round icon, a title, two lines of text, and one grey button.
+function Empty({ icon, title, body, cta, onPress }: { icon: IconName; title: string; body: string; cta: string; onPress: () => void }) {
   return (
-    <Reveal style={{ alignItems: 'center', padding: 32, gap: 12 }}>
-      <Text style={[type.titleCard, { color: colors.text.primary, textAlign: 'center' }]}>{title}</Text>
-      <Text style={[type.bodyLarge, { color: colors.text.secondary, textAlign: 'center' }]}>{body}</Text>
-      <Button label={cta} onPress={onPress} />
+    <Reveal style={{ alignItems: 'center', paddingTop: 86, paddingHorizontal: 10, gap: 20 }}>
+      <LinearGradient colors={colors.gradient.iconCircle} style={{ width: 72, height: 72, borderRadius: 36, alignItems: 'center', justifyContent: 'center' }}>
+        <Icon name={icon} size={32} color={colors.text.secondary} />
+      </LinearGradient>
+      <View style={{ gap: 8, alignItems: 'center' }}>
+        <Text style={[type.labelLarge, { color: colors.text.secondary, textAlign: 'center' }]}>{title}</Text>
+        <Text style={[type.bodyMedium, { lineHeight: 22, color: colors.text.secondary, textAlign: 'center' }]}>{body}</Text>
+      </View>
+      <Button label={cta} variant="secondary" onPress={onPress} style={{ alignSelf: 'stretch' }} />
     </Reveal>
   );
 }
@@ -39,6 +47,7 @@ export default function Library() {
   const lib = useLibrary();
   const [tab, setTab] = useState<Tab>('active');
   const [menuRun, setMenuRun] = useState<string | null>(null);
+  const [menuY, setMenuY] = useState(0); // where the "..." button sits on screen, so the menu opens under it
   const [alert, setAlert] = useState<AlertKind | null>(null);
   const [toast, setToast] = useState<{ message: string; undo: () => void } | null>(null);
   // Which novena's "…" menu is open, and the pop-up / undo message being shown (if any).
@@ -63,7 +72,7 @@ export default function Library() {
       <ScrollView contentContainerStyle={{ paddingHorizontal: screenMargin, paddingBottom: 140, gap: 12 }}>
         {/* Active tab: one card per novena being prayed. Empty? A friendly message and a button to find one. */}
         {tab === 'active' && (lib.active.length === 0
-          ? <Empty title={L.emptyActiveTitle} body={L.emptyActiveBody} cta={L.emptyActiveCta} onPress={() => router.push('/')} />
+          ? <Empty icon="bookOpen" title={L.emptyActiveTitle} body={L.emptyActiveBody} cta={L.emptyActiveCta} onPress={() => router.push('/')} />
           : lib.active.map((r, i) => {
               const n = novenaById(r.novenaId);
               return n && (
@@ -73,13 +82,13 @@ export default function Library() {
                   prayedToday={prayedToday(r)}
                   onOpen={() => router.push(`/novena/${n.id}`)}
                   onPray={() => (prayedToday(r) ? router.push(`/novena/${n.id}`) : router.push(`/reader/${r.id}/${r.continueDay}`))}
-                  onMenu={() => setMenuRun(r.id)} />
+                  onMenu={(y) => { setMenuY(y); setMenuRun(r.id); }} />
                 </Reveal>
               );
             }))}
         {/* Completed tab: finished novenas with their dates and "Pray it again". */}
         {tab === 'completed' && (lib.completed.length === 0
-          ? <Empty title={L.emptyCompletedTitle} body={L.emptyCompletedBody} cta={L.emptyCompletedCta} onPress={() => setTab('active')} />
+          ? <Empty icon="checkCircle" title={L.emptyCompletedTitle} body={L.emptyCompletedBody} cta={L.emptyCompletedCta} onPress={() => setTab('active')} />
           : lib.completed.map((r, i) => {
               const n = novenaById(r.novenaId);
               return n && (
@@ -92,7 +101,7 @@ export default function Library() {
             }))}
         {/* Saved tab: novenas saved for later, in one card. Tap the bookmark to unsave (with Undo). */}
         {tab === 'saved' && (lib.saved.length === 0
-          ? <Empty title={L.emptySavedTitle} body={L.emptySavedBody} cta={L.emptySavedCta} onPress={() => router.push('/')} />
+          ? <Empty icon="bookmark" title={L.emptySavedTitle} body={L.emptySavedBody} cta={L.emptySavedCta} onPress={() => router.push('/')} />
           : (
             <Reveal style={{ borderRadius: radius.m, borderWidth: stroke.hairline, borderColor: colors.border.default, overflow: 'hidden' }}>
               {lib.saved.map((id, i) => {
@@ -112,6 +121,7 @@ export default function Library() {
       {/* The "…" menu on an active novena: pause or resume, start again, or remove. */}
       <CardMenu
         visible={!!menuRun && !alert}
+        anchorBottom={menuY}
         paused={run?.status === 'paused'}
         onClose={() => setMenuRun(null)}
         onPause={async () => { await lib.pause(menuRun!); setMenuRun(null); }}

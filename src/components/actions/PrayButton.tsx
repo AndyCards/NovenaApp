@@ -10,7 +10,7 @@ export function PrayButton({ label, onPress }: { label: string; onPress: () => v
   return (
     <PressableScale dimTo={0.92} accessibilityRole="button" accessibilityLabel={label} onPress={onPress} style={{ alignSelf: 'flex-start' }}>
       <LinearGradient colors={colors.gradient.button} style={{ flexDirection: 'row', alignItems: 'center', gap: 8, paddingLeft: 16, paddingRight: 18, paddingVertical: 13, borderRadius: radius.full }}>
-        <Text style={[type.labelSmall, { color: colors.text.onAction }]}>{label}</Text>
+        <Text style={[type.labelSmall, { fontSize: 15, color: colors.text.onAction }]}>{label}</Text>
         <Icon name="handsPraying" size={18} color={colors.text.onAction} />
       </LinearGradient>
     </PressableScale>
