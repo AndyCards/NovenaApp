@@ -115,7 +115,7 @@ export default function Home() {
   );
 
   return (
-    <SafeAreaView edges={['top']} style={{ flex: 1, backgroundColor: colors.surface.default }}>
+    <SafeAreaView edges={[]} style={{ flex: 1, backgroundColor: colors.surface.default }}>
       {/* Top bar: the pocketNovena name, then Calendar and Search buttons. */}
       <HomeAppBar raised={scrolled} onCalendar={() => router.push('/calendar')} onSearch={() => router.push('/search')} />
       <ScrollView scrollEventThrottle={16} onScroll={(e) => { const s = e.nativeEvent.contentOffset.y > 2; if (s !== scrolled) setScrolled(s); }} contentContainerStyle={{ paddingTop: 12, paddingBottom: 140, gap: 32 }}>
