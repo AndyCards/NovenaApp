@@ -20,6 +20,7 @@ const style = (fontFamily: string, fontSize: number, lineHeight: number): TextSt
 export const type = {
   headingH1: style(fonts.bold, 24, 31),
   headingH2: style(fonts.bold, 20, 26),
+  titleDialog: style(fonts.bold, 18, 26),
   titleCard: style(fonts.semibold, 18, 24),
   titleQuote: style(fonts.semibold, 18, 22),
   titleSection: style(fonts.semibold, 16, 23),
