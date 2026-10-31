@@ -11,12 +11,13 @@ import { SegmentedControl } from '@/components/inputs/SegmentedControl';
 import { AlertCard, type AlertKind } from '@/components/overlays/AlertCard';
 import { CardMenu } from '@/components/overlays/CardMenu';
 import { Toast } from '@/components/overlays/Toast';
-import { colors, screenMargin } from '@/constants/theme';
+import { colors, radius, screenMargin, stroke } from '@/constants/theme';
 import { type } from '@/constants/typography';
 import { strings } from '@/copy/strings';
 import { useCatalog } from '@/hooks/useCatalog';
 import { useLibrary } from '@/hooks/useLibrary';
-import { formatRange } from '@/utils/dateUtils';
+import { formatRange, todayString } from '@/utils/dateUtils';
+import { dueDay } from '@/utils/dayRules';
 
 type Tab = 'active' | 'completed' | 'saved';
 const L = strings.library;
@@ -40,10 +41,11 @@ export default function Library() {
   const [alert, setAlert] = useState<AlertKind | null>(null);
   const [toast, setToast] = useState<{ message: string; undo: () => void } | null>(null);
   const run = lib.runs.find((r) => r.id === menuRun);
+  const prayedToday = (r: { startedOn: string; prayedDays: number[] }) => r.prayedDays.includes(dueDay(r.startedOn, todayString()));
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.surface.page }}>
-      <View style={{ padding: screenMargin }}>
+    <SafeAreaView edges={['top']} style={{ flex: 1, backgroundColor: colors.surface.page }}>
+      <View style={{ paddingHorizontal: screenMargin, paddingTop: 8, paddingBottom: 16 }}>
         <SegmentedControl<Tab>
           value={tab}
           onChange={setTab}
@@ -54,15 +56,17 @@ export default function Library() {
           ]}
         />
       </View>
-      <ScrollView contentContainerStyle={{ paddingHorizontal: screenMargin, paddingBottom: 140, gap: 10 }}>
+      <ScrollView contentContainerStyle={{ paddingHorizontal: screenMargin, paddingBottom: 140, gap: 12 }}>
         {tab === 'active' && (lib.active.length === 0
           ? <Empty title={L.emptyActiveTitle} body={L.emptyActiveBody} cta={L.emptyActiveCta} onPress={() => router.push('/')} />
           : lib.active.map((r) => {
               const n = novenaById(r.novenaId);
               return n && (
-                <ActiveNovenaCard key={r.id} novena={n} day={r.continueDay} paused={r.status === 'paused'}
+                <ActiveNovenaCard key={r.id} novena={n} paused={r.status === 'paused'}
+                  day={prayedToday(r) ? dueDay(r.startedOn, todayString()) : r.continueDay}
+                  prayedToday={prayedToday(r)}
                   onOpen={() => router.push(`/novena/${n.id}`)}
-                  onPray={() => router.push(`/reader/${r.id}/${r.continueDay}`)}
+                  onPray={() => (prayedToday(r) ? router.push(`/novena/${n.id}`) : router.push(`/reader/${r.id}/${r.continueDay}`))}
                   onMenu={() => setMenuRun(r.id)} />
               );
             }))}
@@ -78,10 +82,20 @@ export default function Library() {
             }))}
         {tab === 'saved' && (lib.saved.length === 0
           ? <Empty title={L.emptySavedTitle} body={L.emptySavedBody} cta={L.emptySavedCta} onPress={() => router.push('/')} />
-          : lib.saved.map((id) => {
-              const n = novenaById(id);
-              return n && <SavedRow key={id} novena={n} onPress={() => router.push(`/novena/${id}`)} />;
-            }))}
+          : (
+            <View style={{ borderRadius: radius.m, borderWidth: stroke.hairline, borderColor: colors.border.default, overflow: 'hidden' }}>
+              {lib.saved.map((id, i) => {
+                const n = novenaById(id);
+                return n && (
+                  <View key={id}>
+                    {i > 0 ? <View style={{ height: stroke.hairline, backgroundColor: colors.border.subtle }} /> : null}
+                    <SavedRow novena={n} onPress={() => router.push(`/novena/${id}`)}
+                      onUnsave={async () => { await lib.unsave(id); setToast({ message: L.removedFromSaved, undo: () => lib.undoUnsave(id) }); }} />
+                  </View>
+                );
+              })}
+            </View>
+          ))}
       </ScrollView>
 
       <CardMenu
