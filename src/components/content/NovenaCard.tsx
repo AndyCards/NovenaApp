@@ -12,7 +12,7 @@ export function NovenaCard({ novena, onPress, width = 126 }: { novena: Novena; o
     <PressableScale scaleTo={pressScale.card} accessibilityRole="button" accessibilityLabel={`${novena.title}. ${novena.tagline}`} onPress={onPress} style={{ width, gap: 6 }}>
       <NovenaImage image={novena.image} label={novena.title} style={{ width, height: 160, borderRadius: radius.xs }} />
       <View style={{ gap: 2 }}>
-        <Text style={[type.titleMedium, { color: colors.text.tertiary }]}>{novena.title}</Text>
+        <Text style={[type.titleMedium, { color: colors.text.secondary }]}>{novena.title}</Text>
         <Text numberOfLines={3} style={[type.bodyMedium, { color: colors.text.secondary }]}>{novena.tagline}</Text>
       </View>
     </PressableScale>
