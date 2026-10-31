@@ -2,7 +2,7 @@
 // "Home · First-time user" (1227:56592) and "Home · Returning user · Continue praying" (1227:56659).
 // Sections after the top ones come from the catalog's collections, so Home can be re-themed from the Excel sheet.
 import { useRouter } from 'expo-router';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ScrollView, View, useWindowDimensions, type NativeScrollEvent, type NativeSyntheticEvent } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { CarouselIndicator } from '@/components/content/CarouselIndicator';
@@ -66,6 +66,23 @@ export default function Home() {
   const continueWidth = width - 50; // 340 on a 390pt screen; the next card peeks in
   const featuredWidth = width - 2 * screenMargin;
 
+  // The featured cards slide along by themselves every few seconds, and loop back to the first.
+  // If the person touches the row, it stays still for a while so it never fights their finger.
+  const featuredRef = useRef<{ scrollTo: (o: { x: number; animated?: boolean }) => void } | null>(null);
+  const featuredCount = featured ? novenasOf(featured).length : 0;
+  const pausedUntil = useRef(0);
+  const nextPage = useRef(0);
+  useEffect(() => {
+    if (!returning || featuredCount < 2) return;
+    const timer = setInterval(() => {
+      if (Date.now() < pausedUntil.current) return;
+      nextPage.current = (nextPage.current + 1) % featuredCount;
+      featuredRef.current?.scrollTo({ x: nextPage.current * (featuredWidth + 10), animated: true });
+      setFeaturedPage(nextPage.current + 1);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [returning, featuredCount, featuredWidth]);
+
   // Draws one section. "list" sections show tall rows going down; other sections show cards you swipe sideways.
   const renderCollection = (c: Collection, index: number, layout = c.layout ?? 'cards') => (
     <Reveal key={c.id} index={index} style={{ gap: 10 }}>
@@ -122,8 +139,9 @@ export default function Home() {
                 {/* The big featured cards with the "Start Novena" button. */}
                 <SectionHeader title={featured.title} subtitle={featured.subtitle} />
                 <View style={{ gap: 6, paddingBottom: 6 }}>
-                  <ScrollView horizontal showsHorizontalScrollIndicator={false} snapToInterval={featuredWidth + 10} decelerationRate="fast"
-                    onMomentumScrollEnd={(e) => setFeaturedPage(pageFrom(e, featuredWidth + 10))}
+                  <ScrollView ref={(r) => { featuredRef.current = r; }} horizontal showsHorizontalScrollIndicator={false} snapToInterval={featuredWidth + 10} decelerationRate="fast"
+                    onScrollBeginDrag={() => { pausedUntil.current = Date.now() + 8000; }}
+                    onMomentumScrollEnd={(e) => { const page = pageFrom(e, featuredWidth + 10); nextPage.current = page - 1; setFeaturedPage(page); }}
                     contentContainerStyle={{ paddingHorizontal: screenMargin, paddingVertical: 8, gap: 10 }}>
                     {novenasOf(featured).map((n) => (
                       <FeaturedNovenaCard key={n.id} novena={n} width={featuredWidth} onPress={() => open(n)} onStart={() => startNovena(n)} />
