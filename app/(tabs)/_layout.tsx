@@ -1,5 +1,5 @@
 // The three tabs at the bottom: Library, Discover, Reminders.
-import { Tabs } from 'expo-router';
+import { Tabs } from 'expo-router/js-tabs';
 import { TabBar } from '@/components/navigation/TabBar';
 
 export default function TabsLayout() {

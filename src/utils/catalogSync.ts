@@ -1,5 +1,5 @@
 // Checks for new content. The app always starts from the bundled catalog and keeps the last good copy.
-import * as FileSystem from 'expo-file-system';
+import * as FileSystem from 'expo-file-system/legacy';
 import { parseCatalog } from '@/content/schema';
 import type { Catalog } from '@/content/types';
 import { CATALOG_URL, VERSION_URL } from '@/constants/config';

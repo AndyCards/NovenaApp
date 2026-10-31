@@ -1,5 +1,5 @@
 // Glass bottom bar: Library · Discover · Reminders.
-import type { BottomTabBarProps } from '@react-navigation/bottom-tabs';
+import type { BottomTabBarProps } from 'expo-router/js-tabs';
 import { BlurView } from 'expo-blur';
 import { AccessibilityInfo, View } from 'react-native';
 import { useEffect, useState } from 'react';

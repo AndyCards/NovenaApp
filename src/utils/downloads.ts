@@ -1,5 +1,5 @@
 // Save a novena's audio on the phone for offline listening.
-import * as FileSystem from 'expo-file-system';
+import * as FileSystem from 'expo-file-system/legacy';
 import { audioUrl } from '@/constants/config';
 import { deleteDownload, saveDownload } from '@/data/queries';
 
