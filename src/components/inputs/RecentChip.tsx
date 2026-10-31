@@ -3,10 +3,12 @@ import { Pressable, Text, View } from 'react-native';
 import { colors, radius, stroke } from '@/constants/theme';
 import { type } from '@/constants/typography';
 import { Icon } from '../Icon';
+import { PressableScale } from '@/motion/PressableScale';
+import { pressScale } from '@/motion/tokens';
 
 export function RecentChip({ label, onPress, onRemove }: { label: string; onPress: () => void; onRemove?: () => void }) {
   return (
-    <Pressable accessibilityRole="button" accessibilityLabel={`Search ${label}`} onPress={onPress}
+    <PressableScale scaleTo={pressScale.icon} accessibilityRole="button" accessibilityLabel={`Search ${label}`} onPress={onPress}
       style={{ height: 34, flexDirection: 'row', alignItems: 'center', gap: 8, paddingLeft: 12, paddingRight: onRemove ? 8 : 12, borderRadius: radius.full, borderWidth: stroke.hairline * 2, borderColor: colors.border.default, backgroundColor: colors.surface.default }}>
       <Text style={[type.labelChip, { color: colors.text.body }]}>{label}</Text>
       {onRemove ? (
@@ -16,6 +18,6 @@ export function RecentChip({ label, onPress, onRemove }: { label: string; onPres
           </View>
         </Pressable>
       ) : null}
-    </Pressable>
+    </PressableScale>
   );
 }
