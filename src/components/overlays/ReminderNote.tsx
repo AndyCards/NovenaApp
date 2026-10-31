@@ -1,3 +1,4 @@
+// A small grey note box, for example "Reminders are off. Turn on notifications in Settings".
 import { Text, View } from 'react-native';
 import { colors, radius, screenMargin, space } from '@/constants/theme';
 import { type } from '@/constants/typography';

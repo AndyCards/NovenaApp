@@ -1,3 +1,4 @@
+// One step (title and short line) inside the "How a novena works" card on Home.
 import { Text, View } from 'react-native';
 import { colors, space } from '@/constants/theme';
 import { type } from '@/constants/typography';

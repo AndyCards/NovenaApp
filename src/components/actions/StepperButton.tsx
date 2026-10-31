@@ -1,3 +1,4 @@
+// The little round arrow buttons that move to the previous or next day ("‹ Day 1 of 9 ›").
 import { Pressable } from 'react-native';
 import { colors } from '@/constants/theme';
 import { Icon } from '../Icon';

@@ -1,3 +1,5 @@
+// The search engine. It compares what the person typed with each novena's title, saint, tags and
+// categories, gives each a score, and returns the best matches first.
 import type { Catalog, Novena } from '@/content/types';
 
 /** Lowercase and strip accents so "Thérèse" matches "therese". */

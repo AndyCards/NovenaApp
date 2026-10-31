@@ -1,3 +1,4 @@
+// A saint's round picture. If there is no picture, it shows the saint's initials instead.
 import { Image } from 'expo-image';
 import { Text, View } from 'react-native';
 import { colors } from '@/constants/theme';

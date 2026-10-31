@@ -41,9 +41,11 @@ export default function Reader() {
   const novena = run ? novenaById(run.novenaId) : undefined;
   const dayNo = Number(day);
   const [intentionText, setIntentionText] = useState('');
+  // Which pop-up is open right now: the … menu, the intention (view or edit), or "Continue another time?".
   const [popup, setPopup] = useState<'none' | 'menu' | 'intention-view' | 'intention-edit' | 'pause'>('none');
   const [download, setDownload] = useState<DownloadStatus>({ kind: 'none' });
 
+  // Load the person's saved intention, and whether this novena's audio is already downloaded.
   useEffect(() => { if (runId) getIntention(runId).then(setIntentionText); }, [runId]);
   useEffect(() => {
     if (novena) getDownload(novena.id).then((d) => setDownload(d?.status === 'complete' ? { kind: 'done' } : { kind: 'none' }));
@@ -54,31 +56,38 @@ export default function Reader() {
   const alreadyPrayed = run.prayedDays.includes(dayNo);
   const close = () => setPopup('none');
 
+  // "Mark Day N as prayed": save it, refresh, then show the "Day N marked as prayed" screen.
   const finish = async () => {
     await markPrayed(run.id, dayNo, run.startedOn, run.prayedDays);
     await lib.refresh();
     router.replace(`/prayed/${run.id}/${dayNo}`);
   };
+  // No intention written yet? Open the box to write one. Otherwise show it.
   const openIntention = () => setPopup(intentionText.trim() ? 'intention-view' : 'intention-edit');
 
   return (
     <SafeAreaView edges={['top', 'bottom']} style={{ flex: 1, backgroundColor: colors.surface.default }}>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: screenMargin + 2, paddingVertical: 6 }}>
+        {/* Back asks "Continue another time?" if today's day isn't marked as prayed yet. … opens the menu. */}
         <NavButton icon="back" label={strings.common.back} onPress={() => (alreadyPrayed ? router.back() : setPopup('pause'))} />
         <NavButton icon="more" label={strings.common.more} onPress={() => setPopup('menu')} />
       </View>
 
       <View style={{ flex: 1 }}>
         <ScrollView contentContainerStyle={{ paddingTop: 6, paddingHorizontal: 22, gap: 24, paddingBottom: 72 }}>
+          {/* "Day 1 of 9" with the cross, then the prayer itself, then the mark-as-prayed button. */}
           <ChapterTitle title={strings.reader.dayOf(dayNo, novena.days.length)} />
           <PrayerPassage blocks={content.blocks} onViewIntention={openIntention} />
           <Button label={alreadyPrayed ? strings.novena.prayedDay(dayNo) : strings.reader.markPrayed(dayNo)} icon="handsPraying" disabled={alreadyPrayed} onPress={finish} />
         </ScrollView>
+        {/* Soft white fades at the top and bottom edges so text gently disappears as you scroll. */}
         <LinearGradient pointerEvents="none" colors={['#FFFFFF', 'rgba(255,255,255,0)']} style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 12 }} />
         <LinearGradient pointerEvents="none" colors={['rgba(255,255,255,0)', '#FFFFFF']} style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 46 }} />
       </View>
+      {/* The audio player appears here only after the person chooses Listen. It never plays by itself. */}
       <AudioDock inline />
 
+      {/* The … menu: change day, Listen / Read only, save, download, share, view intention. */}
       <ReaderOptionsMenu
         visible={popup === 'menu'}
         day={dayNo}

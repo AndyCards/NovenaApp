@@ -1,3 +1,4 @@
+// Checks whether the phone is online by trying to reach a small web address. Used to show offline messages.
 import { useEffect, useState } from 'react';
 
 /** Simple online check: asks the content server for its tiny version file. */

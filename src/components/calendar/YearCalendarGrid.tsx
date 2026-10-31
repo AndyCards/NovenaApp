@@ -1,3 +1,4 @@
+// The year view of the Calendar: twelve small month cards, three per row. Tapping one opens that month.
 import { View } from 'react-native';
 import { screenMargin } from '@/constants/theme';
 import { MonthCard } from './MonthCard';

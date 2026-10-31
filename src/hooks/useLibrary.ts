@@ -1,3 +1,5 @@
+// One place for the Library's data: novenas being prayed, finished ones, and saved ones,
+// plus the actions to save, unsave, pause, resume, restart or remove them.
 import { useCallback, useEffect, useState } from 'react';
 import { listSaved, saveNovena, undoUnsave, unsaveNovena } from '@/data/queries';
 import { useRuns } from './useNovenaRun';

@@ -34,6 +34,7 @@ export default function CalendarScreen() {
   const [year, setYear] = useState(now.getFullYear());
   const [month0, setMonth0] = useState(now.getMonth()); // 0 = January
 
+  // Saints whose feast falls in the month on screen, looked up by day number for the grid.
   const feasts = feastsInMonth(catalog, year, month0 + 1);
   const feastByDay = new Map(feasts.map((f) => [Number(f.feastDate.slice(8, 10)), f]));
 
@@ -45,6 +46,7 @@ export default function CalendarScreen() {
   const weeks = Array.from({ length: cells.length / 7 }, (_, r) => cells.slice(r * 7, r * 7 + 7));
   const isThisMonth = year === now.getFullYear() && month0 === now.getMonth();
 
+  // The ‹ › arrows move one month back or forward (and across years).
   const shiftMonth = (delta: number) => {
     const d = new Date(year, month0 + delta, 1);
     setYear(d.getFullYear());
@@ -76,6 +78,7 @@ export default function CalendarScreen() {
             </View>
             {weeks.map((week, i) => (
               <View key={i} style={{ flexDirection: 'row', borderTopWidth: stroke.hairline, borderColor: colors.border.subtle }}>
+                {/* Each day: today gets a dark circle; a feast day shows the saint's picture and opens their novena. */}
                 {week.map((day, j) => {
                   const feast = day === null ? undefined : feastByDay.get(day);
                   return (

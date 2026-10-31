@@ -1,3 +1,4 @@
+// A grey card that shows what the person wrote as their prayer intention (older layout, kept for reuse).
 import { Pressable, Text } from 'react-native';
 import { colors, radius, screenMargin, space } from '@/constants/theme';
 import { type } from '@/constants/typography';

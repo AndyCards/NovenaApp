@@ -7,8 +7,10 @@ import { colors } from '@/constants/theme';
 import { CatalogProvider } from '@/hooks/useCatalog';
 
 export default function RootLayout() {
+  // Load the two typefaces first (Figtree for the app, Source Serif for prayers). Show nothing until they are ready.
   const [loaded] = useFonts({ Figtree_400Regular, Figtree_500Medium, Figtree_600SemiBold, Figtree_700Bold, SourceSerif4_400Regular, SourceSerif4_600SemiBold });
   if (!loaded) return null;
+  // Make the novena list available to every screen, then show whichever screen the person is on.
   return (
     <CatalogProvider>
       <StatusBar style="dark" />

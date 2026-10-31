@@ -36,6 +36,7 @@ export default function DayPrayed() {
   const { novenaById } = useCatalog();
   const lib = useLibrary();
   const [reminder, setReminder] = useState<string | null>(null);
+  // Find out if daily reminders are on, to show "We will gently remind you tomorrow at …".
   useEffect(() => { getReminderSettings().then((s) => setReminder(s.enabled ? s.time : null)); }, []);
   const run = lib.runs.find((r) => r.id === runId);
   const novena = run ? novenaById(run.novenaId) : undefined;
@@ -43,6 +44,7 @@ export default function DayPrayed() {
   const dayNo = Number(day);
   const total = novena.days.length;
   // Five days centred on the one just prayed, kept inside 1..9.
+  // Pick five days to show in the strip, keeping the one just prayed in the middle where possible.
   const first = Math.max(1, Math.min(dayNo - 2, total - 4));
   const strip = Array.from({ length: Math.min(5, total) }, (_, i) => first + i);
 
@@ -66,6 +68,7 @@ export default function DayPrayed() {
         </View>
       </View>
       <View style={{ paddingHorizontal: screenMargin, paddingBottom: 8, gap: 10 }}>
+        {/* The reminder note (not shown after the last day), then the Share button. */}
         {dayNo < total ? (
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12, paddingHorizontal: 14, paddingVertical: 12, borderRadius: radius.m, borderWidth: 0.6, borderColor: colors.border.default }}>
             <Icon name="bell" size={20} color={colors.text.secondary} />

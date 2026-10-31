@@ -1,3 +1,4 @@
+// One tappable line inside a pop-up menu, with an optional icon.
 import { Pressable, Text } from 'react-native';
 import { colors, space } from '@/constants/theme';
 import { type } from '@/constants/typography';

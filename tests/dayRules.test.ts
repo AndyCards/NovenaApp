@@ -1,3 +1,4 @@
+// Automatic checks for the day rules (which day is due, which are missed, when a novena is complete).
 import { continueDay, dayState, dueDay, isCompleted, isLate, missedDays, nextDayInOrder } from '../src/utils/dayRules';
 
 const start = '2026-10-01';

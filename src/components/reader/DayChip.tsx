@@ -1,3 +1,4 @@
+// A small round day number that shows whether that day was prayed, missed, is today, or is still to come.
 import { Pressable, Text } from 'react-native';
 import { colors, radius } from '@/constants/theme';
 import { type } from '@/constants/typography';

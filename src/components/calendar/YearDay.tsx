@@ -1,3 +1,4 @@
+// One tiny day number inside a small month card in the year view. Today gets a dark circle.
 import { Text, View } from 'react-native';
 import { colors } from '@/constants/theme';
 import { type } from '@/constants/typography';

@@ -1,3 +1,5 @@
+// Feast-day maths: the date of each saint's feast this year, the day their novena should start
+// (nine days before), and the list of feasts in a given month or coming up soon.
 import { addDays, parseISO } from 'date-fns';
 import type { Catalog, Novena, Saint } from '@/content/types';
 import { NOVENA_LENGTH } from '@/constants/config';

@@ -1,3 +1,5 @@
+// What happens when someone taps "Mark Day N as prayed": the day is stored, and if it was the
+// last day the whole novena is marked complete.
 import { markDayPrayed, setRunStatus } from '@/data/queries';
 import { todayString } from '@/utils/dateUtils';
 import { isCompleted, isLate } from '@/utils/dayRules';

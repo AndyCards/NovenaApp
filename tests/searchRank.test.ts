@@ -1,3 +1,4 @@
+// Automatic checks that search finds the right novenas and ranks them sensibly.
 import { normalize, searchNovenas } from '../src/utils/searchRank';
 import type { Catalog } from '../src/content/types';
 

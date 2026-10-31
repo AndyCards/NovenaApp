@@ -1,3 +1,4 @@
+// Automatic checks that reminders are planned for the right days and times, and skip quiet hours.
 import { inQuietHours, planReminders } from '../src/utils/reminderPlanner';
 
 const settings = { enabled: true, time: '08:00', weekdays: 127, missedDayNote: true, quietStart: '22:00', quietEnd: '07:00' };

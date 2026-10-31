@@ -1,3 +1,5 @@
+// Gives every screen the list of novenas, saints and categories (the "catalog").
+// It starts from the copy bundled inside the app, then swaps in a newer one if one was downloaded.
 import { createContext, createElement, useContext, useEffect, useState, type ReactNode } from 'react';
 import type { Catalog, Novena, Saint } from '@/content/types';
 import { checkForNewCatalog, loadCatalog } from '@/utils/catalogSync';

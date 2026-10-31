@@ -1,3 +1,5 @@
+// Holds what the person typed in Search, the chosen filter, the matching novenas, suggestions
+// and the list of recent searches.
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { addRecentSearch, clearRecentSearches, deleteRecentSearch, listRecentSearches } from '@/data/queries';
 import { searchNovenas, suggestionsFor } from '@/utils/searchRank';

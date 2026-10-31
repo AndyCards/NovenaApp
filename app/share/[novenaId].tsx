@@ -15,6 +15,7 @@ export default function Share() {
   const { novenaId } = useLocalSearchParams<{ novenaId: string }>();
   const router = useRouter();
   const { novenaById } = useCatalog();
+  // The card below is turned into a picture when Share is tapped. The person's intention is never on it.
   const ref = useRef<ComponentRef<typeof View>>(null);
   const novena = novenaById(novenaId);
   if (!novena) return null;

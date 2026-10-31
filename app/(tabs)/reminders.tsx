@@ -32,6 +32,7 @@ export default function Reminders() {
   const { settings, permission, update } = useReminders();
   const [picking, setPicking] = useState(false);
   if (!settings) return null;
+  // Turning a weekday on or off. The days are stored as one number where each day is one "switch".
   const toggleDay = (i: number) => update({ weekdays: settings.weekdays ^ (1 << i) });
   // Quiet hours are "off" when start equals end (an empty window).
   const quietOn = settings.quietStart !== settings.quietEnd;
@@ -48,6 +49,7 @@ export default function Reminders() {
       <ScrollView contentContainerStyle={{ paddingTop: 8, paddingBottom: 140, gap: 24 }}>
         {!permission && <View style={{ paddingHorizontal: screenMargin }}><ReminderNote text="Reminders are off. Turn on notifications in Settings to get a gentle nudge." /></View>}
         <View style={{ gap: 10 }}>
+          {/* First card: the daily reminder switch, the time (tap to change), and which weekdays. */}
           <Header title={R.title} />
           <Card>
             <SettingRow icon="clock" title={R.daily} body={R.dailyBody}
@@ -69,6 +71,7 @@ export default function Reminders() {
           </Card>
         </View>
         <View style={{ gap: 10 }}>
+          {/* Second card: a note after a missed day, feast-day suggestions, and quiet hours. */}
           <Header title={R.extras} />
           <Card>
             <SettingRow icon="sun" title={R.missedNote} body={R.missedNoteBody}

@@ -43,6 +43,8 @@ export default function Search() {
   const { q, category } = useLocalSearchParams<{ q?: string; category?: string }>();
   const { catalog } = useCatalog();
   const s = useSearch();
+  // "submitted" means the person pressed search (or picked a suggestion), so we show full results.
+  // While they are still typing we show suggestions instead. A category comes from tapping an intention tile.
   const [submitted, setSubmitted] = useState(!!q);
   const [categoryId, setCategoryId] = useState(category);
   useEffect(() => { if (q) s.submit(q); }, [q]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -56,6 +58,7 @@ export default function Search() {
   const results = typing ? s.results : byCategory;
   const label = typing ? s.query : cat?.name ?? '';
 
+  // Pressing search, or tapping a suggestion or recent search.
   const submit = (text: string) => { setCategoryId(undefined); setSubmitted(true); s.submit(text); };
   const change = (text: string) => { setSubmitted(false); setCategoryId(undefined); s.setQuery(text); };
 
@@ -69,6 +72,7 @@ export default function Search() {
       </View>
 
       <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={{ paddingBottom: 140 }}>
+        {/* Under the search box: filter chips (All, By intention…) or, while typing, the recent searches. */}
         {showResults || !typing ? (
           <ScrollView horizontal showsHorizontalScrollIndicator={false} keyboardShouldPersistTaps="handled" contentContainerStyle={{ gap: 8, paddingHorizontal: screenMargin, paddingVertical: 8 }}>
             {(Object.keys(S.filters) as SearchFilter[]).map((f) => (
@@ -81,6 +85,7 @@ export default function Search() {
           </ScrollView>
         ) : null}
 
+        {/* Results: "3 novenas for 'anxiety'" then one row per novena. Nothing found? A gentle message. */}
         {showResults ? (
           results.length > 0 ? (
             <>

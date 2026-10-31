@@ -40,12 +40,15 @@ export default function Library() {
   const [menuRun, setMenuRun] = useState<string | null>(null);
   const [alert, setAlert] = useState<AlertKind | null>(null);
   const [toast, setToast] = useState<{ message: string; undo: () => void } | null>(null);
+  // Which novena's "…" menu is open, and the pop-up / undo message being shown (if any).
   const run = lib.runs.find((r) => r.id === menuRun);
+  // True when today's day of this novena has already been prayed (the button then turns light with a tick).
   const prayedToday = (r: { startedOn: string; prayedDays: number[] }) => r.prayedDays.includes(dueDay(r.startedOn, todayString()));
 
   return (
     <SafeAreaView edges={['top']} style={{ flex: 1, backgroundColor: colors.surface.page }}>
       <View style={{ paddingHorizontal: screenMargin, paddingTop: 8, paddingBottom: 16 }}>
+        {/* The Active / Completed / Saved switch at the top, with how many are in each. */}
         <SegmentedControl<Tab>
           value={tab}
           onChange={setTab}
@@ -57,6 +60,7 @@ export default function Library() {
         />
       </View>
       <ScrollView contentContainerStyle={{ paddingHorizontal: screenMargin, paddingBottom: 140, gap: 12 }}>
+        {/* Active tab: one card per novena being prayed. Empty? A friendly message and a button to find one. */}
         {tab === 'active' && (lib.active.length === 0
           ? <Empty title={L.emptyActiveTitle} body={L.emptyActiveBody} cta={L.emptyActiveCta} onPress={() => router.push('/')} />
           : lib.active.map((r) => {
@@ -70,6 +74,7 @@ export default function Library() {
                   onMenu={() => setMenuRun(r.id)} />
               );
             }))}
+        {/* Completed tab: finished novenas with their dates and "Pray it again". */}
         {tab === 'completed' && (lib.completed.length === 0
           ? <Empty title={L.emptyCompletedTitle} body={L.emptyCompletedBody} cta={L.emptyCompletedCta} onPress={() => setTab('active')} />
           : lib.completed.map((r) => {
@@ -80,6 +85,7 @@ export default function Library() {
                   onPrayAgain={() => { setMenuRun(r.id); setAlert({ kind: 'prayAgain' }); }} />
               );
             }))}
+        {/* Saved tab: novenas saved for later, in one card. Tap the bookmark to unsave (with Undo). */}
         {tab === 'saved' && (lib.saved.length === 0
           ? <Empty title={L.emptySavedTitle} body={L.emptySavedBody} cta={L.emptySavedCta} onPress={() => router.push('/')} />
           : (
@@ -98,6 +104,7 @@ export default function Library() {
           ))}
       </ScrollView>
 
+      {/* The "…" menu on an active novena: pause or resume, start again, or remove. */}
       <CardMenu
         visible={!!menuRun && !alert}
         paused={run?.status === 'paused'}
@@ -107,6 +114,7 @@ export default function Library() {
         onRestart={() => setAlert({ kind: 'prayAgain' })}
         onRemove={() => setAlert({ kind: 'remove' })}
       />
+      {/* Confirmation pop-ups ("Start again?", "Remove novena?") and what happens when you agree. */}
       <AlertCard
         alert={alert}
         onClose={() => { setAlert(null); setMenuRun(null); }}

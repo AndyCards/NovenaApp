@@ -1,3 +1,5 @@
+// Reads and changes the reminder settings (time, weekdays, extras) and re-plans the phone's
+// notifications every time something changes.
 import { useCallback, useEffect, useState } from 'react';
 import { getReminderSettings, saveReminderSettings } from '@/data/queries';
 import { ensurePermission, permissionGranted, rescheduleReminders } from '@/utils/notifications';

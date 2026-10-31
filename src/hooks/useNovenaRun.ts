@@ -1,3 +1,5 @@
+// Loads every novena the person has started (a "run") and works out, for each one, which days were
+// prayed, which were missed, and which day to continue with today.
 import { useCallback, useEffect, useState } from 'react';
 import { listAllCompletions, listRuns, setRunStatus, softRemoveRun, startRun, undoRemoveRun } from '@/data/queries';
 import { todayString } from '@/utils/dateUtils';

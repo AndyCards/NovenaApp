@@ -1,3 +1,5 @@
+// A round button that shows just an icon (for example Back, Share or More).
+// It always has a spoken label so screen readers can say what it does.
 import { Pressable } from 'react-native';
 import { colors, minTouchTarget, stroke } from '@/constants/theme';
 import { Icon, type IconName } from '../Icon';

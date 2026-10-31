@@ -1,3 +1,4 @@
+// The small round × button that empties a search box or removes a chip.
 import { Pressable } from 'react-native';
 import { colors } from '@/constants/theme';
 import { Icon } from '../Icon';
