@@ -16,7 +16,7 @@ const r = strings.reader;
 export function PopupCard(p: Props) {
   if (p.type === 'pause') {
     return (
-      <FloatingCard visible={p.visible} onClose={p.onClose} title={r.pauseTitle}>
+      <FloatingCard visible={p.visible} onClose={p.onClose} title={r.pauseTitle} icon="pause">
         <Text style={[type.bodyLarge, { color: colors.text.secondary, textAlign: 'center', marginTop: -12, paddingHorizontal: 12 }]}>{r.pauseBody}</Text>
         <View style={{ gap: 10, marginTop: 20 }}>
           <Button label={r.pauseLeave} variant="secondary" onPress={p.onLeave} />
@@ -27,7 +27,7 @@ export function PopupCard(p: Props) {
   }
   if (p.type === 'intention-edit') {
     return (
-      <FloatingCard visible={p.visible} onClose={p.onClose} title={r.intentionTitle} subtitle={p.novenaTitle}>
+      <FloatingCard visible={p.visible} onClose={p.onClose} title={r.intentionTitle} subtitle={p.novenaTitle} icon="heart">
         <TextInput
           accessibilityLabel={r.intentionTitle}
           multiline
@@ -46,7 +46,7 @@ export function PopupCard(p: Props) {
     );
   }
   return (
-    <FloatingCard visible={p.visible} onClose={p.onClose} title={r.intentionTitle} subtitle={p.novenaTitle}>
+    <FloatingCard visible={p.visible} onClose={p.onClose} title={r.intentionTitle} subtitle={p.novenaTitle} icon="heart">
       <Pressable accessibilityRole="button" accessibilityHint="Edit your intention" onPress={p.onEdit} style={{ paddingTop: 14, paddingBottom: 12, paddingLeft: 12, paddingRight: 19 }}>
         <Text style={[type.titleQuote, { color: colors.text.primary, textAlign: 'center' }]}>{`“${p.value}”`}</Text>
       </Pressable>
