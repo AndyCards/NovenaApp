@@ -1,4 +1,5 @@
 // Warnings and confirmations: missed days, novena complete, pray another, remove, pray again.
+import { useEffect } from 'react';
 import { Text, View } from 'react-native';
 import { colors } from '@/constants/theme';
 import { type } from '@/constants/typography';
@@ -6,6 +7,7 @@ import { strings } from '@/copy/strings';
 import type { IconName } from '../Icon';
 import { Button } from '../actions/Button';
 import { FloatingCard } from './FloatingCard';
+import { haptics } from '@/motion/haptics';
 
 export type AlertKind =
   | { kind: 'missed'; days: number; continueDay: number }
@@ -17,6 +19,9 @@ export type AlertKind =
 type Props = { alert: AlertKind | null; onClose: () => void; onPrimary: () => void; onSecondary?: () => void };
 
 export function AlertCard({ alert, onClose, onPrimary, onSecondary }: Props) {
+  const kind = alert?.kind;
+  // A finished novena gets one calm success cue when the card appears.
+  useEffect(() => { if (kind === 'complete') haptics.success(); }, [kind]);
   if (!alert) return null;
   const a = strings.alerts;
   const content: { title: string; body: string; primary: string; secondary: string; icon: IconName } = (() => {
@@ -32,7 +37,7 @@ export function AlertCard({ alert, onClose, onPrimary, onSecondary }: Props) {
     <FloatingCard visible onClose={onClose} title={content.title} icon={content.icon}>
       <Text style={[type.bodyLarge, { color: colors.text.secondary, textAlign: 'center', marginTop: -12, paddingHorizontal: 12 }]}>{content.body}</Text>
       <View style={{ gap: 10, marginTop: 20 }}>
-        <Button label={content.secondary} variant="secondary" onPress={onSecondary ?? onClose} />
+        <Button label={content.secondary} variant="secondary" onPress={() => { if (alert.kind === 'remove') haptics.warning(); (onSecondary ?? onClose)(); }} />
         <Button label={content.primary} icon="handsPraying" onPress={onPrimary} />
       </View>
     </FloatingCard>

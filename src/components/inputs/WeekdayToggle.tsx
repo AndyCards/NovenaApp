@@ -8,6 +8,7 @@ import { colors } from '@/constants/theme';
 import { type } from '@/constants/typography';
 import { PressableScale } from '@/motion/PressableScale';
 import { duration, ease, pressScale } from '@/motion/tokens';
+import { haptics } from '@/motion/haptics';
 
 const AnimatedText = Animated.createAnimatedComponent(Text);
 
@@ -17,7 +18,7 @@ export function WeekdayToggle({ label, on, onPress }: { label: string; on: boole
   const fill = useAnimatedStyle(() => ({ opacity: p.value }));
   const text = useAnimatedStyle(() => ({ color: interpolateColor(p.value, [0, 1], [colors.text.body, colors.surface.raised]) }));
   return (
-    <PressableScale scaleTo={pressScale.icon} accessibilityRole="switch" accessibilityState={{ checked: on }} accessibilityLabel={label} onPress={onPress} style={{ flex: 1 }}>
+    <PressableScale scaleTo={pressScale.icon} accessibilityRole="switch" accessibilityState={{ checked: on }} accessibilityLabel={label} onPress={() => { haptics.tap(); onPress(); }} style={{ flex: 1 }}>
       <View style={{ height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', borderWidth: 0.5, borderColor: colors.border.subtle, overflow: 'hidden' }}>
         <LinearGradient colors={['#EFEFEF', '#FBFBFB']} style={StyleSheet.absoluteFill} />
         <Animated.View style={[StyleSheet.absoluteFill, { backgroundColor: colors.action.selected }, fill]} />

@@ -11,6 +11,7 @@ import { PressableScale } from '@/motion/PressableScale';
 import { duration, ease, pressScale } from '@/motion/tokens';
 import { NovenaImage } from '../content/NovenaImage';
 import { Icon } from '../Icon';
+import { haptics } from '@/motion/haptics';
 
 type Props = {
   state: Exclude<PlayerState, 'hidden'>;
@@ -43,7 +44,7 @@ function RoundButton({ icon, label: a11y, onPress }: { icon: 'play' | 'pause' | 
   const playIcon = useAnimatedStyle(() => ({ opacity: 1 - p.value, transform: [{ scale: 0.8 + 0.2 * (1 - p.value) }] }));
   const pauseIcon = useAnimatedStyle(() => ({ opacity: p.value, transform: [{ scale: 0.8 + 0.2 * p.value }] }));
   return (
-    <PressableScale scaleTo={pressScale.icon} accessibilityRole="button" accessibilityLabel={a11y} onPress={onPress} style={{ width: 44, height: 44, alignItems: 'center', justifyContent: 'center' }}>
+    <PressableScale scaleTo={pressScale.icon} accessibilityRole="button" accessibilityLabel={a11y} onPress={() => { haptics.tap(); onPress(); }} style={{ width: 44, height: 44, alignItems: 'center', justifyContent: 'center' }}>
       <View style={{ width: 42, height: 42, borderRadius: 21, borderWidth: 0.6, borderColor: colors.border.default, alignItems: 'center', justifyContent: 'center' }}>
         {toggles ? (
           <>
@@ -109,7 +110,7 @@ export function AudioPlayer({ state, title, image, positionSec, durationSec, lay
             onStartShouldSetResponder={() => !disabled && durationSec > 0}
             onResponderGrant={(e) => setScrub(fraction(e.nativeEvent.locationX))}
             onResponderMove={(e) => setScrub(fraction(e.nativeEvent.locationX))}
-            onResponderRelease={(e) => { const f = fraction(e.nativeEvent.locationX); setScrub(null); onSeek(f * durationSec); }}
+            onResponderRelease={(e) => { const f = fraction(e.nativeEvent.locationX); setScrub(null); haptics.tap(); onSeek(f * durationSec); }}
             onResponderTerminate={() => setScrub(null)}
             style={{ height: 24, justifyContent: 'center', marginRight: 4 }}>
             {/* The bar and knob ignore touches, so the finger position is measured across the whole bar. */}

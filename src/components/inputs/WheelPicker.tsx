@@ -3,6 +3,7 @@ import { useRef, useState } from 'react';
 import { NativeScrollEvent, NativeSyntheticEvent, Pressable, ScrollView, Text, View } from 'react-native';
 import { colors } from '@/constants/theme';
 import { type } from '@/constants/typography';
+import { haptics } from '@/motion/haptics';
 
 const ROW = 36;
 const VISIBLE = 5;
@@ -21,7 +22,7 @@ export function WheelPicker({ items, index, onChange, width = 72 }: Props) {
   };
   const track = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
     const i = Math.max(0, Math.min(items.length - 1, Math.round(e.nativeEvent.contentOffset.y / ROW)));
-    if (i !== live) setLive(i);
+    if (i !== live) { setLive(i); haptics.tap(); }
   };
 
   return (

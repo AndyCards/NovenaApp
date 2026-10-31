@@ -10,6 +10,7 @@ import { Icon } from '../Icon';
 import { NovenaImage } from './NovenaImage';
 import { PressableScale } from '@/motion/PressableScale';
 import { pressScale } from '@/motion/tokens';
+import { haptics } from '@/motion/haptics';
 
 type Props = { novena: Novena; day: number; prayedToday?: boolean; paused?: boolean; onOpen: () => void; onPray: () => void; onMenu: (anchorBottom: number) => void };
 
@@ -34,7 +35,7 @@ export function ActiveNovenaCard({ novena, day, prayedToday, paused, onOpen, onP
           </View>
           <Text numberOfLines={2} style={[type.titleMedium, { color: colors.text.secondary, paddingRight: 33 }]}>{novena.title}</Text>
         </View>
-        <PressableScale dimTo={0.92} accessibilityRole="button" accessibilityLabel={strings.novena.prayDay(nextDay)} onPress={onPray}
+        <PressableScale dimTo={0.92} accessibilityRole="button" accessibilityLabel={strings.novena.prayDay(nextDay)} onPress={() => { haptics.confirm(); onPray(); }}
           style={{ alignSelf: 'flex-start', flexDirection: 'row', alignItems: 'center', gap: 8, paddingLeft: 16, paddingRight: 18, paddingVertical: 13, borderRadius: radius.l,
             backgroundColor: done ? '#F2F2F2' : colors.action.primary }}>
           <Text style={[type.labelSmall, { fontSize: 15, color: done ? colors.text.secondary : colors.text.onAction }]}>{strings.novena.prayDay(nextDay)}</Text>

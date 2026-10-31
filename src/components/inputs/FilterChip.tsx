@@ -7,6 +7,7 @@ import { colors, radius, stroke } from '@/constants/theme';
 import { type } from '@/constants/typography';
 import { PressableScale } from '@/motion/PressableScale';
 import { duration, ease } from '@/motion/tokens';
+import { haptics } from '@/motion/haptics';
 
 const AnimatedText = Animated.createAnimatedComponent(Text);
 
@@ -19,7 +20,7 @@ export function FilterChip({ label, selected, onPress }: { label: string; select
   }));
   const text = useAnimatedStyle(() => ({ color: interpolateColor(p.value, [0, 1], [colors.text.body, colors.text.onAction]) }));
   return (
-    <PressableScale accessibilityRole="button" accessibilityState={{ selected }} accessibilityLabel={label} onPress={onPress}>
+    <PressableScale accessibilityRole="button" accessibilityState={{ selected }} accessibilityLabel={label} onPress={() => { if (!selected) haptics.tap(); onPress(); }}>
       <Animated.View style={[{ height: 36, justifyContent: 'center', paddingHorizontal: 14, borderRadius: radius.full, borderWidth: stroke.hairline * 2 }, chip]}>
         <AnimatedText style={[type.labelChip, text]}>{label}</AnimatedText>
       </Animated.View>

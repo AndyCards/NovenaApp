@@ -21,7 +21,7 @@ export function ActionBar({ primaryLabel, onPrimary, saved, onToggleSave }: Prop
           backgroundColor: pressed ? colors.surface.subtle : colors.surface.default, borderWidth: stroke.hairline, borderColor: colors.border.subtle, ...elevation.card })}>
         <Animated.View style={pulse}><Icon name="bookmark" size={28} weight={saved ? 'fill' : 'light'} /></Animated.View>
       </PressableScale>
-      <PressableScale dimTo={0.92} accessibilityRole="button" accessibilityLabel={primaryLabel} onPress={onPrimary} style={{ flex: 1 }}>
+      <PressableScale dimTo={0.92} accessibilityRole="button" accessibilityLabel={primaryLabel} onPress={() => { haptics.confirm(); onPrimary(); }} style={{ flex: 1 }}>
         <LinearGradient colors={colors.gradient.button} style={{ height: 50, borderRadius: radius.full, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
           <Text style={[type.labelLarge, { color: colors.text.onAction }]}>{primaryLabel}</Text>
           <Icon name="handsPraying" size={20} color={colors.text.onAction} />

@@ -7,6 +7,7 @@ import { colors, elevation, radius, screenMargin } from '@/constants/theme';
 import { type } from '@/constants/typography';
 import { strings } from '@/copy/strings';
 import { duration, ease } from '@/motion/tokens';
+import { haptics } from '@/motion/haptics';
 
 type Props = { message: string | null; onUndo?: () => void; onDismiss: () => void; durationMs?: number };
 
@@ -35,7 +36,7 @@ export function Toast({ message, onUndo, onDismiss, durationMs = 4000 }: Props) 
     <Animated.View entering={reduced ? undefined : toastIn} exiting={reduced ? undefined : toastOut} accessibilityLiveRegion="polite" style={[{ position: 'absolute', left: screenMargin, right: screenMargin, bottom: insets.bottom + 100, flexDirection: 'row', alignItems: 'center', minHeight: 50, paddingHorizontal: 20, paddingVertical: 14, borderRadius: radius.full, backgroundColor: colors.action.media }, elevation.card]}>
       <Text style={[type.bodyLarge, { flex: 1, color: colors.text.onAction }]}>{message}</Text>
       {onUndo ? (
-        <Pressable accessibilityRole="button" onPress={() => { onUndo(); onDismiss(); }} hitSlop={12}>
+        <Pressable accessibilityRole="button" onPress={() => { haptics.tap(); onUndo(); onDismiss(); }} hitSlop={12}>
           <Text style={[type.labelMedium, { color: colors.text.onAction }]}>{strings.library.undo}</Text>
         </Pressable>
       ) : null}

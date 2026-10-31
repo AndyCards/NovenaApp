@@ -130,7 +130,7 @@ export default function Home() {
               <SectionHeader title={strings.home.continueTitle} subtitle={strings.home.continueSubtitle} />
               <View style={{ gap: 6 }}>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false} snapToInterval={continueWidth + 10} decelerationRate="fast"
-                  onMomentumScrollEnd={(e) => setContinuePage(pageFrom(e, continueWidth + 10))}
+                  onMomentumScrollEnd={(e) => { const p = pageFrom(e, continueWidth + 10); if (p !== continuePage) haptics.tap(); setContinuePage(p); }}
                   contentContainerStyle={{ paddingHorizontal: screenMargin, paddingVertical: 6, gap: 10 }} style={{ marginVertical: -4 }}>
                   {active.map(({ run, novena }) => (
                     <ContinueCard key={run.id} novena={novena!} day={run.continueDay} missed={run.missed.length} width={continueWidth}
