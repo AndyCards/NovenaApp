@@ -2,11 +2,11 @@
 import { Tabs } from 'expo-router/js-tabs';
 import { TabBar } from '@/components/navigation/TabBar';
 
-export const unstable_settings = { initialRouteName: 'index' };
+export const unstable_settings = { anchor: 'index' };
 
 export default function TabsLayout() {
   return (
-    <Tabs tabBar={(p) => <TabBar {...p} />} screenOptions={{ headerShown: false }}>
+    <Tabs backBehavior="initialRoute" tabBar={(p) => <TabBar {...p} />} screenOptions={{ headerShown: false }}>
       <Tabs.Screen name="library" options={{ title: 'Library' }} />
       <Tabs.Screen name="index" options={{ title: 'Discover' }} />
       <Tabs.Screen name="reminders" options={{ title: 'Reminders' }} />
