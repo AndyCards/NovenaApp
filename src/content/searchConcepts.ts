@@ -1,0 +1,111 @@
+// The search "thesaurus": what people type when they describe a need, and which novenas can help.
+// Edit THIS FILE to teach search new words. No screen code needs to change.
+//
+// Each concept has:
+//   triggers     words or phrases a person might type (misspellings of single words are caught automatically)
+//   suggestions  the "Try searching for" chips shown when nothing matches exactly (each one is itself a trigger below, so tapping it finds novenas)
+//   categories   catalog category ids whose novenas are relevant (see assets/catalog.json "categories")
+//   keywords     novena keywords/tags that also count as relevant (see each novena's "keywords")
+
+export interface SearchConcept {
+  id: string;
+  triggers: string[];
+  suggestions: string[];
+  categories: string[];
+  keywords: string[];
+}
+
+export const searchConcepts: SearchConcept[] = [
+  {
+    id: 'physical-health',
+    triggers: ['migraine', 'headache', 'pain', 'illness', 'sick', 'sickness', 'cancer', 'surgery', 'disease', 'injury', 'recovery', 'hospital',
+      'healing', 'heal', 'health', 'physical health', 'strength during illness', 'wellbeing', 'chronic'],
+    suggestions: ['Healing', 'Physical health', 'Strength during illness'],
+    categories: ['health'],
+    keywords: ['hope', 'mercy', 'protection of a loved one'],
+  },
+  {
+    id: 'anxiety',
+    triggers: ['anxiety', 'anxious', 'worry', 'worried', 'stress', 'stressed', 'panic', 'fear', 'afraid', 'overwhelmed', 'nervous',
+      'peace', 'calm', 'comfort', 'strength', 'mental health'],
+    suggestions: ['Peace', 'Strength', 'Comfort'],
+    categories: ['health', 'difficult-situations'],
+    keywords: ['mental health', 'nervous disorders', 'trust', 'hope'],
+  },
+  {
+    id: 'depression',
+    triggers: ['depression', 'depressed', 'sad', 'sadness', 'despair', 'hopeless', 'burnout', 'emotional strength', 'hope'],
+    suggestions: ['Hope', 'Comfort', 'Mental health'],
+    categories: ['health', 'difficult-situations'],
+    keywords: ['mental health', 'nervous disorders', 'hope'],
+  },
+  {
+    id: 'loneliness',
+    triggers: ['loneliness', 'lonely', 'alone', 'isolated', 'isolation', 'companionship'],
+    suggestions: ['Companionship', 'Hope', 'Emotional strength'],
+    categories: ['difficult-situations', 'relationships'],
+    keywords: ['hope', 'marian'],
+  },
+  {
+    id: 'marriage',
+    triggers: ['marriage', 'married', 'spouse', 'husband', 'wife', 'wedding', 'divorce', 'engaged', 'dating', 'relationships', 'relationship', 'love'],
+    suggestions: ['Marriage', 'Relationships', 'Family wellbeing'],
+    categories: ['relationships', 'family'],
+    keywords: ['marriage', 'protection of a loved one'],
+  },
+  {
+    id: 'family',
+    triggers: ['family', 'children', 'child', 'kids', 'baby', 'parents', 'mother', 'father', 'son', 'daughter', 'family wellbeing', 'protection'],
+    suggestions: ['Children', 'Protection', 'Family wellbeing'],
+    categories: ['family'],
+    keywords: ['fathers', 'protection of a loved one', 'marriage'],
+  },
+  {
+    id: 'work',
+    triggers: ['job', 'jobs', 'career', 'work', 'employment', 'unemployed', 'interview', 'boss', 'business', 'promotion', 'guidance', 'new beginnings'],
+    suggestions: ['Work', 'Guidance', 'New beginnings'],
+    categories: ['work-studies'],
+    keywords: ['work'],
+  },
+  {
+    id: 'studies',
+    triggers: ['exam', 'exams', 'study', 'studies', 'student', 'students', 'school', 'college', 'university', 'test', 'grades', 'homework'],
+    suggestions: ['Students', 'Work & studies', 'Guidance'],
+    categories: ['work-studies'],
+    keywords: ['students', 'youth'],
+  },
+  {
+    id: 'grief',
+    triggers: ['grief', 'grieving', 'death', 'died', 'loss', 'funeral', 'bereavement', 'mourning', 'passed away'],
+    suggestions: ['Comfort', 'Hope', 'Peace'],
+    categories: ['difficult-situations'],
+    keywords: ['hope', 'marian', 'mercy'],
+  },
+  {
+    id: 'lost',
+    triggers: ['lost', 'missing', 'keys', 'wallet', 'misplaced', 'lost items', 'finding things', 'lost articles'],
+    suggestions: ['Lost items', 'Finding things'],
+    categories: [],
+    keywords: ['lost articles'],
+  },
+  {
+    id: 'trouble',
+    triggers: ['trouble', 'struggle', 'struggling', 'crisis', 'problem', 'problems', 'money', 'debt', 'financial', 'finances', 'addiction', 'deliverance', 'difficult', 'courage'],
+    suggestions: ['Hope', 'Courage', 'Trust'],
+    categories: ['difficult-situations'],
+    keywords: ['hope', 'courage', 'marian', 'trust'],
+  },
+  {
+    id: 'faith',
+    triggers: ['faith', 'doubt', 'doubts', 'trust', 'god', 'jesus', 'mary', 'mercy', 'devotion', 'spiritual'],
+    suggestions: ['Trust', 'Mercy', 'Devotion'],
+    categories: ['faith'],
+    keywords: ['trust', 'mercy', 'devotion'],
+  },
+];
+
+// Shown when the search box is empty: common needs, each of which finds novenas.
+export const popularSearches = ['Healing', 'Anxiety', 'Family', 'Work', 'Peace', 'Marriage'];
+
+// Used when nothing at all matches, so the person still has somewhere to go.
+export const fallbackSearches = ['Healing', 'Peace', 'Family', 'Work'];

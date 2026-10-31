@@ -15,9 +15,12 @@ import { SuggestionRow } from '@/components/inputs/SuggestionRow';
 import { colors, screenMargin } from '@/constants/theme';
 import { type } from '@/constants/typography';
 import { strings } from '@/copy/strings';
-import type { Novena } from '@/content/types';
+import type { Category, Novena } from '@/content/types';
 import { useCatalog } from '@/hooks/useCatalog';
+import { contextualSuggestions, recoverySearches, relatedNovenas } from '@/utils/searchRank';
 import { useSearch, type SearchFilter } from '@/hooks/useSearch';
+import { popularSearches } from '@/content/searchConcepts';
+import { Reveal } from '@/motion/Reveal';
 
 const S = strings.search;
 
@@ -35,6 +38,28 @@ function RelatedRow({ novena, onPress }: { novena: Novena; onPress: () => void }
         <Text numberOfLines={1} style={[type.bodySmall, { color: colors.text.secondary }]}>{`${novena.tagline} · ${novena.days.length} days`}</Text>
       </View>
     </Pressable>
+  );
+}
+
+// "Browse by intention": category cards, two per row. The whole card is tappable.
+function IntentionGrid({ categories, onPick }: { categories: Category[]; onPick: (id: string) => void }) {
+  return (
+    <View style={{ paddingHorizontal: screenMargin, gap: 10 }}>
+      {Array.from({ length: Math.ceil(categories.length / 2) }, (_, row) => (
+        <View key={row} style={{ flexDirection: 'row', gap: 10 }}>
+          {categories.slice(row * 2, row * 2 + 2).map((c) => <IntentionTile key={c.id} label={c.name} icon={c.icon} onPress={() => onPick(c.id)} />)}
+        </View>
+      ))}
+    </View>
+  );
+}
+
+// A row of tappable suggestion chips. Tapping one searches for it straight away.
+function Chips({ items, onPick }: { items: string[]; onPick: (t: string) => void }) {
+  return (
+    <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8, paddingHorizontal: screenMargin }}>
+      {items.map((t) => <FilterChip key={t} label={t} selected={false} onPress={() => onPick(t)} />)}
+    </View>
   );
 }
 
@@ -56,7 +81,12 @@ export default function Search() {
   );
   const showResults = (typing && submitted) || (!typing && !!cat);
   const results = typing ? s.results : byCategory;
+  // Novenas that fit the need even when no title or keyword matches the typed words, and "Try searching for" chips that fit the query.
+  const related = useMemo(() => (typing ? relatedNovenas(catalog, s.query, s.results.map((n) => n.id)) : []), [typing, catalog, s.query, s.results]);
+  const chips = useMemo(() => { const c = contextualSuggestions(s.query); return c.length > 0 ? c : recoverySearches(); }, [s.query]);
   const label = typing ? s.query : cat?.name ?? '';
+  const categories = useMemo(() => [...catalog.categories].sort((a, b) => a.order - b.order), [catalog]);
+  const pickCategory = (id: string) => { s.setQuery(''); setCategoryId(id); };
 
   // Pressing search, or tapping a suggestion or recent search.
   const submit = (text: string) => { setCategoryId(undefined); setSubmitted(true); s.submit(text); };
@@ -85,7 +115,8 @@ export default function Search() {
           </ScrollView>
         ) : null}
 
-        {/* Results: "3 novenas for 'anxiety'" then one row per novena. Nothing found? A gentle message. */}
+        {/* Results: "3 novenas for 'anxiety'" then one row per novena, then related novenas that fit the need.
+            Nothing matched exactly? A friendly recovery screen with related novenas, suggested searches and categories. */}
         {showResults ? (
           results.length > 0 ? (
             <>
@@ -94,12 +125,37 @@ export default function Search() {
                 <Text style={[type.bodyMedium, { color: colors.text.secondary }]}>{S.bestMatch}</Text>
               </View>
               {results.map((n) => <SearchResultRow key={n.id} novena={n} onPress={() => router.push(`/novena/${n.id}`)} />)}
+              {typing && related.length > 0 ? (
+                <View style={{ paddingTop: 16 }}>
+                  <SectionTitle title={S.alsoRelated} />
+                  {related.map((n) => <SearchResultRow key={n.id} novena={n} onPress={() => router.push(`/novena/${n.id}`)} />)}
+                </View>
+              ) : null}
             </>
           ) : (
-            <View style={{ padding: screenMargin, gap: 8 }}>
-              <Text style={[type.titleCard, { color: colors.text.primary }]}>{S.noResultsTitle(label)}</Text>
-              <Text style={[type.bodyLarge, { color: colors.text.secondary }]}>{S.noResultsBody}</Text>
-            </View>
+            <Reveal slide={false} style={{ gap: 20, paddingTop: 8 }}>
+              <View style={{ paddingHorizontal: screenMargin, gap: 10 }}>
+                <View style={{ width: 90, height: 90, borderRadius: 45, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.surface.subtle }}>
+                  <Icon name="search" size={34} color={colors.text.secondary} />
+                </View>
+                <Text accessibilityRole="header" style={[type.titleCard, { color: colors.text.primary }]}>{typing ? S.noExactTitle(label) : S.noResultsTitle(label)}</Text>
+                <Text style={[type.bodyLarge, { color: colors.text.secondary }]}>{related.length > 0 ? S.relatedBody : S.noRelatedBody}</Text>
+              </View>
+              {related.length > 0 ? (
+                <View>
+                  <SectionTitle title={S.relatedNovenas} />
+                  {related.map((n) => <SearchResultRow key={n.id} novena={n} onPress={() => router.push(`/novena/${n.id}`)} />)}
+                </View>
+              ) : null}
+              <View style={{ gap: 10 }}>
+                <SectionTitle title={S.trySearching} />
+                <Chips items={chips} onPick={submit} />
+              </View>
+              <View style={{ gap: 10 }}>
+                <SectionTitle title={S.browseOr} />
+                <IntentionGrid categories={categories} onPick={pickCategory} />
+              </View>
+            </Reveal>
           )
         ) : (
           <View style={{ gap: 16, paddingTop: 4 }}>
@@ -109,21 +165,21 @@ export default function Search() {
                 {s.suggestions.map((x) => <SuggestionRow key={x} label={x} match={s.query} onPress={() => submit(x)} />)}
               </View>
             ) : null}
-            {typing && s.results.length > 0 ? (
+            {typing && (s.results.length > 0 || related.length > 0) ? (
               <View>
                 <SectionTitle title={S.related} />
-                {s.results.slice(0, 3).map((n) => <RelatedRow key={n.id} novena={n} onPress={() => router.push(`/novena/${n.id}`)} />)}
+                {(s.results.length > 0 ? s.results : related).slice(0, 3).map((n) => <RelatedRow key={n.id} novena={n} onPress={() => router.push(`/novena/${n.id}`)} />)}
               </View>
             ) : null}
-            <View style={{ gap: 6 }}>
+            {!typing ? (
+              <View style={{ gap: 10 }}>
+                <SectionTitle title={S.popular} />
+                <Chips items={popularSearches} onPick={submit} />
+              </View>
+            ) : null}
+            <View style={{ gap: 10 }}>
               <SectionTitle title={S.browse} />
-              <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 10, paddingHorizontal: screenMargin, paddingVertical: 4 }}>
-                {catalog.categories.map((c) => (
-                  <View key={c.id} style={{ width: 180 }}>
-                    <IntentionTile label={c.name} icon={c.icon} onPress={() => { s.setQuery(''); setCategoryId(c.id); }} />
-                  </View>
-                ))}
-              </ScrollView>
+              <IntentionGrid categories={categories} onPick={pickCategory} />
             </View>
           </View>
         )}

@@ -31,6 +31,13 @@ export const strings = {
     noResultsTitle: (q: string) => `We couldn’t find novenas for “${q}”`,
     noResultsBody: 'Try a shorter or broader word, or pick one below.',
     trySearching: 'Try searching for',
+    noExactTitle: (q: string) => `We couldn’t find an exact match for “${q}”`,
+    relatedBody: 'Here are some related intentions you could explore.',
+    noRelatedBody: 'We don’t have a novena for that yet. Try a shorter or broader word, or pick one below.',
+    relatedNovenas: 'Novenas that may help',
+    alsoRelated: 'Related novenas',
+    browseOr: 'Or browse by intention',
+    popular: 'Popular searches',
     offline: 'Search needs internet. Showing your saved novenas.',
   },
   novena: {
