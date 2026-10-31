@@ -1,6 +1,6 @@
 // Share: turns a saint card into an image. Intentions are never included.
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useRef } from 'react';
+import { useRef, type ComponentRef } from 'react';
 import { Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button } from '@/components/actions/Button';
@@ -15,7 +15,7 @@ export default function Share() {
   const { novenaId } = useLocalSearchParams<{ novenaId: string }>();
   const router = useRouter();
   const { novenaById } = useCatalog();
-  const ref = useRef<View>(null);
+  const ref = useRef<ComponentRef<typeof View>>(null);
   const novena = novenaById(novenaId);
   if (!novena) return null;
   return (

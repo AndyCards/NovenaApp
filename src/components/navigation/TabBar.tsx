@@ -14,7 +14,7 @@ const tabs: Record<string, { label: string; icon: IconName }> = {
   reminders: { label: strings.tabs.reminders, icon: 'bell' },
 };
 
-export function TabBar({ state, navigation }: BottomTabBarProps) {
+export function TabBar({ state, navigateToTab }: BottomTabBarProps) {
   const [reduceTransparency, setReduceTransparency] = useState(false);
   useEffect(() => { AccessibilityInfo.isReduceTransparencyEnabled().then(setReduceTransparency); }, []);
   const content = (
@@ -22,7 +22,7 @@ export function TabBar({ state, navigation }: BottomTabBarProps) {
       {state.routes.filter((r) => tabs[r.name]).map((route) => {
         const idx = state.routes.indexOf(route);
         const t = tabs[route.name];
-        return <TabItem key={route.key} label={t.label} icon={t.icon} active={state.index === idx} onPress={() => navigation.navigate(route.name)} />;
+        return <TabItem key={route.key} label={t.label} icon={t.icon} active={state.index === idx} onPress={() => navigateToTab(route.key)} />;
       })}
     </View>
   );
