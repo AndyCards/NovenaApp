@@ -10,7 +10,7 @@ const VISIBLE = 5;
 type Props = { items: string[]; index: number; onChange: (i: number) => void; width?: number };
 
 export function WheelPicker({ items, index, onChange, width = 72 }: Props) {
-  const ref = useRef<ScrollView>(null);
+  const ref = useRef<{ scrollTo: (o: { y: number; animated?: boolean }) => void } | null>(null);
   const [live, setLive] = useState(index);
   const pad = ROW * ((VISIBLE - 1) / 2);
 
@@ -27,7 +27,7 @@ export function WheelPicker({ items, index, onChange, width = 72 }: Props) {
   return (
     <View style={{ width, height: ROW * VISIBLE }}>
       <ScrollView
-        ref={ref}
+        ref={(r) => { ref.current = r; }}
         contentOffset={{ x: 0, y: index * ROW }}
         showsVerticalScrollIndicator={false}
         snapToInterval={ROW}
