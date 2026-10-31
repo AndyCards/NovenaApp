@@ -23,11 +23,16 @@ export interface PlannedNotification {
   id: string;
   date: string; // YYYY-MM-DD
   time: string; // HH:mm
-  kind: 'daily' | 'missed';
+  kind: 'daily' | 'missed' | 'feast';
   runId: string;
   title: string;
   day: number;
+  saintName?: string; // feast notes only
+  feastDate?: string; // feast notes only
 }
+
+/** The missed-day note comes at 9 in the morning. */
+export const MISSED_NOTE_TIME = '09:00';
 
 const toMinutes = (hhmm: string) => {
   const [h, m] = hhmm.split(':').map(Number);
@@ -48,6 +53,8 @@ export function planReminders(
 ): PlannedNotification[] {
   if (!settings.enabled) return [];
   const out: PlannedNotification[] = [];
+  const dayOf = (run: PlannerRun, date: string) =>
+    Math.round((new Date(`${date}T12:00:00`).getTime() - new Date(`${run.startedOn}T12:00:00`).getTime()) / 86400000) + 1;
   for (let offset = 0; offset < REMINDER_WINDOW_DAYS; offset++) {
     const date = addDaysTo(today, offset);
     const weekday = new Date(`${date}T12:00:00`).getDay();
@@ -55,11 +62,25 @@ export function planReminders(
     if (inQuietHours(settings.time, settings.quietStart, settings.quietEnd)) continue;
     for (const run of runs) {
       if (!run.remindersOn) continue;
-      const dayNumber = Math.round((new Date(`${date}T12:00:00`).getTime() - new Date(`${run.startedOn}T12:00:00`).getTime()) / 86400000) + 1;
+      const dayNumber = dayOf(run, date);
       if (dayNumber < 1 || dayNumber > 9) continue;
       if (run.prayedDays.includes(dayNumber)) continue;
       out.push({ id: `${run.runId}:${date}:daily`, date, time: settings.time, kind: 'daily', runId: run.runId, title: run.novenaTitle, day: dayNumber });
     }
   }
-  return out.slice(0, maxPending);
+  // "If I miss a day": one quiet note the next morning for a day left unprayed. If the person prays
+  // that day, the plan is redone and this note disappears.
+  if (settings.missedDayNote) {
+    for (let offset = 1; offset < REMINDER_WINDOW_DAYS; offset++) {
+      const date = addDaysTo(today, offset);
+      for (const run of runs) {
+        if (!run.remindersOn) continue;
+        const yesterday = dayOf(run, date) - 1;
+        if (yesterday < 1 || yesterday > 8 || run.prayedDays.includes(yesterday)) continue;
+        out.push({ id: `${run.runId}:${date}:missed`, date, time: MISSED_NOTE_TIME, kind: 'missed', runId: run.runId, title: run.novenaTitle, day: yesterday + 1 });
+      }
+    }
+  }
+  // Soonest first, so if there are too many the far-away ones are the ones left out.
+  return out.sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time)).slice(0, maxPending);
 }

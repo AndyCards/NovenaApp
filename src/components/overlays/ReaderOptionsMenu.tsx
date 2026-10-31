@@ -61,10 +61,11 @@ export function ReaderOptionsMenu(p: Props) {
   const downloadDetail =
     p.download.kind === 'downloading' ? r.downloading(p.download.pct)
     : p.download.kind === 'done' ? r.removeDownload
+    : p.download.kind === 'failed' ? r.retryDownload
     : p.sizeMb ? `Text and audio · ${p.sizeMb} MB` : undefined;
   const rows: { label: string; detail?: string; icon: IconName; onPress: () => void }[] = [
     { label: p.saved ? r.saved : r.save, icon: 'bookmark', onPress: p.onToggleSave },
-    ...(p.hasAudio ? [{ label: p.download.kind === 'done' ? r.offlineReady : r.download, detail: downloadDetail, icon: 'download' as IconName, onPress: p.download.kind === 'done' ? p.onRemoveDownload : p.onDownload }] : []),
+    ...(p.hasAudio ? [{ label: p.download.kind === 'done' ? r.offlineReady : r.download, detail: downloadDetail, icon: 'download' as IconName, onPress: p.download.kind === 'done' ? p.onRemoveDownload : p.download.kind === 'downloading' ? () => {} : p.onDownload }] : []),
     { label: r.share, icon: 'share', onPress: p.onShare },
     { label: r.viewIntentionRow, icon: 'handsPraying', onPress: p.onViewIntention },
   ];

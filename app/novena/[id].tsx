@@ -1,6 +1,6 @@
 // Novena page, Figma Page 34 "Novena page · Pray Day 4" (1227:62829).
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Pressable, ScrollView, Text, useWindowDimensions, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ActionBar } from '@/components/actions/ActionBar';
@@ -22,6 +22,7 @@ export default function NovenaPage() {
   const { novenaById } = useCatalog();
   const lib = useLibrary();
   const [daysOpen, setDaysOpen] = useState(true);
+  const busy = useRef(false); // stops a double tap from starting the novena twice
   const novena = novenaById(id);
   if (!novena) return null;
   // Is this novena already being prayed? That decides the button: Start, Pray Day N, or Continue with Day N.
@@ -31,8 +32,15 @@ export default function NovenaPage() {
   const label = !run ? strings.novena.start : run.missed.length > 0 ? strings.novena.continueDay(run.continueDay) : strings.novena.prayDay(run.continueDay);
   // Opening any day starts the novena first if it hasn't been started yet.
   const openDay = async (day: number) => {
-    const runId = run?.id ?? (await lib.start(novena.id));
-    router.push(`/reader/${runId}/${day}`);
+    if (busy.current || !lib.loaded) return; // wait until we know whether it's already started
+    busy.current = true;
+    try {
+      if (run?.status === 'paused') await lib.resume(run.id); // opening a paused novena picks it up again
+      const runId = run?.id ?? (await lib.start(novena.id));
+      router.push(`/reader/${runId}/${day}`);
+    } finally {
+      busy.current = false;
+    }
   };
   const saved = lib.isSaved(novena.id);
 

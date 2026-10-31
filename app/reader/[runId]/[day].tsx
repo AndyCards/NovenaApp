@@ -16,6 +16,7 @@ import { colors, screenMargin } from '@/constants/theme';
 import { strings } from '@/copy/strings';
 import { getDownload, getIntention, setIntention } from '@/data/queries';
 import { useAudio } from '@/hooks/useAudio';
+import { usePlayerStore } from '@/state/playerStore';
 import { useCatalog } from '@/hooks/useCatalog';
 import { useLibrary } from '@/hooks/useLibrary';
 import { markPrayed } from '@/hooks/useMarkPrayed';
@@ -40,7 +41,8 @@ export default function Reader() {
   const run = lib.runs.find((r) => r.id === runId);
   const novena = run ? novenaById(run.novenaId) : undefined;
   const dayNo = Number(day);
-  const [intentionText, setIntentionText] = useState('');
+  const [intentionText, setIntentionText] = useState(''); // what is saved
+  const [draft, setDraft] = useState(''); // what is being typed, saved only on "Save intention"
   // Which pop-up is open right now: the … menu, the intention (view or edit), or "Continue another time?".
   const [popup, setPopup] = useState<'none' | 'menu' | 'intention-view' | 'intention-edit' | 'pause'>('none');
   const [download, setDownload] = useState<DownloadStatus>({ kind: 'none' });
@@ -50,20 +52,28 @@ export default function Reader() {
   useEffect(() => {
     if (novena) getDownload(novena.id).then((d) => setDownload(d?.status === 'complete' ? { kind: 'done' } : { kind: 'none' }));
   }, [novena?.id]);
+  // Leaving the Reader stops the audio, so it never keeps playing with no way to pause it.
+  useEffect(() => () => { if (usePlayerStore.getState().state !== 'hidden') audio.close(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  // Moving to another day closes the previous day's audio.
+  useEffect(() => {
+    const st = usePlayerStore.getState();
+    if (st.state !== 'hidden' && st.day !== dayNo) audio.close();
+  }, [dayNo]); // eslint-disable-line react-hooks/exhaustive-deps
   if (!run || !novena) return null;
   const content = novena.days.find((d) => d.day === dayNo);
   if (!content) return null;
   const alreadyPrayed = run.prayedDays.includes(dayNo);
+  // A day that isn't due yet can be read, but not marked as prayed.
+  const notYet = lib.stateOf(run, dayNo) === 'upcoming';
   const close = () => setPopup('none');
 
   // "Mark Day N as prayed": save it, refresh, then show the "Day N marked as prayed" screen.
   const finish = async () => {
     await markPrayed(run.id, dayNo, run.startedOn, run.prayedDays);
-    await lib.refresh();
     router.replace(`/prayed/${run.id}/${dayNo}`);
   };
   // No intention written yet? Open the box to write one. Otherwise show it.
-  const openIntention = () => setPopup(intentionText.trim() ? 'intention-view' : 'intention-edit');
+  const openIntention = () => { setDraft(intentionText); setPopup(intentionText.trim() ? 'intention-view' : 'intention-edit'); };
 
   return (
     <SafeAreaView edges={['top', 'bottom']} style={{ flex: 1, backgroundColor: colors.surface.default }}>
@@ -78,7 +88,7 @@ export default function Reader() {
           {/* "Day 1 of 9" with the cross, then the prayer itself, then the mark-as-prayed button. */}
           <ChapterTitle title={strings.reader.dayOf(dayNo, novena.days.length)} />
           <PrayerPassage blocks={content.blocks} onViewIntention={openIntention} />
-          <Button label={alreadyPrayed ? strings.novena.prayedDay(dayNo) : strings.reader.markPrayed(dayNo)} icon="handsPraying" disabled={alreadyPrayed} onPress={finish} />
+          <Button label={alreadyPrayed ? strings.novena.prayedDay(dayNo) : strings.reader.markPrayed(dayNo)} icon="handsPraying" disabled={alreadyPrayed || notYet} onPress={finish} />
         </ScrollView>
         {/* Soft white fades at the top and bottom edges so text gently disappears as you scroll. */}
         <LinearGradient pointerEvents="none" colors={['#FFFFFF', 'rgba(255,255,255,0)']} style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 12 }} />
@@ -113,16 +123,21 @@ export default function Reader() {
         onViewIntention={openIntention}
       />
       <PopupCard type="pause" visible={popup === 'pause'} onClose={close} onLeave={() => { close(); router.back(); }} />
-      <PopupCard type="intention-view" visible={popup === 'intention-view'} onClose={close} novenaTitle={`${novena.title} Novena`} value={intentionText} onEdit={() => setPopup('intention-edit')} />
+      <PopupCard type="intention-view" visible={popup === 'intention-view'} onClose={close} novenaTitle={`${novena.title} Novena`} value={intentionText} onEdit={() => { setDraft(intentionText); setPopup('intention-edit'); }} />
       <PopupCard
         type="intention-edit"
         visible={popup === 'intention-edit'}
         onClose={close}
         novenaTitle={`${novena.title} Novena`}
-        value={intentionText}
-        onChange={setIntentionText}
+        value={draft}
+        onChange={setDraft}
         // The intention stays on this phone. It is never uploaded or shared.
-        onSave={async () => { await setIntention(run.id, intentionText.trim()); setPopup(intentionText.trim() ? 'intention-view' : 'none'); }}
+        onSave={async () => {
+          const text = draft.trim();
+          await setIntention(run.id, text);
+          setIntentionText(text);
+          setPopup(text ? 'intention-view' : 'none');
+        }}
       />
     </SafeAreaView>
   );

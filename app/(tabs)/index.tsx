@@ -2,7 +2,7 @@
 // "Home · First-time user" (1227:56592) and "Home · Returning user · Continue praying" (1227:56659).
 // Sections after the top ones come from the catalog's collections, so Home can be re-themed from the Excel sheet.
 import { useRouter } from 'expo-router';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { ScrollView, View, useWindowDimensions, type NativeScrollEvent, type NativeSyntheticEvent } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { CarouselIndicator } from '@/components/content/CarouselIndicator';
@@ -30,7 +30,7 @@ export default function Home() {
   const router = useRouter();
   const { width } = useWindowDimensions();
   const { catalog, novenaById } = useCatalog();
-  const { runs, start } = useRuns();
+  const { runs, start, resume, loaded } = useRuns();
   const [continuePage, setContinuePage] = useState(1);
   const [featuredPage, setFeaturedPage] = useState(1);
 
@@ -47,10 +47,19 @@ export default function Home() {
 
   // Tapping a novena opens its page. "Start Novena" on a featured card starts it (or continues it) and opens today's prayer.
   const open = (n: Novena) => router.push(`/novena/${n.id}`);
+  const busy = useRef(false); // stops a double tap from starting the same novena twice
   const startNovena = async (n: Novena) => {
-    const existing = runs.find((r) => r.novenaId === n.id && r.status === 'active');
-    const runId = existing?.id ?? (await start(n.id));
-    router.push(`/reader/${runId}/${existing?.continueDay ?? 1}`);
+    if (busy.current || !loaded) return;
+    busy.current = true;
+    try {
+      // Already praying it (or paused)? Pick it up again instead of starting a second copy.
+      const existing = runs.find((r) => r.novenaId === n.id && (r.status === 'active' || r.status === 'paused'));
+      if (existing?.status === 'paused') await resume(existing.id);
+      const runId = existing?.id ?? (await start(n.id));
+      router.push(`/reader/${runId}/${existing?.continueDay ?? 1}`);
+    } finally {
+      busy.current = false;
+    }
   };
 
   const continueWidth = width - 50; // 340 on a 390pt screen; the next card peeks in

@@ -4,6 +4,7 @@ import { SourceSerif4_400Regular, SourceSerif4_600SemiBold } from '@expo-google-
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { colors } from '@/constants/theme';
+import { ReminderSync } from '@/components/ReminderSync';
 import { CatalogProvider } from '@/hooks/useCatalog';
 
 export default function RootLayout() {
@@ -13,6 +14,7 @@ export default function RootLayout() {
   // Make the novena list available to every screen, then show whichever screen the person is on.
   return (
     <CatalogProvider>
+      <ReminderSync />
       <StatusBar style="dark" />
       <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.surface.page } }} />
     </CatalogProvider>

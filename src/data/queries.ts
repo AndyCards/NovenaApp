@@ -30,8 +30,10 @@ export const setRunStatus = (runId: string, status: 'active' | 'paused' | 'compl
     completedOn: status === 'completed' ? today : null,
   }).where(eq(novenaRun.id, runId));
 
-export const softRemoveRun = (runId: string) => db.update(novenaRun).set({ removedAt: Date.now(), status: 'quit' }).where(eq(novenaRun.id, runId));
-export const undoRemoveRun = (runId: string) => db.update(novenaRun).set({ removedAt: null, status: 'active' }).where(eq(novenaRun.id, runId));
+// Removing a novena only hides it. Its status is kept, so Undo brings it back exactly as it was
+// (a paused novena comes back paused).
+export const softRemoveRun = (runId: string) => db.update(novenaRun).set({ removedAt: Date.now() }).where(eq(novenaRun.id, runId));
+export const undoRemoveRun = (runId: string) => db.update(novenaRun).set({ removedAt: null }).where(eq(novenaRun.id, runId));
 
 // ---- days prayed ----
 export const listCompletions = (runId: string) => db.select().from(dayCompletion).where(eq(dayCompletion.runId, runId));

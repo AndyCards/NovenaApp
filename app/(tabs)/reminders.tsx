@@ -14,6 +14,7 @@ import { type } from '@/constants/typography';
 import { strings } from '@/copy/strings';
 import { useReminders } from '@/hooks/useReminders';
 import { formatTime12 } from '@/utils/dateUtils';
+import { inQuietHours } from '@/utils/reminderPlanner';
 
 const R = strings.reminders;
 const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -29,13 +30,15 @@ const Header = ({ title }: { title: string }) => (
 
 export default function Reminders() {
   const router = useRouter();
-  const { settings, permission, update } = useReminders();
+  const { settings, permission, update, toggleWeekday } = useReminders();
   const [picking, setPicking] = useState(false);
   if (!settings) return null;
   // Turning a weekday on or off. The days are stored as one number where each day is one "switch".
-  const toggleDay = (i: number) => update({ weekdays: settings.weekdays ^ (1 << i) });
+  const toggleDay = (i: number) => toggleWeekday(1 << i);
   // Quiet hours are "off" when start equals end (an empty window).
   const quietOn = settings.quietStart !== settings.quietEnd;
+  // Warn when the chosen time falls inside quiet hours, because then the reminder can't ring.
+  const timeIsQuiet = settings.enabled && quietOn && inQuietHours(settings.time, settings.quietStart, settings.quietEnd);
 
   return (
     <SafeAreaView edges={['top']} style={{ flex: 1, backgroundColor: colors.surface.page }}>
@@ -61,6 +64,7 @@ export default function Reminders() {
               <Text style={[type.labelSmall, { color: colors.text.secondary }]}>{formatTime12(settings.time)}</Text>
               <Icon name="chevronRight" size={18} color={colors.text.secondary} />
             </Pressable>
+            {timeIsQuiet ? <Text style={[type.bodySmall, { color: colors.text.secondary, paddingBottom: 10 }]}>{R.quietWarning}</Text> : null}
             <Divider />
             <View style={{ gap: 8, paddingVertical: 12 }}>
               <Text style={[type.bodySmall, { color: colors.text.tertiary }]}>{R.repeatOn}</Text>
@@ -80,7 +84,7 @@ export default function Reminders() {
             <SettingRow icon="calendarDate" title={R.feastNovenas} body={R.feastNovenasBody}
               control={<Switch label={R.feastNovenas} value={settings.feastSuggestions} onValueChange={(feastSuggestions) => update({ feastSuggestions })} />} />
             <Divider />
-            <SettingRow icon="moon" title={R.quietHours} body={`${formatTime12(QUIET.start)} to ${formatTime12(QUIET.end)}`}
+            <SettingRow icon="moon" title={R.quietHours} body={quietOn ? `${formatTime12(settings.quietStart)} to ${formatTime12(settings.quietEnd)}` : `${formatTime12(QUIET.start)} to ${formatTime12(QUIET.end)}`}
               control={<Switch label={R.quietHours} value={quietOn}
                 onValueChange={(on) => update(on ? { quietStart: QUIET.start, quietEnd: QUIET.end } : { quietStart: '00:00', quietEnd: '00:00' })} />} />
           </Card>

@@ -21,7 +21,12 @@ export async function downloadNovenaAudio(
   try {
     let done = 0;
     for (const day of days) {
-      await FileSystem.downloadAsync(audioUrl(novenaId, day), localAudioPath(novenaId, day));
+      const result = await FileSystem.downloadAsync(audioUrl(novenaId, day), localAudioPath(novenaId, day));
+      // A missing file or server error still "downloads" an error page, so check it really worked.
+      if (result.status !== 200) {
+        await FileSystem.deleteAsync(localAudioPath(novenaId, day), { idempotent: true });
+        throw new Error(`Audio for day ${day} could not be downloaded (${result.status})`);
+      }
       done += 1;
       onProgress?.(Math.round((done / days.length) * 100));
       await saveDownload({ novenaId, status: 'downloading', bytesDone: done, bytesTotal: days.length, contentVersion });

@@ -13,11 +13,11 @@ export async function permissionGranted(): Promise<boolean> {
   return (await Notifications.getPermissionsAsync()).granted;
 }
 
-/** Clears and re-schedules the rolling window. Call on app open and whenever settings change. */
-export async function rescheduleReminders(settings: PlannerSettings, runs: PlannerRun[], today: string) {
+/** Clears and re-schedules the rolling window. Called by syncReminders (app open, app back in front, any change). */
+export async function rescheduleReminders(settings: PlannerSettings, runs: PlannerRun[], today: string, extra: PlannedNotification[] = []) {
   await Notifications.cancelAllScheduledNotificationsAsync();
   if (!(await permissionGranted())) return;
-  const planned: PlannedNotification[] = planReminders(settings, runs, today);
+  const planned: PlannedNotification[] = [...planReminders(settings, runs, today), ...extra].slice(0, 60);
   for (const p of planned) {
     const [h, m] = p.time.split(':').map(Number);
     const [y, mo, d] = p.date.split('-').map(Number);
@@ -25,7 +25,13 @@ export async function rescheduleReminders(settings: PlannerSettings, runs: Plann
     if (when.getTime() <= Date.now()) continue;
     await Notifications.scheduleNotificationAsync({
       identifier: p.id,
-      content: { title: strings.reminders.notificationTitle, body: strings.reminders.notificationBody(p.title, p.day), data: { runId: p.runId, day: p.day } },
+      content: {
+        title: p.kind === 'feast' ? strings.reminders.feastNotificationTitle(p.saintName ?? '') : strings.reminders.notificationTitle,
+        body: p.kind === 'missed' ? strings.reminders.missedNotificationBody
+          : p.kind === 'feast' ? strings.reminders.feastNotificationBody(p.title)
+          : strings.reminders.notificationBody(p.title, p.day),
+        data: { runId: p.runId, day: p.day },
+      },
       trigger: { type: Notifications.SchedulableTriggerInputTypes.DATE, date: when },
     });
   }

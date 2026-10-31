@@ -57,6 +57,7 @@ export const strings = {
     downloading: (pct: number) => `Downloading… ${pct}%`,
     offlineReady: 'Available offline',
     removeDownload: 'Tap to remove download',
+    retryDownload: 'Download didn’t finish. Tap to try again',
     share: 'Share this novena',
     pauseTitle: 'Continue another time?',
     pauseBody: 'It’s okay to pause. Your progress will be here when you return.',
@@ -116,6 +117,7 @@ export const strings = {
     emptySavedBody: 'Found a novena you’d like to pray later? Save it.',
     emptySavedCta: 'Browse novenas',
     removedFromSaved: 'Removed from Saved',
+    novenaRemoved: 'Novena removed',
     undo: 'Undo',
   },
   reminders: {
@@ -137,6 +139,9 @@ export const strings = {
     notificationTitle: 'Time to pray',
     notificationBody: (title: string, day: number) => `${title} · Day ${day}`,
     missedNotificationBody: 'You can pick up where you left off today.',
+    feastNotificationTitle: (saint: string) => `${saint}’s feast is in nine days`,
+    feastNotificationBody: (title: string) => `Start the ${title} today to finish on the feast.`,
+    quietWarning: 'This time is inside your quiet hours, so the reminder won’t ring. Pick another time or turn quiet hours off.',
   },
   calendar: {
     title: 'Calendar',

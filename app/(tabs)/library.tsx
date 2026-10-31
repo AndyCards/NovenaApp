@@ -118,15 +118,21 @@ export default function Library() {
       <AlertCard
         alert={alert}
         onClose={() => { setAlert(null); setMenuRun(null); }}
+        // "Remove novena?": the dark button is "Keep praying" (just closes); "Stop novena" removes it, with Undo.
+        // "Start again?": the dark button starts a fresh run from Day 1 and ends the old one.
         onPrimary={async () => {
-          if (!run) return;
-          if (alert?.kind === 'remove') {
-            const id = run.id;
-            await lib.quit(id);
-            setToast({ message: L.removedFromSaved, undo: () => lib.undoQuit(id) });
-          } else if (alert?.kind === 'prayAgain') {
+          if (run && alert?.kind === 'prayAgain') {
+            if (run.status === 'active' || run.status === 'paused') await lib.end(run.id);
             const newId = await lib.start(run.novenaId, run.id);
             router.push(`/reader/${newId}/1`);
+          }
+          setAlert(null); setMenuRun(null);
+        }}
+        onSecondary={async () => {
+          if (run && alert?.kind === 'remove') {
+            const id = run.id;
+            await lib.quit(id);
+            setToast({ message: L.novenaRemoved, undo: () => lib.undoQuit(id) });
           }
           setAlert(null); setMenuRun(null);
         }}

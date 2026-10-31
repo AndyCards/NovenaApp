@@ -65,10 +65,11 @@ export function AudioPlayer({ state, title, image, positionSec, durationSec, lay
         <Pressable accessibilityRole="adjustable" accessibilityLabel="Audio position" onLayout={(e) => setTrackWidth(e.nativeEvent.layout.width)}
           onPress={(e) => durationSec > 0 && trackWidth > 0 && onSeek((e.nativeEvent.locationX / trackWidth) * durationSec)}
           style={{ height: 16, justifyContent: 'center', marginRight: 4 }}>
-          <View style={{ height: 4, borderRadius: 2, backgroundColor: colors.progress.track }}>
+          {/* The bar and knob ignore touches, so the tap position is measured across the whole bar. */}
+          <View pointerEvents="none" style={{ height: 4, borderRadius: 2, backgroundColor: colors.progress.track }}>
             <View style={{ width: `${progress * 100}%`, height: 4, borderRadius: 2, backgroundColor: colors.progress.fill }} />
           </View>
-          <View style={{ position: 'absolute', left: Math.max(0, progress * trackWidth - 8), width: 16, height: 16, borderRadius: 8, backgroundColor: colors.surface.default, borderWidth: 0.6, borderColor: colors.border.strong,
+          <View pointerEvents="none" style={{ position: 'absolute', left: Math.max(0, progress * trackWidth - 8), width: 16, height: 16, borderRadius: 8, backgroundColor: colors.surface.default, borderWidth: 0.6, borderColor: colors.border.strong,
             shadowColor: '#000', shadowOpacity: 0.1, shadowRadius: 2, shadowOffset: { width: 0, height: 1 } }} />
         </Pressable>
       ) : null}
