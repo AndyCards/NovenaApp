@@ -30,7 +30,7 @@ import type { DownloadStatus } from '@/utils/downloadStatus';
 function NavButton({ icon, label, onPress }: { icon: 'back' | 'more'; label: string; onPress: () => void }) {
   return (
     <PressableScale scaleTo={pressScale.icon} accessibilityRole="button" accessibilityLabel={label} onPress={onPress}
-      style={({ pressed }) => ({ width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: pressed ? colors.surface.subtle : 'transparent' })}>
+      style={{ width: 44, height: 44, alignItems: 'center', justifyContent: 'center' }}>
       <Icon name={icon} size={22} />
     </PressableScale>
   );
