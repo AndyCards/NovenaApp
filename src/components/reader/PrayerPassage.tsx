@@ -40,13 +40,14 @@ type PassageProps = {
 export const PrayerPassage = memo(function PrayerPassage({ blocks, onViewIntention, active, onBlockLayout }: PassageProps) {
   // One unchanging layout handler per paragraph, so the paragraphs themselves don't re-draw needlessly.
   const layoutHandlers = useMemo(() => blocks.map((_, i) => (e: LayoutChangeEvent) => onBlockLayout?.(i, e)), [blocks, onBlockLayout]);
+  const listening = (active?.block ?? -1) >= 0; // something is being read: soften the rest
   return (
     <>
       {blocks.map((b, i) => (
         <Fragment key={i}>
           {b.type === 'intention' ? <IntentionPrompt onPress={onViewIntention} />
             : b.type === 'silence' ? null // a pause is for the narration only; drawing it would add a second gap (Figma: 24 between every paragraph)
-            : <PrayerParagraph text={b.text} onLayout={layoutHandlers[i]}
+            : <PrayerParagraph text={b.text} onLayout={layoutHandlers[i]} listening={listening}
                 highlightFrom={active?.block === i ? active.from : undefined} highlightTo={active?.block === i ? active.to : undefined} />}
         </Fragment>
       ))}
