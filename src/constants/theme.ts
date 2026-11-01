@@ -41,6 +41,8 @@ export const colors = {
   gradient: {
     button: ['#575757', '#474747'], // dark CTA, top to bottom
     iconCircle: ['#F1F1F1', '#FAFAFA'],
+    // Figma Gradient/Audio Dock Fade: page content fades out behind the audio bar.
+    audioDockFade: { colors: ['rgba(255,255,255,0.2)', '#FFFFFF', '#FFFFFF'], locations: [0.184, 0.39, 0.948] },
     imageScrim: ['rgba(0,0,0,0)', 'rgba(0,0,0,0.1)', 'rgba(0,0,0,0.45)', 'rgba(0,0,0,0.72)', 'rgba(0,0,0,0.82)'],
   },
   glass: {

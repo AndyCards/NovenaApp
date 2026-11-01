@@ -1,6 +1,6 @@
-// The small audio bar that stays on screen while a prayer is playing, whichever page you move to
-// (Home, Library, Reminders, a novena's page, Search, Calendar). It sits just above the tab bar on the
-// three tab pages, and just above the bottom edge everywhere else.
+// The small audio bar (Figma "Audio Dock") that stays on screen while a prayer is playing, whichever page
+// you move to (Home, Library, Reminders, a novena's page, Search, Calendar). On the three tab pages it sits
+// just above the tab bar; everywhere else it sits at the bottom, above the phone's home indicator.
 // It is not shown on the Reader (which has its own full player in the page) or on screens whose
 // main button sits at the bottom ("Day marked as prayed", Share), so it never covers that button.
 import { usePathname } from 'expo-router';
@@ -15,7 +15,9 @@ export function GlobalAudioDock() {
   const path = usePathname();
   const insets = useSafeAreaInsets();
   if (HIDDEN_ON.some((p) => path.startsWith(p))) return null;
-  const onTabPage = TAB_PAGES.includes(path);
-  const bottom = onTabPage ? Math.max(insets.bottom, 8) + TAB_BAR_HEIGHT + 8 : Math.max(insets.bottom, 10) + 4;
-  return <AudioDock layout="compact" bottomOffset={bottom} />;
+  if (TAB_PAGES.includes(path)) {
+    return <AudioDock layout="compact" bottomOffset={Math.max(insets.bottom, 8) + TAB_BAR_HEIGHT} bottomSpace={4} />;
+  }
+  // Figma: player, 4 of space, then the home indicator area at the very bottom.
+  return <AudioDock layout="compact" bottomOffset={0} bottomSpace={4 + Math.max(insets.bottom, 21)} />;
 }
