@@ -20,6 +20,7 @@ import { getDownload, getIntention, getMeta, setIntention, setMeta } from '@/dat
 import { audioControls } from '@/hooks/useAudio';
 import { useFollowAlong } from '@/hooks/useFollowAlong';
 import { useNarrationHighlight } from '@/hooks/useNarrationHighlight';
+import { testNarration } from '@/content/testNarration';
 import { DUMMY_INTENTIONS, DUMMY_INTENTION_TEXTS, PLACEHOLDER_AUDIO } from '@/constants/config';
 import { PressableScale } from '@/motion/PressableScale';
 import { Reveal } from '@/motion/Reveal';
@@ -69,7 +70,8 @@ export default function Reader() {
   const listening = usePlayerStore((s) => s.state !== 'hidden' && s.novenaId === novena?.id);
   const playing = usePlayerStore((s) => s.state === 'playing' && s.novenaId === novena?.id && s.day === dayNo);
   // Follow-along: which paragraph is being read aloud, and keeping it in view.
-  const { activeIndex } = useNarrationHighlight(novena?.id, dayNo, dayContent?.blocks, dayContent?.audio?.cues);
+  const { activeIndex } = useNarrationHighlight(novena?.id, dayNo, dayContent?.blocks,
+    dayContent?.audio?.cues ?? (PLACEHOLDER_AUDIO ? testNarration(novena?.id, dayNo)?.cues : undefined)); // testing voice, Day 1
   const follow = useFollowAlong(activeIndex, playing, `${novena?.id}-${dayNo}`);
   // An unchanging "view intention" handler, so the prayer text isn't re-drawn when this screen re-draws.
   const openIntentionRef = useRef<() => void>(() => {});
