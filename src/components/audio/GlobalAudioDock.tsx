@@ -5,18 +5,18 @@
 // main button sits at the bottom ("Day marked as prayed", Share), so it never covers that button.
 import { usePathname } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { tabBar } from '@/constants/theme';
 import { AudioDock } from './AudioDock';
 
 const TAB_PAGES = ['/', '/library', '/reminders'];
 const HIDDEN_ON = ['/reader/', '/prayed/', '/share/'];
-const TAB_BAR_HEIGHT = 69; // the tab icons and labels, above the phone's own bottom safe area
 
 export function GlobalAudioDock() {
   const path = usePathname();
   const insets = useSafeAreaInsets();
   if (HIDDEN_ON.some((p) => path.startsWith(p))) return null;
   if (TAB_PAGES.includes(path)) {
-    return <AudioDock layout="compact" bottomOffset={Math.max(insets.bottom, 8) + TAB_BAR_HEIGHT} bottomSpace={4} />;
+    return <AudioDock layout="compact" bottomOffset={tabBar.height(insets.bottom)} bottomSpace={4} />;
   }
   // Figma: player, 4 of space, then the home indicator area at the very bottom.
   return <AudioDock layout="compact" bottomOffset={0} bottomSpace={4 + Math.max(insets.bottom, 21)} />;

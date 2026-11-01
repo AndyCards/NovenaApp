@@ -89,3 +89,10 @@ export const elevation = {
 } as const;
 
 export const blur = { glass: 24 } as const;
+
+// Tab bar (Figma "Tab Bar Detailed" 1227:56658): 72 of tab items + 0.5 hairline, then a 21 home-indicator area (8 on phones without one).
+export const tabBar = {
+  itemsHeight: 72.5,
+  bottomSpace: (safeBottom: number) => (safeBottom > 0 ? 21 : 8),
+  height: (safeBottom: number) => 72.5 + (safeBottom > 0 ? 21 : 8),
+} as const;

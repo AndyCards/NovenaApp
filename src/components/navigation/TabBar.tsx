@@ -1,10 +1,10 @@
-// Glass bottom bar: Library · Discover · Reminders.
+// Glass bottom bar: Library · Discover · Reminders (Figma "Tab Bar Detailed" 1227:56658, 93.5 tall with the 21 home-indicator area).
 import type { BottomTabBarProps } from 'expo-router/js-tabs';
 import { BlurView } from 'expo-blur';
 import { AccessibilityInfo, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useEffect, useState } from 'react';
-import { blur, colors } from '@/constants/theme';
+import { blur, colors, tabBar } from '@/constants/theme';
 import { strings } from '@/copy/strings';
 import { TabItem } from './TabItem';
 import type { IconName } from '../Icon';
@@ -20,7 +20,7 @@ export function TabBar({ state, navigateToTab }: BottomTabBarProps) {
   const [reduceTransparency, setReduceTransparency] = useState(false);
   useEffect(() => { AccessibilityInfo.isReduceTransparencyEnabled().then(setReduceTransparency); }, []);
   const content = (
-    <View style={{ flexDirection: 'row', gap: 8, paddingHorizontal: 16, paddingTop: 4, paddingBottom: Math.max(insets.bottom, 8), borderTopWidth: 0.5, borderColor: colors.glass.tabBarBorder }}>
+    <View style={{ flexDirection: 'row', gap: 8, paddingHorizontal: 16, paddingTop: 4, paddingBottom: tabBar.bottomSpace(insets.bottom), borderTopWidth: 0.5, borderColor: colors.glass.tabBarBorder }}>
       {state.routes.filter((r) => tabs[r.name]).map((route) => {
         const idx = state.routes.indexOf(route);
         const t = tabs[route.name];

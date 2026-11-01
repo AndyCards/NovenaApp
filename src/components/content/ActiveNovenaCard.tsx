@@ -1,5 +1,6 @@
 // Figma "Active Novena Card": art 104×130, "DAY 4 OF 9" eyebrow + menu, title, Pray button.
-// Once today's day is prayed the button turns light with a check and names tomorrow's day.
+// Pray button (Figma 1526:30535): light Action/Secondary pill, 130 x 35, 0.2 strong border, 15 body text + 18 icon, 10 apart.
+// Once today's day is prayed the icon becomes a check and the button names tomorrow's day.
 import { useRef } from 'react';
 import { Text, View } from 'react-native';
 import { colors, radius, stroke } from '@/constants/theme';
@@ -36,10 +37,10 @@ export function ActiveNovenaCard({ novena, day, prayedToday, paused, onOpen, onP
           <Text numberOfLines={2} style={[type.titleMedium, { color: colors.text.secondary, paddingRight: 33 }]}>{novena.title}</Text>
         </View>
         <PressableScale dimTo={0.92} accessibilityRole="button" accessibilityLabel={strings.novena.prayDay(nextDay)} onPress={() => { haptics.confirm(); onPray(); }}
-          style={{ alignSelf: 'flex-start', flexDirection: 'row', alignItems: 'center', gap: 8, paddingLeft: 16, paddingRight: 18, paddingVertical: 13, borderRadius: radius.l,
-            backgroundColor: done ? '#F2F2F2' : colors.action.primary }}>
-          <Text style={[type.labelSmall, { color: done ? colors.text.secondary : colors.text.onAction }]}>{strings.novena.prayDay(nextDay)}</Text>
-          <Icon name={done ? 'check' : 'handsPraying'} size={18} color={done ? colors.text.secondary : colors.text.onAction} />
+          style={{ width: 130, height: 35, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 10, paddingHorizontal: 6, paddingVertical: 6, borderRadius: 25,
+            backgroundColor: '#F2F2F2', borderWidth: 0.2, borderColor: colors.border.strong }}>
+          <Text style={[type.bodyCard, { color: colors.text.body }]}>{strings.novena.prayDay(nextDay)}</Text>
+          <Icon name={done ? 'check' : 'handsPraying'} size={18} color={colors.text.body} />
         </PressableScale>
       </View>
     </PressableScale>

@@ -27,7 +27,7 @@ export function TabItem({ label, icon, active, onPress }: Props) {
         <Animated.View style={outlined}><Icon name={icon} size={28} weight="light" color={colors.icon.secondary} /></Animated.View>
         <Animated.View style={[{ position: 'absolute', left: 16 }, filled]}><Icon name={icon} size={28} weight="fill" color={colors.icon.default} /></Animated.View>
       </View>
-      <Text style={[active ? type.labelTabActive : type.labelTab, { color: active ? colors.text.primary : colors.text.tertiary }]}>{label}</Text>
+      <Text style={[active ? type.labelTabActive : type.labelTab, { lineHeight: 14, color: active ? colors.text.primary : colors.text.tertiary }]}>{label}</Text>
     </PressableScale>
   );
 }
