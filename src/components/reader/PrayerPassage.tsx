@@ -1,7 +1,9 @@
 // One day's prayer. The intention moment is the Figma "Intention Card"; silence is a quiet gap.
+// `activeIndex` is the paragraph being read aloud (or -1), see useNarrationHighlight. `onBlockLayout` tells the
+// Reader where each paragraph sits, so it can gently scroll the one being read into view (useFollowAlong).
 import { LinearGradient } from 'expo-linear-gradient';
-import { Fragment } from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { Fragment, memo, useMemo } from 'react';
+import { Pressable, Text, View, type LayoutChangeEvent } from 'react-native';
 import { colors, radius } from '@/constants/theme';
 import { type } from '@/constants/typography';
 import { strings } from '@/copy/strings';
@@ -26,16 +28,26 @@ export function IntentionPrompt({ onPress }: { onPress: () => void }) {
   );
 }
 
-export function PrayerPassage({ blocks, onViewIntention }: { blocks: DayBlock[]; onViewIntention: () => void }) {
+type PassageProps = {
+  blocks: DayBlock[];
+  onViewIntention: () => void;
+  activeIndex?: number;
+  onBlockLayout?: (index: number, e: LayoutChangeEvent) => void;
+};
+
+// memo: the passage only re-draws when the paragraph being read changes, not on every audio tick.
+export const PrayerPassage = memo(function PrayerPassage({ blocks, onViewIntention, activeIndex = -1, onBlockLayout }: PassageProps) {
+  // One unchanging layout handler per paragraph, so the paragraphs themselves don't re-draw needlessly.
+  const layoutHandlers = useMemo(() => blocks.map((_, i) => (e: LayoutChangeEvent) => onBlockLayout?.(i, e)), [blocks, onBlockLayout]);
   return (
     <>
       {blocks.map((b, i) => (
         <Fragment key={i}>
           {b.type === 'intention' ? <IntentionPrompt onPress={onViewIntention} />
             : b.type === 'silence' ? <View accessibilityLabel="A moment of silence" style={{ height: 24 }} />
-            : <PrayerParagraph text={b.text} />}
+            : <PrayerParagraph text={b.text} active={i === activeIndex} onLayout={layoutHandlers[i]} />}
         </Fragment>
       ))}
     </>
   );
-}
+});

@@ -78,6 +78,7 @@ export const strings = {
     audioSoon: 'Audio coming soon',
     viewIntentionRow: 'View intention',
     backToPrayer: 'Back to prayer',
+    nowReading: 'Now being read aloud', // what VoiceOver says on the highlighted paragraph
   },
   dayPrayed: {
     title: (n: number) => `Day ${n} marked as prayed`,
