@@ -8,9 +8,9 @@ export const colors = {
     raised: '#FBFBFB',
     subtle: '#EFEFEF',
     strong: '#E6E6E6',
-    // Follow-along: the soft warm-paper marker behind the sentence being read aloud (the same tone as the
-    // Now Playing glass, solid). #3F3F3F text on it is about 9:1 contrast.
-    reading: '#F2F1EA',
+    // Follow-along: the soft sand marker behind the sentence being read aloud. Clearly visible on white
+    // (about 1.3:1 against the page) while #3F3F3F text on it stays about 7.9:1. It was #F2F1EA, which was too faint to see.
+    reading: '#E8DFC8',
   },
   text: {
     primary: '#3F3F3F',

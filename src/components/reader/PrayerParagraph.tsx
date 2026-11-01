@@ -1,6 +1,6 @@
 // Reader screens only: Source Serif 4, 17/24, never smaller.
 // While the prayer is read aloud, the sentence being spoken gets a soft warm-paper marker behind it
-// (colors.surface.reading), like following along in a prayer book. The type itself never changes, so lines
+// (colors.surface.reading, a soft sand), like following along in a prayer book. The type itself never changes, so lines
 // don't re-wrap or jump while the highlight moves. VoiceOver also hears "Now being read aloud" on that
 // paragraph, so the highlight never depends on seeing the colour.
 import { memo } from 'react';
