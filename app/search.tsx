@@ -24,9 +24,9 @@ import { Reveal } from '@/motion/Reveal';
 
 const S = strings.search;
 
-// Section heading: 16 SemiBold, 6 above and below. Under the "no results" message it is darker (Figma 1227:56769).
-const SectionTitle = ({ title, strong }: { title: string; strong?: boolean }) => (
-  <Text accessibilityRole="header" style={[type.titleMedium, { color: strong ? colors.text.primary : colors.text.secondary, lineHeight: strong ? 23 : 21, paddingHorizontal: screenMargin, paddingVertical: 6 }]}>{title}</Text>
+// Section heading: 16 SemiBold in Text/Primary (Andy, 2026-11-01: both Section Header variants use Text/Primary), 6 above and below.
+const SectionTitle = ({ title }: { title: string }) => (
+  <Text accessibilityRole="header" style={[type.titleMedium, { color: colors.text.primary, paddingHorizontal: screenMargin, paddingVertical: 6 }]}>{title}</Text>
 );
 
 function RelatedRow({ novena, onPress }: { novena: Novena; onPress: () => void }) {
@@ -150,11 +150,11 @@ export default function Search() {
                 </View>
               ) : null}
               <View style={{ gap: 10 }}>
-                <SectionTitle strong title={S.trySearching} />
+                <SectionTitle title={S.trySearching} />
                 <Chips items={chips} onPick={submit} />
               </View>
               <View style={{ gap: 10 }}>
-                <SectionTitle strong title={S.browseOr} />
+                <SectionTitle title={S.browseOr} />
                 <IntentionGrid categories={categories} onPick={pickCategory} />
               </View>
             </Reveal>
