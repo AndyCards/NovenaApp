@@ -19,7 +19,7 @@ const fade = colors.gradient.audioDockFade;
 
 type Props = { bottomOffset?: number; bottomSpace?: number; layout?: 'full' | 'compact'; inline?: boolean };
 
-export function AudioDock({ bottomOffset = 0, bottomSpace = 4, layout = 'full', inline }: Props) {
+export function AudioDock({ bottomOffset = 0, bottomSpace = 4, layout = 'compact', inline }: Props) {
   const a = useAudio();
   const { novenaById } = useCatalog();
   const reduced = useReducedMotion();
