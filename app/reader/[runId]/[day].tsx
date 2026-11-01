@@ -27,6 +27,7 @@ import { markPrayed } from '@/hooks/useMarkPrayed';
 import { downloadNovenaAudio, removeDownload } from '@/utils/downloads';
 import type { DownloadStatus } from '@/utils/downloadStatus';
 import { haptics } from '@/motion/haptics';
+import { novenaPageTitle } from '@/utils/novenaTitle';
 
 function NavButton({ icon, label, onPress }: { icon: 'back' | 'more'; label: string; onPress: () => void }) {
   return (
@@ -166,12 +167,12 @@ export default function Reader() {
         hideIntention={preview}
       />
       <PopupCard type="pause" visible={popup === 'pause'} onClose={close} onLeave={() => { close(); router.back(); }} />
-      <PopupCard type="intention-view" visible={popup === 'intention-view'} onClose={close} novenaTitle={`${novena.title} Novena`} value={intentionText} onEdit={() => { setEditFocus(true); setDraft(intentionText); setPopup('intention-edit'); }} />
+      <PopupCard type="intention-view" visible={popup === 'intention-view'} onClose={close} novenaTitle={novenaPageTitle(novena.title)} value={intentionText} onEdit={() => { setEditFocus(true); setDraft(intentionText); setPopup('intention-edit'); }} />
       <PopupCard
         type="intention-edit"
         visible={popup === 'intention-edit'}
         onClose={close}
-        novenaTitle={`${novena.title} Novena`}
+        novenaTitle={novenaPageTitle(novena.title)}
         value={draft}
         onChange={setDraft}
         focus={editFocus}

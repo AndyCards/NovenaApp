@@ -15,6 +15,7 @@ import { useCatalog } from '@/hooks/useCatalog';
 import { useLibrary } from '@/hooks/useLibrary';
 import { Reveal } from '@/motion/Reveal';
 import { RotatingChevron } from '@/motion/RotatingChevron';
+import { novenaPageTitle } from '@/utils/novenaTitle';
 
 export default function NovenaPage() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -62,7 +63,7 @@ export default function NovenaPage() {
         </Reveal>
         <Reveal index={1} style={{ paddingHorizontal: screenMargin + 2, paddingVertical: 6, marginTop: 6, gap: 20 }}>
           <View style={{ gap: 6 }}>
-            <Text accessibilityRole="header" style={[type.headingH2, { color: colors.text.body, textTransform: 'capitalize' }]}>{novena.title}</Text>
+            <Text accessibilityRole="header" style={[type.headingH2, { color: colors.text.body, textTransform: 'capitalize' }]}>{novenaPageTitle(novena.title)}</Text>
             <NovenaMetaRow minutes={novena.minutesPerDay} tags={novena.tags} />
           </View>
           {/* Save (bookmark) and the main dark pray button. */}
