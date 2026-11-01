@@ -46,3 +46,9 @@ export const PAUSE_PROMPT = {
   // ...but only once at least this many seconds have passed, so a quick flick and Back still leaves straight away.
   minSecondsWithScroll: 10,
 };
+
+// TESTING: start over as a first-time user. When the app opens and this code differs from the last reset it ran,
+// it clears everything the person has done on this phone: active, completed and saved novenas, prayed days,
+// intentions, prayer progress, recent searches and reminder settings. Downloaded audio and the novena list are kept.
+// It runs once per code. To reset again later, change the code (e.g. to today's date). Set to '' to never reset.
+export const RESET_USER_DATA = '2026-11-01';

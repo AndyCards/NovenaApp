@@ -59,6 +59,7 @@ Colours, spacing and fonts from Figma (`constants/`), and every sentence the app
 
 **Testing switches in `constants/config.ts` (turn off before release):**
 - `PLACEHOLDER_AUDIO = true` plays a bundled sample tone instead of real recordings.
+- `RESET_USER_DATA` wipes your novenas, prayed days, saved, intentions and reminder settings once, so the app looks like a first visit. Change the code to reset again; set it to `''` to switch off.
 - `DUMMY_INTENTIONS = true` fills in a sample intention the first time a novena is opened.
 - The prayers in `assets/catalog.json` are sample text until the real prayers are added.
 
