@@ -2,6 +2,7 @@
 // There is one player for the whole app, so the Reader and the player card control the same audio.
 import { createAudioPlayer, setAudioModeAsync, type AudioPlayer } from 'expo-audio';
 import { audioUrl, PLACEHOLDER_AUDIO } from '@/constants/config';
+import { testNarration } from '@/content/testNarration';
 import { usePlayerStore } from '@/state/playerStore';
 import { isDownloaded, localAudioPath } from '@/utils/downloads';
 
@@ -31,7 +32,8 @@ export const audioControls = {
         audioModeSet = true;
       }
       // While real recordings don't exist, play the bundled placeholder tone (works offline, no network needed).
-      const source = PLACEHOLDER_AUDIO ? require('../../assets/audio/placeholder-prayer.mp3')
+      // Testing: Day 1 of each novena has a computer-voice reading (see content/testNarration.ts).
+      const source = PLACEHOLDER_AUDIO ? (testNarration(novenaId, day)?.source ?? require('../../assets/audio/placeholder-prayer.mp3'))
         : (await isDownloaded(novenaId, day)) ? localAudioPath(novenaId, day) : audioUrl(novenaId, day);
       if (request !== openRequest) return; // a newer open (or close) happened while we waited
       player = createAudioPlayer(source, { updateInterval: POSITION_UPDATE_MS });
