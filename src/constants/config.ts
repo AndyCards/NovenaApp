@@ -34,3 +34,9 @@ export const DUMMY_INTENTION_TEXTS = [
   'Guidance in my work, and the courage to make a hard decision well.',
   'Gratitude for what I have, and trust for what is still unknown.',
 ];
+
+// TESTING: start over as a first-time user. When the app opens and this code differs from the last reset it ran,
+// it clears everything the person has done on this phone: active, completed and saved novenas, prayed days,
+// intentions, prayer progress, recent searches and reminder settings. Downloaded audio and the novena list are kept.
+// It runs once per code. To reset again later, change the code (e.g. to today's date). Set to '' to never reset.
+export const RESET_USER_DATA = '2026-11-01-b';
