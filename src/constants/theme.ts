@@ -40,6 +40,7 @@ export const colors = {
   overlay: { scrim: 'rgba(0,0,0,0.25)' },
   gradient: {
     button: ['#575757', '#474747'], // dark CTA, top to bottom
+    dark: ['#5F5F5F', '#3F3F3F'], // Figma Gradient/Dark: the pocketNovena wordmark, top to bottom
     iconCircle: ['#F1F1F1', '#FAFAFA'],
     // Figma Gradient/Audio Dock Fade: page content fades out behind the audio bar.
     audioDockFade: { colors: ['rgba(255,255,255,0.2)', '#FFFFFF', '#FFFFFF'], locations: [0.184, 0.39, 0.948] },
