@@ -8,7 +8,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { KeyboardAvoidingView, Modal, Platform, Pressable, StyleSheet, Text, View, type ViewStyle } from 'react-native';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { colors, radius, screenMargin, stroke } from '@/constants/theme';
+import { colors, gradients, radius, screenMargin, stroke } from '@/constants/theme';
 import { type } from '@/constants/typography';
 import { strings } from '@/copy/strings';
 import { PressableScale } from '@/motion/PressableScale';
@@ -57,7 +57,7 @@ export function FloatingCard({ visible, onClose, title, subtitle, icon, children
               <View style={{ gap: 4, alignItems: 'stretch' }}>
                 {/* Figma "Halo": a 72 round grey circle with a 36 outlined icon, 10 above the title. */}
                 {icon ? (
-                  <LinearGradient colors={colors.gradient.iconCircle} style={{ alignSelf: 'center', width: 72, height: 72, borderRadius: 36, marginBottom: 6, alignItems: 'center', justifyContent: 'center', borderWidth: stroke.hairline, borderColor: colors.border.subtle }}>
+                  <LinearGradient {...gradients.iconCircle} style={{ alignSelf: 'center', width: 72, height: 72, borderRadius: 36, marginBottom: 6, alignItems: 'center', justifyContent: 'center', borderWidth: stroke.hairline, borderColor: colors.border.subtle }}>
                     <Icon name={icon} size={36} />
                   </LinearGradient>
                 ) : null}

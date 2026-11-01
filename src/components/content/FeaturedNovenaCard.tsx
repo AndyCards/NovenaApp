@@ -2,7 +2,7 @@
 import { BlurView } from 'expo-blur';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Text, View } from 'react-native';
-import { colors, elevation, radius, stroke } from '@/constants/theme';
+import { colors, gradients, elevation, radius, stroke } from '@/constants/theme';
 import { type } from '@/constants/typography';
 import type { Novena } from '@/content/types';
 import { Icon } from '../Icon';
@@ -17,7 +17,7 @@ export function FeaturedNovenaCard({ novena, width, onPress, onStart }: Props) {
     <PressableScale scaleTo={pressScale.card} accessibilityRole="button" accessibilityLabel={`${novena.title}. ${novena.tagline}`} onPress={onPress}
       style={[{ width, height: 327, borderRadius: 22, overflow: 'hidden', justifyContent: 'flex-end', borderWidth: stroke.hairline, borderColor: colors.border.default, backgroundColor: colors.surface.default }, elevation.card]}>
       <NovenaImage image={novena.image} size="full" label={novena.title} style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }} />
-      <LinearGradient colors={colors.gradient.imageScrim} locations={[0, 0.3, 0.6, 0.85, 1]} style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 260 }} />
+      <LinearGradient {...gradients.cardScrim} style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 260 }} />
       <View style={{ paddingHorizontal: 18, paddingBottom: 18, gap: 2 }}>
         <Text style={[type.headingH2, { color: colors.text.onAction, textTransform: 'capitalize' }]}>{novena.title}</Text>
         <Text style={[type.bodyMedium, { color: 'rgba(255,255,255,0.85)' }]}>{`${novena.tagline} · ${novena.minutesPerDay} Mins`}</Text>

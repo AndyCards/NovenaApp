@@ -5,7 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Fragment, memo, useMemo } from 'react';
 import Animated, { useAnimatedStyle, useReducedMotion, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
 import { Text, View, type LayoutChangeEvent } from 'react-native';
-import { colors, radius } from '@/constants/theme';
+import { colors, gradients, radius } from '@/constants/theme';
 import { type } from '@/constants/typography';
 import { strings } from '@/copy/strings';
 import type { DayBlock } from '@/content/types';
@@ -36,7 +36,7 @@ export function IntentionPrompt({ onPress, intention }: { onPress: () => void; i
         borderRadius: radius.m, borderWidth: 0.5, borderColor: colors.border.default, backgroundColor: colors.surface.default,
         shadowColor: '#000', shadowOpacity: 0.04, shadowRadius: 8, shadowOffset: { width: 0, height: 2 } }}>
       {/* Icon circle: softly lit from above, with a faint edge. */}
-      <LinearGradient colors={['#FFFFFF', '#F3F3F3']} style={{ width: 44, height: 44, borderRadius: 22, borderWidth: 0.5, borderColor: colors.border.subtle, alignItems: 'center', justifyContent: 'center' }}>
+      <LinearGradient {...gradients.intentionIcon} style={{ width: 44, height: 44, borderRadius: 22, borderWidth: 0.5, borderColor: colors.border.subtle, alignItems: 'center', justifyContent: 'center' }}>
         <Animated.View style={hands}><Icon name="handsPraying" size={20} color={colors.icon.default} /></Animated.View>
       </LinearGradient>
       {/* Title, then a one-line subtitle: the person's own intention once written, otherwise a gentle prompt. */}

@@ -18,7 +18,7 @@ import { PopupCard } from '@/components/overlays/PopupCard';
 import { ReaderOptionsMenu } from '@/components/overlays/ReaderOptionsMenu';
 import { ChapterTitle } from '@/components/reader/ChapterTitle';
 import { PrayerPassage } from '@/components/reader/PrayerPassage';
-import { colors } from '@/constants/theme';
+import { colors, gradients } from '@/constants/theme';
 import { type } from '@/constants/typography';
 import { addDaysTo, todayString } from '@/utils/dateUtils';
 import { strings } from '@/copy/strings';
@@ -189,7 +189,7 @@ export default function Reader() {
           )}
         </ScrollView>
         {/* A soft white fade at the bottom edge so text gently disappears as you scroll (at the top it slides under the glass bar). */}
-        <LinearGradient pointerEvents="none" colors={['rgba(255,255,255,0)', '#FFFFFF']} style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 46 }} />
+        <LinearGradient pointerEvents="none" {...gradients.fadeBottom} style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 46 }} />
       </Reveal>
       {/* The audio player appears here only after the person chooses Listen. It never plays by itself. */}
       <AudioDock inline />
