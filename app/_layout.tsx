@@ -5,6 +5,7 @@ import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { colors } from '@/constants/theme';
 import { ReminderSync } from '@/components/ReminderSync';
+import { GlobalAudioDock } from '@/components/audio/GlobalAudioDock';
 import { CatalogProvider } from '@/hooks/useCatalog';
 
 export default function RootLayout() {
@@ -21,6 +22,8 @@ export default function RootLayout() {
       <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.surface.page } }}>
         <Stack.Screen name="prayed/[runId]/[day]" options={{ animation: 'fade', animationDuration: 250 }} />
       </Stack>
+      {/* The small audio bar, kept on screen across pages while a prayer is playing. */}
+      <GlobalAudioDock />
     </CatalogProvider>
   );
 }

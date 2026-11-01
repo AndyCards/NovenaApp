@@ -66,12 +66,12 @@ export default function CalendarScreen() {
 
       {view === 'year' ? (
         <Reveal slide={false} style={{ flex: 1 }}>
-        <ScrollView contentContainerStyle={{ paddingTop: 8, paddingBottom: 60 }}>
+        <ScrollView contentContainerStyle={{ paddingTop: 8, paddingBottom: 140 }}>
           <YearCalendarGrid year={year} today={now} onSelectMonth={(m) => { setMonth0(m); setView('month'); }} />
         </ScrollView>
         </Reveal>
       ) : (
-        <ScrollView contentContainerStyle={{ paddingTop: 8, paddingBottom: 60, gap: 24 }}>
+        <ScrollView contentContainerStyle={{ paddingTop: 8, paddingBottom: 140, gap: 24 }}>
           {/* The month card fades in again each time you move to another month. */}
           <Reveal key={format(first, 'yyyy-MM')} slide={false} fromX={slide} style={{ marginHorizontal: screenMargin, borderRadius: radius.m, borderWidth: stroke.hairline, borderColor: colors.border.default, paddingHorizontal: 8, paddingTop: 10, paddingBottom: 4 }}>
             <View style={{ flexDirection: 'row', alignItems: 'center', paddingLeft: 6, paddingVertical: 4, marginBottom: 4 }}>

@@ -32,7 +32,7 @@ Buttons, cards, rows and pop-ups, each matching a component on the Figma Compone
 - `navigation/` top bars and the tab bar
 - `overlays/` pop-up cards and menus (always floating cards, never bottom sheets). `useRunMenu` is the "…" menu on a novena card (pause, resume, start again, remove), shared by Home and Library so both behave the same.
 - `reader/` pieces of the prayer screen
-- `audio/` the audio player
+- `audio/` the audio player. `GlobalAudioDock` keeps the small player bar on screen across pages while a prayer plays.
 - `calendar/` calendar days and month cards
 
 ## src/motion/ — how things move

@@ -75,8 +75,8 @@ export default function Reader() {
   useEffect(() => {
     if (novena) getDownload(novena.id).then((d) => setDownload(d?.status === 'complete' ? { kind: 'done' } : { kind: 'none' }));
   }, [novena?.id]);
-  // Leaving the Reader stops the audio, so it never keeps playing with no way to pause it.
-  useEffect(() => () => { if (usePlayerStore.getState().state !== 'hidden') audio.close(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  // Leaving the Reader does NOT stop the audio: the small player bar stays at the bottom of every screen
+  // (see GlobalAudioDock), so it can always be paused or closed from wherever you are.
   // Moving to another day closes the previous day's audio. While placeholder audio is on, the player bar then
   // appears for the new day, paused (it never starts by itself).
   useEffect(() => {

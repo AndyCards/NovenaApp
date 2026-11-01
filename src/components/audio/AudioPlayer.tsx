@@ -45,7 +45,8 @@ function RoundButton({ icon, label: a11y, onPress }: { icon: 'play' | 'pause' | 
   const pauseIcon = useAnimatedStyle(() => ({ opacity: p.value, transform: [{ scale: 0.8 + 0.2 * p.value }] }));
   return (
     <PressableScale scaleTo={pressScale.icon} accessibilityRole="button" accessibilityLabel={a11y} onPress={() => { haptics.tap(); onPress(); }} style={{ width: 44, height: 44, alignItems: 'center', justifyContent: 'center' }}>
-      <View style={{ width: 42, height: 42, borderRadius: 21, borderWidth: 0.6, borderColor: colors.border.default, alignItems: 'center', justifyContent: 'center' }}>
+      {/* Play and pause sit in a thin circle; the close X is just the icon, as in Figma. */}
+      <View style={{ width: 42, height: 42, borderRadius: 21, borderWidth: toggles ? 0.6 : 0, borderColor: colors.border.default, alignItems: 'center', justifyContent: 'center' }}>
         {toggles ? (
           <>
             <Animated.View style={[{ position: 'absolute' }, playIcon]}><Icon name="play" size={22} /></Animated.View>
