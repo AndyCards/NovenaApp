@@ -24,8 +24,9 @@ import { Reveal } from '@/motion/Reveal';
 
 const S = strings.search;
 
-const SectionTitle = ({ title }: { title: string }) => (
-  <Text accessibilityRole="header" style={[type.titleMedium, { color: colors.text.secondary, paddingHorizontal: screenMargin, paddingVertical: 6 }]}>{title}</Text>
+// Section heading: 16 SemiBold, 6 above and below. Under the "no results" message it is darker (Figma 1227:56769).
+const SectionTitle = ({ title, strong }: { title: string; strong?: boolean }) => (
+  <Text accessibilityRole="header" style={[type.titleMedium, { color: strong ? colors.text.primary : colors.text.secondary, lineHeight: strong ? 23 : 21, paddingHorizontal: screenMargin, paddingVertical: 6 }]}>{title}</Text>
 );
 
 function RelatedRow({ novena, onPress }: { novena: Novena; onPress: () => void }) {
@@ -133,13 +134,14 @@ export default function Search() {
               ) : null}
             </>
           ) : (
-            <Reveal slide={false} style={{ gap: 20, paddingTop: 8 }}>
-              <View style={{ paddingHorizontal: screenMargin, gap: 10 }}>
-                <View style={{ width: 90, height: 90, borderRadius: 45, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.surface.subtle }}>
-                  <Icon name="search" size={34} color={colors.text.secondary} />
+            <Reveal slide={false} style={{ gap: 16, paddingTop: 12 }}>
+              {/* "No results" message (Figma 1227:56762): 45 grey circle with a 22 magnifier, then a 16 title and a 14 line, 8 apart. */}
+              <View style={{ paddingHorizontal: screenMargin, paddingTop: 16, paddingBottom: 12, gap: 8 }}>
+                <View style={{ width: 45, height: 45, borderRadius: 23, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.surface.subtle }}>
+                  <Icon name="search" size={22} />
                 </View>
-                <Text accessibilityRole="header" style={[type.titleCard, { color: colors.text.primary }]}>{typing ? S.noExactTitle(label) : S.noResultsTitle(label)}</Text>
-                <Text style={[type.bodyLarge, { color: colors.text.secondary }]}>{related.length > 0 ? S.relatedBody : S.noRelatedBody}</Text>
+                <Text accessibilityRole="header" style={[type.titleMedium, { color: colors.text.primary }]}>{typing ? S.noExactTitle(label) : S.noResultsTitle(label)}</Text>
+                <Text style={[type.bodyMedium, { color: colors.text.secondary }]}>{related.length > 0 ? S.relatedBody : S.noRelatedBody}</Text>
               </View>
               {related.length > 0 ? (
                 <View>
@@ -148,11 +150,11 @@ export default function Search() {
                 </View>
               ) : null}
               <View style={{ gap: 10 }}>
-                <SectionTitle title={S.trySearching} />
+                <SectionTitle strong title={S.trySearching} />
                 <Chips items={chips} onPick={submit} />
               </View>
               <View style={{ gap: 10 }}>
-                <SectionTitle title={S.browseOr} />
+                <SectionTitle strong title={S.browseOr} />
                 <IntentionGrid categories={categories} onPick={pickCategory} />
               </View>
             </Reveal>
