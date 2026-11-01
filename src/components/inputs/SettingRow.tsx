@@ -1,4 +1,4 @@
-// Figma "Setting Row": optional 22 icon, title (15 SemiBold) + one-line explanation, then a control.
+// Figma "Setting Row": optional 22 icon, title (16 SemiBold, 22 line) + one-line explanation (12 grey), then a control.
 import type { ReactNode } from 'react';
 import { Text, View } from 'react-native';
 import { colors } from '@/constants/theme';
@@ -10,7 +10,7 @@ export function SettingRow({ title, body, icon, control }: { title: string; body
     <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12, paddingVertical: 12 }}>
       {icon ? <Icon name={icon} size={22} /> : null}
       <View style={{ flex: 1, gap: 2 }}>
-        <Text style={[type.titleSmall, { color: colors.text.secondary, lineHeight: 22 }]}>{title}</Text>
+        <Text style={[type.titleMedium, { color: colors.text.secondary, lineHeight: 22 }]}>{title}</Text>
         {body ? <Text style={[type.bodySmall, { color: colors.text.tertiary }]}>{body}</Text> : null}
       </View>
       {control}

@@ -1,9 +1,11 @@
-// Reminders, Figma Page 34 (1227:58916): daily prayer time card, then Extras.
+// Reminders, Figma Page 34 (1227:58916, updated 1227:58921): daily prayer time card, then Extras.
+// Section headings use the shared Section Header (18 SemiBold) with 6 between heading and card; row titles are 16.
 import { useRouter } from 'expo-router';
 import { useState, type ReactNode } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Icon } from '@/components/Icon';
+import { SectionHeader } from '@/components/content/SectionHeader';
 import { SettingRow } from '@/components/inputs/SettingRow';
 import { Switch } from '@/components/inputs/Switch';
 import { WeekdayToggle } from '@/components/inputs/WeekdayToggle';
@@ -24,9 +26,6 @@ const QUIET = { start: '22:00', end: '07:00' };
 const Divider = () => <View style={{ height: stroke.hairline, backgroundColor: colors.border.default }} />;
 const Card = ({ children }: { children: ReactNode }) => (
   <View style={{ marginHorizontal: screenMargin, paddingHorizontal: 14, paddingVertical: 2, borderRadius: radius.m, borderWidth: stroke.hairline, borderColor: colors.border.default, backgroundColor: colors.surface.default }}>{children}</View>
-);
-const Header = ({ title }: { title: string }) => (
-  <Text accessibilityRole="header" style={[type.titleMedium, { color: colors.text.secondary, paddingHorizontal: screenMargin, paddingVertical: 6 }]}>{title}</Text>
 );
 
 export default function Reminders() {
@@ -52,9 +51,9 @@ export default function Reminders() {
       </View>
       <ScrollView contentContainerStyle={{ paddingTop: 8, paddingBottom: 140, gap: 24 }}>
         {!permission && <View style={{ paddingHorizontal: screenMargin }}><ReminderNote text="Reminders are off. Turn on notifications in Settings to get a gentle nudge." /></View>}
-        <Reveal index={0} style={{ gap: 10 }}>
+        <Reveal index={0} style={{ gap: 6 }}>
           {/* First card: the daily reminder switch, the time (tap to change), and which weekdays. */}
-          <Header title={R.title} />
+          <SectionHeader title={R.title} />
           <Card>
             <SettingRow icon="clock" title={R.daily} body={R.dailyBody}
               control={<Switch label={R.daily} value={settings.enabled} onValueChange={(enabled) => update({ enabled })} />} />
@@ -62,8 +61,10 @@ export default function Reminders() {
             <Pressable accessibilityRole="button" accessibilityLabel={`${R.time}, ${formatTime12(settings.time)}`} onPress={() => setPicking(true)}
               style={{ flexDirection: 'row', alignItems: 'center', gap: 12, paddingVertical: 12 }}>
               <Text style={[type.titleSmall, { flex: 1, color: colors.text.secondary, lineHeight: 22 }]}>{R.time}</Text>
-              <Text style={[type.labelSmall, { color: colors.text.secondary }]}>{formatTime12(settings.time)}</Text>
-              <Icon name="chevronRight" size={18} color={colors.text.secondary} />
+              <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+                <Text style={[type.labelSmall, { color: colors.text.secondary }]}>{formatTime12(settings.time)}</Text>
+                <Icon name="chevronRight" size={18} color={colors.text.secondary} />
+              </View>
             </Pressable>
             {timeIsQuiet ? <Text style={[type.bodySmall, { color: colors.text.secondary, paddingBottom: 10 }]}>{R.quietWarning}</Text> : null}
             <Divider />
@@ -75,9 +76,9 @@ export default function Reminders() {
             </View>
           </Card>
         </Reveal>
-        <Reveal index={1} style={{ gap: 10 }}>
+        <Reveal index={1} style={{ gap: 6 }}>
           {/* Second card: a note after a missed day, feast-day suggestions, and quiet hours. */}
-          <Header title={R.extras} />
+          <SectionHeader title={R.extras} />
           <Card>
             <SettingRow icon="sun" title={R.missedNote} body={R.missedNoteBody}
               control={<Switch label={R.missedNote} value={settings.missedDayNote} onValueChange={(missedDayNote) => update({ missedDayNote })} />} />
