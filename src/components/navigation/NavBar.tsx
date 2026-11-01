@@ -1,6 +1,6 @@
 // Figma "Nav Bar" (1429:4753): one top bar for every inner screen. White, 6 padding all round (56 tall).
 // Back on the left, an optional centred title (Title/Medium, secondary grey), up to two actions on the right.
-// Back and the main action are 38 x 44 with just the icon (no circle); the second action is 44 wide; 6 apart.
+// Back and the main action are 38 x 44 with just the icon (no circle); the second action is 44 wide; the two actions are 6 apart.
 import { Text, View } from 'react-native';
 import { colors } from '@/constants/theme';
 import { type } from '@/constants/typography';
@@ -12,8 +12,8 @@ type Props = { title?: string; onBack?: () => void; backLabel?: string; primaryA
 
 export function NavBar({ title, onBack, backLabel = 'Back', primaryAction, secondaryAction }: Props) {
   return (
-    <View style={{ paddingHorizontal: 8, paddingVertical: 6, backgroundColor: colors.surface.default }}>
-      <View style={{ height: 44, flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+    <View style={{ paddingHorizontal: 10, paddingVertical: 4, backgroundColor: colors.surface.default }}>
+      <View style={{ height: 44, flexDirection: 'row', alignItems: 'center' }}>
         {onBack ? <IconButton icon="back" label={backLabel} size="plain" onPress={onBack} /> : <View style={{ width: 38 }} />}
         <View style={{ flex: 1, alignItems: 'center' }}>
           {title ? <Text accessibilityRole="header" numberOfLines={1} style={[type.titleMedium, { textAlign: 'center', color: colors.text.secondary }]}>{title}</Text> : null}
