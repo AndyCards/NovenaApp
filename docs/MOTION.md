@@ -24,3 +24,7 @@ Not in this app (so nothing to animate): streak counters, loading spinners, plan
 3. **Audio player:** play and pause icons cross-fade, the bar glides between updates and follows the finger, the knob grows while held, and tapping the title folds or opens the progress bar.
 4. **Calendar:** each month card glides in from the side you are moving towards; completed days fade in. No streak counters or scores.
 5. **Navigation and pop-ups:** native push and swipe back, soft fades for pop-ups, and the light haptics in `haptics.ts`. Timed soft curves are used instead of springs, because springs did not show reliably on device.
+
+## Audio bar fold and prayer mode switch
+- Tapping the player title folds or opens the progress bar: the card height glides over 320 ms (soft in-out) while the bar fades and drifts 8 pt. It works the same in the Reader and in the floating bar.
+- Listen / Read only in the reader's "…" menu: a white pill slides between the two (280 ms, soft in-out) and the label colours cross-fade. The menu waits for the slide to finish before closing.

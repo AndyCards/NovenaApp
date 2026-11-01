@@ -1,14 +1,16 @@
 // Figma "Reader · Options menu": a floating card under the More button (top right).
 // Day stepper, Prayer mode (Listen / Read only), then Save, Download, Share, View intention.
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Modal, Pressable, StyleSheet, Text, View } from 'react-native';
-import Animated, { useAnimatedStyle } from 'react-native-reanimated';
+import Animated, { interpolateColor, ReduceMotion, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors, screenMargin, stroke } from '@/constants/theme';
 import { type } from '@/constants/typography';
 import { strings } from '@/copy/strings';
 import type { DownloadStatus } from '@/utils/downloadStatus';
 import { usePresence } from '@/motion/usePresence';
+import { ease } from '@/motion/tokens';
+import { haptics } from '@/motion/haptics';
 import { Icon, type IconName } from '../Icon';
 import { StepperButton } from '../actions/StepperButton';
 
@@ -35,14 +37,39 @@ type Props = {
 
 const shadow = { shadowColor: '#000', shadowOpacity: 0.08, shadowRadius: 12, shadowOffset: { width: 0, height: 4 }, elevation: 6 } as const;
 
-function Segment({ label, icon, active, onPress, disabled }: { label: string; icon: IconName; active: boolean; onPress: () => void; disabled?: boolean }) {
-  return (
-    <Pressable accessibilityRole="radio" accessibilityState={{ selected: active, disabled }} accessibilityLabel={label} onPress={disabled ? undefined : onPress}
-      style={{ opacity: disabled ? 0.4 : 1, flex: 1, height: 38, borderRadius: 19, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6,
-        backgroundColor: active ? colors.surface.default : 'transparent', ...(active ? { shadowColor: '#000', shadowOpacity: 0.08, shadowRadius: 2, shadowOffset: { width: 0, height: 1 }, elevation: 1 } : null) }}>
-      <Icon name={icon} size={18} color={active ? colors.text.primary : colors.text.secondary} />
-      <Text style={[type.labelSmall, { color: active ? colors.text.primary : colors.text.secondary }]}>{label}</Text>
+// Prayer mode switch. A white pill slides between Listen and Read only, and the labels' colours cross-fade.
+const SLIDE = { duration: 280, easing: ease.inOut, reduceMotion: ReduceMotion.System };
+const AnimatedText = Animated.createAnimatedComponent(Text);
+
+function ModeSwitch({ value, canListen, onChange, labels }: { value: 'listen' | 'read'; canListen: boolean; onChange: (m: 'listen' | 'read') => void; labels: { listen: string; read: string } }) {
+  const [width, setWidth] = useState(0);
+  const [picked, setPicked] = useState(value); // moves the pill straight away, before the player catches up
+  useEffect(() => setPicked(value), [value]);
+  const at = useSharedValue(picked === 'listen' ? 0 : 1); // 0 = Listen, 1 = Read only
+  useEffect(() => { at.value = withTiming(picked === 'listen' ? 0 : 1, SLIDE); }, [picked, at]);
+  const seg = width > 0 ? (width - 8) / 2 : 0;
+  const pill = useAnimatedStyle(() => ({ transform: [{ translateX: at.value * seg }] }));
+  const listenColor = useAnimatedStyle(() => ({ color: interpolateColor(at.value, [0, 1], [colors.text.primary, colors.text.secondary]) }));
+  const readColor = useAnimatedStyle(() => ({ color: interpolateColor(at.value, [0, 1], [colors.text.secondary, colors.text.primary]) }));
+  const listenIcon = useAnimatedStyle(() => ({ opacity: 1 - at.value * 0.35 }));
+  const readIcon = useAnimatedStyle(() => ({ opacity: 0.65 + at.value * 0.35 }));
+  const choose = (m: 'listen' | 'read') => { if (m === picked) return; haptics.tap(); setPicked(m); onChange(m); };
+  const item = (m: 'listen' | 'read', label: string, icon: IconName, textStyle: object, iconStyle: object, disabled?: boolean) => (
+    <Pressable accessibilityRole="radio" accessibilityState={{ selected: picked === m, disabled }} accessibilityLabel={label} onPress={disabled ? undefined : () => choose(m)}
+      style={{ opacity: disabled ? 0.4 : 1, flex: 1, height: 38, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+      <Animated.View style={iconStyle}><Icon name={icon} size={18} color={picked === m ? colors.text.primary : colors.text.secondary} /></Animated.View>
+      <AnimatedText style={[type.labelSmall, textStyle]}>{label}</AnimatedText>
     </Pressable>
+  );
+  return (
+    <View accessibilityRole="radiogroup" onLayout={(e) => setWidth(e.nativeEvent.layout.width)} style={{ flexDirection: 'row', padding: 4, borderRadius: 25, backgroundColor: colors.surface.subtle }}>
+      {seg > 0 ? (
+        <Animated.View pointerEvents="none" style={[{ position: 'absolute', left: 4, top: 4, width: seg, height: 38, borderRadius: 19, backgroundColor: colors.surface.default,
+          shadowColor: '#000', shadowOpacity: 0.08, shadowRadius: 2, shadowOffset: { width: 0, height: 1 }, elevation: 1 }, pill]} />
+      ) : null}
+      {item('listen', labels.listen, 'headphones', listenColor, listenIcon, !canListen)}
+      {item('read', labels.read, 'speakerSlash', readColor, readIcon)}
+    </View>
   );
 }
 
@@ -97,10 +124,7 @@ export function ReaderOptionsMenu(p: Props) {
           {(
             <View style={{ paddingHorizontal: 10, paddingTop: 10, paddingBottom: 6, gap: 8 }}>
               <Text style={[type.bodySmall, { color: colors.text.tertiary, paddingHorizontal: 4 }]}>{r.prayerMode}</Text>
-              <View accessibilityRole="radiogroup" style={{ flexDirection: 'row', padding: 4, borderRadius: 25, backgroundColor: colors.surface.subtle }}>
-                <Segment label={r.listen} icon="headphones" active={p.canListen && p.mode === 'listen'} disabled={!p.canListen} onPress={() => p.onMode('listen')} />
-                <Segment label={r.readOnly} icon="speakerSlash" active={!p.canListen || p.mode === 'read'} onPress={() => p.onMode('read')} />
-              </View>
+              <ModeSwitch value={p.canListen ? p.mode : 'read'} canListen={p.canListen} onChange={p.onMode} labels={{ listen: r.listen, read: r.readOnly }} />
             </View>
           )}
           {rows.map((row, i) => (

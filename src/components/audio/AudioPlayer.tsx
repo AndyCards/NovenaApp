@@ -2,7 +2,7 @@
 // States: playing, paused, loading, finished, offline, error. Never autoplays.
 import { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
-import Animated, { Easing, FadeIn, FadeOut, LinearTransition, ReduceMotion, useAnimatedStyle, useReducedMotion, useSharedValue, withRepeat, withSequence, withTiming } from 'react-native-reanimated';
+import Animated, { Easing, FadeIn, ReduceMotion, useAnimatedStyle, useReducedMotion, useSharedValue, withRepeat, withSequence, withTiming } from 'react-native-reanimated';
 import type { ImageRef } from '@/content/types';
 import { colors, radius } from '@/constants/theme';
 import { type } from '@/constants/typography';
@@ -89,8 +89,17 @@ export function AudioPlayer({ state, title, image, positionSec, durationSec, lay
       : withTiming(1, { duration: duration.quick });
   }, [state, reduced, breathe]);
   const statusStyle = useAnimatedStyle(() => ({ opacity: breathe.value }));
+  // Folding and opening the progress bar: the card's height glides to the new size while the bar
+  // fades and drifts in or out, so full and compact flow into each other instead of snapping.
+  const open = useSharedValue(layout === 'full' ? 1 : 0);
+  const barHeight = useSharedValue(0); // the bar section's natural height, measured once it has drawn
+  useEffect(() => {
+    open.value = reduced ? (layout === 'full' ? 1 : 0) : withTiming(layout === 'full' ? 1 : 0, { duration: 320, easing: ease.inOut, reduceMotion: ReduceMotion.System });
+  }, [layout, reduced, open]);
+  const foldStyle = useAnimatedStyle(() => ({ height: open.value * barHeight.value }));
+  const barStyle = useAnimatedStyle(() => ({ opacity: Math.max(0, open.value * 1.6 - 0.6), transform: [{ translateY: (1 - open.value) * -8 }] }));
   return (
-    <Animated.View layout={reduced ? undefined : LinearTransition.duration(duration.fade).easing(ease.out)} style={{ borderRadius: radius.m, borderWidth: 1, borderColor: 'rgba(0,0,0,0.08)', backgroundColor: colors.surface.default, paddingLeft: 10, paddingRight: 6, paddingVertical: 10, gap: 12,
+    <View style={{ borderRadius: radius.m, borderWidth: 1, borderColor: 'rgba(0,0,0,0.08)', backgroundColor: colors.surface.default, paddingLeft: 10, paddingRight: 6, paddingVertical: 10,
       shadowColor: '#000', shadowOpacity: 0.08, shadowRadius: 2, shadowOffset: { width: 0, height: 1 }, elevation: 1 }}>
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
         {image ? <NovenaImage image={image} label="" style={{ width: 44, height: 44, borderRadius: radius.s }} /> : null}
@@ -103,8 +112,10 @@ export function AudioPlayer({ state, title, image, positionSec, durationSec, lay
         {canClose ? <RoundButton icon="close" label="Close player" onPress={onClose} /> : null}
         <RoundButton icon={playing ? 'pause' : 'play'} label={playing ? 'Pause' : 'Play'} onPress={disabled ? () => {} : playing ? onPause : onPlay} />
       </View>
-      {layout === 'full' ? (
-        <Animated.View entering={reduced ? undefined : FadeIn.duration(duration.fade)} exiting={reduced ? undefined : FadeOut.duration(duration.quick)} style={{ gap: 2 }}>
+      {/* Always mounted so it can fold smoothly; hidden from touch and screen readers while folded. */}
+      <Animated.View pointerEvents={layout === 'full' ? 'auto' : 'none'} accessibilityElementsHidden={layout !== 'full'} importantForAccessibility={layout === 'full' ? 'auto' : 'no-hide-descendants'}
+        style={[{ overflow: 'hidden' }, foldStyle]}>
+        <Animated.View onLayout={(e) => { barHeight.value = e.nativeEvent.layout.height; }} style={[{ position: 'absolute', left: 0, right: 0, top: 0, paddingTop: 12, gap: 2 }, barStyle]}>
           {/* The progress bar. Tap anywhere on it to jump there, or drag the knob to move forward and back. */}
           <View accessibilityRole="adjustable" accessibilityLabel="Audio position"
             accessibilityValue={{ min: 0, max: Math.round(durationSec), now: Math.round(positionSec) }}
@@ -128,7 +139,7 @@ export function AudioPlayer({ state, title, image, positionSec, durationSec, lay
             <Text style={[type.bodySmall, { color: colors.text.tertiary }]}>{mmss(durationSec)}</Text>
           </View>
         </Animated.View>
-      ) : null}
-    </Animated.View>
+      </Animated.View>
+    </View>
   );
 }

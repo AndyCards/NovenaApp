@@ -151,7 +151,7 @@ export default function Reader() {
         canListen={novena.hasAudio || PLACEHOLDER_AUDIO}
         onClose={close}
         onChangeDay={(d) => router.setParams({ day: String(d) })}
-        onMode={(m) => { if (m === 'listen') audio.open(novena.id, novena.title, dayNo); else audio.close(); close(); }}
+        onMode={(m) => { if (m === 'listen') audio.open(novena.id, novena.title, dayNo); else audio.close(); setTimeout(close, 320); /* let the pill finish sliding before the menu closes */ }}
         onToggleSave={() => (lib.isSaved(novena.id) ? lib.unsave(novena.id) : lib.save(novena.id))}
         onDownload={async () => {
           setDownload({ kind: 'downloading', pct: 0 });
