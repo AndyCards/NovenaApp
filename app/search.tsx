@@ -25,13 +25,13 @@ import { Reveal } from '@/motion/Reveal';
 const S = strings.search;
 
 const SectionTitle = ({ title }: { title: string }) => (
-  <Text accessibilityRole="header" style={[type.titleMedium, { color: colors.text.secondary, paddingHorizontal: screenMargin, paddingTop: 6, paddingBottom: 4 }]}>{title}</Text>
+  <Text accessibilityRole="header" style={[type.titleMedium, { color: colors.text.secondary, paddingHorizontal: screenMargin, paddingVertical: 6 }]}>{title}</Text>
 );
 
 function RelatedRow({ novena, onPress }: { novena: Novena; onPress: () => void }) {
   return (
     <Pressable accessibilityRole="button" accessibilityLabel={novena.title} onPress={onPress}
-      style={({ pressed }) => ({ flexDirection: 'row', alignItems: 'center', gap: 12, paddingHorizontal: screenMargin, paddingVertical: 8, backgroundColor: pressed ? colors.surface.subtle : 'transparent' })}>
+      style={({ pressed }) => ({ flexDirection: 'row', alignItems: 'center', gap: 12, paddingHorizontal: screenMargin, paddingVertical: 12, backgroundColor: pressed ? colors.surface.subtle : 'transparent' })}>
       <NovenaImage image={novena.image} label="" style={{ width: 44, height: 44, borderRadius: 22 }} />
       <View style={{ flex: 1, gap: 2 }}>
         <Text numberOfLines={1} style={[type.titleSmall, { color: colors.text.primary }]}>{novena.title}</Text>
@@ -160,13 +160,13 @@ export default function Search() {
         ) : (
           <View style={{ gap: 16, paddingTop: 4 }}>
             {typing && s.suggestions.length > 0 ? (
-              <View>
+              <View style={{ gap: 8 }}>
                 <SectionTitle title={S.suggestions} />
                 {s.suggestions.map((x) => <SuggestionRow key={x} label={x} match={s.query} onPress={() => submit(x)} />)}
               </View>
             ) : null}
             {typing && (s.results.length > 0 || related.length > 0) ? (
-              <View>
+              <View style={{ gap: 8 }}>
                 <SectionTitle title={S.related} />
                 {(s.results.length > 0 ? s.results : related).slice(0, 3).map((n) => <RelatedRow key={n.id} novena={n} onPress={() => router.push(`/novena/${n.id}`)} />)}
               </View>

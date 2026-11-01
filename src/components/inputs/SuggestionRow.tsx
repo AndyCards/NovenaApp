@@ -1,4 +1,4 @@
-// Figma "Suggestion Row": magnifier + suggestion, with the typed part in bold.
+// Figma "Suggestion Row" (1323:9935): 20 magnifier + suggestion (15 on 21), 12 above and below, typed part in bold.
 import { Pressable, Text } from 'react-native';
 import { colors } from '@/constants/theme';
 import { fonts, type } from '@/constants/typography';
@@ -8,9 +8,9 @@ export function SuggestionRow({ label, match = '', onPress }: { label: string; m
   const i = match ? label.toLowerCase().indexOf(match.toLowerCase()) : -1;
   return (
     <Pressable accessibilityRole="button" accessibilityLabel={label} onPress={onPress}
-      style={({ pressed }) => ({ height: 46, flexDirection: 'row', alignItems: 'center', gap: 12, paddingHorizontal: 10, backgroundColor: pressed ? colors.surface.subtle : 'transparent' })}>
+      style={({ pressed }) => ({ paddingVertical: 12, flexDirection: 'row', alignItems: 'center', gap: 12, paddingHorizontal: 10, backgroundColor: pressed ? colors.surface.subtle : 'transparent' })}>
       <Icon name="search" size={20} />
-      <Text style={[type.bodyLarge, { color: colors.text.body }]}>
+      <Text style={[type.bodyLarge, { flex: 1, lineHeight: 21, color: colors.text.body }]}>
         {i < 0 ? label : (
           <>
             {label.slice(0, i)}

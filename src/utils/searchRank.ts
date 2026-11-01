@@ -1,7 +1,7 @@
 // The search engine. It compares what the person typed with each novena's title, saint, tags and
 // categories, gives each a score, and returns the best matches first.
 import type { Catalog, Novena } from '@/content/types';
-import { fallbackSearches, searchConcepts, type SearchConcept } from '@/content/searchConcepts';
+import { fallbackSearches, popularSearches, searchConcepts, type SearchConcept } from '@/content/searchConcepts';
 
 /** Lowercase and strip accents so "Thérèse" matches "therese". */
 export const normalize = (s: string) =>
@@ -44,11 +44,36 @@ export function searchNovenas(catalog: Catalog, query: string, { filter }: Searc
   return scored.map((x) => x.n);
 }
 
+/**
+ * The "Suggestions" list while typing: up to 3 searches that complete what was typed.
+ * They come from every word the app knows: the search dictionary, popular searches, novena names,
+ * saints, tags, keywords and categories. Ones that START with the typed letters come first
+ * (typing "anx" offers "Anxiety"), then ones where a word starts with them, then ones that merely contain them.
+ * If nothing completes the text, the dictionary's related ideas are offered instead.
+ */
 export function suggestionsFor(catalog: Catalog, query: string, limit = 3): string[] {
   const q = normalize(query);
   if (!q) return [];
-  const terms = catalog.suggestions.flatMap((s) => [s.term, ...s.related]);
-  const typed = terms.filter((t) => normalize(t).includes(q));
+  const pool = new Set<string>();
+  const add = (t?: string) => { if (t && t.trim()) pool.add(t.trim()); };
+  searchConcepts.forEach((c) => { c.triggers.forEach(add); c.suggestions.forEach(add); });
+  popularSearches.forEach(add);
+  catalog.suggestions.forEach((s) => { add(s.term); s.related.forEach(add); });
+  catalog.categories.forEach((c) => add(c.name));
+  catalog.saints.forEach((s) => { add(s.name); (s.patronOf ?? []).forEach(add); });
+  catalog.novenas.forEach((n) => { add(n.title); n.tags.forEach(add); n.keywords.forEach(add); });
+  const rank = (t: string) => {
+    const n = normalize(t);
+    if (n === q) return 0; // exactly what was typed
+    if (n.startsWith(q)) return 1;
+    if (n.split(/\s+/).some((w) => w.startsWith(q))) return 2;
+    return n.includes(q) ? 3 : 9;
+  };
+  const typed = Array.from(pool)
+    .map((t) => ({ t, r: rank(t) }))
+    .filter((x) => x.r < 9)
+    .sort((a, b) => a.r - b.r || a.t.length - b.t.length || a.t.localeCompare(b.t))
+    .map((x) => x.t);
   return Array.from(new Set([...typed, ...contextualSuggestions(query, limit)])).slice(0, limit);
 }
 
