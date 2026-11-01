@@ -19,7 +19,10 @@ const day = z.object({
       durationSec: z.number().optional(),
       bytes: z.number().optional(),
       // Follow-along timings: when each paragraph is spoken (see src/utils/narrationCues.ts).
-      cues: z.array(z.object({ block: z.number().int().min(0), start: z.number().min(0), end: z.number().min(0) })).optional(),
+      cues: z.array(z.object({
+        block: z.number().int().min(0), start: z.number().min(0), end: z.number().min(0),
+        from: z.number().int().min(0).optional(), to: z.number().int().min(0).optional(),
+      })).optional(),
     })
     .optional(),
 });

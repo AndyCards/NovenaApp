@@ -5,12 +5,16 @@ export type DayBlock =
   | { type: 'intention' }
   | { type: 'silence'; seconds: number };
 
-// When one paragraph is spoken in the day's recording, in seconds from the start. Written by pipeline/tts.py.
-// `block` is the paragraph's position in `blocks` (counting from 0). Used to highlight the prayer as it is read.
+// When one sentence is spoken in the day's recording, in seconds from the start. Written by pipeline/tts.py.
+// `block` is the paragraph's position in `blocks` (counting from 0); `from`/`to` are where the sentence sits in
+// that paragraph's text (characters). Without from/to the cue covers the whole paragraph.
+// Used to highlight the prayer as it is read aloud.
 export interface NarrationCue {
   block: number;
   start: number;
   end: number;
+  from?: number;
+  to?: number;
 }
 
 export interface NovenaDay {
