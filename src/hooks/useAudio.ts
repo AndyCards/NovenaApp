@@ -14,7 +14,8 @@ const release = () => { player?.remove(); player = null; };
 export function useAudio() {
   const store = usePlayerStore();
 
-  const open = async (novenaId: string, title: string, day: number) => {
+  // startAtSec: where to begin (used when coming back to a prayer that was paused part-way). Still opens paused.
+  const open = async (novenaId: string, title: string, day: number, startAtSec = 0) => {
     const request = ++openRequest;
     release();
     store.load(novenaId, title, day); // shows the player, paused
@@ -29,6 +30,7 @@ export function useAudio() {
         : (await isDownloaded(novenaId, day)) ? localAudioPath(novenaId, day) : audioUrl(novenaId, day);
       if (request !== openRequest) return; // a newer open (or close) happened while we waited
       player = createAudioPlayer(source);
+      if (startAtSec > 0) { player.seekTo(startAtSec); store.set({ positionSec: startAtSec }); }
       player.addListener('playbackStatusUpdate', (s) => {
         const st = usePlayerStore.getState();
         if (st.state === 'hidden') return;

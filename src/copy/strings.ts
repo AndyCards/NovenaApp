@@ -51,6 +51,13 @@ export const strings = {
     minutes: (n: number) => `${n} min`,
     minutesPerDay: (n: number) => `${n} mins a day`,
   },
+  // The gentle "stepping away?" card. One set of words per place it is used. Never guilt, never a warning.
+  gentleExit: {
+    prayer: { title: 'Take a pause?', body: 'It’s okay to pause. Your progress will be here when you return.', leave: 'Leave and resume later', stay: 'Keep praying' },
+    // Ready for later use:
+    intention: { title: 'Save your intention for later?', body: 'You can finish writing it whenever you’re ready.', leave: 'Save and leave', stay: 'Keep writing' },
+    listening: { title: 'Pause listening?', body: 'We’ll keep your place, so you can pick up right where you left off.', leave: 'Pause and leave', stay: 'Keep listening' },
+  },
   reader: {
     dayOf: (n: number, total: number) => `Day ${n} of ${total}`,
     markPrayed: (n: number) => `Mark Day ${n} as prayed`,
@@ -67,10 +74,6 @@ export const strings = {
     removeDownload: 'Tap to remove download',
     retryDownload: 'Download didn’t finish. Tap to try again',
     share: 'Share this novena',
-    pauseTitle: 'Continue another time?',
-    pauseBody: 'It’s okay to pause. Your progress will be here when you return.',
-    pauseLeave: 'Leave and resume later',
-    pauseStay: 'Keep praying',
     intentionTitle: 'Your Intention',
     intentionPrivate: 'Your note stays private',
     intentionPlaceholder: 'What are you praying for?',

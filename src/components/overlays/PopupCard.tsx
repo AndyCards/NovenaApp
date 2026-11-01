@@ -1,4 +1,4 @@
-// Reader pop-ups from Figma Page 34: "Continue another time?" and "Your Intention".
+// Reader pop-ups from Figma Page 34: "Your Intention" (view and edit). "Take a pause?" lives in GentleExitCard.
 import { Pressable, Text, TextInput, View } from 'react-native';
 import { colors, radius, stroke } from '@/constants/theme';
 import { type } from '@/constants/typography';
@@ -7,24 +7,12 @@ import { Button } from '../actions/Button';
 import { FloatingCard } from './FloatingCard';
 
 type Props =
-  | { type: 'pause'; visible: boolean; onClose: () => void; onLeave: () => void }
   | { type: 'intention-edit'; visible: boolean; onClose: () => void; novenaTitle: string; value: string; onChange: (t: string) => void; onSave: () => void; focus?: boolean }
   | { type: 'intention-view'; visible: boolean; onClose: () => void; novenaTitle: string; value: string; onEdit: () => void };
 
 const r = strings.reader;
 
 export function PopupCard(p: Props) {
-  if (p.type === 'pause') {
-    return (
-      <FloatingCard visible={p.visible} onClose={p.onClose} title={r.pauseTitle} icon="pause">
-        <Text style={[type.bodyLarge, { color: colors.text.secondary, textAlign: 'center', marginTop: -12, paddingHorizontal: 12 }]}>{r.pauseBody}</Text>
-        <View style={{ gap: 10, marginTop: 20 }}>
-          <Button label={r.pauseLeave} variant="secondary" onPress={p.onLeave} />
-          <Button label={r.pauseStay} icon="handsPraying" onPress={p.onClose} />
-        </View>
-      </FloatingCard>
-    );
-  }
   if (p.type === 'intention-edit') {
     return (
       <FloatingCard visible={p.visible} onClose={p.onClose} title={r.intentionTitle} subtitle={p.novenaTitle} icon="heart">
