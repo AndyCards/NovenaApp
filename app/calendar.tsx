@@ -19,10 +19,10 @@ import { Reveal } from '@/motion/Reveal';
 
 const WEEKDAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
-function RoundButton({ icon, label, onPress }: { icon: IconName; label: string; onPress: () => void }) {
+function RoundButton({ icon, label, onPress, size = 44, iconSize = 22 }: { icon: IconName; label: string; onPress: () => void; size?: number; iconSize?: number }) {
   return (
-    <Pressable accessibilityRole="button" accessibilityLabel={label} onPress={onPress} hitSlop={6} style={{ width: 44, height: 44, alignItems: 'center', justifyContent: 'center' }}>
-      <Icon name={icon} size={22} />
+    <Pressable accessibilityRole="button" accessibilityLabel={label} onPress={onPress} hitSlop={6} style={{ width: size, height: size, alignItems: 'center', justifyContent: 'center' }}>
+      <Icon name={icon} size={iconSize} />
     </Pressable>
   );
 }
@@ -71,11 +71,13 @@ export default function CalendarScreen() {
       ) : (
         <ScrollView contentContainerStyle={{ paddingTop: 8, paddingBottom: 60, gap: 24 }}>
           {/* The month card fades in again each time you move to another month. */}
-          <Reveal key={format(first, 'yyyy-MM')} slide={false} style={{ marginHorizontal: screenMargin, borderRadius: radius.m, borderWidth: stroke.hairline, borderColor: colors.border.default, paddingHorizontal: 10, paddingTop: 14, paddingBottom: 6 }}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', paddingLeft: 4, marginBottom: 6 }}>
+          <Reveal key={format(first, 'yyyy-MM')} slide={false} style={{ marginHorizontal: screenMargin, borderRadius: radius.m, borderWidth: stroke.hairline, borderColor: colors.border.default, paddingHorizontal: 8, paddingTop: 10, paddingBottom: 4 }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', paddingLeft: 6, paddingVertical: 4, marginBottom: 4 }}>
               <Text style={[type.headingH2, { flex: 1, color: colors.text.primary }]}>{format(first, 'MMMM yyyy')}</Text>
-              <RoundButton icon="chevronLeft" label="Previous month" onPress={() => shiftMonth(-1)} />
-              <RoundButton icon="chevronRight" label="Next month" onPress={() => shiftMonth(1)} />
+              <View style={{ flexDirection: 'row', gap: 4 }}>
+                <RoundButton size={36} iconSize={20} icon="chevronLeft" label="Previous month" onPress={() => shiftMonth(-1)} />
+                <RoundButton size={36} iconSize={20} icon="chevronRight" label="Next month" onPress={() => shiftMonth(1)} />
+              </View>
             </View>
             <View style={{ flexDirection: 'row', paddingBottom: 6 }}>
               {WEEKDAYS.map((d) => <Text key={d} style={[type.calendarWeekday, { flex: 1, textAlign: 'center', color: colors.text.secondary }]}>{d}</Text>)}
