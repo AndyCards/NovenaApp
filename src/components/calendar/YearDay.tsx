@@ -6,7 +6,7 @@ import { type } from '@/constants/typography';
 export function YearDay({ day, state = 'default' }: { day: number | null; state?: 'default' | 'weekend' | 'today' }) {
   return (
     <View style={{ flex: 1, aspectRatio: 1, alignItems: 'center', justifyContent: 'center', borderRadius: 999, backgroundColor: state === 'today' ? colors.action.selected : 'transparent' }}>
-      {day !== null ? <Text style={[type.calendarYearDay, { color: state === 'today' ? colors.text.onAction : state === 'weekend' ? colors.text.tertiary : colors.text.primary }]}>{day}</Text> : null}
+      {day !== null ? <Text style={[type.calendarYearDay, { color: state === 'today' ? colors.text.onAction : state === 'weekend' ? colors.text.tertiary : colors.text.secondary }]}>{day}</Text> : null}
     </View>
   );
 }
