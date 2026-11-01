@@ -5,7 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Modal, Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { colors, screenMargin, stroke } from '@/constants/theme';
+import { colors, radius, screenMargin, stroke } from '@/constants/theme';
 import { type } from '@/constants/typography';
 import { strings } from '@/copy/strings';
 import { PressableScale } from '@/motion/PressableScale';
@@ -35,7 +35,7 @@ export function FloatingCard({ visible, onClose, title, subtitle, icon, children
             style={{ width: 36, height: 36, borderRadius: 18, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.surface.default, borderWidth: stroke.hairline, borderColor: colors.border.subtle, ...softShadow }}>
             <Icon name="close" size={22} />
           </PressableScale>
-          <Pressable accessible={false} style={{ alignSelf: 'stretch', padding: 16, gap: 20, borderRadius: 24, backgroundColor: colors.surface.default, borderWidth: stroke.hairline, borderColor: colors.border.subtle, ...softShadow }}>
+          <Pressable accessible={false} style={{ alignSelf: 'stretch', padding: 16, gap: 20, borderRadius: radius.l, backgroundColor: colors.surface.default, borderWidth: stroke.hairline, borderColor: colors.border.default, ...softShadow }}>
             {title ? (
               <View style={{ gap: 4, alignItems: 'stretch' }}>
                 {/* Figma "Halo": a 72 round grey circle with a 36 outlined icon, 10 above the title. */}

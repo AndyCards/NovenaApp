@@ -22,7 +22,8 @@ export function Button({ label, onPress, variant = 'primary', size = 'default', 
   const primary = variant === 'primary' && !disabled;
   const h = heights[size];
   const textStyle = size === 'default' ? type.labelLarge : type.labelSmall;
-  const fg = primary ? colors.text.onAction : disabled ? colors.text.disabled : colors.text.body;
+  // Light button text: Figma uses secondary grey on the big button and body grey on the small one.
+  const fg = primary ? colors.text.onAction : disabled ? colors.text.disabled : size === 'default' ? colors.text.secondary : colors.text.body;
   const inner = (
     <>
       <Text style={[textStyle, { color: fg }]}>{label}</Text>
@@ -36,7 +37,7 @@ export function Button({ label, onPress, variant = 'primary', size = 'default', 
       {primary ? (
         <LinearGradient colors={colors.gradient.button} style={[shape, { borderWidth: stroke.hairline, borderColor: colors.border.subtle }]}>{inner}</LinearGradient>
       ) : (
-        <View style={[shape, { backgroundColor: disabled ? colors.action.disabled : colors.action.secondary, borderWidth: stroke.hairline, borderColor: colors.border.default }]}>{inner}</View>
+        <View style={[shape, { backgroundColor: disabled ? colors.action.disabled : colors.action.secondary, borderWidth: 0.2, borderColor: colors.border.strong }]}>{inner}</View>
       )}
     </PressableScale>
   );
