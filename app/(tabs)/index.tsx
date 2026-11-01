@@ -92,7 +92,7 @@ export default function Home() {
   // Draws one section. "list" sections show tall rows going down; other sections show cards you swipe sideways.
   const renderCollection = (c: Collection, index: number, layout = c.layout ?? 'cards') => (
     <Reveal key={c.id} index={index} style={{ gap: 10 }}>
-      <SectionHeader title={c.title} subtitle={c.subtitle} />
+      <SectionHeader title={c.title} />
       {layout === 'list' ? (
         <View style={{ gap: 12 }}>{novenasOf(c).map((n) => <NovenaRow key={n.id} novena={n} onPress={() => open(n)} />)}</View>
       ) : (
@@ -106,7 +106,7 @@ export default function Home() {
   // The "Feast days ahead" row: the next four saints' feast days.
   const feastSection = (index: number) => feasts.length > 0 && (
     <Reveal index={index} style={{ gap: 10 }}>
-      <SectionHeader title="Feast days ahead" subtitle={strings.home.feastSubtitle} onSeeAll={() => router.push('/calendar')} />
+      <SectionHeader title="Feast days ahead" onSeeAll={() => router.push('/calendar')} />
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: screenMargin }}>
         {feasts.map((f) => (
           <FeastDayItem key={f.saint.id} saintName={f.saint.name} avatar={f.saint.avatar} feastDate={f.feastDate}
@@ -127,7 +127,7 @@ export default function Home() {
           <>
             <Reveal index={0} style={{ gap: 10 }}>
               {/* "Continue praying": one card per novena in progress, swipe sideways. */}
-              <SectionHeader title={strings.home.continueTitle} subtitle={strings.home.continueSubtitle} />
+              <SectionHeader title={strings.home.continueTitle} />
               <View style={{ gap: 6 }}>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false} snapToInterval={continueWidth + 10} decelerationRate="fast"
                   onMomentumScrollEnd={(e) => { const p = pageFrom(e, continueWidth + 10); if (p !== continuePage) haptics.tap(); setContinuePage(p); }}
@@ -143,7 +143,7 @@ export default function Home() {
             {featured ? (
               <Reveal index={1} style={{ gap: 10 }}>
                 {/* The big featured cards with the "Start Novena" button. */}
-                <SectionHeader title={featured.title} subtitle={featured.subtitle} />
+                <SectionHeader title={featured.title} />
                 <View style={{ gap: 6, paddingBottom: 6 }}>
                   <ScrollView ref={(r) => { featuredRef.current = r; }} horizontal showsHorizontalScrollIndicator={false} snapToInterval={featuredWidth + 10} decelerationRate="fast"
                     onScrollBeginDrag={() => { pausedUntil.current = Date.now() + 8000; }}
@@ -177,7 +177,7 @@ export default function Home() {
           <>
             {featured ? renderCollection(featured, 0, 'cards') : null}
             <Reveal index={1} style={{ gap: 10 }}>
-              <SectionHeader title={strings.home.howItWorksTitle} subtitle={strings.home.howItWorksSubtitle} />
+              <SectionHeader title={strings.home.howItWorksTitle} />
               <View style={{ paddingHorizontal: screenMargin }}><HowItWorksCard /></View>
             </Reveal>
             {feastSection(2)}
