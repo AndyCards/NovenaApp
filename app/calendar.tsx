@@ -34,6 +34,7 @@ export default function CalendarScreen() {
   const [view, setView] = useState<'month' | 'year'>('month');
   const [year, setYear] = useState(now.getFullYear());
   const [month0, setMonth0] = useState(now.getMonth()); // 0 = January
+  const [slide, setSlide] = useState(0); // which way the month card glides in (0 = just fades)
 
   // Saints whose feast falls in the month on screen, looked up by day number for the grid.
   const feasts = feastsInMonth(catalog, year, month0 + 1);
@@ -49,6 +50,7 @@ export default function CalendarScreen() {
 
   // The ‹ › arrows move one month back or forward (and across years).
   const shiftMonth = (delta: number) => {
+    setSlide(delta > 0 ? 24 : -24); // the new month glides in from the side you are moving towards
     const d = new Date(year, month0 + delta, 1);
     setYear(d.getFullYear());
     setMonth0(d.getMonth());
@@ -71,7 +73,7 @@ export default function CalendarScreen() {
       ) : (
         <ScrollView contentContainerStyle={{ paddingTop: 8, paddingBottom: 60, gap: 24 }}>
           {/* The month card fades in again each time you move to another month. */}
-          <Reveal key={format(first, 'yyyy-MM')} slide={false} style={{ marginHorizontal: screenMargin, borderRadius: radius.m, borderWidth: stroke.hairline, borderColor: colors.border.default, paddingHorizontal: 8, paddingTop: 10, paddingBottom: 4 }}>
+          <Reveal key={format(first, 'yyyy-MM')} slide={false} fromX={slide} style={{ marginHorizontal: screenMargin, borderRadius: radius.m, borderWidth: stroke.hairline, borderColor: colors.border.default, paddingHorizontal: 8, paddingTop: 10, paddingBottom: 4 }}>
             <View style={{ flexDirection: 'row', alignItems: 'center', paddingLeft: 6, paddingVertical: 4, marginBottom: 4 }}>
               <Text style={[type.headingH2, { flex: 1, color: colors.text.primary }]}>{format(first, 'MMMM yyyy')}</Text>
               <View style={{ flexDirection: 'row', gap: 4 }}>

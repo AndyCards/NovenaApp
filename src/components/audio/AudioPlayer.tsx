@@ -57,7 +57,8 @@ function RoundButton({ icon, label: a11y, onPress }: { icon: 'play' | 'pause' | 
   );
 }
 
-export function AudioPlayer({ state, title, image, positionSec, durationSec, layout = 'full', onPlay, onPause, onSeek, onClose }: Props) {
+export function AudioPlayer({ state, title, image, positionSec, durationSec, layout: startLayout = 'full', onPlay, onPause, onSeek, onClose }: Props) {
+  const [layout, setLayout] = useState(startLayout); // tap the title to open or fold the progress bar
   const [trackWidth, setTrackWidth] = useState(0);
   const [scrub, setScrub] = useState<number | null>(null); // 0 to 1 while a finger is dragging the bar, otherwise null
   const left = mmss(Math.max(0, durationSec - positionSec));
@@ -92,12 +93,12 @@ export function AudioPlayer({ state, title, image, positionSec, durationSec, lay
       shadowColor: '#000', shadowOpacity: 0.08, shadowRadius: 2, shadowOffset: { width: 0, height: 1 }, elevation: 1 }}>
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
         {image ? <NovenaImage image={image} label="" style={{ width: 44, height: 44, borderRadius: radius.s }} /> : null}
-        <View style={{ flex: 1, gap: 2 }}>
+        <PressableScale scaleTo={0.99} accessibilityRole="button" accessibilityLabel={`${title}. ${layout === 'full' ? 'Hide' : 'Show'} progress bar`} onPress={() => { haptics.tap(); setLayout(layout === 'full' ? 'compact' : 'full'); }} style={{ flex: 1, gap: 2 }}>
           <Text numberOfLines={1} style={[type.labelSmall, { color: colors.text.body }]}>{title}</Text>
           <Animated.View key={state} entering={reduced ? undefined : FadeIn.duration(duration.fade)}>
             <Animated.Text numberOfLines={1} style={[type.bodySmall, { color: colors.text.secondary }, statusStyle]}>{label(state, left)}</Animated.Text>
           </Animated.View>
-        </View>
+        </PressableScale>
         {canClose ? <RoundButton icon="close" label="Close player" onPress={onClose} /> : null}
         <RoundButton icon={playing ? 'pause' : 'play'} label={playing ? 'Pause' : 'Play'} onPress={disabled ? () => {} : playing ? onPause : onPlay} />
       </View>

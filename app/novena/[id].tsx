@@ -56,8 +56,8 @@ export default function NovenaPage() {
         <IconButton icon="share" label="Share" size="plain" onPress={() => router.push(`/share/${novena.id}`)} />
       </View>
       <ScrollView contentContainerStyle={{ paddingBottom: 60 }}>
-        <Reveal slide={false} style={{ paddingHorizontal: screenMargin }}>
-          {/* The big saint picture (cropped from the top so heads are never cut off). */}
+        <Reveal slide={false} fromScale={0.95} style={{ paddingHorizontal: screenMargin }}>
+          {/* The big saint picture (it settles in from slightly smaller, so it feels like the card you tapped opening up).  (cropped from the top so heads are never cut off). */}
           <NovenaImage image={novena.image} size="full" label={novena.title} style={{ width: width - screenMargin * 2, height: 403, borderRadius: radius.s }} />
         </Reveal>
         <Reveal index={1} style={{ paddingHorizontal: screenMargin + 2, paddingVertical: 6, marginTop: 6, gap: 20 }}>
