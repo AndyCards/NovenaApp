@@ -15,7 +15,6 @@ import { useCatalog } from '@/hooks/useCatalog';
 import { useLibrary } from '@/hooks/useLibrary';
 import { Reveal } from '@/motion/Reveal';
 import { RotatingChevron } from '@/motion/RotatingChevron';
-import { DayProgressBar } from '@/components/content/DayProgressBar';
 
 export default function NovenaPage() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -69,8 +68,6 @@ export default function NovenaPage() {
           {/* Save (bookmark) and the main dark pray button. */}
           <ActionBar primaryLabel={label} onPrimary={() => openDay(run?.continueDay ?? 1, true)} saved={saved}
             onToggleSave={() => (saved ? lib.unsave(novena.id) : lib.save(novena.id))} />
-          {/* Once started: how many of the days have been prayed. */}
-          {run ? <DayProgressBar prayed={run.prayedDays.length} total={novena.days.length} /> : null}
           <Text style={[type.bodyMedium, { color: colors.text.body }]}>{novena.about}</Text>
         </Reveal>
         {/* "Novena Days" heading. Tap it to fold or unfold the list of nine days. */}
