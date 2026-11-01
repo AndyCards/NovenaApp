@@ -31,8 +31,8 @@ export function FloatingCard({ visible, onClose, title, subtitle, icon, children
       <Animated.View pointerEvents="none" style={[StyleSheet.absoluteFill, { backgroundColor: colors.overlay.scrim }, scrimStyle]} />
       <Pressable accessibilityLabel={strings.common.close} onPress={onClose} style={{ flex: 1, justifyContent: 'flex-end', paddingHorizontal: screenMargin, paddingBottom: Math.max(insets.bottom, 10) + 4 }}>
         <Animated.View style={[{ alignItems: 'center', gap: 20 }, cardStyle]}>
-          <PressableScale scaleTo={pressScale.icon} accessibilityRole="button" accessibilityLabel={strings.common.close} onPress={onClose} hitSlop={4}
-            style={{ width: 36, height: 36, borderRadius: 18, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.surface.default, borderWidth: stroke.hairline, borderColor: colors.border.subtle, ...softShadow }}>
+          <PressableScale scaleTo={pressScale.icon} accessibilityRole="button" accessibilityLabel={strings.common.close} onPress={onClose} hitSlop={1}
+            style={{ width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.surface.default, borderWidth: stroke.hairline, borderColor: colors.border.subtle, ...softShadow }}>
             <Icon name="close" size={22} />
           </PressableScale>
           <Pressable accessible={false} style={{ alignSelf: 'stretch', padding: 16, gap: 20, borderRadius: radius.l, backgroundColor: colors.surface.default, borderWidth: stroke.hairline, borderColor: colors.border.default, ...softShadow }}>
