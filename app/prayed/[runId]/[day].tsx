@@ -6,7 +6,7 @@ import { Pressable, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button } from '@/components/actions/Button';
 import { Icon } from '@/components/Icon';
-import { colors, radius, screenMargin } from '@/constants/theme';
+import { colors, radius, screenMargin, stroke } from '@/constants/theme';
 import { type } from '@/constants/typography';
 import { strings } from '@/copy/strings';
 import { getReminderSettings } from '@/data/queries';
@@ -26,14 +26,14 @@ function DayDot({ prayed, today, date, wave = -1 }: { prayed: boolean; today: bo
   const dot = (
     <View style={{ width: size, height: size, borderRadius: size / 2, alignItems: 'center', justifyContent: 'center',
       backgroundColor: 'transparent', borderWidth: prayed ? 0 : 1, borderStyle: 'dashed', borderColor: colors.border.default }}>
-      {prayed ? <Animated.View style={[{ position: 'absolute', width: size, height: size, borderRadius: size / 2, backgroundColor: colors.action.primary }, fill]} /> : null}
+      {prayed ? <Animated.View style={[{ position: 'absolute', width: size, height: size, borderRadius: size / 2, backgroundColor: colors.progress.fill }, fill]} /> : null}
       <Icon name="handsPraying" size={26} color={prayed ? colors.text.onAction : colors.border.default} />
     </View>
   );
   return (
     <View style={{ alignItems: 'center', gap: 6 }}>
-      {today ? <View style={{ padding: 2, borderRadius: 30, borderWidth: 1.5, borderColor: colors.action.primary }}>{dot}</View> : <View style={{ padding: 3.5 }}>{dot}</View>}
-      <Text style={[prayed ? type.labelCaption : type.bodySmall, { color: prayed ? colors.text.primary : colors.text.tertiary }]}>{today ? strings.dayPrayed.today : date}</Text>
+      {today ? <View style={{ padding: 2, borderRadius: 30, borderWidth: 1.5, borderColor: colors.progress.fill }}>{dot}</View> : <View style={{ padding: 3.5 }}>{dot}</View>}
+      <Text style={[prayed || today ? type.labelCaption : type.bodySmall, { color: today ? colors.text.secondary : prayed ? colors.text.body : colors.text.tertiary }]}>{today ? strings.dayPrayed.today : date}</Text>
     </View>
   );
 }
@@ -71,14 +71,14 @@ export default function DayPrayed() {
           ))}
         </View>
         <Reveal index={strip.length} style={{ alignItems: 'center', gap: 6 }}>
-          <Text accessibilityRole="header" style={[type.titleCard, { color: colors.text.primary, textAlign: 'center' }]}>{strings.dayPrayed.title(dayNo)}</Text>
+          <Text accessibilityRole="header" style={[type.labelLarge, { color: colors.text.secondary, textAlign: 'center' }]}>{strings.dayPrayed.title(dayNo)}</Text>
           <Text style={[type.bodyLarge, { color: colors.text.secondary, textAlign: 'center' }]}>{strings.dayPrayed.body}</Text>
         </Reveal>
       </View>
       <View style={{ paddingHorizontal: screenMargin, paddingBottom: 8, gap: 10 }}>
         {/* The reminder note (not shown after the last day), then the Share button. */}
         {dayNo < total ? (
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12, paddingHorizontal: 14, paddingVertical: 12, borderRadius: radius.m, borderWidth: 0.6, borderColor: colors.border.default }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12, paddingHorizontal: 14, paddingVertical: 12, borderRadius: radius.m, borderWidth: stroke.hairline, borderColor: colors.border.default, backgroundColor: colors.surface.raised }}>
             <Icon name="bell" size={20} color={colors.text.secondary} />
             <Text style={[type.bodyMedium, { flex: 1, color: colors.text.secondary }]}>{reminder ? strings.dayPrayed.reminder(formatTime12(reminder)) : strings.dayPrayed.setReminder}</Text>
             <Pressable accessibilityRole="button" onPress={() => router.push('/reminders')} hitSlop={10}>
