@@ -5,12 +5,20 @@ export type DayBlock =
   | { type: 'intention' }
   | { type: 'silence'; seconds: number };
 
+// When one paragraph is spoken in the day's recording, in seconds from the start. Written by pipeline/tts.py.
+// `block` is the paragraph's position in `blocks` (counting from 0). Used to highlight the prayer as it is read.
+export interface NarrationCue {
+  block: number;
+  start: number;
+  end: number;
+}
+
 export interface NovenaDay {
   day: number; // 1..9
   title: string;
   blocks: DayBlock[];
   shareQuote?: string;
-  audio?: { file: string; durationSec?: number; bytes?: number };
+  audio?: { file: string; durationSec?: number; bytes?: number; cues?: NarrationCue[] };
 }
 
 export interface ImageRef {

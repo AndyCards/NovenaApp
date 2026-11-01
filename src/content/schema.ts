@@ -14,7 +14,13 @@ const day = z.object({
   blocks: z.array(block).min(1),
   shareQuote: z.string().optional(),
   audio: z
-    .object({ file: z.string(), durationSec: z.number().optional(), bytes: z.number().optional() })
+    .object({
+      file: z.string(),
+      durationSec: z.number().optional(),
+      bytes: z.number().optional(),
+      // Follow-along timings: when each paragraph is spoken (see src/utils/narrationCues.ts).
+      cues: z.array(z.object({ block: z.number().int().min(0), start: z.number().min(0), end: z.number().min(0) })).optional(),
+    })
     .optional(),
 });
 

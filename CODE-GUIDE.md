@@ -31,7 +31,7 @@ Buttons, cards, rows and pop-ups, each matching a component on the Figma Compone
 - `inputs/` search box, switches, chips, tabs
 - `navigation/` top bars and the tab bar
 - `overlays/` pop-up cards and menus (always floating cards, never bottom sheets). `useRunMenu` is the "…" menu on a novena card (pause, resume, start again, remove), shared by Home and Library so both behave the same.
-- `reader/` pieces of the prayer screen
+- `reader/` pieces of the prayer screen. While a prayer is read aloud, the paragraph being spoken is set in Source Serif SemiBold and gently kept in view ("follow-along", see below).
 - `audio/` the audio player. `GlobalAudioDock` keeps the small player bar on screen across pages while a prayer plays.
 - `calendar/` calendar days and month cards
 
@@ -40,6 +40,12 @@ The app's animation rules live here so every screen moves the same way. `timing.
 
 ## src/hooks/ — the "brains" behind screens
 Small helpers that load data and do actions, so screens stay simple (e.g. `useLibrary`, `useAudio`, `useReminders`).
+
+## Follow-along (prayer highlighted as it is read aloud)
+- `src/utils/narrationCues.ts` works out which paragraph is being spoken at any moment of the audio.
+- `src/hooks/useNarrationHighlight.ts` watches the real audio position and tells the Reader which paragraph to highlight (re-drawing only when it changes).
+- `src/hooks/useFollowAlong.ts` scrolls that paragraph gently into view, only when it is off screen, and never while the person is scrolling themselves (it waits 8 seconds after they stop) or while VoiceOver is on.
+- **Exact or estimated?** Exact when the day's recording has timings (`audio.cues` in `catalog.json`, written by `pipeline/tts.py` as it makes the audio). Without them (today, with the placeholder tone) the highlight still follows the real playback position, but where one paragraph hands over to the next is estimated from the length of each paragraph, so it can be a few seconds off.
 
 ## src/state/ — shared memory while the app is open
 `dataVersion.ts` is a counter that goes up whenever something is saved; screens watch it to know when to reload. `playerStore.ts` remembers what the audio player is doing, so every screen shows the same player.

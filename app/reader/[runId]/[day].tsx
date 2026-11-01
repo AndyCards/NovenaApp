@@ -1,8 +1,10 @@
 // Reader, Figma Page 34 "Reader · Day 1" (1227:57554) and its menu, intention and pause pop-ups.
 // Source Serif 4 is used only on Reader screens. Audio never starts by itself.
+// While audio plays, the paragraph being read is highlighted and gently kept in view ("follow-along",
+// see useNarrationHighlight and useFollowAlong).
 import { LinearGradient } from 'expo-linear-gradient';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button } from '@/components/actions/Button';
@@ -15,7 +17,9 @@ import { PrayerPassage } from '@/components/reader/PrayerPassage';
 import { colors, screenMargin } from '@/constants/theme';
 import { strings } from '@/copy/strings';
 import { getDownload, getIntention, getMeta, setIntention, setMeta } from '@/data/queries';
-import { useAudio } from '@/hooks/useAudio';
+import { audioControls } from '@/hooks/useAudio';
+import { useFollowAlong } from '@/hooks/useFollowAlong';
+import { useNarrationHighlight } from '@/hooks/useNarrationHighlight';
 import { DUMMY_INTENTIONS, DUMMY_INTENTION_TEXTS, PLACEHOLDER_AUDIO } from '@/constants/config';
 import { PressableScale } from '@/motion/PressableScale';
 import { Reveal } from '@/motion/Reveal';
@@ -43,7 +47,9 @@ export default function Reader() {
   const router = useRouter();
   const { catalog, novenaById } = useCatalog();
   const lib = useLibrary();
-  const audio = useAudio();
+  // The player's buttons only. This screen does not re-draw on every audio position update; the parts that
+  // need the position (the player card, the highlighted paragraph) follow it themselves.
+  const audio = audioControls;
   // "preview~<novenaId>" means the person is reading a day of a novena they have NOT started: read-only,
   // nothing is saved, nothing can be marked as prayed, and no streak is counted.
   const preview = !!runId?.startsWith('preview~');
@@ -58,6 +64,16 @@ export default function Reader() {
   // Which pop-up is open right now: the … menu, the intention (view or edit), or "Continue another time?".
   const [popup, setPopup] = useState<'none' | 'menu' | 'intention-view' | 'intention-edit' | 'pause'>('none');
   const [download, setDownload] = useState<DownloadStatus>({ kind: 'none' });
+  const dayContent = novena?.days.find((d) => d.day === dayNo);
+  // Is the player open for this novena? (Decides "Listen" or "Read only" in the … menu.)
+  const listening = usePlayerStore((s) => s.state !== 'hidden' && s.novenaId === novena?.id);
+  const playing = usePlayerStore((s) => s.state === 'playing' && s.novenaId === novena?.id && s.day === dayNo);
+  // Follow-along: which paragraph is being read aloud, and keeping it in view.
+  const { activeIndex } = useNarrationHighlight(novena?.id, dayNo, dayContent?.blocks, dayContent?.audio?.cues);
+  const follow = useFollowAlong(activeIndex, playing, `${novena?.id}-${dayNo}`);
+  // An unchanging "view intention" handler, so the prayer text isn't re-drawn when this screen re-draws.
+  const openIntentionRef = useRef<() => void>(() => {});
+  const onViewIntention = useCallback(() => openIntentionRef.current(), []);
 
   // Load the person's saved intention, and whether this novena's audio is already downloaded.
   useEffect(() => {
@@ -88,7 +104,7 @@ export default function Reader() {
     if (PLACEHOLDER_AUDIO) audio.open(novena.id, novena.title, dayNo);
   }, [novena?.id, dayNo]); // eslint-disable-line react-hooks/exhaustive-deps
   if (!novena || (!run && !preview)) return null;
-  const content = novena.days.find((d) => d.day === dayNo);
+  const content = dayContent;
   if (!content) return null;
   const alreadyPrayed = !!run?.prayedDays.includes(dayNo);
   // A day that isn't due yet can be read, but not marked as prayed.
@@ -113,6 +129,7 @@ export default function Reader() {
   };
   // No intention written yet? Open the box to write one. Otherwise show it.
   const openIntention = () => { setEditFocus(false); setDraft(intentionText); setPopup(intentionText.trim() ? 'intention-view' : 'intention-edit'); };
+  openIntentionRef.current = openIntention;
 
   return (
     <SafeAreaView edges={['top', 'bottom']} style={{ flex: 1, backgroundColor: colors.surface.default }}>
@@ -123,10 +140,10 @@ export default function Reader() {
       </View>
 
       <Reveal key={dayNo} slide={false} fromX={slideFrom} style={{ flex: 1 }}>
-        <ScrollView contentContainerStyle={{ paddingTop: 6, paddingHorizontal: 22, gap: 24, paddingBottom: 72 }}>
+        <ScrollView {...follow.scrollProps} contentContainerStyle={{ paddingTop: 6, paddingHorizontal: 22, gap: 24, paddingBottom: 72 }}>
           {/* "Day 1 of 9" with the cross, then the prayer itself, then the mark-as-prayed button. */}
           <ChapterTitle title={strings.reader.dayOf(dayNo, novena.days.length)} />
-          <PrayerPassage blocks={content.blocks} onViewIntention={openIntention} />
+          <PrayerPassage blocks={content.blocks} onViewIntention={onViewIntention} activeIndex={activeIndex} onBlockLayout={follow.onBlockLayout} />
           {/* Preview: instead of "Mark as prayed", offer to start the novena (then this same day opens for real). */}
           {preview ? (
             <Button label={strings.novena.start} icon="handsPraying" onPress={async () => { const id = await lib.start(novena.id); router.replace(`/reader/${id}/${dayNo}`); }} />
@@ -144,7 +161,7 @@ export default function Reader() {
         visible={popup === 'menu'}
         day={dayNo}
         total={novena.days.length}
-        mode={audio.state !== 'hidden' && audio.novenaId === novena.id ? 'listen' : 'read'}
+        mode={listening ? 'listen' : 'read'}
         saved={lib.isSaved(novena.id)}
         download={download}
         sizeMb={novena.audioSizeMb}
