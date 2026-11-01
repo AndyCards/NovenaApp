@@ -10,7 +10,16 @@ import { REMINDER_WINDOW_DAYS } from '@/constants/config';
 import type { Catalog } from '@/content/types';
 import { getReminderSettings, listAllCompletions, listRuns } from '@/data/queries';
 
-export async function syncReminders(catalog: Catalog) {
+// Only one re-plan runs at a time. Without this, two quick changes (say, marking a day prayed right as
+// the app comes back to the front) could interleave: the older plan would finish last and bring back a
+// reminder for a day that was just prayed. Each call waits for the one before it, then plans from fresh data.
+let running: Promise<void> = Promise.resolve();
+export function syncReminders(catalog: Catalog): Promise<void> {
+  running = running.catch(() => {}).then(() => planAndSchedule(catalog));
+  return running;
+}
+
+async function planAndSchedule(catalog: Catalog) {
   const today = todayString();
   const [settings, runs, completions] = await Promise.all([getReminderSettings(), listRuns(), listAllCompletions()]);
   const active = runs

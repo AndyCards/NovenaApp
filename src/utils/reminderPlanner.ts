@@ -69,8 +69,8 @@ export function planReminders(
     }
   }
   // "If I miss a day": one quiet note the next morning for a day left unprayed. If the person prays
-  // that day, the plan is redone and this note disappears.
-  if (settings.missedDayNote) {
+  // that day, the plan is redone and this note disappears. Quiet hours are respected here too.
+  if (settings.missedDayNote && !inQuietHours(MISSED_NOTE_TIME, settings.quietStart, settings.quietEnd)) {
     for (let offset = 1; offset < REMINDER_WINDOW_DAYS; offset++) {
       const date = addDaysTo(today, offset);
       for (const run of runs) {

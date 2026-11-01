@@ -24,6 +24,10 @@ describe('reminderPlanner', () => {
     expect(missed).toHaveLength(7);
     expect(planReminders({ ...settings, missedDayNote: false }, [run], '2026-10-02').some((p) => p.kind === 'missed')).toBe(false);
   });
+  it('does not send the 9 am missed-day note during quiet hours', () => {
+    const late = { ...settings, quietStart: '22:00', quietEnd: '10:00' };
+    expect(planReminders(late, [run], '2026-10-02').some((p) => p.kind === 'missed')).toBe(false);
+  });
   it('respects the per-novena switch', () => {
     expect(planReminders(settings, [{ ...run, remindersOn: false }], '2026-10-02')).toEqual([]);
   });

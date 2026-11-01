@@ -20,7 +20,8 @@ export function useReminders() {
   }, []);
 
   const apply = (makePatch: (current: NonNullable<Settings>) => Patch) => {
-    queue.current = queue.current.then(async () => {
+    // If one save fails, the next one still runs (the queue never gets stuck).
+    queue.current = queue.current.catch(() => {}).then(async () => {
       const current = await getReminderSettings(); // always start from what is really saved
       const patch = makePatch(current);
       if (patch.enabled) {

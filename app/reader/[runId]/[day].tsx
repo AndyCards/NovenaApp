@@ -51,6 +51,7 @@ export default function Reader() {
   const dayNo = Number(day);
   const [intentionText, setIntentionText] = useState(''); // what is saved
   const [editFocus, setEditFocus] = useState(false); // true only when the person tapped to edit, so the keyboard stays away otherwise
+  const finishing = useRef(false); // true while "Mark as prayed" is saving
   const lastDay = useRef(dayNo); // the day shown before this one, to know which way to slide
   const [draft, setDraft] = useState(''); // what is being typed, saved only on "Save intention"
   // Which pop-up is open right now: the … menu, the intention (view or edit), or "Continue another time?".
@@ -97,11 +98,17 @@ export default function Reader() {
   lastDay.current = dayNo;
 
   // "Mark Day N as prayed": save it, refresh, then show the "Day N marked as prayed" screen.
+  // A quick double tap only counts once.
   const finish = async () => {
-    if (!run) return;
-    await markPrayed(run.id, dayNo, run.startedOn, run.prayedDays);
-    haptics.success(); // one calm double-tap: the day is done
-    router.replace(`/prayed/${run.id}/${dayNo}`);
+    if (!run || finishing.current) return;
+    finishing.current = true;
+    try {
+      await markPrayed(run.id, dayNo, run.startedOn, run.prayedDays);
+      haptics.success(); // one calm double-tap: the day is done
+      router.replace(`/prayed/${run.id}/${dayNo}`);
+    } finally {
+      finishing.current = false;
+    }
   };
   // No intention written yet? Open the box to write one. Otherwise show it.
   const openIntention = () => { setEditFocus(false); setDraft(intentionText); setPopup(intentionText.trim() ? 'intention-view' : 'intention-edit'); };

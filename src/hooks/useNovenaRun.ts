@@ -7,6 +7,10 @@ import { dataChanged, useDataVersion } from '@/state/dataVersion';
 import { todayString } from '@/utils/dateUtils';
 import { continueDay, dayState, isCompleted, missedDays } from '@/utils/dayRules';
 
+// A novena being started right now, by novena id. A quick double tap on "Start Novena" reuses the
+// first start instead of creating the same novena twice.
+const starting = new Map<string, Promise<string>>();
+
 type Run = Awaited<ReturnType<typeof listRuns>>[number];
 
 export interface RunView extends Run {
@@ -19,15 +23,18 @@ export function useRuns() {
   const [runs, setRuns] = useState<RunView[]>([]);
   const [loaded, setLoaded] = useState(false); // false until the first load from the phone finishes
   const refresh = useCallback(async () => {
-    const [rs, cs] = await Promise.all([listRuns(), listAllCompletions()]);
-    const today = todayString();
-    setRuns(
-      rs.map((r) => {
-        const prayedDays = cs.filter((c) => c.runId === r.id).map((c) => c.day);
-        return { ...r, prayedDays, missed: missedDays(prayedDays, r.startedOn, today), continueDay: continueDay(prayedDays, r.startedOn, today) };
-      }),
-    );
-    setLoaded(true);
+    try {
+      const [rs, cs] = await Promise.all([listRuns(), listAllCompletions()]);
+      const today = todayString();
+      setRuns(
+        rs.map((r) => {
+          const prayedDays = cs.filter((c) => c.runId === r.id).map((c) => c.day);
+          return { ...r, prayedDays, missed: missedDays(prayedDays, r.startedOn, today), continueDay: continueDay(prayedDays, r.startedOn, today) };
+        }),
+      );
+    } finally {
+      setLoaded(true); // even if reading failed, stop waiting so the screen isn't left blank
+    }
   }, []);
   // Reload when anything is saved anywhere in the app, and whenever this screen comes back into view
   // (for example the next morning, so "today" moves on).
@@ -42,7 +49,14 @@ export function useRuns() {
     runs,
     refresh,
     loaded,
-    start: (novenaId: string, restartedFrom?: string) => write(() => startRun(novenaId, todayString(), restartedFrom)),
+    start: (novenaId: string, restartedFrom?: string) => {
+      const key = `${novenaId}:${restartedFrom ?? ''}`;
+      const pending = starting.get(key);
+      if (pending) return pending;
+      const job = write(() => startRun(novenaId, todayString(), restartedFrom)).finally(() => starting.delete(key));
+      starting.set(key, job);
+      return job;
+    },
     pause: (runId: string) => write(() => setRunStatus(runId, 'paused', todayString())),
     resume: (runId: string) => write(() => setRunStatus(runId, 'active', todayString())),
     /** Ends a run without hiding it from history (used when starting the same novena again). */
