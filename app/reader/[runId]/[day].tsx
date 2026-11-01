@@ -9,12 +9,11 @@ import { ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button } from '@/components/actions/Button';
 import { AudioDock } from '@/components/audio/AudioDock';
-import { Icon } from '@/components/Icon';
 import { PopupCard } from '@/components/overlays/PopupCard';
 import { ReaderOptionsMenu } from '@/components/overlays/ReaderOptionsMenu';
 import { ChapterTitle } from '@/components/reader/ChapterTitle';
 import { PrayerPassage } from '@/components/reader/PrayerPassage';
-import { colors, screenMargin } from '@/constants/theme';
+import { colors } from '@/constants/theme';
 import { strings } from '@/copy/strings';
 import { getDownload, getIntention, getMeta, setIntention, setMeta } from '@/data/queries';
 import { audioControls } from '@/hooks/useAudio';
@@ -22,9 +21,7 @@ import { useFollowAlong } from '@/hooks/useFollowAlong';
 import { useNarrationHighlight } from '@/hooks/useNarrationHighlight';
 import { testNarration } from '@/content/testNarration';
 import { DUMMY_INTENTIONS, DUMMY_INTENTION_TEXTS, PLACEHOLDER_AUDIO } from '@/constants/config';
-import { PressableScale } from '@/motion/PressableScale';
 import { Reveal } from '@/motion/Reveal';
-import { pressScale } from '@/motion/tokens';
 import { usePlayerStore } from '@/state/playerStore';
 import { useCatalog } from '@/hooks/useCatalog';
 import { useLibrary } from '@/hooks/useLibrary';
@@ -33,15 +30,7 @@ import { downloadNovenaAudio, removeDownload } from '@/utils/downloads';
 import type { DownloadStatus } from '@/utils/downloadStatus';
 import { haptics } from '@/motion/haptics';
 import { novenaPageTitle } from '@/utils/novenaTitle';
-
-function NavButton({ icon, label, onPress }: { icon: 'back' | 'more'; label: string; onPress: () => void }) {
-  return (
-    <PressableScale scaleTo={pressScale.icon} accessibilityRole="button" accessibilityLabel={label} onPress={onPress}
-      style={{ width: 44, height: 44, alignItems: 'center', justifyContent: 'center' }}>
-      <Icon name={icon} size={22} />
-    </PressableScale>
-  );
-}
+import { NavBar } from '@/components/navigation/NavBar';
 
 export default function Reader() {
   const { runId, day } = useLocalSearchParams<{ runId: string; day: string }>();
@@ -135,11 +124,9 @@ export default function Reader() {
 
   return (
     <SafeAreaView edges={['top', 'bottom']} style={{ flex: 1, backgroundColor: colors.surface.default }}>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: screenMargin + 2, paddingVertical: 6 }}>
-        {/* Back asks "Continue another time?" if today's day isn't marked as prayed yet. … opens the menu. */}
-        <NavButton icon="back" label={strings.common.back} onPress={() => (alreadyPrayed || preview ? router.back() : setPopup('pause'))} />
-        <NavButton icon="more" label={strings.common.more} onPress={() => setPopup('menu')} />
-      </View>
+      {/* Figma Nav Bar. Back asks "Continue another time?" if today's day isn't marked as prayed yet. … opens the menu. */}
+      <NavBar backLabel={strings.common.back} onBack={() => (alreadyPrayed || preview ? router.back() : setPopup('pause'))}
+        primaryAction={{ icon: 'more', label: strings.common.more, onPress: () => setPopup('menu') }} />
 
       <Reveal key={dayNo} slide={false} fromX={slideFrom} style={{ flex: 1 }}>
         <ScrollView {...follow.scrollProps} contentContainerStyle={{ paddingTop: 6, paddingHorizontal: 22, gap: 24, paddingBottom: 72 }}>

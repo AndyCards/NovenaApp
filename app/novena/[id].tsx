@@ -4,7 +4,6 @@ import { useRef, useState } from 'react';
 import { Pressable, ScrollView, Text, useWindowDimensions, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ActionBar } from '@/components/actions/ActionBar';
-import { IconButton } from '@/components/actions/IconButton';
 import { NovenaImage } from '@/components/content/NovenaImage';
 import { NovenaMetaRow } from '@/components/content/NovenaMetaRow';
 import { NovenaDayRow } from '@/components/reader/NovenaDayRow';
@@ -16,6 +15,7 @@ import { useLibrary } from '@/hooks/useLibrary';
 import { Reveal } from '@/motion/Reveal';
 import { RotatingChevron } from '@/motion/RotatingChevron';
 import { novenaPageTitle } from '@/utils/novenaTitle';
+import { NavBar } from '@/components/navigation/NavBar';
 
 export default function NovenaPage() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -51,11 +51,8 @@ export default function NovenaPage() {
 
   return (
     <SafeAreaView edges={['top']} style={{ flex: 1, backgroundColor: colors.surface.page }}>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: screenMargin, paddingVertical: 6 }}>
-        {/* Top row: Back on the left, Share on the right. */}
-        <IconButton icon="back" label="Back" size="plain" onPress={() => router.back()} />
-        <IconButton icon="share" label="Share" size="plain" onPress={() => router.push(`/share/${novena.id}`)} />
-      </View>
+      {/* Figma Nav Bar: Back on the left, Share on the right. */}
+      <NavBar onBack={() => router.back()} primaryAction={{ icon: 'share', label: 'Share', onPress: () => router.push(`/share/${novena.id}`) }} />
       <ScrollView contentContainerStyle={{ paddingBottom: 140 }}>
         <Reveal slide={false} fromScale={0.95} style={{ paddingHorizontal: screenMargin }}>
           {/* The big saint picture (it settles in from slightly smaller, so it feels like the card you tapped opening up).  (cropped from the top so heads are never cut off). */}
