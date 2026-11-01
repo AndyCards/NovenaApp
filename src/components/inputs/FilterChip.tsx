@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { Text } from 'react-native';
 import Animated, { interpolateColor, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
-import { colors, radius, stroke } from '@/constants/theme';
+import { colors, radius } from '@/constants/theme';
 import { type } from '@/constants/typography';
 import { PressableScale } from '@/motion/PressableScale';
 import { duration, ease } from '@/motion/tokens';
@@ -21,7 +21,7 @@ export function FilterChip({ label, selected, onPress }: { label: string; select
   const text = useAnimatedStyle(() => ({ color: interpolateColor(p.value, [0, 1], [colors.text.body, colors.text.onAction]) }));
   return (
     <PressableScale accessibilityRole="button" accessibilityState={{ selected }} accessibilityLabel={label} onPress={() => { if (!selected) haptics.tap(); onPress(); }}>
-      <Animated.View style={[{ height: 36, justifyContent: 'center', paddingHorizontal: 14, borderRadius: radius.full, borderWidth: stroke.hairline * 2 }, chip]}>
+      <Animated.View style={[{ height: 36, justifyContent: 'center', paddingHorizontal: 14, borderRadius: radius.m, borderWidth: 1 }, chip]}>
         <AnimatedText style={[type.labelChip, text]}>{label}</AnimatedText>
       </Animated.View>
     </PressableScale>
