@@ -1,5 +1,5 @@
 // One day's prayer. The intention moment is the Figma "Intention Card"; silence is a quiet gap.
-// `activeIndex` is the paragraph being read aloud (or -1), see useNarrationHighlight. `onBlockLayout` tells the
+// `active` is the sentence being read aloud (paragraph + character range; block -1 = none), see useNarrationHighlight. `onBlockLayout` tells the
 // Reader where each paragraph sits, so it can gently scroll the one being read into view (useFollowAlong).
 import { LinearGradient } from 'expo-linear-gradient';
 import { Fragment, memo, useMemo } from 'react';
@@ -9,6 +9,7 @@ import { type } from '@/constants/typography';
 import { strings } from '@/copy/strings';
 import type { DayBlock } from '@/content/types';
 import { Icon } from '../Icon';
+import type { ActiveSpan } from '@/hooks/useNarrationHighlight';
 import { PrayerParagraph } from './PrayerParagraph';
 
 export function IntentionPrompt({ onPress }: { onPress: () => void }) {
@@ -31,12 +32,12 @@ export function IntentionPrompt({ onPress }: { onPress: () => void }) {
 type PassageProps = {
   blocks: DayBlock[];
   onViewIntention: () => void;
-  activeIndex?: number;
+  active?: ActiveSpan;
   onBlockLayout?: (index: number, e: LayoutChangeEvent) => void;
 };
 
-// memo: the passage only re-draws when the paragraph being read changes, not on every audio tick.
-export const PrayerPassage = memo(function PrayerPassage({ blocks, onViewIntention, activeIndex = -1, onBlockLayout }: PassageProps) {
+// memo: the passage only re-draws when the sentence being read changes, not on every audio tick.
+export const PrayerPassage = memo(function PrayerPassage({ blocks, onViewIntention, active, onBlockLayout }: PassageProps) {
   // One unchanging layout handler per paragraph, so the paragraphs themselves don't re-draw needlessly.
   const layoutHandlers = useMemo(() => blocks.map((_, i) => (e: LayoutChangeEvent) => onBlockLayout?.(i, e)), [blocks, onBlockLayout]);
   return (
@@ -45,7 +46,8 @@ export const PrayerPassage = memo(function PrayerPassage({ blocks, onViewIntenti
         <Fragment key={i}>
           {b.type === 'intention' ? <IntentionPrompt onPress={onViewIntention} />
             : b.type === 'silence' ? <View accessibilityLabel="A moment of silence" style={{ height: 24 }} />
-            : <PrayerParagraph text={b.text} active={i === activeIndex} onLayout={layoutHandlers[i]} />}
+            : <PrayerParagraph text={b.text} onLayout={layoutHandlers[i]}
+                highlightFrom={active?.block === i ? active.from : undefined} highlightTo={active?.block === i ? active.to : undefined} />}
         </Fragment>
       ))}
     </>

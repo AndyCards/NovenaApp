@@ -39,7 +39,7 @@ export function useFollowAlong(activeIndex: number, playing: boolean, resetKey: 
 
   useEffect(() => {
     if (!playing || activeIndex < 0 || screenReader) return;
-    // Wait a moment: the highlighted paragraph changes weight, so its height may change before we measure.
+    // Wait a moment so the page has settled before we measure.
     const t = setTimeout(() => {
       const box = boxes.current[activeIndex];
       const { offset, height } = view.current;

@@ -1,4 +1,4 @@
-# TESTING ONLY. Makes a computer-voice reading (espeak-ng) of Day 1 of every novena, with exact paragraph timings.
+# TESTING ONLY. Makes a computer-voice reading (espeak-ng) of Day 1 of every novena, with exact sentence timings.
 # Usage: pip install espeakng-loader; python pipeline/test-narration.py assets/catalog.json out/test-narration
 # then convert each wav to m4a (ffmpeg -i x.wav -ac 1 -c:a aac -b:a 24k x.m4a) and copy the timings into src/content/testNarration.ts.
 import ctypes, json, sys, wave, struct, pathlib
@@ -24,6 +24,28 @@ def speak(text):
     out = list(buf)
     while out and abs(out[-1]) < 64: out.pop()
     return out
+
+import re
+# Same sentence rule as splitSentences in src/utils/narrationCues.ts (keep the two in step).
+NOT_SENTENCE_ENDS = {"St", "Sts", "Bl", "Mt", "Fr", "Dr", "Mr", "Mrs", "Ms", "Sr", "Br"}
+END = re.compile(r"[.!?]+[\"'\u201D\u2019)]*(?=\s)")
+def split_sentences(text):
+    out, start = [], 0
+    for m in END.finditer(text):
+        if m.group(0) == "." and (w := re.search(r"([A-Za-z]+)$", text[:m.start()])) and w.group(1) in NOT_SENTENCE_ENDS:
+            continue
+        end = m.end()
+        if text[start:end].strip(): out.append([start, end])
+        start = end
+        while start < len(text) and text[start].isspace(): start += 1
+    rest = text[start:].rstrip()
+    if rest.strip(): out.append([start, start + len(rest)])
+    fixed = []
+    for f, t in out:
+        while f < t and text[f].isspace(): f += 1
+        fixed.append((f, t))
+    return fixed
+SENTENCE_GAP = 0.3  # seconds between sentences inside a paragraph
 GAP, INTENTION = 0.8, 10
 catalog = json.load(open(sys.argv[1])); outdir = pathlib.Path(sys.argv[2]); outdir.mkdir(parents=True, exist_ok=True)
 result = {}
@@ -34,9 +56,11 @@ for n in catalog["novenas"]:
         if b["type"] == "silence": samples += [0] * int(SR * b["seconds"])
         elif b["type"] == "intention": samples += [0] * int(SR * INTENTION)
         else:
-            start = len(samples); samples += speak(b["text"]); end = len(samples)
-            cues.append({"block": i, "start": round(start / SR, 3), "end": round(end / SR, 3)})
-            samples += [0] * int(SR * GAP)
+            parts = split_sentences(b["text"])
+            for k, (f, t) in enumerate(parts):
+                start = len(samples); samples += speak(b["text"][f:t]); end = len(samples)
+                cues.append({"block": i, "start": round(start / SR, 3), "end": round(end / SR, 3), "from": f, "to": t})
+                samples += [0] * int(SR * (GAP if k == len(parts) - 1 else SENTENCE_GAP))
     p = outdir / f"{n['id']}-day-1.wav"
     with wave.open(str(p), "wb") as w:
         w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR)
