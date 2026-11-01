@@ -1,4 +1,4 @@
-// Figma "Continue Card" (985:35289, on Home 1227:56670): 10 padding (14 on the right), 104x130 art, 12 gap,
+// Figma "Continue Card" (985:35289): 10 padding (14 on the right), 104x130 art, 12 gap,
 // text column 10 from the top and 6 from the bottom: day eyebrow, 2 gap, title; Pray Day N at the bottom.
 // The "…" button floats in the top-right corner so it doesn't push the title down.
 import { useRef } from 'react';
