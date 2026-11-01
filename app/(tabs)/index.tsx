@@ -142,13 +142,13 @@ export default function Home() {
             </Reveal>
             {featured ? (
               <Reveal index={1} style={{ gap: 6 }}>
-                {/* The big featured cards with the "Start Novena" button. */}
+                {/* The big featured cards with the "Start Novena" button. Figma Featured Carousel (1227:56679): 10 at the sides, 4 above and below the cards, 6 to the page dots, 6 under them. */}
                 <SectionHeader title={featured.title} />
                 <View style={{ gap: 6, paddingBottom: 6 }}>
                   <ScrollView ref={(r) => { featuredRef.current = r; }} horizontal showsHorizontalScrollIndicator={false} snapToInterval={featuredWidth + 10} decelerationRate="fast"
                     onScrollBeginDrag={() => { pausedUntil.current = Date.now() + 8000; }}
                     onMomentumScrollEnd={(e) => { const page = pageFrom(e, featuredWidth + 10); nextPage.current = page - 1; setFeaturedPage(page); }}
-                    contentContainerStyle={{ paddingHorizontal: screenMargin, paddingVertical: 8, gap: 10 }}>
+                    contentContainerStyle={{ paddingHorizontal: screenMargin, paddingVertical: 4, gap: 10 }}>
                     {novenasOf(featured).map((n) => (
                       <FeaturedNovenaCard key={n.id} novena={n} width={featuredWidth} onPress={() => open(n)} onStart={() => startNovena(n)} />
                     ))}
