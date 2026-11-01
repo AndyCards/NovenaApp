@@ -13,7 +13,7 @@ import { SegmentedControl } from '@/components/inputs/SegmentedControl';
 import { AlertCard, type AlertKind } from '@/components/overlays/AlertCard';
 import { CardMenu } from '@/components/overlays/CardMenu';
 import { Toast } from '@/components/overlays/Toast';
-import { colors, radius, screenMargin, stroke } from '@/constants/theme';
+import { colors, gradients, radius, screenMargin, stroke } from '@/constants/theme';
 import { Reveal } from '@/motion/Reveal';
 import { type } from '@/constants/typography';
 import { strings } from '@/copy/strings';
@@ -29,7 +29,7 @@ const L = strings.library;
 function Empty({ icon, title, body, cta, onPress }: { icon: IconName; title: string; body: string; cta: string; onPress: () => void }) {
   return (
     <Reveal style={{ alignItems: 'center', paddingTop: 86, paddingHorizontal: 10, gap: 20 }}>
-      <LinearGradient colors={colors.gradient.iconCircle} style={{ width: 72, height: 72, borderRadius: 36, alignItems: 'center', justifyContent: 'center' }}>
+      <LinearGradient {...gradients.iconCircle} style={{ width: 72, height: 72, borderRadius: 36, alignItems: 'center', justifyContent: 'center' }}>
         <Icon name={icon} size={32} color={colors.text.secondary} />
       </LinearGradient>
       <View style={{ gap: 8, alignItems: 'center' }}>

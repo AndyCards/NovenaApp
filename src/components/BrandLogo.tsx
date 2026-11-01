@@ -4,6 +4,7 @@
 // the same on every phone and needs no extra font. The whole logo is 170 wide and 50 tall.
 import { Image, View } from 'react-native';
 import Svg, { Defs, LinearGradient, Path, Stop } from 'react-native-svg';
+import { gradients } from '@/constants/theme';
 import { wordmarkPath } from '@/constants/wordmarkPath';
 
 export function BrandLogo() {
@@ -15,8 +16,9 @@ export function BrandLogo() {
       <Svg width={140} height={30} viewBox="0 0 140 30" style={{ position: 'absolute', left: 30, top: 10 }}>
         <Defs>
           <LinearGradient id="wordmarkFill" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="30">
-            <Stop offset="0" stopColor="#5F5F5F" />
-            <Stop offset="1" stopColor="#3F3F3F" />
+            {/* Figma "Gradient/Dark", from the shared gradient list. */}
+            <Stop offset="0" stopColor={gradients.dark.colors[0]} />
+            <Stop offset="1" stopColor={gradients.dark.colors[1]} />
           </LinearGradient>
         </Defs>
         <Path d={wordmarkPath} fill="url(#wordmarkFill)" />

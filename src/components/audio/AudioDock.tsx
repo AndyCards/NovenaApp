@@ -1,7 +1,11 @@
 // Holds the player card. Shows only once audio has been opened. `inline` puts it in the page flow
 // (Reader, Figma "Audio" 10/8 padding); otherwise it floats above the tab bar.
+// Behind the player sits a soft white band, as in Figma: "Gradient/Audio Bar Fade" in the reader,
+// "Gradient/Audio Dock Fade" when floating, so anything scrolling underneath fades out instead of clashing.
+import { LinearGradient } from 'expo-linear-gradient';
+import { StyleSheet } from 'react-native';
 import Animated, { FadeOut, ReduceMotion, useReducedMotion } from 'react-native-reanimated';
-import { screenMargin } from '@/constants/theme';
+import { gradients, screenMargin } from '@/constants/theme';
 import { useAudio } from '@/hooks/useAudio';
 import { useCatalog } from '@/hooks/useCatalog';
 import { revealIn } from '@/motion/Reveal';
@@ -26,6 +30,9 @@ export function AudioDock({ bottomOffset = 90, layout = 'full', inline }: Props)
     : { position: 'absolute' as const, left: screenMargin, right: screenMargin, bottom: bottomOffset };
   return (
     <Animated.View entering={reduced ? undefined : enter} exiting={reduced ? undefined : leave} pointerEvents={inline ? 'auto' : 'box-none'} style={place}>
+      {/* The white band behind the player. Inline it fills the strip; floating it spreads to the screen edges. */}
+      <LinearGradient pointerEvents="none" {...(inline ? gradients.audioBarFade : gradients.audioDockFade)}
+        style={inline ? StyleSheet.absoluteFill : { position: 'absolute', top: 0, bottom: 0, left: -screenMargin, right: -screenMargin }} />
       <AudioPlayer state={a.state} title={`${a.novenaTitle} · Day ${a.day}`} image={novena?.image} positionSec={a.positionSec} durationSec={a.durationSec}
         layout={layout} onPlay={a.play} onPause={a.pause} onSeek={a.seek} onClose={a.close} />
     </Animated.View>

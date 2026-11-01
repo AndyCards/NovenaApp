@@ -12,7 +12,7 @@ import { PopupCard } from '@/components/overlays/PopupCard';
 import { ReaderOptionsMenu } from '@/components/overlays/ReaderOptionsMenu';
 import { ChapterTitle } from '@/components/reader/ChapterTitle';
 import { PrayerPassage } from '@/components/reader/PrayerPassage';
-import { colors, screenMargin } from '@/constants/theme';
+import { colors, gradients, screenMargin } from '@/constants/theme';
 import { strings } from '@/copy/strings';
 import { getDownload, getIntention, getMeta, setIntention, setMeta } from '@/data/queries';
 import { useAudio } from '@/hooks/useAudio';
@@ -132,8 +132,8 @@ export default function Reader() {
           ) : <Button label={alreadyPrayed ? strings.novena.prayedDay(dayNo) : strings.reader.markPrayed(dayNo)} icon="handsPraying" disabled={alreadyPrayed || notYet} onPress={finish} />}
         </ScrollView>
         {/* Soft white fades at the top and bottom edges so text gently disappears as you scroll. */}
-        <LinearGradient pointerEvents="none" colors={['#FFFFFF', 'rgba(255,255,255,0)']} style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 12 }} />
-        <LinearGradient pointerEvents="none" colors={['rgba(255,255,255,0)', '#FFFFFF']} style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 46 }} />
+        <LinearGradient pointerEvents="none" {...gradients.fadeTop} style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 12 }} />
+        <LinearGradient pointerEvents="none" {...gradients.fadeBottom} style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 46 }} />
       </Reveal>
       {/* The audio player appears here only after the person chooses Listen. It never plays by itself. */}
       <AudioDock inline />
