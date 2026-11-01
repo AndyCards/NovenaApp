@@ -1,4 +1,4 @@
-// Figma "Nav Bar" (1429:4753): one top bar for every inner screen. White, 6 padding all round (56 tall).
+// Figma "Nav Bar" (1429:4753): one top bar for every inner screen. White, 10 at the sides and 4 above and below (52 tall).
 // Back on the left, an optional centred title (Title/Medium, secondary grey), up to two actions on the right.
 // Back and the main action are 38 x 44 with just the icon (no circle); the second action is 44 wide; the two actions are 6 apart.
 import { Text, View } from 'react-native';
