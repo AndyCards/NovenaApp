@@ -45,7 +45,7 @@ export const PrayerPassage = memo(function PrayerPassage({ blocks, onViewIntenti
       {blocks.map((b, i) => (
         <Fragment key={i}>
           {b.type === 'intention' ? <IntentionPrompt onPress={onViewIntention} />
-            : b.type === 'silence' ? <View accessibilityLabel="A moment of silence" style={{ height: 24 }} />
+            : b.type === 'silence' ? null // a pause is for the narration only; drawing it would add a second gap (Figma: 24 between every paragraph)
             : <PrayerParagraph text={b.text} onLayout={layoutHandlers[i]}
                 highlightFrom={active?.block === i ? active.from : undefined} highlightTo={active?.block === i ? active.to : undefined} />}
         </Fragment>
