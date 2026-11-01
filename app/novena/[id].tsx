@@ -76,14 +76,15 @@ export default function NovenaPage() {
         </Pressable>
         {daysOpen ? (
           <Reveal index={0} style={{ padding: screenMargin, gap: 8 }}>
-            {/* One card per day, with a marker showing prayed, today, missed or still to come. */}
+            {/* One card per day, with a marker showing prayed, today, missed or still to come.
+                A novena not started yet shows Day 1 as "today" and the rest still to come. */}
             {novena.days.map((d) => (
               <NovenaDayRow
                 key={d.day}
                 day={d.day}
                 title={d.title}
                 meta={d.day === 1 ? `${strings.novena.startHere} · ${strings.novena.minutes(novena.minutesPerDay)}` : strings.novena.minutes(novena.minutesPerDay)}
-                state={run ? lib.stateOf(run, d.day) : 'upcoming'}
+                state={run ? lib.stateOf(run, d.day) : d.day === 1 ? 'today' : 'upcoming'}
                 onPress={() => openDay(d.day)}
               />
             ))}
