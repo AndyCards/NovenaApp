@@ -53,8 +53,8 @@ export default function NovenaPage() {
     <SafeAreaView edges={['top']} style={{ flex: 1, backgroundColor: colors.surface.page }}>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: screenMargin, paddingVertical: 6 }}>
         {/* Top row: Back on the left, Share on the right. */}
-        <IconButton icon="back" label="Back" size="large" onPress={() => router.back()} />
-        <IconButton icon="share" label="Share" size="large" onPress={() => router.push(`/share/${novena.id}`)} />
+        <IconButton icon="back" label="Back" size="plain" onPress={() => router.back()} />
+        <IconButton icon="share" label="Share" size="plain" onPress={() => router.push(`/share/${novena.id}`)} />
       </View>
       <ScrollView contentContainerStyle={{ paddingBottom: 60 }}>
         <Reveal slide={false} style={{ paddingHorizontal: screenMargin }}>

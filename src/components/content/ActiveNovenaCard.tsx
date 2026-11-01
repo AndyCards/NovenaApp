@@ -38,7 +38,7 @@ export function ActiveNovenaCard({ novena, day, prayedToday, paused, onOpen, onP
         <PressableScale dimTo={0.92} accessibilityRole="button" accessibilityLabel={strings.novena.prayDay(nextDay)} onPress={() => { haptics.confirm(); onPray(); }}
           style={{ alignSelf: 'flex-start', flexDirection: 'row', alignItems: 'center', gap: 8, paddingLeft: 16, paddingRight: 18, paddingVertical: 13, borderRadius: radius.l,
             backgroundColor: done ? '#F2F2F2' : colors.action.primary }}>
-          <Text style={[type.labelSmall, { fontSize: 15, color: done ? colors.text.secondary : colors.text.onAction }]}>{strings.novena.prayDay(nextDay)}</Text>
+          <Text style={[type.labelSmall, { color: done ? colors.text.secondary : colors.text.onAction }]}>{strings.novena.prayDay(nextDay)}</Text>
           <Icon name={done ? 'check' : 'handsPraying'} size={18} color={done ? colors.text.secondary : colors.text.onAction} />
         </PressableScale>
       </View>
