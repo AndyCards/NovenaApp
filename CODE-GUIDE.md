@@ -63,7 +63,7 @@ Day rules (which day is due or missed), dates, feast days, search ranking, remin
 Colours, spacing and fonts from Figma (`constants/`), and every sentence the app shows (`copy/strings.ts`). Change wording in `strings.ts`.
 
 **Testing switches in `constants/config.ts` (turn off before release):**
-- `PLACEHOLDER_AUDIO = true` plays a bundled sample tone instead of real recordings. Day 1 of every novena instead plays a computer voice reading the prayer, with exact timings, so the follow-along highlight can be checked against a voice (`src/content/testNarration.ts`, `assets/audio/test-narration/`, made by `pipeline/test-narration.py`).
+- `PLACEHOLDER_AUDIO = true` plays a bundled sample tone instead of real recordings. St Dymphna (all 9 days) plays a prayerful Kokoro reading (open-source voice, slow, with real pauses after commas, sentences, "Amen", paragraphs and sections; `pipeline/kokoro-narration.py`), and Day 1 of every other novena a basic computer voice (`pipeline/test-narration.py`). Both have exact sentence timings for the highlight (`src/content/testNarration.ts`, `assets/audio/test-narration/`).
 - `DUMMY_INTENTIONS = true` fills in a sample intention the first time a novena is opened.
 - The prayers in `assets/catalog.json` are sample text until the real prayers are added.
 
