@@ -123,27 +123,12 @@ export default function Home() {
       {/* Top bar: the pocketNovena name, then Calendar and Search buttons. Frosted glass; the page scrolls underneath it. */}
       <HomeAppBar onCalendar={() => router.push('/calendar')} onSearch={() => router.push('/search')} scrolled={scrolled} />
       <ScrollView onScroll={onScroll} scrollEventThrottle={32} scrollIndicatorInsets={{ top: insets.top + HOME_APP_BAR_HEIGHT }} contentContainerStyle={{ paddingTop: insets.top + HOME_APP_BAR_HEIGHT + 12, paddingBottom: 140, gap: 32 }}>
-        {/* Someone already praying sees: Continue cards, featured novenas, intentions, feast days, then the other sections. */}
+        {/* Someone already praying sees (Andy, 2026-11-02): featured novenas first, then Continue cards, intentions, feast days, then the other sections. */}
         {/* Someone new sees: featured novenas, "How a novena works", feast days, then the other sections. */}
         {!loaded ? null : returning ? (
           <>
-            <Reveal index={0} style={{ gap: 6 }}>
-              {/* "Continue praying": one card per novena in progress, swipe sideways. */}
-              <SectionHeader title={strings.home.continueTitle} />
-              <View style={{ gap: 6 }}>
-                <ScrollView horizontal showsHorizontalScrollIndicator={false} snapToInterval={continueWidth + 10} decelerationRate="fast"
-                  onMomentumScrollEnd={(e) => { const p = pageFrom(e, continueWidth + 10); if (p !== continuePage) haptics.tap(); setContinuePage(p); }}
-                  contentContainerStyle={{ paddingHorizontal: screenMargin, paddingVertical: 6, gap: 10 }} style={{ marginVertical: -4 }}>
-                  {active.map(({ run, novena }) => (
-                    <ContinueCard key={run.id} novena={novena!} day={run.continueDay} missed={run.missed.length} width={continueWidth}
-                      onOpen={() => open(novena!)} onMenu={(y) => openMenu(run.id, y)} onContinue={() => router.push(`/reader/${run.id}/${run.continueDay}`)} />
-                  ))}
-                </ScrollView>
-                {active.length > 1 ? <CarouselIndicator count={active.length} active={continuePage} /> : null}
-              </View>
-            </Reveal>
             {featured ? (
-              <Reveal index={1} style={{ gap: 6 }}>
+              <Reveal index={0} style={{ gap: 6 }}>
                 {/* The big featured cards with the "Start Novena" button. Figma Featured Carousel (1227:56679): 10 at the sides, 4 above and below the cards, 6 to the page dots, 6 under them. */}
                 <SectionHeader title={featured.title} />
                 <View style={{ gap: 6, paddingBottom: 6 }}>
@@ -159,6 +144,21 @@ export default function Home() {
                 </View>
               </Reveal>
             ) : null}
+            <Reveal index={1} style={{ gap: 6 }}>
+              {/* "Continue praying": one card per novena in progress, swipe sideways. */}
+              <SectionHeader title={strings.home.continueTitle} />
+              <View style={{ gap: 6 }}>
+                <ScrollView horizontal showsHorizontalScrollIndicator={false} snapToInterval={continueWidth + 10} decelerationRate="fast"
+                  onMomentumScrollEnd={(e) => { const p = pageFrom(e, continueWidth + 10); if (p !== continuePage) haptics.tap(); setContinuePage(p); }}
+                  contentContainerStyle={{ paddingHorizontal: screenMargin, paddingVertical: 6, gap: 10 }} style={{ marginVertical: -4 }}>
+                  {active.map(({ run, novena }) => (
+                    <ContinueCard key={run.id} novena={novena!} day={run.continueDay} missed={run.missed.length} width={continueWidth}
+                      onOpen={() => open(novena!)} onMenu={(y) => openMenu(run.id, y)} onContinue={() => router.push(`/reader/${run.id}/${run.continueDay}`)} />
+                  ))}
+                </ScrollView>
+                {active.length > 1 ? <CarouselIndicator count={active.length} active={continuePage} /> : null}
+              </View>
+            </Reveal>
             <Reveal index={2} style={{ gap: 6 }}>
               {/* "What are you praying for?": two tiles per row. Tapping one shows the novenas for that need. */}
               <SectionHeader title={strings.home.intentionsTitle} />
