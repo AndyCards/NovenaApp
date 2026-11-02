@@ -43,7 +43,8 @@ export default function Home() {
   const [featuredPage, setFeaturedPage] = useState(1);
 
   // Novenas the person is praying right now. If there are any, they are a "returning" user and see the Continue cards first.
-  const active = runs.filter((r) => r.status === 'active').map((r) => ({ run: r, novena: novenaById(r.novenaId) })).filter((x) => x.novena);
+  // Paused ones count too (Andy, 2026-11-02): their card stays on Home, marked "Paused", with a Resume button.
+  const active = runs.filter((r) => r.status === 'active' || r.status === 'paused').map((r) => ({ run: r, novena: novenaById(r.novenaId) })).filter((x) => x.novena);
   const returning = active.length > 0;
   // Home's sections (favourites, mental health, etc.) come from the catalog, in the order set in the spreadsheet.
   const collections = [...catalog.collections].sort((a, b) => a.order - b.order);
@@ -152,8 +153,9 @@ export default function Home() {
                   onMomentumScrollEnd={(e) => { const p = pageFrom(e, continueWidth + 10); if (p !== continuePage) haptics.tap(); setContinuePage(p); }}
                   contentContainerStyle={{ paddingHorizontal: screenMargin, paddingVertical: 6, gap: 10 }} style={{ marginVertical: -4 }}>
                   {active.map(({ run, novena }) => (
-                    <ContinueCard key={run.id} novena={novena!} day={run.continueDay} missed={run.missed.length} width={continueWidth}
-                      onOpen={() => open(novena!)} onMenu={(y) => openMenu(run.id, y)} onContinue={() => router.push(`/reader/${run.id}/${run.continueDay}`)} />
+                    <ContinueCard key={run.id} novena={novena!} day={run.continueDay} missed={run.missed.length} paused={run.status === 'paused'} width={continueWidth}
+                      onOpen={() => open(novena!)} onMenu={(y) => openMenu(run.id, y)}
+                      onContinue={async () => { if (run.status === 'paused') await resume(run.id); router.push(`/reader/${run.id}/${run.continueDay}`); }} />
                   ))}
                 </ScrollView>
                 {active.length > 1 ? <CarouselIndicator count={active.length} active={continuePage} /> : null}

@@ -13,18 +13,18 @@ import { NovenaImage } from './NovenaImage';
 import { PressableScale } from '@/motion/PressableScale';
 import { pressScale } from '@/motion/tokens';
 
-type Props = { novena: Novena; day: number; missed?: number; width?: number; onContinue: () => void; onOpen: () => void; onMenu?: (anchorBottom: number) => void };
+type Props = { novena: Novena; day: number; missed?: number; paused?: boolean; width?: number; onContinue: () => void; onOpen: () => void; onMenu?: (anchorBottom: number) => void };
 
-export function ContinueCard({ novena, day, missed = 0, width = 340, onContinue, onOpen, onMenu }: Props) {
+export function ContinueCard({ novena, day, missed = 0, paused = false, width = 340, onContinue, onOpen, onMenu }: Props) {
   const dots = useRef<{ measureInWindow: (cb: (x: number, y: number, w: number, h: number) => void) => void } | null>(null); // finds the "…" button so the menu opens right under it
   return (
-    <PressableScale scaleTo={pressScale.card} accessibilityRole="button" accessibilityLabel={`${novena.title}, day ${day} of 9`} onPress={onOpen}
+    <PressableScale scaleTo={pressScale.card} accessibilityRole="button" accessibilityLabel={`${novena.title}, day ${day} of 9${paused ? ', paused' : ''}`} onPress={onOpen}
       style={{ width, height: 150, flexDirection: 'row', padding: 10, paddingRight: 14, gap: 12, borderRadius: radius.m, borderWidth: stroke.hairline, borderColor: colors.border.default, backgroundColor: colors.surface.default, ...elevation.card }}>
       <NovenaImage image={novena.image} label={novena.title} style={{ width: 104, height: 130, borderRadius: radius.s }} />
       <View style={{ flex: 1, justifyContent: 'space-between', paddingTop: 10, paddingBottom: 6 }}>
         <View style={{ gap: 2 }}>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Text style={[type.labelEyebrow, { color: colors.icon.secondary, letterSpacing: 1.2, textTransform: 'uppercase' }]}>{`Day ${day} of 9`}</Text>
+            <Text style={[type.labelEyebrow, { color: colors.icon.secondary, letterSpacing: 1.2, textTransform: 'uppercase' }]}>{paused ? 'Paused' : `Day ${day} of 9`}</Text>
             {onMenu ? (
               <View ref={(r) => { dots.current = r; }} collapsable={false} style={{ position: 'absolute', right: 0, top: -5 }}>
                 <PressableScale scaleTo={pressScale.icon} accessibilityRole="button" accessibilityLabel="More options" hitSlop={12}
@@ -36,7 +36,8 @@ export function ContinueCard({ novena, day, missed = 0, width = 340, onContinue,
           </View>
           <Text numberOfLines={2} style={[type.titleMedium, { color: colors.text.secondary, paddingRight: onMenu ? 26 : 0 }]}>{novena.title}</Text>
         </View>
-        <PrayButton label={missed > 0 ? strings.novena.continueDay(day) : strings.novena.prayDay(day)} onPress={onContinue} />
+        {/* A paused novena (Andy, 2026-11-02) keeps its card on Home: the eyebrow says "Paused" and the button says "Resume". */}
+        <PrayButton label={paused ? strings.novena.resume : missed > 0 ? strings.novena.continueDay(day) : strings.novena.prayDay(day)} onPress={onContinue} />
       </View>
     </PressableScale>
   );

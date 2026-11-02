@@ -5,7 +5,8 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
+import { format, parseISO } from 'date-fns';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '@/components/actions/Button';
 import { AudioDock } from '@/components/audio/AudioDock';
@@ -14,6 +15,8 @@ import { ReaderOptionsMenu } from '@/components/overlays/ReaderOptionsMenu';
 import { ChapterTitle } from '@/components/reader/ChapterTitle';
 import { PrayerPassage } from '@/components/reader/PrayerPassage';
 import { colors } from '@/constants/theme';
+import { type } from '@/constants/typography';
+import { addDaysTo, todayString } from '@/utils/dateUtils';
 import { strings } from '@/copy/strings';
 import { getDownload, getIntention, getMeta, setIntention, setMeta } from '@/data/queries';
 import { audioControls } from '@/hooks/useAudio';
@@ -126,6 +129,9 @@ export default function Reader() {
   const alreadyPrayed = !!run?.prayedDays.includes(dayNo);
   // A day that isn't due yet can be read, but not marked as prayed.
   const notYet = !!run && lib.stateOf(run, dayNo) === 'upcoming';
+  // When that day can be marked (Andy, 2026-11-02): shown as a short line under the greyed-out button.
+  const dueOn = run ? addDaysTo(run.startedOn, dayNo - 1) : '';
+  const notYetWhen = !notYet ? '' : dueOn === addDaysTo(todayString(), 1) ? 'tomorrow' : `on ${format(parseISO(dueOn), 'EEEE d MMM')}`;
   const close = () => setPopup('none');
   // Going to a later day, the prayer slides in gently from the right; to an earlier day, from the left.
   const slideFrom = lastDay.current === dayNo ? 0 : dayNo > lastDay.current ? 28 : -28;
@@ -171,7 +177,12 @@ export default function Reader() {
           {/* Preview: instead of "Mark as prayed", offer to start the novena (then this same day opens for real). */}
           {preview ? (
             <Button label={strings.novena.start} icon="handsPraying" onPress={async () => { const id = await lib.start(novena.id); router.replace(`/reader/${id}/${dayNo}`); }} />
-          ) : <Button label={alreadyPrayed ? strings.novena.prayedDay(dayNo) : strings.reader.markPrayed(dayNo)} icon="handsPraying" disabled={alreadyPrayed || notYet} onPress={finish} />}
+          ) : (
+            <View style={{ gap: 10 }}>
+              <Button label={alreadyPrayed ? strings.novena.prayedDay(dayNo) : strings.reader.markPrayed(dayNo)} icon="handsPraying" disabled={alreadyPrayed || notYet} onPress={finish} />
+              {notYet ? <Text style={[type.bodySmall, { color: colors.text.tertiary, textAlign: 'center' }]}>{strings.reader.notYet(dayNo, notYetWhen)}</Text> : null}
+            </View>
+          )}
         </ScrollView>
         {/* A soft white fade at the bottom edge so text gently disappears as you scroll (at the top it slides under the glass bar). */}
         <LinearGradient pointerEvents="none" colors={['rgba(255,255,255,0)', '#FFFFFF']} style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 46 }} />
