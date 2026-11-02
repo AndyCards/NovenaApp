@@ -163,7 +163,7 @@ export default function Reader() {
         <ScrollView {...follow.scrollProps} onScroll={(e) => { follow.scrollProps.onScroll(e); onScroll(e); }} scrollIndicatorInsets={{ top: insets.top + NAV_BAR_HEIGHT }} contentContainerStyle={{ paddingTop: insets.top + NAV_BAR_HEIGHT + 6, paddingHorizontal: 22, gap: 24, paddingBottom: 72 }}>
           {/* "Day 1 of 9" with the cross, then the prayer itself, then the mark-as-prayed button. */}
           <ChapterTitle title={strings.reader.dayOf(dayNo, novena.days.length)} />
-          <PrayerPassage blocks={content.blocks} onViewIntention={onViewIntention} active={active} onBlockLayout={follow.onBlockLayout} />
+          <PrayerPassage blocks={content.blocks} onViewIntention={onViewIntention} intention={intentionText} active={active} onBlockLayout={follow.onBlockLayout} />
           {/* Preview: instead of "Mark as prayed", offer to start the novena (then this same day opens for real). */}
           {preview ? (
             <Button label={strings.novena.start} icon="handsPraying" onPress={async () => { const id = await lib.start(novena.id); router.replace(`/reader/${id}/${dayNo}`); }} />
