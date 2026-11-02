@@ -21,4 +21,11 @@ describe('suggestionsFor', () => {
     expect(suggestionsFor(catalog, '')).toEqual([]);
     expect(suggestionsFor(catalog, 'a').length).toBeLessThanOrEqual(3);
   });
+  it('never offers the same word twice in different capitals', () => {
+    // QA 2026-11-02: typing "anx" offered both "anxiety" and "Anxiety".
+    const withDupes: any = { ...catalog, categories: [...catalog.categories, { id: 'anx', name: 'Anxiety' }] };
+    const out = suggestionsFor(withDupes, 'anx');
+    const lowered = out.map((t) => t.toLowerCase());
+    expect(new Set(lowered).size).toBe(lowered.length);
+  });
 });

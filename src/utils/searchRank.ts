@@ -74,7 +74,11 @@ export function suggestionsFor(catalog: Catalog, query: string, limit = 3): stri
     .filter((x) => x.r < 9)
     .sort((a, b) => a.r - b.r || a.t.length - b.t.length || a.t.localeCompare(b.t))
     .map((x) => x.t);
-  return Array.from(new Set([...typed, ...contextualSuggestions(query, limit)])).slice(0, limit);
+  // One entry per word, whatever its capitals ("anxiety" and "Anxiety" are the same suggestion).
+  const seen = new Set<string>();
+  return [...typed, ...contextualSuggestions(query, limit)]
+    .filter((t) => { const k = normalize(t); if (seen.has(k)) return false; seen.add(k); return true; })
+    .slice(0, limit);
 }
 
 // ---------------------------------------------------------------------------------------------
