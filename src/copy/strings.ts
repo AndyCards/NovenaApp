@@ -55,7 +55,7 @@ export const strings = {
     dayOf: (n: number, total: number) => `Day ${n} of ${total}`,
     markPrayed: (n: number) => `Mark Day ${n} as prayed`,
     viewIntention: 'View Intention',
-    intentionPrompt: 'For what you hold in prayer',
+    intentionPrompt: 'Take a moment for what you hold in prayer',
     prayerMode: 'Prayer mode',
     listen: 'Listen',
     readOnly: 'Read only',

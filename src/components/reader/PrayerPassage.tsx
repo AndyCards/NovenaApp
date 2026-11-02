@@ -42,7 +42,7 @@ export function IntentionPrompt({ onPress, intention }: { onPress: () => void; i
       {/* Title, then a one-line subtitle: the person's own intention once written, otherwise a gentle prompt. */}
       <View style={{ flex: 1, gap: 2 }}>
         <Text numberOfLines={1} style={[type.labelMedium, { color: colors.text.primary }]}>{strings.reader.viewIntention}</Text>
-        <Text numberOfLines={1} style={[type.bodyMedium, { color: written ? colors.text.body : colors.text.tertiary }]}>{subtitle}</Text>
+        <Text numberOfLines={2} style={[type.bodyMedium, { color: written ? colors.text.body : colors.text.tertiary }]}>{subtitle}</Text>
       </View>
       <Icon name="chevronRight" size={16} color={colors.text.muted} />
     </PressableScale>
