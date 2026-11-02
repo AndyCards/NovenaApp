@@ -1,4 +1,6 @@
 // Novena page, Figma Page 34 "Novena page · Pray Day 4" (1227:62829).
+// How you get here: tapping a novena anywhere (Home, Search, Library, Calendar). From here: the big button or a day row
+// opens the Reader, Share opens the Share screen, Back returns to wherever you came from.
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useRef, useState } from 'react';
 import { Pressable, ScrollView, Text, useWindowDimensions, View } from 'react-native';

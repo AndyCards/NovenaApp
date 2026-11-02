@@ -1,5 +1,9 @@
 // Reader, Figma Page 34 "Reader · Day 1" (1227:57554) and its menu, intention and pause pop-ups.
 // Source Serif 4 is used only on Reader screens. Audio never starts by itself.
+// How you get here: Start Novena / Pray Day N / Continue (novena page, Home, Library) or a day row on the novena page.
+// The address is /reader/<run id>/<day>; for a novena not started yet it is /reader/preview~<novena id>/<day> (read only).
+// From here: "Mark as prayed" swaps this screen for "Day N marked as prayed"; the … menu can change day (same screen,
+// new day number in the address), and Back may first ask "Continue another time?".
 // While audio plays, the paragraph being read is highlighted and gently kept in view ("follow-along",
 // see useNarrationHighlight and useFollowAlong).
 import { LinearGradient } from 'expo-linear-gradient';

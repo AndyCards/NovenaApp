@@ -1,4 +1,5 @@
 // A row in the Reader options menu: label, optional detail line, optional icon.
+// NOT USED ON ANY SCREEN RIGHT NOW: nothing imports this file, so changing it has no visible effect (see UX_DESIGNER_GUIDE.md).
 import { Pressable, Text, View } from 'react-native';
 import { colors, space } from '@/constants/theme';
 import { type } from '@/constants/typography';

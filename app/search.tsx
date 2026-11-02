@@ -1,5 +1,8 @@
 // Search, Figma Page 34 (1227:56728 results, 1227:56784 typing): field, filter chips,
 // recent chips, suggestions, related novenas, browse by intention, results.
+// How you get here: the magnifier on Home, or an intention tile (Home) which opens Search already showing that need.
+// What shows depends on three things: is anything typed (`typing`), was search pressed (`submitted`), and was an
+// intention tile picked (`categoryId`). See the comments in the page below for each combination.
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useMemo, useState } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';

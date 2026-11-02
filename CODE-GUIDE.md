@@ -1,6 +1,7 @@
 # How the pocketNovena code is organised
 
 A plain-English map of the folders. Every code file also starts with a comment saying what it does.
+For a longer, designer-focused walkthrough (screen by screen, components, UI states, what is safe to change), see `UX_DESIGNER_GUIDE.md`.
 
 ## The big picture, in four sentences
 The app keeps everything on the phone: there are no accounts and nothing is sent anywhere. The list of novenas and their prayers comes bundled inside the app (`assets/catalog.json`), and the app quietly checks once a day for a newer list. What the person does (novenas started, days prayed, intentions, saved novenas, reminder settings) is stored in a small database on the phone. Whenever anything is saved, every screen and the reminders refresh themselves, so they always agree.

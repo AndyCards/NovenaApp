@@ -1,4 +1,6 @@
 // Read and write helpers. Screens never touch the database directly; hooks call these.
+// Important: each helper only builds the request. It runs when it is awaited (or .then is called). A write that is not
+// awaited silently does nothing. After a write, call dataChanged() (state/dataVersion.ts) so every screen refreshes.
 import { and, desc, eq, isNull } from 'drizzle-orm';
 import { db } from './db';
 import {

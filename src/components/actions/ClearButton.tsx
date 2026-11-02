@@ -1,4 +1,5 @@
 // The small round × button that empties a search box or removes a chip.
+// NOT USED ON ANY SCREEN RIGHT NOW: nothing imports this file, so changing it has no visible effect (see UX_DESIGNER_GUIDE.md).
 import { colors } from '@/constants/theme';
 import { Icon } from '../Icon';
 import { PressableScale } from '@/motion/PressableScale';
