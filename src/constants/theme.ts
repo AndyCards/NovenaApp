@@ -53,7 +53,7 @@ export const colors = {
   glass: {
     nowPlayingFill: 'rgba(242,241,234,0.72)',
     nowPlayingBorder: 'rgba(255,255,255,0.9)',
-    tabBarFill: 'rgba(255,254,252,0.72)',
+    tabBarFill: 'rgba(255,255,255,0.7)', // pure white glass, no cream (Andy, 2026-11-02)
     tabBarBorder: 'rgba(0,0,0,0.08)',
   },
 } as const;
@@ -89,7 +89,8 @@ export const elevation = {
   },
 } as const;
 
-export const blur = { glass: 24 } as const;
+// expo-blur intensity (0–100). Figma's blur 24 px looks like roughly 60 here.
+export const blur = { glass: 60 } as const;
 
 // Tab bar (Figma "Tab Bar Detailed" 1227:56658): 72 of tab items + 0.5 hairline, then a 21 home-indicator area (8 on phones without one).
 export const tabBar = {
