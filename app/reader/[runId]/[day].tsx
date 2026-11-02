@@ -77,6 +77,12 @@ export default function Reader() {
         await setIntention(runId, text);
         await setMeta(`dummy-intention-${runId}`, '1');
       }
+      // Testing aid switched off: clear a sample intention that was saved earlier (and never changed),
+      // so novenas opened during testing also start empty and offer the "Your Intention" card.
+      if (!DUMMY_INTENTIONS && DUMMY_INTENTION_TEXTS.includes(text) && (await getMeta(`dummy-intention-${runId}`))) {
+        text = '';
+        await setIntention(runId, '');
+      }
       setIntentionText(text);
       // First visit to a brand-new novena: nothing written yet, so offer the empty "Your Intention" card once,
       // a moment after the prayer appears. Each novena you start has its own intention, so this happens once per novena.
