@@ -1,9 +1,8 @@
 // One day's prayer. The intention moment is the Figma "Intention Card"; silence is a quiet gap.
 // `active` is the sentence being read aloud (paragraph + character range; block -1 = none), see useNarrationHighlight. `onBlockLayout` tells the
 // Reader where each paragraph sits, so it can gently scroll the one being read into view (useFollowAlong).
-import { LinearGradient } from 'expo-linear-gradient';
 import { Fragment, memo, useMemo } from 'react';
-import { Pressable, Text, View, type LayoutChangeEvent } from 'react-native';
+import { Text, View, type LayoutChangeEvent } from 'react-native';
 import { colors, radius } from '@/constants/theme';
 import { type } from '@/constants/typography';
 import { strings } from '@/copy/strings';
@@ -11,21 +10,29 @@ import type { DayBlock } from '@/content/types';
 import { Icon } from '../Icon';
 import type { ActiveSpan } from '@/hooks/useNarrationHighlight';
 import { PrayerParagraph } from './PrayerParagraph';
+import { PressableScale } from '@/motion/PressableScale';
+import { pressScale } from '@/motion/tokens';
 
+// The "View Intention" card inside the prayer. Refined 2026-11-02 (Andy: "improve the aesthetics subtly"):
+// a lighter hairline and a whisper of shadow instead of a grey outline, a calm solid icon circle, the subtitle on one line,
+// a smaller, lighter chevron, and a gentle shrink when pressed.
 export function IntentionPrompt({ onPress }: { onPress: () => void }) {
   return (
-    <Pressable accessibilityRole="button" accessibilityLabel={`${strings.reader.viewIntention}. ${strings.reader.intentionPrompt}`} onPress={onPress}
-      style={({ pressed }) => ({ flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 12, paddingVertical: 10, minHeight: 79,
-        borderRadius: radius.m, borderWidth: 0.6, borderColor: colors.border.default, backgroundColor: pressed ? colors.surface.subtle : colors.surface.default })}>
-      <LinearGradient colors={['#EFEFEF', '#FBFBFB']} style={{ width: 42, height: 42, borderRadius: 21, borderWidth: 0.5, borderColor: colors.border.subtle, alignItems: 'center', justifyContent: 'center' }}>
-        <Icon name="handsPraying" size={20} />
-      </LinearGradient>
-      <View style={{ flex: 1, gap: 4 }}>
-        <Text style={[type.labelSmall, { color: colors.text.body }]}>{strings.reader.viewIntention}</Text>
-        <Text style={[type.bodyMedium, { color: colors.text.tertiary }]}>{strings.reader.intentionPrompt}</Text>
+    <PressableScale scaleTo={pressScale.card} accessibilityRole="button" accessibilityLabel={`${strings.reader.viewIntention}. ${strings.reader.intentionPrompt}`} onPress={onPress}
+      style={{ flexDirection: 'row', alignItems: 'center', gap: 12, paddingLeft: 12, paddingRight: 14, paddingVertical: 12,
+        borderRadius: radius.m, borderWidth: 0.5, borderColor: colors.border.default, backgroundColor: colors.surface.default,
+        shadowColor: '#000', shadowOpacity: 0.04, shadowRadius: 8, shadowOffset: { width: 0, height: 2 } }}>
+      {/* Icon circle: soft grey, no outline. */}
+      <View style={{ width: 44, height: 44, borderRadius: 22, backgroundColor: colors.surface.raised, borderWidth: 0.5, borderColor: colors.border.subtle, alignItems: 'center', justifyContent: 'center' }}>
+        <Icon name="handsPraying" size={20} color={colors.icon.default} />
       </View>
-      <Icon name="chevronRight" size={20} color={colors.icon.secondary} />
-    </Pressable>
+      {/* Title and one-line subtitle. */}
+      <View style={{ flex: 1, gap: 2 }}>
+        <Text numberOfLines={1} style={[type.labelMedium, { color: colors.text.primary }]}>{strings.reader.viewIntention}</Text>
+        <Text numberOfLines={1} style={[type.bodyMedium, { color: colors.text.tertiary }]}>{strings.reader.intentionPrompt}</Text>
+      </View>
+      <Icon name="chevronRight" size={16} color={colors.text.muted} />
+    </PressableScale>
   );
 }
 
