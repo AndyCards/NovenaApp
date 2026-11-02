@@ -2,7 +2,7 @@
 // Back on the left, an optional centred title (Title/Medium, secondary grey), up to two actions on the right.
 // Back and the main action are 38 x 44 with just the icon (no circle); the second action is 44 wide; the two actions are 6 apart.
 // `overlay` floats the bar over the top of the screen (it also covers the status bar area) so the page scrolls underneath it and shows through the glass;
-// that screen then leaves NAV_BAR_HEIGHT + the top safe area free at the top of its scrolling content.
+// `scrolled` shows the soft shadow under the bar (only once the page has moved). That screen then leaves NAV_BAR_HEIGHT + the top safe area free at the top of its scrolling content.
 import { Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from '@/constants/theme';
@@ -14,12 +14,12 @@ import type { IconName } from '../Icon';
 export const NAV_BAR_HEIGHT = 52;
 
 type Action = { icon: IconName; label: string; onPress: () => void };
-type Props = { title?: string; onBack?: () => void; backLabel?: string; primaryAction?: Action; secondaryAction?: Action; overlay?: boolean };
+type Props = { title?: string; onBack?: () => void; backLabel?: string; primaryAction?: Action; secondaryAction?: Action; overlay?: boolean; scrolled?: boolean };
 
-export function NavBar({ title, onBack, backLabel = 'Back', primaryAction, secondaryAction, overlay }: Props) {
+export function NavBar({ title, onBack, backLabel = 'Back', primaryAction, secondaryAction, overlay, scrolled = false }: Props) {
   const insets = useSafeAreaInsets();
   return (
-    <GlassSurface edge="top" style={overlay ? { position: 'absolute', top: 0, left: 0, right: 0, zIndex: 2, paddingTop: insets.top } : { zIndex: 2 }}>
+    <GlassSurface edge="top" raised={scrolled} style={overlay ? { position: 'absolute', top: 0, left: 0, right: 0, zIndex: 2 } : { zIndex: 2 }} contentStyle={overlay ? { paddingTop: insets.top } : undefined}>
       <View style={{ paddingHorizontal: 10, paddingVertical: 4 }}>
         <View style={{ height: 44, flexDirection: 'row', alignItems: 'center' }}>
           {onBack ? <IconButton icon="back" label={backLabel} size="plain" onPress={onBack} /> : <View style={{ width: 38 }} />}

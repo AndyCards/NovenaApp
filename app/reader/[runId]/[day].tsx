@@ -31,10 +31,12 @@ import type { DownloadStatus } from '@/utils/downloadStatus';
 import { haptics } from '@/motion/haptics';
 import { novenaPageTitle } from '@/utils/novenaTitle';
 import { NAV_BAR_HEIGHT, NavBar } from '@/components/navigation/NavBar';
+import { useScrolled } from '@/hooks/useScrolled';
 
 export default function Reader() {
   const { runId, day } = useLocalSearchParams<{ runId: string; day: string }>();
   const router = useRouter();
+  const { scrolled, onScroll } = useScrolled();
   const insets = useSafeAreaInsets(); // the glass nav bar floats over the page, so the content starts below it
   const { catalog, novenaById } = useCatalog();
   const lib = useLibrary();
@@ -154,11 +156,11 @@ export default function Reader() {
   return (
     <SafeAreaView edges={['bottom']} style={{ flex: 1, backgroundColor: colors.surface.default }}>
       {/* Figma Nav Bar. Back asks "Continue another time?" if today's day isn't marked as prayed yet. … opens the menu. */}
-      <NavBar overlay backLabel={strings.common.back} onBack={() => (alreadyPrayed || preview ? router.back() : setPopup('pause'))}
+      <NavBar overlay scrolled={scrolled} backLabel={strings.common.back} onBack={() => (alreadyPrayed || preview ? router.back() : setPopup('pause'))}
         primaryAction={{ icon: 'more', label: strings.common.more, onPress: () => setPopup('menu') }} />
 
       <Reveal key={dayNo} slide={false} fromX={slideFrom} style={{ flex: 1 }}>
-        <ScrollView {...follow.scrollProps} scrollIndicatorInsets={{ top: insets.top + NAV_BAR_HEIGHT }} contentContainerStyle={{ paddingTop: insets.top + NAV_BAR_HEIGHT + 6, paddingHorizontal: 22, gap: 24, paddingBottom: 72 }}>
+        <ScrollView {...follow.scrollProps} onScroll={(e) => { follow.scrollProps.onScroll(e); onScroll(e); }} scrollIndicatorInsets={{ top: insets.top + NAV_BAR_HEIGHT }} contentContainerStyle={{ paddingTop: insets.top + NAV_BAR_HEIGHT + 6, paddingHorizontal: 22, gap: 24, paddingBottom: 72 }}>
           {/* "Day 1 of 9" with the cross, then the prayer itself, then the mark-as-prayed button. */}
           <ChapterTitle title={strings.reader.dayOf(dayNo, novena.days.length)} />
           <PrayerPassage blocks={content.blocks} onViewIntention={onViewIntention} active={active} onBlockLayout={follow.onBlockLayout} />

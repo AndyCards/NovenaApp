@@ -16,10 +16,12 @@ import { Reveal } from '@/motion/Reveal';
 import { RotatingChevron } from '@/motion/RotatingChevron';
 import { novenaPageTitle } from '@/utils/novenaTitle';
 import { NAV_BAR_HEIGHT, NavBar } from '@/components/navigation/NavBar';
+import { useScrolled } from '@/hooks/useScrolled';
 
 export default function NovenaPage() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
+  const { scrolled, onScroll } = useScrolled();
   const insets = useSafeAreaInsets(); // the glass nav bar floats over the page, so the content starts below it
   const { width } = useWindowDimensions();
   const { novenaById } = useCatalog();
@@ -53,8 +55,8 @@ export default function NovenaPage() {
   return (
     <SafeAreaView edges={[]} style={{ flex: 1, backgroundColor: colors.surface.page }}>
       {/* Figma Nav Bar: Back on the left, Share on the right. */}
-      <NavBar overlay onBack={() => router.back()} primaryAction={{ icon: 'share', label: 'Share', onPress: () => router.push(`/share/${novena.id}`) }} />
-      <ScrollView scrollIndicatorInsets={{ top: insets.top + NAV_BAR_HEIGHT }} contentContainerStyle={{ paddingTop: insets.top + NAV_BAR_HEIGHT, paddingBottom: 140 }}>
+      <NavBar overlay scrolled={scrolled} onBack={() => router.back()} primaryAction={{ icon: 'share', label: 'Share', onPress: () => router.push(`/share/${novena.id}`) }} />
+      <ScrollView onScroll={onScroll} scrollEventThrottle={32} scrollIndicatorInsets={{ top: insets.top + NAV_BAR_HEIGHT }} contentContainerStyle={{ paddingTop: insets.top + NAV_BAR_HEIGHT, paddingBottom: 140 }}>
         <Reveal slide={false} fromScale={0.95} style={{ paddingHorizontal: screenMargin }}>
           {/* The big saint picture (it settles in from slightly smaller, so it feels like the card you tapped opening up).  (cropped from the top so heads are never cut off). */}
           <NovenaImage image={novena.image} size="full" label={novena.title} style={{ width: width - screenMargin * 2, height: 403, borderRadius: radius.s }} />

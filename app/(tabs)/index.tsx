@@ -16,6 +16,7 @@ import { NovenaRow } from '@/components/content/NovenaRow';
 import { SectionHeader } from '@/components/content/SectionHeader';
 import { useRunMenu } from '@/components/overlays/useRunMenu';
 import { HOME_APP_BAR_HEIGHT, HomeAppBar } from '@/components/navigation/HomeAppBar';
+import { useScrolled } from '@/hooks/useScrolled';
 import { colors, screenMargin } from '@/constants/theme';
 import { Reveal } from '@/motion/Reveal';
 import { strings } from '@/copy/strings';
@@ -36,6 +37,7 @@ export default function Home() {
   const runsApi = useRuns();
   const { runs, start, resume, loaded } = runsApi;
   const { openMenu, menus } = useRunMenu(runsApi);
+  const { scrolled, onScroll } = useScrolled();
   const insets = useSafeAreaInsets(); // the glass top bar floats over the page, so the content starts below it
   const [continuePage, setContinuePage] = useState(1);
   const [featuredPage, setFeaturedPage] = useState(1);
@@ -119,8 +121,8 @@ export default function Home() {
   return (
     <SafeAreaView edges={[]} style={{ flex: 1, backgroundColor: colors.surface.default }}>
       {/* Top bar: the pocketNovena name, then Calendar and Search buttons. Frosted glass; the page scrolls underneath it. */}
-      <HomeAppBar onCalendar={() => router.push('/calendar')} onSearch={() => router.push('/search')} />
-      <ScrollView scrollIndicatorInsets={{ top: insets.top + HOME_APP_BAR_HEIGHT }} contentContainerStyle={{ paddingTop: insets.top + HOME_APP_BAR_HEIGHT + 12, paddingBottom: 140, gap: 32 }}>
+      <HomeAppBar onCalendar={() => router.push('/calendar')} onSearch={() => router.push('/search')} scrolled={scrolled} />
+      <ScrollView onScroll={onScroll} scrollEventThrottle={32} scrollIndicatorInsets={{ top: insets.top + HOME_APP_BAR_HEIGHT }} contentContainerStyle={{ paddingTop: insets.top + HOME_APP_BAR_HEIGHT + 12, paddingBottom: 140, gap: 32 }}>
         {/* Someone already praying sees: Continue cards, featured novenas, intentions, feast days, then the other sections. */}
         {/* Someone new sees: featured novenas, "How a novena works", feast days, then the other sections. */}
         {!loaded ? null : returning ? (
