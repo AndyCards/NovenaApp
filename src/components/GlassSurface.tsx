@@ -6,26 +6,21 @@ import { useEffect, useState, type ReactNode } from 'react';
 import { AccessibilityInfo, View, type StyleProp, type ViewStyle } from 'react-native';
 import { blur, colors } from '@/constants/theme';
 
-export const TOP_BAR_RADIUS = 24;
-
 type Props = { edge: 'top' | 'bottom'; children: ReactNode; style?: StyleProp<ViewStyle> };
 
 export function GlassSurface({ edge, children, style }: Props) {
   const [solid, setSolid] = useState(false);
   useEffect(() => { AccessibilityInfo.isReduceTransparencyEnabled().then(setSolid); }, []);
   // `edge` is the side that touches the page: the hairline and the shadow sit there.
-  // Top bars get soft rounded bottom corners (Andy, 2026-11-02: "cute"), so the bar reads like a little sheet resting on the page.
+  // Square corners: Andy removed the rounded bottom corners on 2026-11-02.
   const isTop = edge === 'top';
   // The outer view carries the shadow and the position. It must not clip, or iOS hides the shadow.
   const outer: ViewStyle = {
     shadowColor: '#000', shadowOpacity: 0.06, shadowRadius: 10,
     shadowOffset: { width: 0, height: isTop ? 4 : -4 },
-    ...(isTop ? { borderBottomLeftRadius: TOP_BAR_RADIUS, borderBottomRightRadius: TOP_BAR_RADIUS } : null),
   };
-  // The inner view is the glass itself: it clips the blur to the rounded corners and draws the hairline.
-  const inner: ViewStyle = isTop
-    ? { borderBottomWidth: 0.5, borderLeftWidth: 0.5, borderRightWidth: 0.5, borderColor: colors.glass.tabBarBorder, borderBottomLeftRadius: TOP_BAR_RADIUS, borderBottomRightRadius: TOP_BAR_RADIUS, overflow: 'hidden' }
-    : { borderTopWidth: 0.5, borderColor: colors.glass.tabBarBorder, overflow: 'hidden' };
+  // The inner view is the glass itself: it clips the blur and draws the hairline on the page side.
+  const inner: ViewStyle = { [isTop ? 'borderBottomWidth' : 'borderTopWidth']: 0.5, borderColor: colors.glass.tabBarBorder, overflow: 'hidden' };
   return (
     <View style={[outer, style]}>
       {solid ? (
