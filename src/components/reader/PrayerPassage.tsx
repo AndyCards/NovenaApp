@@ -51,7 +51,7 @@ export function IntentionPrompt({ onPress, intention }: { onPress: () => void; i
 
 type PassageProps = {
   blocks: DayBlock[];
-  onViewIntention: () => void;
+  onViewIntention?: () => void; // left out in preview mode: nothing can be saved there, so the intention card isn't shown
   intention?: string; // what the person wrote, shown on the intention card
   active?: ActiveSpan;
   onBlockLayout?: (index: number, e: LayoutChangeEvent) => void;
@@ -66,7 +66,7 @@ export const PrayerPassage = memo(function PrayerPassage({ blocks, onViewIntenti
     <>
       {blocks.map((b, i) => (
         <Fragment key={i}>
-          {b.type === 'intention' ? <IntentionPrompt onPress={onViewIntention} intention={intention} />
+          {b.type === 'intention' ? (onViewIntention ? <IntentionPrompt onPress={onViewIntention} intention={intention} /> : null)
             : b.type === 'silence' ? null // a pause is for the narration only; drawing it would add a second gap (Figma: 24 between every paragraph)
             : <PrayerParagraph text={b.text} onLayout={layoutHandlers[i]} listening={listening}
                 highlightFrom={active?.block === i ? active.from : undefined} highlightTo={active?.block === i ? active.to : undefined} />}

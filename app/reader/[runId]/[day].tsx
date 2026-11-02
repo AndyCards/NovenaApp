@@ -101,7 +101,9 @@ export default function Reader() {
     if (popup !== 'intention-edit' || !run) return;
     const text = draft.trim();
     if (text === intentionText) return;
-    const t = setTimeout(() => { setIntention(run.id, text); setIntentionText(text); }, 400);
+    // The save must be awaited (or .then-ed): the database helper only writes when it is awaited. Without it the
+    // text looked saved on screen but was never stored, so it vanished when the person left the prayer.
+    const t = setTimeout(() => { setIntention(run.id, text).then(() => setIntentionText(text)); }, 400);
     return () => clearTimeout(t);
   }, [draft, popup]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
@@ -161,9 +163,11 @@ export default function Reader() {
 
       <Reveal key={dayNo} slide={false} fromX={slideFrom} style={{ flex: 1 }}>
         <ScrollView {...follow.scrollProps} onScroll={(e) => { follow.scrollProps.onScroll(e); onScroll(e); }} scrollIndicatorInsets={{ top: insets.top + NAV_BAR_HEIGHT }} contentContainerStyle={{ paddingTop: insets.top + NAV_BAR_HEIGHT + 6, paddingHorizontal: 22, gap: 24, paddingBottom: 72 }}>
-          {/* "Day 1 of 9" with the cross, then the prayer itself, then the mark-as-prayed button. */}
+          {/* "Day 1 of 9" with the cross, then the prayer itself, then the mark-as-prayed button.
+              In preview (novena not started) the "View Intention" card is hidden, as in the … menu: an intention typed
+              there had nowhere to be saved and was silently lost. */}
           <ChapterTitle title={strings.reader.dayOf(dayNo, novena.days.length)} />
-          <PrayerPassage blocks={content.blocks} onViewIntention={onViewIntention} intention={intentionText} active={active} onBlockLayout={follow.onBlockLayout} />
+          <PrayerPassage blocks={content.blocks} onViewIntention={preview ? undefined : onViewIntention} intention={intentionText} active={active} onBlockLayout={follow.onBlockLayout} />
           {/* Preview: instead of "Mark as prayed", offer to start the novena (then this same day opens for real). */}
           {preview ? (
             <Button label={strings.novena.start} icon="handsPraying" onPress={async () => { const id = await lib.start(novena.id); router.replace(`/reader/${id}/${dayNo}`); }} />
