@@ -50,7 +50,7 @@ export default function Reader() {
   const [editFocus, setEditFocus] = useState(false); // true only when the person tapped to edit, so the keyboard stays away otherwise
   const finishing = useRef(false); // true while "Mark as prayed" is saving
   const lastDay = useRef(dayNo); // the day shown before this one, to know which way to slide
-  const [draft, setDraft] = useState(''); // what is being typed, saved only on "Save intention"
+  const [draft, setDraft] = useState(''); // what is being typed; it saves itself a moment after you stop typing
   // Which pop-up is open right now: the … menu, the intention (view or edit), or "Continue another time?".
   const [popup, setPopup] = useState<'none' | 'menu' | 'intention-view' | 'intention-edit' | 'pause'>('none');
   const [download, setDownload] = useState<DownloadStatus>({ kind: 'none' });
@@ -77,9 +77,30 @@ export default function Reader() {
         await setIntention(runId, text);
         await setMeta(`dummy-intention-${runId}`, '1');
       }
+      // Testing aid switched off: clear a sample intention that was saved earlier (and never changed),
+      // so novenas opened during testing also start empty and offer the "Your Intention" card.
+      if (!DUMMY_INTENTIONS && DUMMY_INTENTION_TEXTS.includes(text) && (await getMeta(`dummy-intention-${runId}`))) {
+        text = '';
+        await setIntention(runId, '');
+      }
       setIntentionText(text);
+      // First visit to a brand-new novena: nothing written yet, so offer the empty "Your Intention" card once,
+      // a moment after the prayer appears. Each novena you start has its own intention, so this happens once per novena.
+      if (!text.trim() && !(await getMeta(`intention-offered-${runId}`))) {
+        await setMeta(`intention-offered-${runId}`, '1');
+        setTimeout(() => setPopup((cur) => (cur === 'none' ? 'intention-edit' : cur)), 600);
+      }
     })();
   }, [runId]);
+  // Auto-save: while the intention card is open, what is typed is stored a moment after the last key press.
+  // The intention stays on this phone. It is never uploaded or shared.
+  useEffect(() => {
+    if (popup !== 'intention-edit' || !run) return;
+    const text = draft.trim();
+    if (text === intentionText) return;
+    const t = setTimeout(() => { setIntention(run.id, text); setIntentionText(text); }, 400);
+    return () => clearTimeout(t);
+  }, [draft, popup]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (novena) getDownload(novena.id).then((d) => setDownload(d?.status === 'complete' ? { kind: 'done' } : { kind: 'none' }));
   }, [novena?.id]);
@@ -121,6 +142,13 @@ export default function Reader() {
   // No intention written yet? Open the box to write one. Otherwise show it.
   const openIntention = () => { setEditFocus(false); setDraft(intentionText); setPopup(intentionText.trim() ? 'intention-view' : 'intention-edit'); };
   openIntentionRef.current = openIntention;
+  // Store what was written right away (no waiting for auto-save), then go back to the prayer.
+  const saveIntentionAndClose = async () => {
+    close();
+    if (!run) return;
+    const text = draft.trim();
+    if (text !== intentionText) { await setIntention(run.id, text); setIntentionText(text); }
+  };
 
   return (
     <SafeAreaView edges={['top', 'bottom']} style={{ flex: 1, backgroundColor: colors.surface.default }}>
@@ -174,22 +202,17 @@ export default function Reader() {
       />
       <PopupCard type="pause" visible={popup === 'pause'} onClose={close} onLeave={() => { close(); router.back(); }} />
       <PopupCard type="intention-view" visible={popup === 'intention-view'} onClose={close} novenaTitle={novenaPageTitle(novena.title)} value={intentionText} onEdit={() => { setEditFocus(true); setDraft(intentionText); setPopup('intention-edit'); }} />
+      {/* "Your Intention" entry card (Figma 985:35382 empty, 985:35418 with text). Closing it or tapping
+          "Add Intention" keeps what was written, saved for this novena only. */}
       <PopupCard
         type="intention-edit"
         visible={popup === 'intention-edit'}
-        onClose={close}
+        onClose={saveIntentionAndClose}
         novenaTitle={novenaPageTitle(novena.title)}
         value={draft}
         onChange={setDraft}
         focus={editFocus}
-        // The intention stays on this phone. It is never uploaded or shared.
-        onSave={async () => {
-          if (!run) return;
-          const text = draft.trim();
-          await setIntention(run.id, text);
-          setIntentionText(text);
-          setPopup(text ? 'intention-view' : 'none');
-        }}
+        onSave={saveIntentionAndClose}
       />
     </SafeAreaView>
   );

@@ -27,6 +27,7 @@ export const type = {
   titleMedium: style(fonts.semibold, 16, 21),
   titleSmall: style(fonts.semibold, 15, 21),
   bodyLarge: style(fonts.regular, 15, 22),
+  bodyInput: style(fonts.regular, 16, 22), // text typed into the intention box (Figma 985:35413)
   bodyCard: style(fonts.regular, 15, 19.5),
   bodyMedium: style(fonts.regular, 14, 19),
   bodySmall: style(fonts.regular, 12, 16),

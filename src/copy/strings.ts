@@ -75,6 +75,8 @@ export const strings = {
     intentionPrivate: 'Your note stays private',
     intentionPlaceholder: 'What are you praying for?',
     saveIntention: 'Save intention',
+    addIntention: 'Add Intention',
+    intentionAutoSaved: 'Your intention is auto-saved',
     audioSoon: 'Audio coming soon',
     viewIntentionRow: 'View intention',
     backToPrayer: 'Back to prayer',

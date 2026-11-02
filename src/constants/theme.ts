@@ -8,6 +8,7 @@ export const colors = {
     raised: '#FBFBFB',
     subtle: '#EFEFEF',
     strong: '#E6E6E6',
+    closeSoft: '#F3F3F3', // the light grey X circle on the filled "Your Intention" card (Figma 985:35418)
     // Follow-along: the soft sand marker behind the sentence being read aloud. Clearly visible on white
     // (about 1.3:1 against the page) while #3F3F3F text on it stays about 7.9:1. It was #F2F1EA, which was too faint to see.
     reading: '#E8DFC8',
