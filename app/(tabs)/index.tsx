@@ -4,7 +4,7 @@
 import { useRouter } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
 import { ScrollView, View, useWindowDimensions, type NativeScrollEvent, type NativeSyntheticEvent } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CarouselIndicator } from '@/components/content/CarouselIndicator';
 import { ContinueCard } from '@/components/content/ContinueCard';
 import { FeastDayItem } from '@/components/content/FeastDayItem';
@@ -15,7 +15,7 @@ import { NovenaCard } from '@/components/content/NovenaCard';
 import { NovenaRow } from '@/components/content/NovenaRow';
 import { SectionHeader } from '@/components/content/SectionHeader';
 import { useRunMenu } from '@/components/overlays/useRunMenu';
-import { HomeAppBar } from '@/components/navigation/HomeAppBar';
+import { HOME_APP_BAR_HEIGHT, HomeAppBar } from '@/components/navigation/HomeAppBar';
 import { colors, screenMargin } from '@/constants/theme';
 import { Reveal } from '@/motion/Reveal';
 import { strings } from '@/copy/strings';
@@ -36,7 +36,7 @@ export default function Home() {
   const runsApi = useRuns();
   const { runs, start, resume, loaded } = runsApi;
   const { openMenu, menus } = useRunMenu(runsApi);
-  const [scrolled, setScrolled] = useState(false); // true once the page has scrolled, so the top bar can lift
+  const insets = useSafeAreaInsets(); // the glass top bar floats over the page, so the content starts below it
   const [continuePage, setContinuePage] = useState(1);
   const [featuredPage, setFeaturedPage] = useState(1);
 
@@ -118,9 +118,9 @@ export default function Home() {
 
   return (
     <SafeAreaView edges={[]} style={{ flex: 1, backgroundColor: colors.surface.default }}>
-      {/* Top bar: the pocketNovena name, then Calendar and Search buttons. */}
-      <HomeAppBar raised={scrolled} onCalendar={() => router.push('/calendar')} onSearch={() => router.push('/search')} />
-      <ScrollView scrollEventThrottle={16} onScroll={(e) => { const s = e.nativeEvent.contentOffset.y > 2; if (s !== scrolled) setScrolled(s); }} contentContainerStyle={{ paddingTop: 12, paddingBottom: 140, gap: 32 }}>
+      {/* Top bar: the pocketNovena name, then Calendar and Search buttons. Frosted glass; the page scrolls underneath it. */}
+      <HomeAppBar onCalendar={() => router.push('/calendar')} onSearch={() => router.push('/search')} />
+      <ScrollView scrollIndicatorInsets={{ top: insets.top + HOME_APP_BAR_HEIGHT }} contentContainerStyle={{ paddingTop: insets.top + HOME_APP_BAR_HEIGHT + 12, paddingBottom: 140, gap: 32 }}>
         {/* Someone already praying sees: Continue cards, featured novenas, intentions, feast days, then the other sections. */}
         {/* Someone new sees: featured novenas, "How a novena works", feast days, then the other sections. */}
         {!loaded ? null : returning ? (

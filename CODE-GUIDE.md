@@ -29,7 +29,7 @@ Buttons, cards, rows and pop-ups, each matching a component on the Figma Compone
 - `actions/` buttons
 - `content/` cards, rows, pictures
 - `inputs/` search box, switches, chips, tabs
-- `navigation/` top bars and the tab bar
+- `navigation/` top bars and the tab bar. They share `GlassSurface` (frosted glass); the top bars float over the page with rounded bottom corners so content scrolls under them.
 - `overlays/` pop-up cards and menus (always floating cards, never bottom sheets). `useRunMenu` is the "…" menu on a novena card (pause, resume, start again, remove), shared by Home and Library so both behave the same.
 - `reader/` pieces of the prayer screen. While a prayer is read aloud, the sentence being spoken gets a soft warm-paper marker behind it and is gently kept in view ("follow-along", see below).
 - `audio/` the audio player. `GlobalAudioDock` keeps the small player bar on screen across pages while a prayer plays.

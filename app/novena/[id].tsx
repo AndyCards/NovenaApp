@@ -2,7 +2,7 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useRef, useState } from 'react';
 import { Pressable, ScrollView, Text, useWindowDimensions, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ActionBar } from '@/components/actions/ActionBar';
 import { NovenaImage } from '@/components/content/NovenaImage';
 import { NovenaMetaRow } from '@/components/content/NovenaMetaRow';
@@ -15,11 +15,12 @@ import { useLibrary } from '@/hooks/useLibrary';
 import { Reveal } from '@/motion/Reveal';
 import { RotatingChevron } from '@/motion/RotatingChevron';
 import { novenaPageTitle } from '@/utils/novenaTitle';
-import { NavBar } from '@/components/navigation/NavBar';
+import { NAV_BAR_HEIGHT, NavBar } from '@/components/navigation/NavBar';
 
 export default function NovenaPage() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
+  const insets = useSafeAreaInsets(); // the glass nav bar floats over the page, so the content starts below it
   const { width } = useWindowDimensions();
   const { novenaById } = useCatalog();
   const lib = useLibrary();
@@ -50,10 +51,10 @@ export default function NovenaPage() {
   const saved = lib.isSaved(novena.id);
 
   return (
-    <SafeAreaView edges={['top']} style={{ flex: 1, backgroundColor: colors.surface.page }}>
+    <SafeAreaView edges={[]} style={{ flex: 1, backgroundColor: colors.surface.page }}>
       {/* Figma Nav Bar: Back on the left, Share on the right. */}
-      <NavBar onBack={() => router.back()} primaryAction={{ icon: 'share', label: 'Share', onPress: () => router.push(`/share/${novena.id}`) }} />
-      <ScrollView contentContainerStyle={{ paddingBottom: 140 }}>
+      <NavBar overlay onBack={() => router.back()} primaryAction={{ icon: 'share', label: 'Share', onPress: () => router.push(`/share/${novena.id}`) }} />
+      <ScrollView scrollIndicatorInsets={{ top: insets.top + NAV_BAR_HEIGHT }} contentContainerStyle={{ paddingTop: insets.top + NAV_BAR_HEIGHT, paddingBottom: 140 }}>
         <Reveal slide={false} fromScale={0.95} style={{ paddingHorizontal: screenMargin }}>
           {/* The big saint picture (it settles in from slightly smaller, so it feels like the card you tapped opening up).  (cropped from the top so heads are never cut off). */}
           <NovenaImage image={novena.image} size="full" label={novena.title} style={{ width: width - screenMargin * 2, height: 403, borderRadius: radius.s }} />

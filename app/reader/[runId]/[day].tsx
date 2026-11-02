@@ -6,7 +6,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { ScrollView, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '@/components/actions/Button';
 import { AudioDock } from '@/components/audio/AudioDock';
 import { PopupCard } from '@/components/overlays/PopupCard';
@@ -30,11 +30,12 @@ import { downloadNovenaAudio, removeDownload } from '@/utils/downloads';
 import type { DownloadStatus } from '@/utils/downloadStatus';
 import { haptics } from '@/motion/haptics';
 import { novenaPageTitle } from '@/utils/novenaTitle';
-import { NavBar } from '@/components/navigation/NavBar';
+import { NAV_BAR_HEIGHT, NavBar } from '@/components/navigation/NavBar';
 
 export default function Reader() {
   const { runId, day } = useLocalSearchParams<{ runId: string; day: string }>();
   const router = useRouter();
+  const insets = useSafeAreaInsets(); // the glass nav bar floats over the page, so the content starts below it
   const { catalog, novenaById } = useCatalog();
   const lib = useLibrary();
   // The player's buttons only. This screen does not re-draw on every audio position update; the parts that
@@ -151,13 +152,13 @@ export default function Reader() {
   };
 
   return (
-    <SafeAreaView edges={['top', 'bottom']} style={{ flex: 1, backgroundColor: colors.surface.default }}>
+    <SafeAreaView edges={['bottom']} style={{ flex: 1, backgroundColor: colors.surface.default }}>
       {/* Figma Nav Bar. Back asks "Continue another time?" if today's day isn't marked as prayed yet. … opens the menu. */}
-      <NavBar backLabel={strings.common.back} onBack={() => (alreadyPrayed || preview ? router.back() : setPopup('pause'))}
+      <NavBar overlay backLabel={strings.common.back} onBack={() => (alreadyPrayed || preview ? router.back() : setPopup('pause'))}
         primaryAction={{ icon: 'more', label: strings.common.more, onPress: () => setPopup('menu') }} />
 
       <Reveal key={dayNo} slide={false} fromX={slideFrom} style={{ flex: 1 }}>
-        <ScrollView {...follow.scrollProps} contentContainerStyle={{ paddingTop: 6, paddingHorizontal: 22, gap: 24, paddingBottom: 72 }}>
+        <ScrollView {...follow.scrollProps} scrollIndicatorInsets={{ top: insets.top + NAV_BAR_HEIGHT }} contentContainerStyle={{ paddingTop: insets.top + NAV_BAR_HEIGHT + 6, paddingHorizontal: 22, gap: 24, paddingBottom: 72 }}>
           {/* "Day 1 of 9" with the cross, then the prayer itself, then the mark-as-prayed button. */}
           <ChapterTitle title={strings.reader.dayOf(dayNo, novena.days.length)} />
           <PrayerPassage blocks={content.blocks} onViewIntention={onViewIntention} active={active} onBlockLayout={follow.onBlockLayout} />
@@ -166,8 +167,7 @@ export default function Reader() {
             <Button label={strings.novena.start} icon="handsPraying" onPress={async () => { const id = await lib.start(novena.id); router.replace(`/reader/${id}/${dayNo}`); }} />
           ) : <Button label={alreadyPrayed ? strings.novena.prayedDay(dayNo) : strings.reader.markPrayed(dayNo)} icon="handsPraying" disabled={alreadyPrayed || notYet} onPress={finish} />}
         </ScrollView>
-        {/* Soft white fades at the top and bottom edges so text gently disappears as you scroll. */}
-        <LinearGradient pointerEvents="none" colors={['#FFFFFF', 'rgba(255,255,255,0)']} style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 12 }} />
+        {/* A soft white fade at the bottom edge so text gently disappears as you scroll (at the top it slides under the glass bar). */}
         <LinearGradient pointerEvents="none" colors={['rgba(255,255,255,0)', '#FFFFFF']} style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 46 }} />
       </Reveal>
       {/* The audio player appears here only after the person chooses Listen. It never plays by itself. */}
