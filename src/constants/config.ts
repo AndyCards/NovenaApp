@@ -26,8 +26,8 @@ export const NOVENA_LENGTH = 9;
 export const RECENT_SEARCH_LIMIT = 10;
 
 // TEMPORARY, for testing: the first time you open a novena's Reader, a sample intention is saved for it (you can still edit or clear it).
-// Set to false once testing is done.
-export const DUMMY_INTENTIONS = true;
+// Off, so a brand-new novena starts with no intention and the Reader offers the empty "Your Intention" card.
+export const DUMMY_INTENTIONS = false;
 export const DUMMY_INTENTION_TEXTS = [
   'Calm before my exams, and the patience to wait on God\u2019s answer.',
   'Healing and strength for my mother, and peace for our whole family.',
