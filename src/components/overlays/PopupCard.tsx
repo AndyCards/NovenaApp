@@ -1,6 +1,6 @@
 // Reader pop-ups from Figma Page 34: "Continue another time?" and "Your Intention".
 // The intention box saves itself as you type (see the Reader); "Add Intention" saves and closes.
-import { useRef } from 'react';
+import { useRef, type ComponentRef } from 'react';
 import { Pressable, Text, TextInput, View } from 'react-native';
 import { colors, radius } from '@/constants/theme';
 import { type } from '@/constants/typography';
@@ -16,7 +16,7 @@ type Props =
 const r = strings.reader;
 
 export function PopupCard(p: Props) {
-  const inputRef = useRef<TextInput>(null); // the intention box, so "Add Intention" can put the cursor in it
+  const inputRef = useRef<ComponentRef<typeof TextInput>>(null); // the intention box, so "Add Intention" can put the cursor in it
   if (p.type === 'pause') {
     return (
       <FloatingCard visible={p.visible} onClose={p.onClose} title={r.pauseTitle} icon="pause">
