@@ -34,3 +34,15 @@ export const DUMMY_INTENTION_TEXTS = [
   'Guidance in my work, and the courage to make a hard decision well.',
   'Gratitude for what I have, and trust for what is still unknown.',
 ];
+
+// "Take a pause?" card on the Reader (and, later, other places such as writing an intention or listening).
+// The card only appears when the person taps Back (or swipes back) after really spending time with the prayer.
+// Change these numbers to test different behaviour. Time only counts while the app is open on screen.
+export const PAUSE_PROMPT = {
+  // Tapping Back before this many seconds leaves straight away, with no card.
+  minEngagedSeconds: 30,
+  // Scrolling this far down the prayer (in points) also counts as being "in" the prayer...
+  scrollEngagedPx: 400,
+  // ...but only once at least this many seconds have passed, so a quick flick and Back still leaves straight away.
+  minSecondsWithScroll: 10,
+};

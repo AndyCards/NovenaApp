@@ -125,8 +125,8 @@ Each screen names the Figma frame it matches (Page 34) in its first comment.
   - `'menu'`: the … options menu (`ReaderOptionsMenu`)
   - `'intention-edit'`: the *Your Intention* writing card
   - `'intention-view'`: shows the intention you wrote
-  - `'pause'`: *Continue another time?*
   - `'none'`: nothing open
+  - *Take a pause?* is separate (`GentleExitCard`, run by `useGentleExit`), see Back below.
 - **First visit to a new novena.** After a short pause (0.6 s) the *Your Intention* card opens once by itself. Each run has its own intention.
 - **Intention saving.** The intention saves itself while you type (0.4 s after you stop). Tapping *Add Intention* or ✕ saves too. With an empty box, *Add Intention* just puts the cursor in it.
 - **Mark as prayed.**
@@ -134,8 +134,10 @@ Each screen names the Figma frame it matches (Page 34) in its first comment.
   - It is also disabled when the day isn't due yet ("upcoming"). Days follow the calendar: Day N is due N−1 days after the start. A short line under the button then says when it can be marked ("You can mark Day 2 as prayed tomorrow.").
   - A double tap counts once. After it, the screen is replaced by "Day N marked as prayed".
 - **Back.**
-  - If today's day isn't prayed, Back asks *Continue another time?* (*Leave and resume later* or *Keep praying*).
-  - If the day is prayed, or this is a preview, Back just goes back.
+  - Back (the button, iOS swipe back or Android back) first asks *Take a pause?* (*Leave and resume later* or *Keep praying*), but only when the day isn't prayed and the person has really spent time in it: 30 seconds on screen, or 400 points of scrolling after at least 10 seconds. Only time with the app open counts. The numbers are `PAUSE_PROMPT` in `config.ts`.
+  - Before that, or when the day is prayed, or in a preview, Back just goes back. The card never opens by itself, from the … menu, or when the phone locks.
+  - Closing the card with ✕ or a tap outside means *Keep praying*.
+- **Your place is remembered.** The scroll position and audio position for the day are saved quietly when the app goes to the background, when you leave, and when the screen closes (`src/data/prayerProgress.ts`). Opening the same day again puts you back there, with audio paused at the saved spot. Saving never marks a day prayed or missed, and the bookmark is cleared once the day is marked prayed.
 - **Preview mode.** The address starts with `preview~`. It is read only: no Mark button (*Start Novena* instead), no intention card, and nothing is saved.
 - **Audio.** It never starts by itself. While placeholder audio is on (`PLACEHOLDER_AUDIO` in `config.ts`), the player opens paused for each day. While it plays, the sentence being spoken gets a sand-coloured marker (`colors.surface.reading`) and the page scrolls gently to keep it in view (`useFollowAlong`).
 
@@ -189,7 +191,7 @@ All components are in `src/components/`, grouped like the Figma Components page.
 ### Actions (`actions/`)
 | Component | Where it appears | What it does / how to customise |
 |---|---|---|
-| `Button` | Reader (Mark as prayed), pop-ups, Share, Day prayed | Big pill (50 high). `variant` is `primary` (dark gradient) or `secondary` (light grey). `size` is default 50, medium 44 or small 34. `disabled` greys it out. It dips slightly under a finger. Colours come from `colors.gradient.button` and `colors.action.*`. |
+| `Button` | Reader (Mark as prayed), pop-ups, Share, Day prayed | Big pill (50 high). `variant` is `primary` (dark gradient) or `secondary` (light grey). `size` is default 50, medium 44 or small 34. `disabled` greys it out. It dips slightly under a finger. While held, the dark one switches to `gradients.buttonPressed`. Colours come from `gradients.button` and `colors.action.*`. |
 | `ActionBar` | Novena page | Round Save bookmark plus the dark pray button. |
 | `PrayButton` | Home Continue card | Small dark pill, "Pray Day 4", with praying hands. |
 | `IconButton` | Nav bars, menus | A round icon-only button. It always has a spoken label for VoiceOver. |
@@ -227,7 +229,8 @@ All components are in `src/components/`, grouped like the Figma Components page.
 ### Overlays (`overlays/`)
 Pop-ups are always **floating cards, never bottom sheets** (Andy's rule).
 - `FloatingCard`: the shared shell. Dark backdrop, round ✕ above a white card, rises in softly. The ✕ has three looks: `raised`, `plain` and `soft`.
-- `PopupCard`: the Reader pop-ups: *Continue another time?*, *Your Intention* (write) and *Your Intention* (view).
+- `PopupCard`: the Reader pop-ups *Your Intention* (write) and *Your Intention* (view).
+- `GentleExitCard`: the calm "stepping away?" card, today *Take a pause?* on the Reader. Words live in `strings.gentleExit`; the *intention* and *listening* versions are written but not used on any screen yet.
 - `AlertCard`: confirmations. Today only *Remove this novena?* and *Pray it again?* are opened, from the "…" menus and the Completed tab. The card also has "You've missed N days" and "Novena complete" versions, but no screen opens them yet.
 - `CardMenu`: the small "…" menu under a card. `useRunMenu` wires it up for Home.
 - `ReaderOptionsMenu`: the Reader … menu.
@@ -290,12 +293,12 @@ The tokens are named like the Figma styles:
 - `colors.surface.*`: backgrounds. The page is pure white.
 - `colors.text.*`: text greys, from `primary` (darkest) to `tertiary`. `muted` is for decoration only and is too light for reading.
 - `colors.border.*`, `colors.action.*` (button fills for each state), `colors.icon.*` and `colors.progress.*`.
-- `colors.gradient.*`: the dark button gradient, wordmark and image scrim.
+- `gradients.*` (bottom of `theme.ts`): every gradient, each named after its Figma *Gradient/…* style (Button, Button Pressed, Dark, Subtle, Icon Circle, Ornament, Fade Bottom, Card Scrim, Audio Bar Fade, Audio Dock Fade and more). `intentionIcon` is the one gradient that isn't a Figma style yet.
 - `colors.glass.*`: tab bar and player glass.
 
 The palette is neutral greys only, with no accent colours (Andy's rule).
 
-**Example.** To make every dark button slightly lighter, change `colors.gradient.button`. Every primary `Button`, `ActionBar` and `PrayButton` follows.
+**Example.** To make every dark button slightly lighter, change `gradients.button`. Every primary `Button`, `ActionBar` and `PrayButton` follows.
 
 ### Spacing, corners, lines, shadows (also `theme.ts`)
 - `space`: the spacing scale.

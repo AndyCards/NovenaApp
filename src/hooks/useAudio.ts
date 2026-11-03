@@ -21,7 +21,8 @@ const store = () => usePlayerStore.getState();
 // The player's buttons. These don't change, so a screen can use them without re-drawing every time the
 // position moves (the Reader does this, so the prayer text isn't redrawn four times a second).
 export const audioControls = {
-  open: async (novenaId: string, title: string, day: number) => {
+  // startAtSec: where to begin (used when coming back to a prayer that was paused part-way). Still opens paused.
+  open: async (novenaId: string, title: string, day: number, startAtSec = 0) => {
     const request = ++openRequest;
     release();
     store().load(novenaId, title, day); // shows the player, paused
@@ -37,6 +38,7 @@ export const audioControls = {
         : (await isDownloaded(novenaId, day)) ? localAudioPath(novenaId, day) : audioUrl(novenaId, day);
       if (request !== openRequest) return; // a newer open (or close) happened while we waited
       player = createAudioPlayer(source, { updateInterval: POSITION_UPDATE_MS });
+      if (startAtSec > 0) { player.seekTo(startAtSec); store().set({ positionSec: startAtSec }); }
       player.addListener('playbackStatusUpdate', (s) => {
         const st = usePlayerStore.getState();
         if (st.state === 'hidden') return;

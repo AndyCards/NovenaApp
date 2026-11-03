@@ -1,4 +1,4 @@
-// Reader pop-ups from Figma Page 34: "Continue another time?" and "Your Intention".
+// Reader pop-ups from Figma Page 34: "Your Intention" (view and edit). "Take a pause?" lives in GentleExitCard.
 // The intention box saves itself as you type (see the Reader); "Add Intention" saves and closes.
 import { useRef, type ComponentRef } from 'react';
 import { Pressable, Text, TextInput, View } from 'react-native';
@@ -9,7 +9,6 @@ import { Button } from '../actions/Button';
 import { FloatingCard } from './FloatingCard';
 
 type Props =
-  | { type: 'pause'; visible: boolean; onClose: () => void; onLeave: () => void }
   | { type: 'intention-edit'; visible: boolean; onClose: () => void; novenaTitle: string; value: string; onChange: (t: string) => void; onSave: () => void; focus?: boolean }
   | { type: 'intention-view'; visible: boolean; onClose: () => void; novenaTitle: string; value: string; onEdit: () => void };
 
@@ -17,17 +16,6 @@ const r = strings.reader;
 
 export function PopupCard(p: Props) {
   const inputRef = useRef<ComponentRef<typeof TextInput>>(null); // the intention box, so "Add Intention" can put the cursor in it
-  if (p.type === 'pause') {
-    return (
-      <FloatingCard visible={p.visible} onClose={p.onClose} title={r.pauseTitle} icon="pause">
-        <Text style={[type.bodyLarge, { color: colors.text.secondary, textAlign: 'center', marginTop: -12, paddingHorizontal: 12 }]}>{r.pauseBody}</Text>
-        <View style={{ gap: 10, marginTop: 20 }}>
-          <Button label={r.pauseLeave} variant="secondary" onPress={p.onLeave} />
-          <Button label={r.pauseStay} icon="handsPraying" onPress={p.onClose} />
-        </View>
-      </FloatingCard>
-    );
-  }
   if (p.type === 'intention-edit') {
     // Figma Popup Card "Intention Empty" (985:35382) and "Intention Draft" (985:35418).
     // No icon circle: just the title, the novena's name, a grey writing box and "Add Intention".
