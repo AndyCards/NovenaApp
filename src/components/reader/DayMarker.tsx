@@ -2,7 +2,7 @@
 // Prayed: solid dark. Today: soft light disc. Missed: dashed dark-grey ring, stronger hands. Upcoming: dashed light ring, faded hands.
 import { LinearGradient } from 'expo-linear-gradient';
 import { View } from 'react-native';
-import { colors } from '@/constants/theme';
+import { colors, gradients } from '@/constants/theme';
 import type { DayState } from '@/utils/dayRules';
 import { Icon } from '../Icon';
 
@@ -11,7 +11,7 @@ export function DayMarker({ state, size = 32 }: { state: DayState; size?: number
   const base = { width: size, height: size, borderRadius: size / 2, alignItems: 'center' as const, justifyContent: 'center' as const };
   if (state === 'today') {
     return (
-      <LinearGradient accessibilityLabel={state} colors={colors.gradient.iconCircle} style={[base, { borderWidth: 0.5, borderColor: colors.border.subtle }]}>
+      <LinearGradient accessibilityLabel={state} {...gradients.iconCircle} style={[base, { borderWidth: 0.5, borderColor: colors.border.subtle }]}>
         <Icon name="handsPraying" size={icon} color={colors.icon.default} />
       </LinearGradient>
     );

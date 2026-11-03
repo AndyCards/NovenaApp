@@ -85,6 +85,7 @@ export const deleteRecentSearch = (query: string) => db.delete(recentSearch).whe
 export const getMeta = async (key: string) => (await db.select().from(appMeta).where(eq(appMeta.key, key)))[0]?.value;
 export const setMeta = (key: string, value: string) =>
   db.insert(appMeta).values({ key, value }).onConflictDoUpdate({ target: appMeta.key, set: { value } });
+export const deleteMeta = (key: string) => db.delete(appMeta).where(eq(appMeta.key, key));
 
 export const activeRunsFor = (novenaId: string) =>
   db.select().from(novenaRun).where(and(eq(novenaRun.novenaId, novenaId), eq(novenaRun.status, 'active'), isNull(novenaRun.removedAt)));

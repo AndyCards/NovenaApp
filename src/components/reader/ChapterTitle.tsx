@@ -1,11 +1,11 @@
 // Figma "Day Header": "Day 1 of 9" in Source Serif, with the cross ornament underneath.
 import { LinearGradient } from 'expo-linear-gradient';
 import { Text, View } from 'react-native';
-import { colors } from '@/constants/theme';
+import { colors, gradients } from '@/constants/theme';
 import { type } from '@/constants/typography';
 import { Icon } from '../Icon';
 
-const Rule = () => <LinearGradient colors={['#5F5F5F', '#868484']} style={{ width: 48, height: 0.6 }} />;
+const Rule = () => <LinearGradient {...gradients.ornament} style={{ width: 48, height: 0.6 }} />;
 
 export function ChapterTitle({ title }: { title: string }) {
   return (

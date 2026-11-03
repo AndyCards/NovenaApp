@@ -41,6 +41,7 @@ The app's animation rules live here so every screen moves the same way. `timing.
 
 ## src/hooks/ — the "brains" behind screens
 Small helpers that load data and do actions, so screens stay simple (e.g. `useLibrary`, `useAudio`, `useReminders`).
+`useGentleExit` is the reusable "stepping away?" pattern: after real time on a screen (or scrolling), Back and swipe back first show a calm card (`overlays/GentleExitCard`, "Take a pause?" on the prayer), and it saves progress quietly whenever the app goes to the background or the screen closes. When the card may appear is set by `PAUSE_PROMPT` in `constants/config.ts` and decided in `utils/pauseRules.ts`.
 
 ## Follow-along (prayer highlighted as it is read aloud)
 - `src/utils/narrationCues.ts` works out which sentence is being spoken at any moment of the audio.
@@ -55,7 +56,7 @@ Small helpers that load data and do actions, so screens stay simple (e.g. `useLi
 `schema.ts` checks a downloaded novena list is complete before the app uses it (a broken list is ignored). `searchConcepts.ts` is the search "dictionary": it links everyday words (migraine, job, exams, marriage) to the saints and topics that fit, so search finds something useful even when no title matches.
 
 ## src/data/ — what is stored on the phone
-The database tables and the read/write helpers. Nothing here leaves the phone (intentions included).
+The database tables and the read/write helpers. Nothing here leaves the phone (intentions included). `prayerProgress.ts` remembers where the person was in a day's prayer (scroll and audio) so it reopens in the same place; it never marks a day prayed or missed.
 
 ## src/utils/ — rules and maths
 Day rules (which day is due or missed), dates, feast days, search ranking, reminders planning, downloads, sharing.

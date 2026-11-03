@@ -44,14 +44,7 @@ export const colors = {
   icon: { default: '#3F3F3F', secondary: '#6F6F6F' },
   progress: { track: '#D9D9D9', fill: '#5F5F5F' },
   overlay: { scrim: 'rgba(0,0,0,0.25)' },
-  gradient: {
-    button: ['#575757', '#474747'], // dark CTA, top to bottom
-    dark: ['#5F5F5F', '#3F3F3F'], // Figma Gradient/Dark: the pocketNovena wordmark, top to bottom
-    iconCircle: ['#F1F1F1', '#FAFAFA'],
-    // Figma Gradient/Audio Dock Fade: page content fades out behind the audio bar.
-    audioDockFade: { colors: ['rgba(255,255,255,0.2)', '#FFFFFF', '#FFFFFF'], locations: [0.184, 0.39, 0.948] },
-    imageScrim: ['rgba(0,0,0,0)', 'rgba(0,0,0,0.1)', 'rgba(0,0,0,0.45)', 'rgba(0,0,0,0.72)', 'rgba(0,0,0,0.82)'],
-  },
+  // Gradients live in `gradients` at the bottom of this file.
   glass: {
     nowPlayingFill: 'rgba(242,241,234,0.72)',
     nowPlayingBorder: 'rgba(255,255,255,0.9)',
@@ -100,3 +93,55 @@ export const tabBar = {
   bottomSpace: (safeBottom: number) => (safeBottom > 0 ? 21 : 8),
   height: (safeBottom: number) => 72.5 + (safeBottom > 0 ? 21 : 8),
 } as const;
+
+// Every gradient from the Figma design system ("Gradient/..." paint styles), ready to spread straight onto
+// an expo-linear-gradient: <LinearGradient {...gradients.button} style={...} />.
+// Each one runs top to bottom unless it says otherwise. `locations` are where each colour sits (0 = top, 1 = bottom).
+// If a gradient changes in Figma, change it here and every screen that uses it follows.
+type GradientSpec = {
+  colors: readonly [string, string, ...string[]];
+  locations?: readonly [number, number, ...number[]];
+  start?: { x: number; y: number };
+  end?: { x: number; y: number };
+};
+export const gradients = {
+  // Gradient/Button: the dark "Start Novena" / pray buttons.
+  button: { colors: ['#575757', '#474747'] },
+  // Gradient/Button Hover and Gradient/Button Pressed: the same button, darker while a finger is on it.
+  buttonHover: { colors: ['#4B4B4B', '#3B3B3B'] },
+  buttonPressed: { colors: ['#363636', '#282828'] },
+  // Gradient/Dark: the pocketNovena wordmark in the top bar.
+  dark: { colors: ['#5F5F5F', '#3F3F3F'] },
+  // Gradient/Subtle: soft grey circles (Weekday Toggle off).
+  subtle: { colors: ['#EFEFEF', '#FBFBFB'] },
+  // Gradient/Icon Circle: the round icon behind each Intention Tile, empty states, pop-up icons and day markers.
+  iconCircle: { colors: ['#F1F1F1', '#FAFAFA'] },
+  // The softly lit circle behind the praying hands on the reader's "View Intention" card
+  // (Andy's polish of 2 Nov 2026). Not a Figma style yet: add it to Figma if it stays.
+  intentionIcon: { colors: ['#FFFFFF', '#F3F3F3'] },
+  // Gradient/Ornament: the two short lines either side of the cross under "Day 1 of 9".
+  ornament: { colors: ['#5F5F5F', '#868484'] },
+  // Gradient/Fade Top and Gradient/Fade Bottom: white edges so reader text fades out as it scrolls.
+  fadeTop: { colors: ['#FFFFFF', 'rgba(255,255,255,0)'] },
+  fadeBottom: { colors: ['rgba(255,255,255,0)', '#FFFFFF'] },
+  // Gradient/Card Scrim: the dark wash over the bottom of the featured novena photos, so the white text reads.
+  cardScrim: {
+    colors: ['rgba(0,0,0,0)', 'rgba(0,0,0,0.1)', 'rgba(0,0,0,0.45)', 'rgba(0,0,0,0.72)', 'rgba(0,0,0,0.82)'],
+    locations: [0, 0.3, 0.6, 0.85, 1],
+  },
+  // Gradient/Image Scrim: an older, stronger 3-step photo wash (kept to match Figma; not used on Page 34).
+  imageScrim: { colors: ['rgba(0,0,0,0)', 'rgba(0,0,0,0.6)', 'rgba(0,0,0,0.85)'], locations: [0, 0.55, 1] },
+  // Gradient/Audio Bar Fade: white band behind the audio player in the reader. Faint at the very top,
+  // fully white by about halfway down.
+  audioBarFade: {
+    colors: ['rgba(255,255,255,0.2)', '#FFFFFF', '#FFFFFF'],
+    locations: [0, 0.52, 1],
+    start: { x: 0.5, y: 0.04 },
+    end: { x: 0.5, y: 1 },
+  },
+  // Gradient/Audio Dock Fade: the white band behind the floating player over Home and the novena page.
+  audioDockFade: { colors: ['rgba(255,255,255,0.2)', '#FFFFFF', '#FFFFFF'], locations: [0.184, 0.39, 0.948] },
+  // Gradient/Icon Dark: a dark grey fill seen once in Figma on a praying-hands icon. The app's icons are
+  // single-colour, so this is kept for reference only.
+  iconDark: { colors: ['#4F4F4F', '#686868', '#7C7C7C'], locations: [0, 0.51, 0.92] },
+} as const satisfies Record<string, GradientSpec>;
