@@ -6,6 +6,9 @@
 //   suggestions  the "Try searching for" chips shown when nothing matches exactly (each one is itself a trigger below, so tapping it finds novenas)
 //   categories   catalog category ids whose novenas are relevant (see assets/catalog.json "categories")
 //   keywords     novena keywords/tags that also count as relevant (see each novena's "keywords")
+//   themes       short phrases offered in the "Suggestions" list while someone types, in the order they should appear
+//                (typing "anxi" offers "anxiety", "anxiety and worry", "anxious thoughts"). Each one is also a trigger,
+//                so picking a suggestion always finds novenas.
 
 export interface SearchConcept {
   id: string;
@@ -13,6 +16,7 @@ export interface SearchConcept {
   suggestions: string[];
   categories: string[];
   keywords: string[];
+  themes: string[];
 }
 
 export const searchConcepts: SearchConcept[] = [
@@ -23,6 +27,7 @@ export const searchConcepts: SearchConcept[] = [
     suggestions: ['Healing', 'Physical health', 'Strength during illness'],
     categories: ['health'],
     keywords: ['hope', 'mercy', 'protection of a loved one'],
+    themes: ['healing', 'healing from illness', 'health', 'strength during illness', 'recovery after surgery', 'chronic pain'],
   },
   {
     id: 'anxiety',
@@ -31,6 +36,7 @@ export const searchConcepts: SearchConcept[] = [
     suggestions: ['Peace', 'Strength', 'Comfort'],
     categories: ['health', 'difficult-situations'],
     keywords: ['mental health', 'nervous disorders', 'trust', 'hope'],
+    themes: ['anxiety', 'anxiety and worry', 'anxious thoughts', 'letting go of worry', 'worry', 'peace for troubled hearts', 'peace of mind', 'stress', 'fear', 'calm', 'comfort', 'mental health'],
   },
   {
     id: 'depression',
@@ -38,6 +44,7 @@ export const searchConcepts: SearchConcept[] = [
     suggestions: ['Hope', 'Comfort', 'Mental health'],
     categories: ['health', 'difficult-situations'],
     keywords: ['mental health', 'nervous disorders', 'hope'],
+    themes: ['depression', 'hope', 'hope in dark times', 'sadness', 'emotional strength', 'mental fatigue'],
   },
   {
     id: 'loneliness',
@@ -45,6 +52,7 @@ export const searchConcepts: SearchConcept[] = [
     suggestions: ['Companionship', 'Hope', 'Emotional strength'],
     categories: ['difficult-situations', 'relationships'],
     keywords: ['hope', 'marian'],
+    themes: ['loneliness', 'feeling alone', 'companionship'],
   },
   {
     id: 'marriage',
@@ -52,6 +60,7 @@ export const searchConcepts: SearchConcept[] = [
     suggestions: ['Marriage', 'Relationships', 'Family wellbeing'],
     categories: ['relationships', 'family'],
     keywords: ['marriage', 'protection of a loved one'],
+    themes: ['marriage', 'a happy marriage', 'finding a spouse', 'relationships', 'healing a relationship', 'love'],
   },
   {
     id: 'family',
@@ -59,6 +68,7 @@ export const searchConcepts: SearchConcept[] = [
     suggestions: ['Children', 'Protection', 'Family wellbeing'],
     categories: ['family'],
     keywords: ['fathers', 'protection of a loved one', 'marriage'],
+    themes: ['family', 'family wellbeing', 'children', 'protection of a loved one', 'parents', 'fathers'],
   },
   {
     id: 'work',
@@ -66,6 +76,7 @@ export const searchConcepts: SearchConcept[] = [
     suggestions: ['Work', 'Guidance', 'New beginnings'],
     categories: ['work-studies'],
     keywords: ['work'],
+    themes: ['work', 'finding a job', 'work and employment', 'career', 'guidance', 'new beginnings'],
   },
   {
     id: 'studies',
@@ -73,6 +84,7 @@ export const searchConcepts: SearchConcept[] = [
     suggestions: ['Students', 'Work & studies', 'Guidance'],
     categories: ['work-studies'],
     keywords: ['students', 'youth'],
+    themes: ['studies', 'exams', 'students', 'school'],
   },
   {
     id: 'grief',
@@ -80,6 +92,7 @@ export const searchConcepts: SearchConcept[] = [
     suggestions: ['Comfort', 'Hope', 'Peace'],
     categories: ['difficult-situations'],
     keywords: ['hope', 'marian', 'mercy'],
+    themes: ['grief', 'grief and loss', 'comfort in grief', 'loss of a loved one'],
   },
   {
     id: 'lost',
@@ -87,6 +100,7 @@ export const searchConcepts: SearchConcept[] = [
     suggestions: ['Lost items', 'Finding things'],
     categories: [],
     keywords: ['lost articles'],
+    themes: ['lost items', 'lost articles', 'finding things'],
   },
   {
     id: 'trouble',
@@ -94,6 +108,7 @@ export const searchConcepts: SearchConcept[] = [
     suggestions: ['Hope', 'Courage', 'Trust'],
     categories: ['difficult-situations'],
     keywords: ['hope', 'courage', 'marian', 'trust'],
+    themes: ['trouble', 'difficult times', 'hopeless causes', 'courage', 'financial worries', 'addiction'],
   },
   {
     id: 'faith',
@@ -101,6 +116,7 @@ export const searchConcepts: SearchConcept[] = [
     suggestions: ['Trust', 'Mercy', 'Devotion'],
     categories: ['faith'],
     keywords: ['trust', 'mercy', 'devotion'],
+    themes: ['faith', 'trust in god', 'trust', 'mercy', 'devotion', 'surrender', 'deepening faith'],
   },
 ];
 
