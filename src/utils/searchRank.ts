@@ -7,6 +7,9 @@ import { fallbackSearches, popularSearches, searchConcepts, type SearchConcept }
 export const normalize = (s: string) =>
   s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
 
+/** True when the typed text starts the phrase or starts one of its words ("anx" fits "anxious thoughts", "an" does not fit "St Joan"). */
+export const startsWord = (text: string, q: string) => !!q && (text.startsWith(q) || text.includes(' ' + q));
+
 export interface SearchOptions {
   filter: 'all' | 'intention' | 'saint' | 'audio';
 }
@@ -28,14 +31,14 @@ export function searchNovenas(catalog: Catalog, query: string, { filter }: Searc
       const cats = n.categoryIds.map((id) => normalize(categories.get(id)?.name ?? ''));
       let score = 0;
       if (filter === 'all' || filter === 'saint' || filter === 'audio') {
-        if (title.includes(q) || saintName.includes(q)) score += 10;
+        if (startsWord(title, q) || startsWord(saintName, q)) score += 10;
       }
       if (filter === 'all' || filter === 'intention' || filter === 'audio') {
-        if (keywords.some((k) => k.includes(q) || q.includes(k))) score += 6;
-        if (patron.some((p) => p.includes(q))) score += 5;
-        if (tags.some((t) => t.includes(q))) score += 4;
-        if (cats.some((c) => c.includes(q))) score += 3;
-        if (normalize(n.tagline).includes(q)) score += 2;
+        if (keywords.some((k) => startsWord(k, q) || (k.length >= 3 && startsWord(q, k)))) score += 6;
+        if (patron.some((p) => startsWord(p, q))) score += 5;
+        if (tags.some((t) => startsWord(t, q))) score += 4;
+        if (cats.some((c) => startsWord(c, q))) score += 3;
+        if (startsWord(normalize(n.tagline), q)) score += 2;
       }
       return { n, score };
     })
@@ -45,40 +48,56 @@ export function searchNovenas(catalog: Catalog, query: string, { filter }: Searc
 }
 
 /**
- * The "Suggestions" list while typing: up to 3 searches that complete what was typed.
- * They come from every word the app knows: the search dictionary, popular searches, novena names,
- * saints, tags, keywords and categories. Ones that START with the typed letters come first
- * (typing "anx" offers "Anxiety"), then ones where a word starts with them, then ones that merely contain them.
- * If nothing completes the text, the dictionary's related ideas are offered instead.
+ * The "Suggestions" list while typing: up to 3 searches that complete what was typed (Figma 1227:56784).
+ * First choice is the curated themes in the search dictionary (typing "anxi" offers "anxiety",
+ * "anxiety and worry", "anxious thoughts"), then the app's own words: popular searches, categories,
+ * saints, novena names and tags. A suggestion only counts when the typed letters start it or start one of
+ * its words, and the same word is never offered twice ("Anxiety" and "anxiety" are one suggestion).
+ * If that still leaves room, the dictionary's other trigger words fill in, then related ideas.
  */
 export function suggestionsFor(catalog: Catalog, query: string, limit = 3): string[] {
   const q = normalize(query);
   if (!q) return [];
-  const pool = new Set<string>();
-  const add = (t?: string) => { if (t && t.trim()) pool.add(t.trim()); };
-  searchConcepts.forEach((c) => { c.triggers.forEach(add); c.suggestions.forEach(add); });
-  popularSearches.forEach(add);
+  // Every candidate, best source first. The first spelling of a word wins.
+  const pool = new Map<string, string>();
+  const add = (t?: string) => { const k = t ? normalize(t) : ''; if (k && !pool.has(k)) pool.set(k, t!.trim()); };
+  searchConcepts.forEach((c) => c.themes.forEach(add));
+  searchConcepts.forEach((c) => c.suggestions.forEach((t) => add(t.toLowerCase())));
+  popularSearches.forEach((t) => add(t.toLowerCase()));
   catalog.suggestions.forEach((s) => { add(s.term); s.related.forEach(add); });
   catalog.categories.forEach((c) => add(c.name));
   catalog.saints.forEach((s) => { add(s.name); (s.patronOf ?? []).forEach(add); });
-  catalog.novenas.forEach((n) => { add(n.title); n.tags.forEach(add); n.keywords.forEach(add); });
-  const rank = (t: string) => {
-    const n = normalize(t);
-    if (n === q) return 0; // exactly what was typed
-    if (n.startsWith(q)) return 1;
-    if (n.split(/\s+/).some((w) => w.startsWith(q))) return 2;
-    return n.includes(q) ? 3 : 9;
-  };
-  const typed = Array.from(pool)
-    .map((t) => ({ t, r: rank(t) }))
+  catalog.novenas.forEach((n) => { add(n.title); n.tags.forEach((t) => add(t.toLowerCase())); });
+  const primary = pool.size;
+  searchConcepts.forEach((c) => c.triggers.forEach(add)); // backup words such as "migraine"
+
+  // Rank: exactly what was typed, then phrases that start with it, then phrases with a word that starts with it.
+  // Ties keep the order above, so the curated themes read in the order they were written.
+  const rank = (k: string) => (k === q ? 0 : k.startsWith(q) ? 1 : startsWord(k, q) ? 2 : 9);
+  const typed = Array.from(pool.entries())
+    .map(([k, t], i) => ({ t, r: rank(k) > 0 && i >= primary ? rank(k) + 3 : rank(k), i }))
     .filter((x) => x.r < 9)
-    .sort((a, b) => a.r - b.r || a.t.length - b.t.length || a.t.localeCompare(b.t))
+    .sort((a, b) => a.r - b.r || a.i - b.i)
     .map((x) => x.t);
-  // One entry per word, whatever its capitals ("anxiety" and "Anxiety" are the same suggestion).
-  const seen = new Set<string>();
-  return [...typed, ...contextualSuggestions(query, limit)]
-    .filter((t) => { const k = normalize(t); if (seen.has(k)) return false; seen.add(k); return true; })
-    .slice(0, limit);
+  const out: string[] = [];
+  for (const t of [...typed, ...contextualSuggestions(query, limit).map((c) => c.toLowerCase())]) if (!out.some((o) => normalize(o) === normalize(t))) out.push(t);
+  return out.slice(0, limit);
+}
+
+/**
+ * "Explore related novenas" while typing: novenas whose name, saint or theme fits what was typed,
+ * then novenas that help with the same need (typing "anxi" finds St Dymphna for mental health).
+ */
+export function novenasWhileTyping(catalog: Catalog, query: string, limit = 3): Novena[] {
+  const direct = searchNovenas(catalog, query, { filter: 'all' });
+  const related = relatedNovenas(catalog, query, direct.map((n) => n.id), limit);
+  return [...direct, ...related].slice(0, limit);
+}
+
+/** The short theme line under a novena's name, e.g. "Mental health" (its first tag, in sentence case). */
+export function novenaTheme(n: Novena): string {
+  const t = n.tags[0] ?? '';
+  return t ? t.charAt(0).toUpperCase() + t.slice(1).toLowerCase() : n.tagline;
 }
 
 // ---------------------------------------------------------------------------------------------
@@ -109,7 +128,7 @@ const isTypoOf = (typed: string, known: string) => typed.length >= 5 && Math.abs
 function conceptStrength(q: string, concept: SearchConcept): number {
   const words = q.split(/\s+/).filter(Boolean);
   let best = 0;
-  for (const raw of concept.triggers) {
+  for (const raw of [...concept.triggers, ...concept.themes]) {
     const t = normalize(raw);
     if (q === t) return 3;
     if (words.includes(t) || (t.includes(' ') && q.includes(t))) best = Math.max(best, 2);

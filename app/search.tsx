@@ -20,7 +20,7 @@ import { type } from '@/constants/typography';
 import { strings } from '@/copy/strings';
 import type { Category, Novena } from '@/content/types';
 import { useCatalog } from '@/hooks/useCatalog';
-import { contextualSuggestions, recoverySearches, relatedNovenas } from '@/utils/searchRank';
+import { contextualSuggestions, novenaTheme, novenasWhileTyping, recoverySearches, relatedNovenas } from '@/utils/searchRank';
 import { useSearch, type SearchFilter } from '@/hooks/useSearch';
 import { popularSearches } from '@/content/searchConcepts';
 import { Reveal } from '@/motion/Reveal';
@@ -39,7 +39,7 @@ function RelatedRow({ novena, onPress }: { novena: Novena; onPress: () => void }
       <NovenaImage image={novena.image} label="" style={{ width: 44, height: 44, borderRadius: 22 }} />
       <View style={{ flex: 1, gap: 2 }}>
         <Text numberOfLines={1} style={[type.titleSmall, { color: colors.text.primary }]}>{novena.title}</Text>
-        <Text numberOfLines={1} style={[type.bodySmall, { color: colors.text.secondary }]}>{`${novena.tagline} · ${novena.days.length} days`}</Text>
+        <Text numberOfLines={1} style={[type.bodySmall, { color: colors.text.secondary }]}>{`${novenaTheme(novena)} · ${novena.days.length} days`}</Text>
       </View>
     </Pressable>
   );
@@ -87,6 +87,8 @@ export default function Search() {
   const results = typing ? s.results : byCategory;
   // Novenas that fit the need even when no title or keyword matches the typed words, and "Try searching for" chips that fit the query.
   const related = useMemo(() => (typing ? relatedNovenas(catalog, s.query, s.results.map((n) => n.id)) : []), [typing, catalog, s.query, s.results]);
+  // While typing (Figma 1227:56784): up to 3 novenas for "Explore related novenas", direct matches first.
+  const typingNovenas = useMemo(() => (typing ? novenasWhileTyping(catalog, s.query) : []), [typing, catalog, s.query]);
   const chips = useMemo(() => { const c = contextualSuggestions(s.query); return c.length > 0 ? c : recoverySearches(); }, [s.query]);
   const label = typing ? s.query : cat?.name ?? '';
   const categories = useMemo(() => [...catalog.categories].sort((a, b) => a.order - b.order), [catalog]);
@@ -170,10 +172,10 @@ export default function Search() {
                 {s.suggestions.map((x) => <SuggestionRow key={x} label={x} match={s.query} onPress={() => submit(x)} />)}
               </View>
             ) : null}
-            {typing && (s.results.length > 0 || related.length > 0) ? (
+            {typingNovenas.length > 0 ? (
               <View style={{ gap: 8 }}>
                 <SectionTitle title={S.related} />
-                {(s.results.length > 0 ? s.results : related).slice(0, 3).map((n) => <RelatedRow key={n.id} novena={n} onPress={() => router.push(`/novena/${n.id}`)} />)}
+                {typingNovenas.map((n) => <RelatedRow key={n.id} novena={n} onPress={() => router.push(`/novena/${n.id}`)} />)}
               </View>
             ) : null}
             {!typing ? (
