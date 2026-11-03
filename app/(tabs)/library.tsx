@@ -1,4 +1,6 @@
 // Library: Active / Completed / Saved.
+// How you get here: the Library tab. From here: a card opens the novena page, its pray button opens the Reader
+// (or the novena page if today is already prayed), "…" opens the pause / start again / remove menu.
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -45,7 +47,7 @@ export default function Library() {
   const router = useRouter();
   const { novenaById } = useCatalog();
   const lib = useLibrary();
-  const [tab, setTab] = useState<Tab>('active');
+  const [tab, setTab] = useState<Tab>('active'); // which list is showing: Active, Completed or Saved (opens on Active)
   const [menuRun, setMenuRun] = useState<string | null>(null);
   const [menuY, setMenuY] = useState(0); // where the "..." button sits on screen, so the menu opens under it
   const [alert, setAlert] = useState<AlertKind | null>(null);
@@ -69,6 +71,7 @@ export default function Library() {
           ]}
         />
       </View>
+      {/* Pull down to refresh re-reads everything from the phone (useful the next morning, so "today" moves on). */}
       <ScrollView refreshControl={<RefreshControl refreshing={false} onRefresh={() => lib.refresh()} tintColor={colors.text.muted} />} contentContainerStyle={{ paddingHorizontal: screenMargin, paddingBottom: 140, gap: 12 }}>
         {/* Active tab: one card per novena being prayed. Empty? A friendly message and a button to find one. */}
         {tab === 'active' && (lib.active.length === 0

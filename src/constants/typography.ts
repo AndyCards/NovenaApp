@@ -1,5 +1,7 @@
 // Figtree everywhere. Source Serif 4 only for prayer text and the day
 // heading on Reader screens. No other fonts.
+// Each name below is one text style (font, size, line height), like a Figma text style. Components pick one with
+// type.<name>; colour is set separately where the text is drawn. Changing a style here changes it everywhere it is used.
 import type { TextStyle } from 'react-native';
 
 export const fonts = {

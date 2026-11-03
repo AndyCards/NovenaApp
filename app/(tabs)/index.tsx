@@ -1,6 +1,8 @@
 // Home (Discover), built to match Figma Page 34:
 // "Home · First-time user" (1227:56592) and "Home · Returning user · Continue praying" (1227:56659).
 // Sections after the top ones come from the catalog's collections, so Home can be re-themed from the Excel sheet.
+// How you get here: the app opens on Home (the Discover tab). From here: the Search and Calendar buttons, a card to its
+// novena page, "Start Novena" / "Pray Day N" straight into the Reader, an intention tile into Search for that need.
 import { useRouter } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
 import { ScrollView, View, useWindowDimensions, type NativeScrollEvent, type NativeSyntheticEvent } from 'react-native';

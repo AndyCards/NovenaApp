@@ -1,5 +1,7 @@
 // Day prayed, Figma Page 34 (1227:58282): a strip of days around today, a short note,
 // the reminder line and "Share today's prayer".
+// How you get here: "Mark Day N as prayed" in the Reader (this screen replaces the Reader, so Back skips the prayer).
+// From here: ✕ to the novena page, "Set" / "Change" to Reminders, Share to the Share screen.
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Pressable, Text, View } from 'react-native';

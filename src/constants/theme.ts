@@ -1,5 +1,7 @@
 // Design tokens from the NovenaApp Figma file (Components page + variables).
 // Neutral greys only, no accent colours. Page background is pure white.
+// Change a value here and every screen and component that uses it changes with it. This file only decides how
+// things look, never what they do, so it is the safest place to make visual changes.
 
 export const colors = {
   surface: {

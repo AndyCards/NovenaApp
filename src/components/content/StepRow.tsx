@@ -1,4 +1,5 @@
 // One step (title and short line) inside the "How a novena works" card on Home.
+// NOT USED ON ANY SCREEN RIGHT NOW: nothing imports this file, so changing it has no visible effect (see UX_DESIGNER_GUIDE.md).
 import { Text, View } from 'react-native';
 import { colors, space } from '@/constants/theme';
 import { type } from '@/constants/typography';

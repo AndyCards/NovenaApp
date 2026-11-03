@@ -1,4 +1,5 @@
 // A round icon button drawn on top of a picture (kept for older layouts; not used on Page 34 screens).
+// NOT USED ON ANY SCREEN RIGHT NOW: nothing imports this file, so changing it has no visible effect (see UX_DESIGNER_GUIDE.md).
 import { Pressable } from 'react-native';
 import { colors } from '@/constants/theme';
 import { Icon, type IconName } from '../Icon';

@@ -1,4 +1,5 @@
 // A grey card that shows what the person wrote as their prayer intention (older layout, kept for reuse).
+// NOT USED ON ANY SCREEN RIGHT NOW: nothing imports this file, so changing it has no visible effect (see UX_DESIGNER_GUIDE.md).
 import { Pressable, Text } from 'react-native';
 import { colors, radius, screenMargin, space } from '@/constants/theme';
 import { type } from '@/constants/typography';
