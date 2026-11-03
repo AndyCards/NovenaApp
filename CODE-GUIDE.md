@@ -1,0 +1,86 @@
+# How the pocketNovena code is organised
+
+A plain-English map of the folders. Every code file also starts with a comment saying what it does.
+For a longer, designer-focused walkthrough (screen by screen, components, UI states, what is safe to change), see `UX_DESIGNER_GUIDE.md`.
+
+## The big picture, in four sentences
+The app keeps everything on the phone: there are no accounts and nothing is sent anywhere. The list of novenas and their prayers comes bundled inside the app (`assets/catalog.json`), and the app quietly checks once a day for a newer list. What the person does (novenas started, days prayed, intentions, saved novenas, reminder settings) is stored in a small database on the phone. Whenever anything is saved, every screen and the reminders refresh themselves, so they always agree.
+
+## app/ — the screens
+Each file here is one screen. The file name is the screen's address.
+
+| File | Screen |
+|---|---|
+| `app/(tabs)/index.tsx` | Home (the Discover tab) |
+| `app/(tabs)/library.tsx` | Library: Active, Completed, Saved |
+| `app/(tabs)/reminders.tsx` | Reminders |
+| `app/(tabs)/_layout.tsx` | The three tabs at the bottom |
+| `app/novena/[id].tsx` | A novena's page (picture, Pray button, nine days) |
+| `app/reader/[runId]/[day].tsx` | The prayer for one day |
+| `app/prayed/[runId]/[day].tsx` | "Day N marked as prayed" |
+| `app/search.tsx` | Search |
+| `app/calendar.tsx` | Calendar (month and year) |
+| `app/share/[novenaId].tsx` | Share a saint card |
+| `app/_layout.tsx` | Starts the app: fonts, content, then screens |
+
+Square brackets mean "fill in": `novena/[id]` becomes `novena/st-anthony`.
+
+## src/components/ — the building blocks
+Buttons, cards, rows and pop-ups, each matching a component on the Figma Components page.
+- `actions/` buttons
+- `content/` cards, rows, pictures
+- `inputs/` search box, switches, chips, tabs
+- `navigation/` top bars and the tab bar. They share `GlassSurface` (frosted glass); the top bars float over the page with rounded bottom corners so content scrolls under them.
+- `overlays/` pop-up cards and menus (always floating cards, never bottom sheets). `useRunMenu` is the "…" menu on a novena card (pause, resume, start again, remove), shared by Home and Library so both behave the same.
+- `reader/` pieces of the prayer screen. While a prayer is read aloud, the sentence being spoken gets a soft warm-paper marker behind it and is gently kept in view ("follow-along", see below).
+- `audio/` the audio player. `GlobalAudioDock` keeps the small player bar on screen across pages while a prayer plays.
+- `calendar/` calendar days and month cards
+
+## src/motion/ — how things move
+The app's animation rules live here so every screen moves the same way. `timing.ts` and `tokens.ts` hold the speeds and soft curves (calm, no bounce). `PressableScale` makes buttons and cards dip slightly under a finger. `Reveal` fades and slides page content in, one piece after another. `usePresence` animates pop-ups in (they close straight away, because iOS can freeze if a closing pop-up is still on screen while the next one opens or the app moves to another screen). `haptics.ts` adds four gentle touch cues: tap, confirm, warning (before removing something) and success (a day prayed). The full rules are in `docs/MOTION.md`. Everything runs on the phone's UI thread (react-native-reanimated) and switches itself off when iPhone's Reduce Motion setting is on.
+
+## src/hooks/ — the "brains" behind screens
+Small helpers that load data and do actions, so screens stay simple (e.g. `useLibrary`, `useAudio`, `useReminders`).
+
+## Follow-along (prayer highlighted as it is read aloud)
+- `src/utils/narrationCues.ts` works out which sentence is being spoken at any moment of the audio.
+- `src/hooks/useNarrationHighlight.ts` watches the real audio position and tells the Reader which sentence to highlight (re-drawing only when it changes).
+- `src/hooks/useFollowAlong.ts` scrolls that paragraph gently into view, only when it is off screen, and never while the person is scrolling themselves (it waits 8 seconds after they stop) or while VoiceOver is on.
+- **Exact or estimated?** Exact when the day's recording has timings (`audio.cues` in `catalog.json`, written by `pipeline/tts.py` as it makes the audio). Without them (today, with the placeholder tone) the highlight still follows the real playback position, but where one sentence hands over to the next is estimated from the length of each sentence, so it can be a few seconds off.
+
+## src/state/ — shared memory while the app is open
+`dataVersion.ts` is a counter that goes up whenever something is saved; screens watch it to know when to reload. `playerStore.ts` remembers what the audio player is doing, so every screen shows the same player.
+
+## src/content/ — the shape of the novena list
+`schema.ts` checks a downloaded novena list is complete before the app uses it (a broken list is ignored). `searchConcepts.ts` is the search "dictionary": it links everyday words (migraine, job, exams, marriage) to the saints and topics that fit, so search finds something useful even when no title matches.
+
+## src/data/ — what is stored on the phone
+The database tables and the read/write helpers. Nothing here leaves the phone (intentions included).
+
+## src/utils/ — rules and maths
+Day rules (which day is due or missed), dates, feast days, search ranking, reminders planning, downloads, sharing.
+
+## src/constants/ and src/copy/
+Colours, spacing and fonts from Figma (`constants/`), and every sentence the app shows (`copy/strings.ts`). Change wording in `strings.ts`.
+
+**Testing switches in `constants/config.ts` (turn off before release):**
+- `PLACEHOLDER_AUDIO = true` plays a bundled sample tone instead of real recordings. St Dymphna (all 9 days) plays a prayerful Kokoro reading (open-source voice, slow, with real pauses after commas, sentences, "Amen", paragraphs and sections; `pipeline/kokoro-narration.py`), and Day 1 of every other novena a basic computer voice (`pipeline/test-narration.py`). Both have exact sentence timings for the highlight (`src/content/testNarration.ts`, `assets/audio/test-narration/`).
+- `DUMMY_INTENTIONS = true` fills in a sample intention the first time a novena is opened.
+- The prayers in `assets/catalog.json` are sample text until the real prayers are added.
+
+## assets/
+Fonts, the bundled saint pictures, and `catalog.json` (the starter list of novenas, made from the Excel sheet).
+
+## pipeline/
+Tools that run on a computer, not in the app: turn the Excel sheet into `catalog.json`, prepare pictures, make audio, upload.
+
+## tests/
+Automatic checks that run on every change (GitHub "Tests"): the day rules, reminder planning, search ranking and the search dictionary, and the novena list checker.
+
+## How to check the code is healthy
+Run these in the project folder. All three should finish without errors.
+- `npx tsc --noEmit` checks the code for mistakes in how pieces fit together.
+- `npx jest` runs the automatic tests.
+- `npx expo export --platform ios` builds the app the way the phone would load it.
+
+These don't replace trying the app on the phone: animations, haptics, notifications and audio can only be judged on a real device.

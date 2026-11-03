@@ -1,0 +1,197 @@
+// Home (Discover), built to match Figma Page 34:
+// "Home · First-time user" (1227:56592) and "Home · Returning user · Continue praying" (1227:56659).
+// Sections after the top ones come from the catalog's collections, so Home can be re-themed from the Excel sheet.
+// How you get here: the app opens on Home (the Discover tab). From here: the Search and Calendar buttons, a card to its
+// novena page, "Start Novena" / "Pray Day N" straight into the Reader, an intention tile into Search for that need.
+import { useRouter } from 'expo-router';
+import { useEffect, useRef, useState } from 'react';
+import { ScrollView, View, useWindowDimensions, type NativeScrollEvent, type NativeSyntheticEvent } from 'react-native';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { CarouselIndicator } from '@/components/content/CarouselIndicator';
+import { ContinueCard } from '@/components/content/ContinueCard';
+import { FeastDayItem } from '@/components/content/FeastDayItem';
+import { FeaturedNovenaCard } from '@/components/content/FeaturedNovenaCard';
+import { HowItWorksCard } from '@/components/content/HowItWorksCard';
+import { IntentionTile } from '@/components/content/IntentionTile';
+import { NovenaCard } from '@/components/content/NovenaCard';
+import { NovenaRow } from '@/components/content/NovenaRow';
+import { SectionHeader } from '@/components/content/SectionHeader';
+import { useRunMenu } from '@/components/overlays/useRunMenu';
+import { HOME_APP_BAR_HEIGHT, HomeAppBar } from '@/components/navigation/HomeAppBar';
+import { useScrolled } from '@/hooks/useScrolled';
+import { colors, screenMargin } from '@/constants/theme';
+import { Reveal } from '@/motion/Reveal';
+import { strings } from '@/copy/strings';
+import type { Collection, Novena } from '@/content/types';
+import { useCatalog } from '@/hooks/useCatalog';
+import { useRuns } from '@/hooks/useNovenaRun';
+import { todayString } from '@/utils/dateUtils';
+import { upcomingFeasts } from '@/utils/feasts';
+import { haptics } from '@/motion/haptics';
+
+// Works out which card of a sideways carousel is showing, so the little dots can follow along.
+const pageFrom = (e: NativeSyntheticEvent<NativeScrollEvent>, step: number) => Math.round(e.nativeEvent.contentOffset.x / step) + 1;
+
+export default function Home() {
+  const router = useRouter();
+  const { width } = useWindowDimensions();
+  const { catalog, novenaById } = useCatalog();
+  const runsApi = useRuns();
+  const { runs, start, resume, loaded } = runsApi;
+  const { openMenu, menus } = useRunMenu(runsApi);
+  const { scrolled, onScroll } = useScrolled();
+  const insets = useSafeAreaInsets(); // the glass top bar floats over the page, so the content starts below it
+  const [continuePage, setContinuePage] = useState(1);
+  const [featuredPage, setFeaturedPage] = useState(1);
+
+  // Novenas the person is praying right now. If there are any, they are a "returning" user and see the Continue cards first.
+  // Paused ones count too (Andy, 2026-11-02): their card stays on Home, marked "Paused", with a Resume button.
+  const active = runs.filter((r) => r.status === 'active' || r.status === 'paused').map((r) => ({ run: r, novena: novenaById(r.novenaId) })).filter((x) => x.novena);
+  const returning = active.length > 0;
+  // Home's sections (favourites, mental health, etc.) come from the catalog, in the order set in the spreadsheet.
+  const collections = [...catalog.collections].sort((a, b) => a.order - b.order);
+  const novenasOf = (c: Collection) => c.novenaIds.map(novenaById).filter((n): n is Novena => !!n);
+  const featured = collections.find((c) => c.layout === 'featured');
+  const others = collections.filter((c) => c !== featured);
+  const feasts = upcomingFeasts(catalog, todayString(), 4);
+  const categories = [...catalog.categories].sort((a, b) => a.order - b.order);
+
+  // Tapping a novena opens its page. "Start Novena" on a featured card starts it (or continues it) and opens today's prayer.
+  const open = (n: Novena) => router.push(`/novena/${n.id}`);
+  const busy = useRef(false); // stops a double tap from starting the same novena twice
+  const startNovena = async (n: Novena) => {
+    if (busy.current || !loaded) return;
+    busy.current = true;
+    haptics.confirm();
+    try {
+      // Already praying it (or paused)? Pick it up again instead of starting a second copy.
+      const existing = runs.find((r) => r.novenaId === n.id && (r.status === 'active' || r.status === 'paused'));
+      if (existing?.status === 'paused') await resume(existing.id);
+      const runId = existing?.id ?? (await start(n.id));
+      router.push(`/reader/${runId}/${existing?.continueDay ?? 1}`);
+    } finally {
+      busy.current = false;
+    }
+  };
+
+  const continueWidth = width - 50; // 340 on a 390pt screen; the next card peeks in
+  const featuredWidth = width - 2 * screenMargin;
+
+  // The featured cards slide along by themselves every few seconds, and loop back to the first.
+  // If the person touches the row, it stays still for a while so it never fights their finger.
+  const featuredRef = useRef<{ scrollTo: (o: { x: number; animated?: boolean }) => void } | null>(null);
+  const featuredCount = featured ? novenasOf(featured).length : 0;
+  const pausedUntil = useRef(0);
+  const nextPage = useRef(0);
+  useEffect(() => {
+    if (!returning || featuredCount < 2) return;
+    const timer = setInterval(() => {
+      if (Date.now() < pausedUntil.current) return;
+      nextPage.current = (nextPage.current + 1) % featuredCount;
+      featuredRef.current?.scrollTo({ x: nextPage.current * (featuredWidth + 10), animated: true });
+      setFeaturedPage(nextPage.current + 1);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [returning, featuredCount, featuredWidth]);
+
+  // Draws one section. "list" sections show tall rows going down; other sections show cards you swipe sideways.
+  const renderCollection = (c: Collection, index: number, layout = c.layout ?? 'cards') => (
+    <Reveal key={c.id} index={index} style={{ gap: 6 }}>
+      <SectionHeader title={c.title} />
+      {layout === 'list' ? (
+        <View style={{ gap: 12 }}>{novenasOf(c).map((n) => <NovenaRow key={n.id} novena={n} onPress={() => open(n)} />)}</View>
+      ) : (
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: screenMargin, gap: 12 }}>
+          {novenasOf(c).map((n) => <NovenaCard key={n.id} novena={n} onPress={() => open(n)} />)}
+        </ScrollView>
+      )}
+    </Reveal>
+  );
+
+  // The "Feast days ahead" row: the next four saints' feast days.
+  const feastSection = (index: number) => feasts.length > 0 && (
+    <Reveal index={index} style={{ gap: 6 }}>
+      <SectionHeader title="Feast days ahead" onSeeAll={() => router.push('/calendar')} />
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: screenMargin }}>
+        {feasts.map((f) => (
+          <FeastDayItem key={f.saint.id} saintName={f.saint.name} avatar={f.saint.avatar} feastDate={f.feastDate}
+            onPress={() => (f.novena ? open(f.novena) : router.push('/calendar'))} />
+        ))}
+      </View>
+    </Reveal>
+  );
+
+  return (
+    <SafeAreaView edges={[]} style={{ flex: 1, backgroundColor: colors.surface.default }}>
+      {/* Top bar: the pocketNovena name, then Calendar and Search buttons. Frosted glass; the page scrolls underneath it. */}
+      <HomeAppBar onCalendar={() => router.push('/calendar')} onSearch={() => router.push('/search')} scrolled={scrolled} />
+      <ScrollView onScroll={onScroll} scrollEventThrottle={32} scrollIndicatorInsets={{ top: insets.top + HOME_APP_BAR_HEIGHT }} contentContainerStyle={{ paddingTop: insets.top + HOME_APP_BAR_HEIGHT + 12, paddingBottom: 140, gap: 32 }}>
+        {/* Someone already praying sees (Andy, 2026-11-02): featured novenas first, then Continue cards, intentions, feast days, then the other sections. */}
+        {/* Someone new sees: featured novenas, "How a novena works", feast days, then the other sections. */}
+        {!loaded ? null : returning ? (
+          <>
+            {featured ? (
+              <Reveal index={0} style={{ gap: 6 }}>
+                {/* The big featured cards with the "Start Novena" button. Figma Featured Carousel (1227:56679): 10 at the sides, 4 above and below the cards, 6 to the page dots, 6 under them. */}
+                <SectionHeader title={featured.title} />
+                <View style={{ gap: 6, paddingBottom: 6 }}>
+                  <ScrollView ref={(r) => { featuredRef.current = r; }} horizontal showsHorizontalScrollIndicator={false} snapToInterval={featuredWidth + 10} decelerationRate="fast"
+                    onScrollBeginDrag={() => { pausedUntil.current = Date.now() + 8000; }}
+                    onMomentumScrollEnd={(e) => { const page = pageFrom(e, featuredWidth + 10); nextPage.current = page - 1; setFeaturedPage(page); }}
+                    contentContainerStyle={{ paddingHorizontal: screenMargin, paddingVertical: 4, gap: 10 }}>
+                    {novenasOf(featured).map((n) => (
+                      <FeaturedNovenaCard key={n.id} novena={n} width={featuredWidth} onPress={() => open(n)} onStart={() => startNovena(n)} />
+                    ))}
+                  </ScrollView>
+                  <CarouselIndicator count={novenasOf(featured).length} active={featuredPage} tone="strong" />
+                </View>
+              </Reveal>
+            ) : null}
+            <Reveal index={1} style={{ gap: 6 }}>
+              {/* "Continue praying": one card per novena in progress, swipe sideways. */}
+              <SectionHeader title={strings.home.continueTitle} />
+              <View style={{ gap: 6 }}>
+                <ScrollView horizontal showsHorizontalScrollIndicator={false} snapToInterval={continueWidth + 10} decelerationRate="fast"
+                  onMomentumScrollEnd={(e) => { const p = pageFrom(e, continueWidth + 10); if (p !== continuePage) haptics.tap(); setContinuePage(p); }}
+                  contentContainerStyle={{ paddingHorizontal: screenMargin, paddingVertical: 6, gap: 10 }} style={{ marginVertical: -4 }}>
+                  {active.map(({ run, novena }) => (
+                    <ContinueCard key={run.id} novena={novena!} day={run.continueDay} missed={run.missed.length} paused={run.status === 'paused'} width={continueWidth}
+                      onOpen={() => open(novena!)} onMenu={(y) => openMenu(run.id, y)}
+                      onContinue={async () => { if (run.status === 'paused') await resume(run.id); router.push(`/reader/${run.id}/${run.continueDay}`); }} />
+                  ))}
+                </ScrollView>
+                {active.length > 1 ? <CarouselIndicator count={active.length} active={continuePage} /> : null}
+              </View>
+            </Reveal>
+            <Reveal index={2} style={{ gap: 6 }}>
+              {/* "What are you praying for?": two tiles per row. Tapping one shows the novenas for that need. */}
+              <SectionHeader title={strings.home.intentionsTitle} />
+              <View style={{ paddingHorizontal: screenMargin, gap: 10 }}>
+                {Array.from({ length: Math.ceil(categories.length / 2) }, (_, row) => (
+                  <View key={row} style={{ flexDirection: 'row', gap: 10 }}>
+                    {categories.slice(row * 2, row * 2 + 2).map((c) => (
+                      <IntentionTile key={c.id} label={c.name} icon={c.icon} onPress={() => router.push({ pathname: '/search', params: { category: c.id } })} />
+                    ))}
+                  </View>
+                ))}
+              </View>
+            </Reveal>
+            {feastSection(3)}
+            {others.map((c, i) => renderCollection(c, 4 + i))}
+          </>
+        ) : (
+          <>
+            {featured ? renderCollection(featured, 0, 'cards') : null}
+            <Reveal index={1} style={{ gap: 6 }}>
+              <SectionHeader title={strings.home.howItWorksTitle} />
+              <View style={{ paddingHorizontal: screenMargin }}><HowItWorksCard /></View>
+            </Reveal>
+            {feastSection(2)}
+            {others.map((c, i) => renderCollection(c, 3 + i))}
+          </>
+        )}
+      </ScrollView>
+      {menus}
+    </SafeAreaView>
+  );
+}

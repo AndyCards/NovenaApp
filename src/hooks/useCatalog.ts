@@ -1,0 +1,29 @@
+// Gives every screen the list of novenas, saints and categories (the "catalog").
+// It starts from the copy bundled inside the app, then swaps in a newer one if one was downloaded.
+import { createContext, createElement, useContext, useEffect, useState, type ReactNode } from 'react';
+import type { Catalog, Novena, Saint } from '@/content/types';
+import { checkForNewCatalog, loadCatalog } from '@/utils/catalogSync';
+import { plainTitle } from '@/utils/novenaTitle';
+
+// Every screen gets the plain name ("St Jude"); pages that want "St Jude Novena" use novenaPageTitle.
+const withPlainTitles = (c: Catalog): Catalog => ({ ...c, novenas: c.novenas.map((n) => ({ ...n, title: plainTitle(n.title) })) });
+
+const CatalogContext = createContext<Catalog | null>(null);
+
+export function CatalogProvider({ children }: { children: ReactNode }) {
+  const [catalog, setCatalog] = useState<Catalog | null>(null);
+  useEffect(() => {
+    loadCatalog().then((c) => setCatalog(withPlainTitles(c)));
+    checkForNewCatalog().then((fresh) => fresh && setCatalog(withPlainTitles(fresh))); // swaps in new content when found
+  }, []);
+  if (!catalog) return null;
+  return createElement(CatalogContext.Provider, { value: catalog }, children);
+}
+
+export function useCatalog() {
+  const catalog = useContext(CatalogContext);
+  if (!catalog) throw new Error('useCatalog must be used inside CatalogProvider');
+  const novenaById = (id: string): Novena | undefined => catalog.novenas.find((n) => n.id === id);
+  const saintById = (id?: string): Saint | undefined => (id ? catalog.saints.find((s) => s.id === id) : undefined);
+  return { catalog, novenaById, saintById };
+}

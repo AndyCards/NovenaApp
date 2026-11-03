@@ -1,0 +1,15 @@
+{
+  "expo": {
+    "name": "pocketNovena",
+    "slug": "novena-app",
+    "scheme": "pocketnovena",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "backgroundColor": "#FFFFFF",
+    "ios": { "bundleIdentifier": "com.andycards.pocketnovena", "supportsTablet": false },
+    "android": { "package": "com.andycards.pocketnovena" },
+    "plugins": ["expo-router", "expo-font", "expo-sqlite", "expo-notifications"],
+    "experiments": { "typedRoutes": true }
+  }
+}
