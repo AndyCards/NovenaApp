@@ -75,7 +75,7 @@ export default function Search() {
   const [categoryId, setCategoryId] = useState(category);
   useEffect(() => { if (q) s.submit(q); }, [q]); // eslint-disable-line react-hooks/exhaustive-deps
   const cat = catalog.categories.find((c) => c.id === categoryId);
-  const typing = s.query.length > 0;
+  const typing = s.query.trim().length > 0; // only spaces counts as an empty box, not as a search for "   "
   const byCategory = useMemo(
     () => (cat ? catalog.novenas.filter((n) => n.categoryIds.includes(cat.id) && (s.filter !== 'audio' || n.hasAudio)) : []),
     [cat, catalog, s.filter],

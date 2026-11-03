@@ -59,7 +59,9 @@ export default function DayPrayed() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.surface.page }}>
       <View style={{ alignItems: 'flex-end', paddingHorizontal: screenMargin + 2, paddingVertical: 6 }}>
-        <Pressable accessibilityRole="button" accessibilityLabel={strings.common.close} onPress={() => router.replace(`/novena/${novena.id}`)}
+        {/* Close goes to the novena's page. If that page is already underneath (the usual way in: novena page, then the
+            prayer), it goes back to it rather than opening a second copy, so Back then returns to where you came from. */}
+        <Pressable accessibilityRole="button" accessibilityLabel={strings.common.close} onPress={() => router.dismissTo(`/novena/${novena.id}`)}
           style={{ width: 44, height: 44, alignItems: 'center', justifyContent: 'center' }}>
           <Icon name="close" size={22} />
         </Pressable>

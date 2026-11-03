@@ -45,6 +45,7 @@ export const strings = {
     prayDay: (n: number) => `Pray Day ${n}`,
     continueDay: (n: number) => `Continue with Day ${n}`,
     prayedDay: (n: number) => `Prayed Day ${n}`,
+    resume: 'Resume', // the button on a paused novena's Continue card (Home)
     days: 'Novena Days',
     startHere: 'Start here',
     startFirst: 'Tap Start Novena to begin your first day.',
@@ -54,6 +55,8 @@ export const strings = {
   reader: {
     dayOf: (n: number, total: number) => `Day ${n} of ${total}`,
     markPrayed: (n: number) => `Mark Day ${n} as prayed`,
+    // Under the greyed-out button on a day that isn't due yet. `when` is "tomorrow" or "on Wednesday 4 Nov".
+    notYet: (n: number, when: string) => `You can mark Day ${n} as prayed ${when}.`,
     viewIntention: 'View Intention',
     intentionPrompt: 'Take a moment for what you hold in prayer',
     prayerMode: 'Prayer mode',
